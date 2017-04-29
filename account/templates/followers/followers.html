@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Following</title>
+</head>
+<body>
+<div class="container">
+{% for people in followers %}
+    <p><div class="imgAbt"><a href="/account/viewprofile/{{ people.1.pk }}" class="image" style="text-decoration:none;"><img src={{ people.1.image.url }} alt="" style="width:40px;height:40px;border:1px solid #E6E6E6;border-radius:50%">&nbsp;&nbsp;&nbsp;&nbsp;Username:&nbsp;{{ people.0 }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name:&nbsp;{{ people.0.first_name }}&nbsp;{{ people.0.last_name }}</a></div></p>
+{% endfor %}
+   </div>
+</body>
+</html>

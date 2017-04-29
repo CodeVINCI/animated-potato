@@ -1,0 +1,146 @@
+<html>
+{% load static %}
+<head>
+    <title>Newspapers</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+     <link rel="stylesheet" href="{% static 'newspapers/menubar.css' %}" type="text/css">
+  <link rel="shortcut icon" type="image/png" href="{% static "profile/images/favicon.ico" %}"/>
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        <a class="navbar-brand" href="/home/">Socrates</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+           <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search-Socrates">
+        </div>
+        <button type="submit" class="btn btn-default">&#x1f50d;</button>
+      </form>
+        <li><a href="/home/"><span class="glyphicon glyphicon-home" aria-hidden="true">Home</span></a></li>
+        <li><a href="#">Compare</a></li>
+         <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Themes<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/home/politics/">Politics</a></li>
+            <li><a href="/home/sports/">Sports</a></li>
+            <li><a href="/home/market">Market</a></li>
+                <li><a href="/home/UnitedNations/">United Nations</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">News in Hindi</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">News in English</a></li>
+          </ul>
+        </li>
+          <li><a href="/account/newspapers/">Newspapers</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      <li><a href="#">Notifications<span class="badge">5</span></a></li>
+        <div class="imgAbt">
+        <li class="dropdown">
+
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+               {% if pic.url %}
+             {% load static %}
+  <img src={{ pic.url }} alt="" style="width:40px;height:40px;border:1px solid #E6E6E6;border-radius:50%;">
+</a>
+         {% else %}
+         {% load static %}
+          <img src="{% static "images/Dp.png" %}" alt="" style="width:40px;height:40px;border:1px;border-radius:50%;">
+         {% endif %} </a>
+
+                <ul class="dropdown-menu">
+            <li><a href="/account/profile">My Profile</a></li>
+            <li><a href="/account/Myblog">My Blog</a></li>
+            <li><a href="#">My Messages</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/account/settings">Settings</a></li>
+              <li role="separator" class="divider"></li>
+            <li><a href="/account/logout">Logout</a></li>
+          </ul>
+        </li>
+          </div>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-flui-->
+ </nav>
+
+<div class="box">
+<div class="verticalLine">
+<div class="gray-wrapper">
+  <div class="cf home main-box">
+    <div class="main-title content-title ">
+      <span>News Websites</span>
+    </div>
+    <div class="content-links content-links-bottom flex">
+      <div class="bottom-left-col flex">
+        <div class="link-col flex-child flex-one">
+          <div class="widget-box drudge_link_posts" id="drudge-column-links-6"><div class="wpd-static-links"><ul class="links-list static-links-category-6"><li class="cf"><a class="headline-link" href="http://news.123india.com" target="_blank">123India.com</a></li><li class="cf"><a class="headline-link" href="http://www.aamaadmiparty.org/" target="_blank">Aam Aadmi Party</a></li><li class="cf"><a class="headline-link" href="http://www.abcnews.com/" target="_blank">ABC News</a></li><li class="cf"><a class="headline-link" href="http://www.abplive.in/" target="_blank">ABP Live</a></li><li class="cf"><a class="headline-link" href="http://www.asianage.com" target="_blank">Asian Age</a></li><li class="cf"><a class="headline-link" href="http://asiancorrespondent.com/category/india/" target="_blank">AsianCorrespondent.com</a></li><li class="cf"><a class="headline-link" href="http://www.assamtribune.com" target="_blank">Assam Tribune, The</a></li><li class="cf"><a class="headline-link" href="http://hosted.ap.org" target="_blank">Associated Press (AP)</a></li><li class="cf"><a class="headline-link" href="http://www.bbc.co.uk/news/world/asia/india" target="_blank">BBC</a></li><li class="cf"><a class="headline-link" href="http://bjp.org" target="_blank">Bharatiya Janata Party</a></li><li class="cf"><a class="headline-link" href="http://www.bloomberg.com/" target="_blank">Bloomberg</a></li><li class="cf"><a class="headline-link" href="http://www.bollywoodlife.com/" target="_blank">Bollywood Life</a></li><li class="cf"><a class="headline-link" href="http://www.businessinsider.com/" target="_blank">Business Insider</a></li><li class="cf"><a class="headline-link" href="http://www.thehindubusinessline.com" target="_blank">Business Line</a></li><li class="cf"><a class="headline-link" href="http://www.business-standard.com/" target="_blank">Business Standard</a></li><li class="cf"><a class="headline-link" href="http://www.businesswireindia.com/" target="_blank">Business Wire India</a></li><li class="cf"><a class="headline-link" href="http://www.catchnews.com/" target="_blank">Catch News</a></li><li class="cf"><a class="headline-link" href="http://www.moneycontrol.com/" target="_blank">CNBC India</a></li><li class="cf"><a class="headline-link" href="http://www.news18.com/" target="_blank">CNN India</a></li><li class="cf"><a class="headline-link" href="http://cpim.org" target="_blank">Communist Party of India</a></li><li class="cf"><a class="headline-link" href="http://www.abplive.in/" target="_blank">CricBuzz</a></li><li class="cf"><a class="headline-link" href="http://www.dailymail.co.uk/indiahome/index.html" target="_blank">DailyMail UK</a></li><li class="cf"><a class="headline-link" href="http://www.dailyo.in/" target="_blank">DailyO</a></li><li class="cf"><a class="headline-link" href="http://www.deccan.com/" target="_blank">Deccan Chronicle</a></li><li class="cf"><a class="headline-link" href="http://www.deccanherald.com/" target="_blank">Deccan Herald</a></li><li class="cf"><a class="headline-link" href="http://www.dnaindia.com/" target="_blank">DNA India</a></li><li class="cf"><a class="headline-link" href="http://www.economictimes.com" target="_blank">Economic Times, The</a></li></ul></div></div>        </div>
+        <div class="link-col flex-child flex-one">
+          <div class="widget-box drudge_link_posts" id="drudge-column-links-5"><div class="wpd-static-links"><ul class="links-list static-links-category-7"><li class="cf"><a class="headline-link" href="http://www.emirates247.com" target="_blank">Emirates 24/7</a></li><li class="cf"><a class="headline-link" href="http://www.espncricinfo.com/" target="_blank">ESPN CricInfo</a></li><li class="cf"><a class="headline-link" href="http://www.filmfare.com/" target="_blank">FilmFare</a></li><li class="cf"><a class="headline-link" href="http://www.financialexpress.com/" target="_blank">Financial Express</a></li><li class="cf"><a class="headline-link" href="http://firstpost.com" target="_blank">First Post</a></li><li class="cf"><a class="headline-link" href="http://forbesindia.com/" target="_blank">Forbes India</a></li><li class="cf"><a class="headline-link" href="http://www.flonnet.com/" target="_blank">Frontline</a></li><li class="cf"><a class="headline-link" href="https://news.google.com/" target="_blank">GOOGLE NEWS</a></li><li class="cf"><a class="headline-link" href="http://hardnewsmedia.com" target="_blank">Hardnews</a></li><li class="cf"><a class="headline-link" href="http://us.hellomagazine.com/tags/india/" target="_blank">HELLO!</a></li><li class="cf"><a class="headline-link" href="http://www.thehindu.com/" target="_blank">Hindu, The</a></li><li class="cf"><a class="headline-link" href="http://www.huffingtonpost.in/" target="_blank">Huffington Post India</a></li><li class="cf"><a class="headline-link" href="http://www.independent.co.uk/topic/India" target="_blank">Independent UK</a></li><li class="cf"><a class="headline-link" href="http://www.expressindia.com/" target="_blank">Indian Express, The</a></li><li class="cf"><a class="headline-link" href="http://aicc.org.in" target="_blank">Indian National Congress</a></li><li class="cf"><a class="headline-link" href="http://www.indigenousherald.com/" target="_blank">Indigenous Herald</a></li><li class="cf"><a class="headline-link" href="http://www.littleindia.com" target="_blank">Little India</a></li><li class="cf"><a class="headline-link" href="http://www.masala.com/" target="_blank">Masala!</a></li><li class="cf"><a class="headline-link" href="http://www.mid-day.com/" target="_blank">Mid-Day</a></li><li class="cf"><a class="headline-link" href="http://www.missmalini.com/" target="_blank">Miss Malini</a></li><li class="cf"><a class="headline-link" href="http://www.mumbaimirror.com/" target="_blank">Mumbai Mirror</a></li><li class="cf"><a class="headline-link" href="http://www.ndtv.com" target="_blank">NDTV</a></li><li class="cf"><a class="headline-link" href="http://www.nytimes.com/topic/destination/india" target="_blank">NY Times</a></li><li class="cf"><a class="headline-link" href="http://www.organiser.org/" target="_blank">Organiser</a></li><li class="cf"><a class="headline-link" href="http://www.outlookindia.com/" target="_blank">Outlook</a></li><li class="cf"><a class="headline-link" href="http://www.prnewswire.co.in/?gclid=CIGuiJ-U1swCFZA2aQod3QQLWA" target="_blank">PR Newswire India</a></li><li class="cf"><a class="headline-link" href="http://www.ptinews.com/" target="_blank">Press Trust India</a></li></ul></div></div>        </div>
+        <div class="link-col flex-child flex-one">
+          <div class="widget-box drudge_link_posts" id="drudge-column-links-7"><div class="wpd-static-links"><ul class="links-list static-links-category-8"><li class="cf"><a class="headline-link" href="http://pmindia.nic.in" target="_blank">Prime Minister&#039;s Office</a></li><li class="cf"><a class="headline-link" href="http://www.reuters.com/" target="_blank">Reuters</a></li><li class="cf"><a class="headline-link" href="http://www.sahilonline.org/" target="_blank">Sahil Online</a></li><li class="cf"><a class="headline-link" href="http://www.samachar.com/" target="_blank">Samachar</a></li><li class="cf"><a class="headline-link" href="http://swarajyamag.com/" target="_blank">Swarajya</a></li><li class="cf"><a class="headline-link" href="http://www.tehelka.com/%20" target="_blank">Tehelka</a></li><li class="cf"><a class="headline-link" href="http://www.telegraphindia.com/" target="_blank">Telegraph India</a></li><li class="cf"><a class="headline-link" href="http://www.telegraph.co.uk/news/worldnews/asia/india/" target="_blank">Telegraph UK</a></li><li class="cf"><a class="headline-link" href="http://www.caravanmagazine.in/" target="_blank">The Caravan</a></li><li class="cf"><a class="headline-link" href="http://www.economist.com/topics/india" target="_blank">The Economist</a></li><li class="cf"><a class="headline-link" href="http://www.hinduonnet.com" target="_blank">The Hindu</a></li><li class="cf"><a class="headline-link" href="http://www.hindustantimes.com/" target="_blank">The Hindustan Times</a></li><li class="cf"><a class="headline-link" href="http://janataparty.org" target="_blank">The Janata Party</a></li><li class="cf"><a class="headline-link" href="http://www.newindianexpress.com/" target="_blank">The New Indian Express</a></li><li class="cf"><a class="headline-link" href="http://www.dailypioneer.com/" target="_blank">The Pioneer</a></li><li class="cf"><a class="headline-link" href="http://www.thestatesman.net/" target="_blank">The Statesman</a></li><li class="cf"><a class="headline-link" href="http://tribuneindia.com/" target="_blank">The Tribune</a></li><li class="cf"><a class="headline-link" href="http://www.timesofindia.com/" target="_blank">Times of India</a></li><li class="cf"><a class="headline-link" href="http://www.TMZ.com" target="_blank">TMZ</a></li><li class="cf"><a class="headline-link" href="http://www.vanityfair.com" target="_blank">Vanity Fair</a></li><li class="cf"><a class="headline-link" href="http://www.vogue.in/" target="_blank">Vogue India</a></li><li class="cf"><a class="headline-link" href="http://www.the-week.com/" target="_blank">Week, The</a></li><li class="cf"><a class="headline-link" href="http://www.weeklystandard.com/section/india" target="_blank">Weekly Standard</a></li><li class="cf"><a class="headline-link" href="https://in.yahoo.com/" target="_blank">Yahoo India</a></li><li class="cf"><a class="headline-link" href="http://zeenews.india.com/" target="_blank">Zee News</a></li></ul></div></div>        </div>
+      </div>
+    </div>
+  </div>
+    <!--
+  <div class="jumbotron">
+  <h1><font color="maroon">Socrates</font></h1>
+<!--<div class="container">-->
+   <!-- <form class="form-inline" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-default">Login</button>
+  <!--<div class="form-group">
+    <label for='username'>Email/Username</label>
+    <input type="email" class="form-control" id="username" placeholder="jane.doe@example.com">
+  </div>
+  <div class="form-group">
+    <label for='password'>Password</label>
+    <input type="password" class="form-control" id="password" placeholder="Password">
+  </div>
+         <button type="submit" class="btn btn-default">Login</button>
+        <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Remember me</label>
+      </div>
+    </div>
+  </div>-->
+<!--</form>
+<!--</div>-->
+<!--</div>
+<div class="container">
+<h2>Create new account now</h2>
+<br>
+<div class="btn-group" role="group" aria-label="...">
+    <a class="btn btn-default" href="/account/signup">Get new account</a>
+</div>
+    <br><br>
+<div class="Moto">
+  <h2><font color="maroon">I know nothing except the fact of my ignorance.&#160;&#160;- <i>Socrates</i></font></h2>
+</div>
+</div>-->
+</body>
+</html>
+
+
+
+

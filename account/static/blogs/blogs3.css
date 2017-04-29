@@ -1,0 +1,132 @@
+
+/*@import 'https://fonts.googleapis.com/css?family=Open+Sans'*/
+.navbar-default {
+     background-image:linear-gradient(
+	rgb(161, 161, 161),
+	rgb(230, 230, 230)
+);
+    border-color: black;
+    padding: 5px 20px;
+    height:60px;
+}
+/* Socrates setting*/
+.navbar-default .navbar-brand {
+    color: maroon;
+    font-size: 25px;
+    font-family:"Times New Roman", Times, serif;
+}
+/*socrates hover color change*/
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color:maroon;
+}
+/*menubar links setting*/
+.navbar-default .navbar-nav > li > a {
+    color: black;
+    margin-left: 10px;
+}
+/*menu bar links hover setting*/
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: maroon;
+
+}
+/* caret,themes triangle setting */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: black;
+    border-bottom-color:black;
+}
+
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: black;
+    border-bottom-color: red;
+}
+.navbar-default .navbar-nav > .open > a .caret,
+.navbar-default .navbar-nav > .open > a:hover .caret,
+.navbar-default .navbar-nav > .open > a:focus .caret {
+    border-top-color: maroon;
+    border-bottom-color: grey;
+}
+/* mobile version */
+.navbar-default .navbar-toggle {
+    border-color: blue;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: blue;
+}
+ .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+     color: black;
+ }
+
+ .gray-wrapper{
+     margin-top: 60px;
+
+ }
+ .navbar-right
+ {
+   width:300px;
+   height:60px;
+   float:top;
+   line-height:30px;
+ }
+ .navbar-right li
+ {
+   float:left;
+   width:120px;
+ }
+ .navbar-right a{
+  float:left;
+  width:140px;
+
+ }
+ .navbar-right a.dropdown-toggle
+ {
+    background: transparent url("images/Default.ico") no-repeat center;
+   width:40px;
+   margin-top:5px;
+   height:40px;
+   float:right;
+ }
+ .navbar-right .dropdown {
+     margin-left: 30px;
+     width: 30px;
+     height: 30px;
+ }
+
+
+
+
+.row-fluid.editor-container{
+    width:600px;
+    margin-left: 200px;
+    height: 450px;
+
+}
+
+.row.content{
+    margin-top: 100px;
+}
+.col-sm-8{
+    width:1000px;
+}
+.jumbotron-container {
+    height: 730px;
+    width: 1000px;
+    background-color: white;
+}
+.jumbotron-container h2{
+    margin-left:200px;
+    color:black ;
+    width:300px;
+}
+.form-horizontal{
+    width:600px;
+    margin-left: 568px;
+    margin-bottom: 100px;
+}
+
+.btn.btn-default{
+    margin-bottom: 10px;
+}

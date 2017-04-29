@@ -1,0 +1,52 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Socrates-login</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static "login/login.css"%}" type="text/css"/>
+    <link rel="shortcut icon" type="image/png" href="{% static "profile/images/favicon.ico" %}"/>
+</head>
+<body>
+<div class="jumbotron">
+  <h1><font color="maroon">Socrates</font></h1>
+<!--<div class="container">-->
+    <form class="form-inline" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn btn-default">Login</button>
+  <!--<div class="form-group">
+    <label for='username'>Email/Username</label>
+    <input type="email" class="form-control" id="username" placeholder="jane.doe@example.com">
+  </div>
+  <div class="form-group">
+    <label for='password'>Password</label>
+    <input type="password" class="form-control" id="password" placeholder="Password">
+  </div>
+         <button type="submit" class="btn btn-default">Login</button>
+        <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox"> Remember me</label>
+      </div>
+    </div>
+  </div>-->
+</form>
+<!--</div>-->
+</div>
+<div class="container">
+<h2>Create new account now</h2>
+<br>
+<div class="btn-group" role="group" aria-label="...">
+    <a class="btn btn-default" href="/account/signup">Get new account</a>
+</div>
+    <br><br>
+<div class="Moto">
+  <h2><font color="maroon">I know nothing except the fact of my ignorance.&#160;&#160;- <i>Socrates</i></font></h2>
+</div>
+</div>
+</body>
+</html>
+

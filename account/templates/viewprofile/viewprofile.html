@@ -1,0 +1,150 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "profile/profile.css"%}" type="text/css"/>
+    <link rel="shortcut icon" type="image/png" href="{% static "profile/images/favicon.ico" %}"/>
+    <title>Socrates-{{user.first_name}} {{user.last_name}}</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        <a class="navbar-brand" href="/home/">Socrates</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+           <form class="navbar-form navbar-left" method="post">
+        <div class="form-group">
+            {% csrf_token %}
+          {{ form.search.errors }}
+    {{ form.search}}
+        </div>
+        <button type="submit" class="btn btn-default">&#x1f50d;</button>
+      </form>
+        <li><a href="/home/"><span class="glyphicon glyphicon-home" aria-hidden="true">Home</span></a></li>
+        <li><a href="#">Compare</a></li>
+         <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Themes<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/home/politics/">Politics</a></li>
+            <li><a href="/home/sports/">Sports</a></li>
+            <li><a href="/home/market">Market</a></li>
+                <li><a href="/home/UnitedNations/">United Nations</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">News in Hindi</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">News in English</a></li>
+          </ul>
+        </li>
+          <li><a href="/account/newspapers/">Newspapers</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Notifications<span class="badge">5</span></a></li>
+          <div class="imgAbt">
+        <li class="dropdown">
+
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+               {% if activeuserimage.url %}
+             {% load static %}
+  <img src={{ activeuserimage.url }} alt="" style="width:40px;height:40px;border:1px solid #E6E6E6;border-radius:50%;">
+</a>
+         {% else %}
+         {% load static %}
+          <img src="{% static "images/Dp.png" %}" alt="" style="width:40px;height:40px;border:1px;border-radius:50%;">
+         {% endif %} </a>
+
+                <ul class="dropdown-menu">
+            <li><a href="/account/profile">My Profile</a></li>
+            <li><a href="/account/Myblog">My Blog</a></li>
+            <li><a href="#">My Messages</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/account/settings">Settings</a></li>
+              <li role="separator" class="divider"></li>
+            <li><a href="/account/logout">Logout</a></li>
+          </ul>
+        </li>
+          </div>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-flui-->
+ </nav>
+
+
+<div class="container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-1 sidenav">
+        <br><br><br><br>
+        <b><p>Feeds</p></b><hr>
+      <p><a href="#">Activity</a></p>
+      <a href="#">Blog<span class="badge">5</span></a><br><br>
+<a href="#">Followers<span class="badge">10</span></a><br><br>
+<a href="#">Following<span class="badge">2</span></a><br><br>
+<a href="#">Messages<span class="badge">2</span></a><br><br>
+        <a href="#">Follow your Comments<span class="badge">2</span></a><br><br>
+    </div>
+
+<div class="col-sm-8 text-left">
+    <div class="container">
+     <div class="col-md-4">
+     <div class="imgAbt">
+         <a href="/account/profile/upload_picture">
+             {% if details.image.url %}
+             {% load static %}
+  <img src={{ pic.url }} alt="" style="width:240px;height:240px;border:5px solid #E6E6E6;border-radius:50%;">
+</a>
+         {% else %}
+         {% load static %}
+          <img src="{% static "images/Dp.png" %}" alt="" style="width:240px;height:240px;border:5px;">
+         {% endif %}
+
+     </div>
+     </div>
+    <div class="col-md-6">
+        <h2>{{user.first_name}}&nbsp; {{user.last_name}}</h2>
+        <p>{{ details.description }}</p>
+        <p>My Website:&nbsp;<a href="#">{{ details.website }}</a></p>
+        {% if not viewer.username == user.username %}
+        <a href="/account/connect/{{ possibleaction }}/{{ user.pk }}"><button type="button" class="btn btn-secondary" style="background-color:maroon;color:white;">{{ possibleaction }}</button></a>
+        {% endif %}
+        </div>
+    </div>
+<hr>
+    </div>
+    <div class="col-sm-2 sidenav">
+      <div class="well">
+
+          <p><b>Credentials & Highlights</b><hr><b>Work and employment</b><br>{{ details.workAndemployment }}<br><br><b>Location</b><br>{{ details.location }}</p>
+
+      </div>
+      <div class="well">
+        <p><b>Interested In &nbsp;<b><hr></p><a href="#">Politics</a><br><br><a href="#">Sports</a><br><br><a href="#">Market</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="container-fluid text-center">
+  <p>Footer Text</p>
+</footer>
+{% else %}
+<p><a href="/account/login">You need to login first</a></p>
+<h1>OR</h1>
+<p><a href="/account/signup">Get new account here</a></p>
+{% endif %}
+</body>
+</html>

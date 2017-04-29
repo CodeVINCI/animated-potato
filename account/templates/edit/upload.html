@@ -1,0 +1,32 @@
+ <!-- Latest compiled and minified CSS -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+       <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    {% load static %}
+    <link rel="shortcut icon" type="image/png" href="{% static "profile/images/favicon.ico" %}"/>
+     <link rel="stylesheet" href="{% static "edit/upload.css"%}" type="text/css"/>
+    <title>Socrates</title>
+</head>
+<body>
+<div class="container">
+    {% if pic.url %}
+     <img src="{{ pic.url }}" alt="" style="width:200px;height:200px;border:0;">
+    {% else %}
+    {% load static %}
+    <img src="{% static "images/Dp.png" %}" alt="" style="width:200px;height:200px;border:0;">
+    {% endif %}
+
+    <br>
+<form method="post" enctype="multipart/form-data">
+{% csrf_token %}
+    {{form.as_p}}
+    <button type="submit">Upload</button>
+</form>
+</div>
+</body>
+</html>

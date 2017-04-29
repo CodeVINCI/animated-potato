@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "home.css"%}" type="text/css"/>
+    {% load static%}
+    <script type="text/javascript" src="{% static 'jscroll.js' %}"></script>
+    <script type="text/javascript" src="{% static 'scroll.js' %}"></script>
+    <title>Socrates-Search</title>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        <a class="navbar-brand" href="/home/">Socrates</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+           <form class="navbar-form navbar-left">
+        <div class="form-group">
+            {% csrf_token %}
+          {{ form.search.errors }}
+    {{ form.search}}
+        </div>
+        <button type="submit" class="btn btn-default">&#x1f50d;</button>
+      </form>
+        <li><a href="/home/"><span class="glyphicon glyphicon-home" aria-hidden="true">Home</span></a></li>
+        <li><a href="#">Compare</a></li>
+         <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Themes<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/home/politics/">Politics</a></li>
+            <li><a href="/home/sports/">Sports</a></li>
+            <li><a href="/home/market">Market</a></li>
+                <li><a href="/home/UnitedNations/">United Nations</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">News in Hindi</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/home/">News in English</a></li>
+          </ul>
+        </li>
+          <li><a href="/account/newspapers/">Newspapers</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Notifications<span class="badge">5</span></a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
+          <ul class="dropdown-menu">
+            <li><a href="/account/profile">My Profile</a></li>
+            <li><a href="/account/Myblog">My Blog</a></li>
+            <li><a href="#">My Messages</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/account/settings">Settings</a></li>
+               <li role="separator" class="divider"></li>
+            <li><a href="/account/logout/">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-flui-->
+ </nav>
+<div style="width:100%; height:60px;margin-top:65px;margin-left:20px;">
+ <div style="float:left; width=100px;">
+        <a href="/account/searchsocrates"><button type="button" value="News Articles" style="backgroung-color:gray;font:16px;border:none;padding:15px 32px;">News Articles</button></a>
+    </div>
+    <div style="float:left; width=100px;">
+        <a href="/account/search_people"><button type="button" value="People" style="background-color:maroon;font:16px;border:none;padding:15px 32px;color:white;">People</button></a>
+    </div>
+      <div style="float:left; width=100px;">
+        <a href="/account/search_websites"><button type="button" value="News Website" style="backgroung-color:gray;font:16px;border:none;padding:15px 32px;">News Sites</button></a>
+    </div>
+     <div style="float:left; width=100px;">
+        <a href="/account/search_writers"><button type="button" value="Writers" style="backgroung-color:gray;font:16px;border:none;padding:15px 32px;">Writers</button></a>
+    </div>
+     <div style="float:left; width=100px;">
+        <a href="/account/search_blogs"><button type="button" value="Blogs" style="backgroung-color:gray;font:16px;border:none;padding:15px 32px;">Blogs</button></a>
+    </div>
+    <br><br>
+</div>
+<ul>
+{% for names in peoplelist %}
+    <li><div class="imgAbt"><a href="/account/viewprofile/{{ names.0.pk }}" class="image"><img src={{ names.0.image.url }} alt="" style="width:40px;height:40px;border:1px solid #E6E6E6;border-radius:50%;">{{ names.1.first_name}}&nbsp;{{names.1.last_name}}&nbsp;&nbsp;&nbsp;Username:&nbsp;{{names.1.username}}</a></div><hr></li>
+
+  {% endfor %}
+</body>
+</html>
