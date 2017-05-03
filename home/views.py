@@ -3,7 +3,8 @@ from django.views.generic import TemplateView
 
 from account.forms import SocratesSearchForm
 from account.models import Userprofile
-from home.models import Post
+from home.models import Post,comment
+from home.forms import comment_form
 from home.scrapers.ScrapeUN import UN
 
 
@@ -17,9 +18,10 @@ class home(TemplateView):
         details=userprofile[0]
         pic=details.image
         form=SocratesSearchForm()
+        commentbox=comment_form()
         posts=Post.objects.all().order_by('date')
 
-        args={'user':request.user,'details':details,'pic':pic,'form':form,"posts":posts}
+        args={'user':request.user,'details':details,'pic':pic,'form':form,"posts":posts,"commentbox":commentbox}
         return render(request,self.template_name,args)
 
 def homeSports(request):
