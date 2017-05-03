@@ -1,0 +1,6 @@
+*.pyc
+*websiteenv
+*.gitignore
+*Newspictures
+*db.sqlite3
+*.idea

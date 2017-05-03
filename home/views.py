@@ -17,7 +17,7 @@ class home(TemplateView):
         details=userprofile[0]
         pic=details.image
         form=SocratesSearchForm()
-        posts=Post.objects.all()
+        posts=Post.objects.all().order_by('date')
 
         args={'user':request.user,'details':details,'pic':pic,'form':form,"posts":posts}
         return render(request,self.template_name,args)

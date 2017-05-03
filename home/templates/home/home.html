@@ -14,7 +14,7 @@
     <script type="text/javascript" src="{% static 'scroll.js' %}"></script>
     <title>Socrates-Politics</title>
 </head>
-<body>
+<body style="overflow-x:scroll">
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -77,27 +77,23 @@
   </div><!-- /.container-flui-->
  </nav>
 
-<div class="jumbotron">
-
-    <div class="row content">
+<div class="span12" style="column-count:3;">
+         <ul id="tiles" class="unstyled">
         {% for post in posts %}
 
-    <div class="col-sm-4 text-left">
-
-
-        <div class="col-sm-4 col-md-2">
-    <div class="thumbnail">
+   <li><div class="thumbnail">
       <img src={{ post.image.url }} alt="...">
       <div class="caption">
+          <p style="font-size:10px;">{{ post.date }}</p>
           <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.headline }}</h3>
-          <hr>
+          <p style="font-size:10px;">{{ post.author }}</p>
         <p style="font-size:20px;">{{ post.story }}</p>
+          <p style="font-size:10px;">{{ post.source }}</p>
         <p><a href={{ post.pageurl }} class="btn btn-primary" role="button">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a></p>
       </div>
-    </div>
-  </div>
-    </div>
+    </div></li>
  {% endfor %}
+         </ul>
 
 
         <!-- <div class="col-sm-1 sidenav" style="background-color:grey;">
@@ -110,8 +106,6 @@
                 </div>-->
          </div>
 
-
-</div>
 
 
 

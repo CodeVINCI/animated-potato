@@ -17,7 +17,7 @@ def get_news():
     response=urllib.urlopen(url)
     data=json.loads(response.read())
     source= data["source"].encode('utf-8')
-    articles=data["articles"].encode('utf-8')
+    articles=data["articles"]
     for article in articles:
         storedarticles=Post.objects.filter(headline=article["title"])
         if len(storedarticles)==0:
