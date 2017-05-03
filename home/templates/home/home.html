@@ -89,7 +89,16 @@
           <p style="font-size:10px;">{{ post.author }}</p>
         <p style="font-size:20px;">{{ post.story }}</p>
           <p style="font-size:10px;">{{ post.source }}</p>
-        <p><a href={{ post.pageurl }} class="btn btn-primary" role="button">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a></p>
+        <p><a href={{ post.pageurl }} class="btn btn-primary" role="button">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <button class="social-like" >
+     <span class="like"><i class="glyphicon glyphicon-thumbs-up"></i></span>
+     <span class="count" >0</span>
+ </button>
+    &nbsp;
+ <button class="social-dislike" >
+     <span class="dislike" >0</span>
+     <span class="like"><i class="glyphicon glyphicon-thumbs-down"></i></span>
+ </button></p>
       </div>
     </div></li>
  {% endfor %}

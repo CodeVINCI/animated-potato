@@ -76,109 +76,44 @@
   </div><!-- /.container-flui-->
  </nav>
 
-<div class="jumbotron">
-    <div class="row content">
-    <div class="col-sm-4 text-left">
+<div class="span12" style="column-count:3;">
+         <ul id="tiles" class="unstyled">
+        {% for post in posts %}
 
-        <div class="col-sm-4 col-md-2">
-    <div class="thumbnail">
-      <img src="..." alt="...">
+   <li><div class="thumbnail">
+      <img src={{ post.image.url }} alt="...">
       <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+          <p style="font-size:10px;">{{ post.date }}</p>
+          <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.headline }}</h3>
+          <p style="font-size:10px;">{{ post.author }}</p>
+        <p style="font-size:20px;">{{ post.story }}</p>
+          <p style="font-size:10px;">{{ post.source }}</p>
+        <p><a href={{ post.pageurl }} class="btn btn-primary" role="button">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <button class="social-like" >
+     <span class="like"><i class="glyphicon glyphicon-thumbs-up"></i></span>
+     <span class="count" >0</span>
+ </button>
+    &nbsp;
+ <button class="social-dislike" >
+     <span class="dislike" >0</span>
+     <span class="like"><i class="glyphicon glyphicon-thumbs-down"></i></span>
+ </button></p>
       </div>
-    </div>
-  </div>
-
-           <div class="col-sm-4 col-md-2">
-    <div class="thumbnail">
-      <img src="..." alt="...">
-      <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-      </div>
-    </div>
-  </div>
-
-    </div>
-
-         <div class="col-sm-4 text-left">
-                 <div class="col-sm-4 col-md-2">
-                 <div class="thumbnail">
-                 <img src="..." alt="...">
-                     <div class="caption">
-                     <h3>Thumbnail label</h3>
-                         <p>...</p>
-                         <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                        </div>
-                       </div>
-                      </div>
-
-              <div class="col-sm-4 col-md-2">
-                 <div class="thumbnail">
-                 <img src="..." alt="...">
-                     <div class="caption">
-                     <h3>Thumbnail label</h3>
-                         <p>...</p>
-                         <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                        </div>
-                       </div>
-                      </div>
-
-              <div class="col-sm-4 col-md-2">
-                 <div class="thumbnail">
-                 <img src="..." alt="...">
-                     <div class="caption">
-                     <h3>Thumbnail label</h3>
-                         <p>...</p>
-                         <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                        </div>
-                       </div>
-                      </div>
-
-              <div class="col-sm-4 col-md-2">
-                 <div class="thumbnail">
-                 <img src="..." alt="...">
-                     <div class="caption">
-                     <h3>Thumbnail label</h3>
-                         <p>...</p>
-                         <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                        </div>
-                       </div>
-                      </div>
+    </div></li>
+ {% endfor %}
+         </ul>
 
 
-
-         </div>
-
-         <div class="col-sm-4 text-left">
-                <div class="col-sm-4 col-md-2">
-                <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                <h3>Thumbnail label</h3>
-                <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
-                </div>
-                </div>
-
-         </div>
-
-         <div class="col-sm-1 sidenav">
+        <!-- <div class="col-sm-1 sidenav" style="background-color:grey;">
                <div class="well">
                 <p>ADS</p>
                 </div>
                 <div class="well">
                 <p>ADS</p>
                 </div>
-                </div>
+                </div>-->
          </div>
 
-
-</div>
 
 
 
