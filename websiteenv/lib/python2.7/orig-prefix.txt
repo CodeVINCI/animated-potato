@@ -1,1 +1,1 @@
-/home/vinci/anaconda
+/usr

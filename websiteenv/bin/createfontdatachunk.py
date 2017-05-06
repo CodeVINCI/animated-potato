@@ -1,4 +1,4 @@
-#!/home/vinci/project/website/websiteenv/bin/python
+#!/home/shrikrishna/animated-potato/websiteenv/bin/python
 from __future__ import print_function
 import base64
 import os

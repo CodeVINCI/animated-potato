@@ -3,8 +3,66 @@ from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.core.files.images import get_image_dimensions
-
+from django.contrib.auth.forms import UserCreationForm
+from account import models
 from django import forms
+
+
+class SignUp_form(UserCreationForm):
+    email=forms.EmailField(required='True',
+                        widget = forms.EmailInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter Your Email Address'
+        }
+                           ))
+    class Meta:
+        password1 = forms.CharField(widget=forms.PasswordInput())
+        password2 = forms.CharField(widget=forms.PasswordInput())
+        model = User
+        widgets = {
+            'first_name': forms.TextInput(attrs={'class': 'form-control1',
+                                                'placeholder': 'First name',
+
+                                                 }),
+            'last_name': forms.TextInput(attrs={'class': 'form-control2',
+                                                 'placeholder': 'Surname',
+
+                                                 }),
+            'password1': forms.PasswordInput(attrs={'class': 'form-control4',
+                                                   'placeholder': 'Password',
+
+            }),
+            'password2': forms.PasswordInput(attrs={'class': 'form-control4',
+                                                   'placeholder': 'Password',
+
+            }),
+            'username': forms.TextInput(attrs={'class': 'form-control3',
+                                                    'placeholder': 'Username'
+
+                                                    }),
+
+        }
+        fields={'first_name',
+                'last_name',
+                'email',
+                'password1',
+                'password2',
+                'username',
+                }
+    def save(self,commit=True):
+        user=super(SignUp_form,self).save(commit=False)
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        user.email= self.cleaned_data['email']
+        if commit:
+            user.save()
+        return user
+
+
+
+
+
 
 class UserProfile_form(forms.ModelForm):
     workAndemployment = forms.CharField(max_length=200,required=False,

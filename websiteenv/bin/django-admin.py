@@ -1,4 +1,4 @@
-#!/home/vinci/project/website/websiteenv/bin/python
+#!/home/shrikrishna/animated-potato/websiteenv/bin/python
 from django.core import management
 
 if __name__ == "__main__":

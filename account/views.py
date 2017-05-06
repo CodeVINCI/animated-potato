@@ -5,13 +5,20 @@ from account.models import Userprofile,SocratesSearch,Following
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from account.handle_upload import handle_uploaded_file
-
+from account import forms
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import SetPasswordForm,PasswordChangeForm
+from django.contrib.auth.forms import SetPasswordForm,PasswordChangeForm,UserCreationForm
 from django.contrib.auth import update_session_auth_hash
 from account.friends_search import FriendSearch
+from django.db import IntegrityError
+from django.contrib.auth.models import User
 import random
+from account import forms,models
+from django.http import (
+    HttpResponse,
+    HttpResponseRedirect,
+)
 
 # view for login /account/login
 def login(request):
@@ -20,21 +27,25 @@ def login(request):
 
 
 # view for Signup /account/signup
-def signup(request):
-    name=request.user
-    if request.method=='POST':
-        form=SignUp_form(request.POST)
-        formprofile=UserProfile_form()
+class signup(TemplateView):
+
+    template_name = 'signup/SignUp.html'
+
+    def get(self, request):
+        form = forms.SignUp_form()
+        return render(request, self.template_name,{'form':form})
+    def post(self,request):
+        form = forms.SignUp_form(request.POST)
         if form.is_valid():
-            userprofile=formprofile.save(commit=False)
-            userprofile.user=name
-            userprofile.save()
-            form.save()
-            return redirect('/account/Welcome-to-socrates')
-    else:
-        form=SignUp_form()
-        args={'form':form}
-        return render(request,'signup/SignUp.html',args)
+            user=form.save(commit=False)
+            user.is_active=True
+            user.save()
+            Userprofile.objects.create(user=user)
+            Following.objects.create(current_user=user)
+            return HttpResponseRedirect('/account/Welcome-to-socrates/')
+
+
+
 
 
 

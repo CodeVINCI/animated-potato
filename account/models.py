@@ -8,7 +8,8 @@ from django.forms import ModelForm
 
 class Userprofile(models.Model):
 
-    user=models.ForeignKey(User)
+    #user=models.ForeignKey(User)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     workAndemployment=models.CharField(max_length=200,default='',blank=True)
     location=models.CharField(max_length=100,default='',blank=True)
     website=models.URLField(default='',blank=True)
@@ -51,3 +52,5 @@ class Following(models.Model):
             current_user=current_user
         )
         follower.users.remove(new_following)
+
+

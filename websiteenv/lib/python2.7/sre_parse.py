@@ -1,1 +1,1 @@
-/home/vinci/anaconda/lib/python2.7/sre_parse.py
+/usr/lib/python2.7/sre_parse.py

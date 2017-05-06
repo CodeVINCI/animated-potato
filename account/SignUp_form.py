@@ -11,17 +11,6 @@ class SignUp_form(UserCreationForm):
             'placeholder': 'Enter Your Email Address'
         }
                            ))
-
-    female = forms.BooleanField(widget=forms.CheckboxInput(
-        attrs={
-            'class': 'form-control6',
-        }
-    ))
-    male = forms.BooleanField(widget=forms.CheckboxInput(
-        attrs={
-            'class': 'form-control6',
-        }
-    ))
     class Meta:
         password = forms.CharField(widget=forms.PasswordInput())
 
@@ -56,7 +45,6 @@ class SignUp_form(UserCreationForm):
         user.first_name = self.cleaned_data['first_name']
         user.last_name = self.cleaned_data['last_name']
         user.email= self.cleaned_data['email']
-        user.birthdate= self.cleaned_data['birtdate']
         if commit:
             user.save()
         return user
