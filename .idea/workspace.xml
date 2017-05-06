@@ -2,121 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4177d4de-711f-4685-bd45-2397543020ce" name="Default" comment="Basicprofile">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/config" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/Pillow-4.1.0.dist-info/DESCRIPTION.rst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/Pillow-4.1.0.dist-info/INSTALLER" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/Pillow-4.1.0.dist-info/METADATA" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/Pillow-4.1.0.dist-info/RECORD" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/Pillow-4.1.0.dist-info/WHEEL" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/Pillow-4.1.0.dist-info/metadata.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/Pillow-4.1.0.dist-info/top_level.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/Pillow-4.1.0.dist-info/zip-safe" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/celery_with_redis-3.0.dist-info/DESCRIPTION.rst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/celery_with_redis-3.0.dist-info/INSTALLER" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/celery_with_redis-3.0.dist-info/METADATA" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/celery_with_redis-3.0.dist-info/RECORD" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/celery_with_redis-3.0.dist-info/WHEEL" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/celery_with_redis-3.0.dist-info/metadata.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/celery_with_redis-3.0.dist-info/top_level.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/setuptools-35.0.1.dist-info/DESCRIPTION.rst" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/setuptools-35.0.1.dist-info/INSTALLER" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/setuptools-35.0.1.dist-info/METADATA" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/setuptools-35.0.1.dist-info/RECORD" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/setuptools-35.0.1.dist-info/WHEEL" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/setuptools-35.0.1.dist-info/dependency_links.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/setuptools-35.0.1.dist-info/entry_points.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/setuptools-35.0.1.dist-info/metadata.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/setuptools-35.0.1.dist-info/top_level.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/setuptools-35.0.1.dist-info/zip-safe" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/python" afterPath="$PROJECT_DIR$/websiteenv/bin/python" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/include/python2.7" afterPath="$PROJECT_DIR$/websiteenv/include/python2.7" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/encodings" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/encodings" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/lib-dynload" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/lib-dynload" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/PIL/_imaging.so" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/PIL/_imaging.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/PIL/_imagingcms.so" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/PIL/_imagingcms.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/PIL/_imagingft.so" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/PIL/_imagingft.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/PIL/_imagingmath.so" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/PIL/_imagingmath.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/PIL/_imagingmorph.so" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/PIL/_imagingmorph.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/PIL/_imagingtk.so" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/PIL/_imagingtk.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/PIL/_webp.so" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/PIL/_webp.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/_billiard.so" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/_billiard.so" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/account/SignUp_form.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/account/SignUp_form.py" afterPath="$PROJECT_DIR$/account/SignUp_form.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/account/forms.py" afterPath="$PROJECT_DIR$/account/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/account/models.py" afterPath="$PROJECT_DIR$/account/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/account/static/signup/SignUp.css" afterPath="$PROJECT_DIR$/account/static/signup/SignUp.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/account/templates/signup/SignUp.html" afterPath="$PROJECT_DIR$/account/templates/signup/SignUp.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/account/urls.py" afterPath="$PROJECT_DIR$/account/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/account/views.py" afterPath="$PROJECT_DIR$/account/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/website/settings.py" afterPath="$PROJECT_DIR$/website/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/activate" afterPath="$PROJECT_DIR$/websiteenv/bin/activate" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/activate.csh" afterPath="$PROJECT_DIR$/websiteenv/bin/activate.csh" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/activate.fish" afterPath="$PROJECT_DIR$/websiteenv/bin/activate.fish" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/celery" afterPath="$PROJECT_DIR$/websiteenv/bin/celery" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/celerybeat" afterPath="$PROJECT_DIR$/websiteenv/bin/celerybeat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/celeryd" afterPath="$PROJECT_DIR$/websiteenv/bin/celeryd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/celeryd-multi" afterPath="$PROJECT_DIR$/websiteenv/bin/celeryd-multi" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/createfontdatachunk.py" afterPath="$PROJECT_DIR$/websiteenv/bin/createfontdatachunk.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/django-admin" afterPath="$PROJECT_DIR$/websiteenv/bin/django-admin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/django-admin.py" afterPath="$PROJECT_DIR$/websiteenv/bin/django-admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/easy_install" afterPath="$PROJECT_DIR$/websiteenv/bin/easy_install" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/easy_install-2.7" afterPath="$PROJECT_DIR$/websiteenv/bin/easy_install-2.7" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/enhancer.py" afterPath="$PROJECT_DIR$/websiteenv/bin/enhancer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/explode.py" afterPath="$PROJECT_DIR$/websiteenv/bin/explode.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/gifmaker.py" afterPath="$PROJECT_DIR$/websiteenv/bin/gifmaker.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/painter.py" afterPath="$PROJECT_DIR$/websiteenv/bin/painter.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/pilconvert.py" afterPath="$PROJECT_DIR$/websiteenv/bin/pilconvert.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/pildriver.py" afterPath="$PROJECT_DIR$/websiteenv/bin/pildriver.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/pilfile.py" afterPath="$PROJECT_DIR$/websiteenv/bin/pilfile.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/pilfont.py" afterPath="$PROJECT_DIR$/websiteenv/bin/pilfont.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/pilprint.py" afterPath="$PROJECT_DIR$/websiteenv/bin/pilprint.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/pip" afterPath="$PROJECT_DIR$/websiteenv/bin/pip" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/pip2" afterPath="$PROJECT_DIR$/websiteenv/bin/pip2" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/pip2.7" afterPath="$PROJECT_DIR$/websiteenv/bin/pip2.7" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/player.py" afterPath="$PROJECT_DIR$/websiteenv/bin/player.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/python-config" afterPath="$PROJECT_DIR$/websiteenv/bin/python-config" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/thresholder.py" afterPath="$PROJECT_DIR$/websiteenv/bin/thresholder.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/viewer.py" afterPath="$PROJECT_DIR$/websiteenv/bin/viewer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/bin/wheel" afterPath="$PROJECT_DIR$/websiteenv/bin/wheel" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/UserDict.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/UserDict.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/_abcoll.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/_abcoll.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/_weakrefset.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/_weakrefset.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/abc.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/abc.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/codecs.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/codecs.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/copy_reg.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/copy_reg.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/fnmatch.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/fnmatch.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/genericpath.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/genericpath.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/linecache.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/linecache.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/locale.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/locale.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/ntpath.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/ntpath.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/orig-prefix.txt" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/orig-prefix.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/os.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/os.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/posixpath.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/posixpath.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/re.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/re.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/Django-1.11.dist-info/RECORD" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/Django-1.11.dist-info/RECORD" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/PIL/JpegImagePlugin.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/PIL/JpegImagePlugin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/PIL/__init__.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/PIL/__init__.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/amqp-1.4.9.dist-info/RECORD" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/amqp-1.4.9.dist-info/RECORD" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/beautifulsoup4-4.5.3.dist-info/RECORD" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/beautifulsoup4-4.5.3.dist-info/RECORD" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/billiard-3.3.0.23.dist-info/RECORD" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/billiard-3.3.0.23.dist-info/RECORD" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/celery-3.1.25.dist-info/RECORD" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/celery-3.1.25.dist-info/RECORD" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/django_celery-3.2.1.dist-info/RECORD" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/django_celery-3.2.1.dist-info/RECORD" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/kombu-3.0.37.dist-info/RECORD" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/kombu-3.0.37.dist-info/RECORD" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/pip-9.0.1.dist-info/RECORD" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/pip-9.0.1.dist-info/RECORD" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/psycopg2-2.7.1.dist-info/RECORD" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/psycopg2-2.7.1.dist-info/RECORD" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/pytz-2017.2.dist-info/RECORD" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/pytz-2017.2.dist-info/RECORD" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/requests-2.13.0.dist-info/RECORD" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/requests-2.13.0.dist-info/RECORD" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/setuptools/command/egg_info.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/setuptools/command/egg_info.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/setuptools/monkey.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/setuptools/monkey.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/wheel-0.29.0.dist-info/RECORD" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/site-packages/wheel-0.29.0.dist-info/RECORD" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/sre.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/sre.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/sre_compile.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/sre_compile.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/sre_constants.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/sre_constants.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/sre_parse.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/sre_parse.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/stat.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/stat.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/types.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/types.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/lib/python2.7/warnings.py" afterPath="$PROJECT_DIR$/websiteenv/lib/python2.7/warnings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/websiteenv/pip-selfcheck.json" afterPath="$PROJECT_DIR$/websiteenv/pip-selfcheck.json" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -131,13 +22,13 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="forms.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/account/forms.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-255">
-              <caret line="52" column="2" lean-forward="false" selection-start-line="52" selection-start-column="2" selection-end-line="52" selection-end-column="2" />
+            <state relative-caret-position="507">
+              <caret line="161" column="27" lean-forward="false" selection-start-line="161" selection-start-column="27" selection-end-line="161" selection-end-column="27" />
               <folding>
-                <element signature="e#0#53#0" expanded="true" />
+                <element signature="e#0#39#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -155,14 +46,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="tests.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/account/tests.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/account/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="37" column="46" lean-forward="true" selection-start-line="37" selection-start-column="46" selection-end-line="37" selection-end-column="46" />
+            <state relative-caret-position="388">
+              <caret line="213" column="57" lean-forward="true" selection-start-line="213" selection-start-column="57" selection-end-line="213" selection-end-column="57" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Welcome.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/account/templates/welcome/Welcome.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="54" column="31" lean-forward="false" selection-start-line="54" selection-start-column="31" selection-end-line="54" selection-end-column="31" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -177,31 +88,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/website/settings.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="885">
-              <caret line="59" column="17" lean-forward="false" selection-start-line="59" selection-start-column="17" selection-end-line="59" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="requirements.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/requirements.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="SignUp.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/account/templates/signup/SignUp.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="22" column="28" lean-forward="true" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+            <state relative-caret-position="360">
+              <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+              <folding>
+                <element signature="e#1318#1324#0" expanded="true" />
+                <element signature="e#1324#1330#0" expanded="true" />
+                <element signature="e#1465#1471#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SignUp.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/account/static/signup/SignUp.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="267">
+              <caret line="71" column="14" lean-forward="false" selection-start-line="71" selection-start-column="14" selection-end-line="71" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -210,32 +115,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/account/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-15">
+            <state relative-caret-position="165">
               <caret line="11" column="4" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admin.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/account/admin.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SignUp_form.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/account/SignUp_form.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="810">
-              <caret line="54" column="15" lean-forward="true" selection-start-line="54" selection-start-column="15" selection-end-line="54" selection-end-column="15" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -259,7 +140,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/account/templates/newspapers/Newspapers.html" />
         <option value="$PROJECT_DIR$/account/templates/settings/ensettings.html" />
         <option value="$PROJECT_DIR$/account/templates/settings/psettings.html" />
         <option value="$PROJECT_DIR$/account/templates/settings/settings.html" />
@@ -307,9 +187,10 @@
         <option value="$PROJECT_DIR$/account/SignUp_form.py" />
         <option value="$PROJECT_DIR$/account/urls.py" />
         <option value="$PROJECT_DIR$/account/models.py" />
+        <option value="$PROJECT_DIR$/account/static/signup/SignUp.css" />
         <option value="$PROJECT_DIR$/account/templates/signup/SignUp.html" />
-        <option value="$PROJECT_DIR$/account/forms.py" />
         <option value="$PROJECT_DIR$/account/views.py" />
+        <option value="$PROJECT_DIR$/account/forms.py" />
       </list>
     </option>
   </component>
@@ -391,28 +272,6 @@
               <option name="myItemId" value="templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="welcome" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="animated-potato" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="animated-potato" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="account" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -433,6 +292,46 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="signup" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="animated-potato" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="animated-potato" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="account" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="signup" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="animated-potato" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="animated-potato" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="account" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -629,7 +528,7 @@
     <frame x="65" y="24" width="1301" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10798122" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19483568" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32847896" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -657,7 +556,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/account/views.py</url>
-          <line>75</line>
+          <line>74</line>
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/account/urls.py</url>
@@ -669,20 +568,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/account/static/newspapers/menubar.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="79" column="10" lean-forward="false" selection-start-line="79" selection-start-column="10" selection-end-line="79" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/account/static/profile/profile.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="80" column="10" lean-forward="false" selection-start-line="80" selection-start-column="10" selection-end-line="80" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/account/static/settings/email.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1245">
@@ -701,13 +586,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1425">
           <caret line="95" column="10" lean-forward="false" selection-start-line="95" selection-start-column="10" selection-end-line="95" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/account/templates/welcome/Welcome.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-258">
-          <caret line="54" column="31" lean-forward="false" selection-start-line="54" selection-start-column="31" selection-end-line="54" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -934,7 +812,7 @@
         <state relative-caret-position="90">
           <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
           <folding>
-            <element signature="e#0#32#0" expanded="true" />
+            <element signature="e#0#32#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -943,6 +821,40 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/account/apps.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/account/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="4" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/account/templates/welcome/Welcome.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="54" column="31" lean-forward="false" selection-start-line="54" selection-start-column="31" selection-end-line="54" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/account/static/signup/SignUp.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="71" column="14" lean-forward="false" selection-start-line="71" selection-start-column="14" selection-end-line="71" selection-end-column="14" />
           <folding />
         </state>
       </provider>
@@ -957,7 +869,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/account/apps.py">
+    <entry file="file://$PROJECT_DIR$/account/tests.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -965,50 +877,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/account/templates/signup/SignUp.html">
+    <entry file="file://$PROJECT_DIR$/account/SignUp_form.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="22" column="28" lean-forward="true" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+        <state relative-caret-position="30">
+          <caret line="2" column="55" lean-forward="true" selection-start-line="2" selection-start-column="55" selection-end-line="2" selection-end-column="69" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/account/SignUp_form.py">
+    <entry file="file://$PROJECT_DIR$/account/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="810">
-          <caret line="54" column="15" lean-forward="true" selection-start-line="54" selection-start-column="15" selection-end-line="54" selection-end-column="15" />
+        <state relative-caret-position="388">
+          <caret line="213" column="57" lean-forward="true" selection-start-line="213" selection-start-column="57" selection-end-line="213" selection-end-column="57" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/account/templates/signup/SignUp.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding>
+            <element signature="e#1318#1324#0" expanded="true" />
+            <element signature="e#1324#1330#0" expanded="true" />
+            <element signature="e#1465#1471#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/account/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-255">
-          <caret line="52" column="2" lean-forward="false" selection-start-line="52" selection-start-column="2" selection-end-line="52" selection-end-column="2" />
-          <folding>
-            <element signature="e#0#53#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/account/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-15">
-          <caret line="11" column="4" lean-forward="false" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+        <state relative-caret-position="507">
+          <caret line="161" column="27" lean-forward="false" selection-start-line="161" selection-start-column="27" selection-end-line="161" selection-end-column="27" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/account/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="37" column="46" lean-forward="true" selection-start-line="37" selection-start-column="46" selection-end-line="37" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
           </folding>
         </state>
       </provider>

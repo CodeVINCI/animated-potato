@@ -1,9 +1,10 @@
+from __future__ import unicode_literals
 from account.models import Userprofile,SocratesSearch
 from django.forms import ModelForm
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.core.files.images import get_image_dimensions
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm,UserChangeForm
 from account import models
 from django import forms
 
@@ -33,8 +34,8 @@ class SignUp_form(UserCreationForm):
                                                    'placeholder': 'Password',
 
             }),
-            'password2': forms.PasswordInput(attrs={'class': 'form-control4',
-                                                   'placeholder': 'Password',
+            'password2': forms.PasswordInput(attrs={'class': 'form-control5',
+                                                   'placeholder': 'Confirm Password',
 
             }),
             'username': forms.TextInput(attrs={'class': 'form-control3',
@@ -152,3 +153,11 @@ class SocratesSearchForm(forms.ModelForm):
     class Meta:
         model=SocratesSearch
         fields=('search',)
+
+class UserBasicEdit_form(UserChangeForm):
+    class Meta:
+        model=User
+        fields=('first_name',
+                'last_name',
+                'password',
+        )

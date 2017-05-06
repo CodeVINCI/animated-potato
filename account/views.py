@@ -1,6 +1,5 @@
 from django.shortcuts import render,redirect
-from account.SignUp_form import SignUp_form,UserBasicEdit_form
-from account.forms import UserProfile_form,Upload_form,SocratesSearchForm
+from account.forms import UserProfile_form,Upload_form,SocratesSearchForm,SignUp_form,UserBasicEdit_form
 from account.models import Userprofile,SocratesSearch,Following
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
