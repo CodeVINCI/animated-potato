@@ -126,6 +126,9 @@ MEDIA_ROOT=os.path.join(BASE_DIR,'website/media')
 STATIC_ROOT = 'static/'
 LOGIN_REDIRECT_URL='/home/'
 
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+
 
 # CELERY SETTINGS
 BROKER_URL = 'redis://localhost:6379/0'
