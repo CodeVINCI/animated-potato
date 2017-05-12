@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from account.forms import UserProfile_form,Upload_form,SocratesSearchForm,SignUp_form,UserBasicEdit_form
-from account.models import Userprofile,SocratesSearch,Following
+from account.models import Userprofile,SocratesSearch,Following,newspaper
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from account.handle_upload import handle_uploaded_file
@@ -90,8 +90,17 @@ def imfollowing(request, user):
     for person in following:
         profiles.append(Userprofile.objects.get(user=person))
     list=zip(following,profiles)
-    args={"following":list}
+    args={"following":list,"user":user}
     return render(request,'following/following.html',args)
+
+def mysubscription(request,user):
+    subscriptionsobj=Following.objects.get(current_user__username=user)
+    subscriptions=subscriptionsobj.newspaper.all()
+    subscribemore=newspaper.objects.exclude(id__in=subscriptions)
+    print(subscribemore)
+    args={"subscriptions":subscriptions,"subscribemore":subscribemore}
+    return render(request,'following/subscribe.html',args)
+
 
 def viewprofile(request,pk):
     profile=Userprofile.objects.get(pk=pk)

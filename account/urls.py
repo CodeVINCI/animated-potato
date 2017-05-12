@@ -27,6 +27,7 @@ urlpatterns=[url(r'^$', views.login),
              url(r'^viewprofile/(?P<pk>.+)/$', views.viewprofile,name='viewprofile'),
              url(r'^connect/(?P<action>.+)/(?P<pk>\d+)/$',views.connections,name='connections'),
              url(r'^(?P<user>.+)/following/$',views.imfollowing,name='following'),
+             url(r'^(?P<user>.+)/subscriptions/$',views.mysubscription,name='subscriptions'),
              url(r'^(?P<user>.+)/followers/$',views.myfollowers,name='followers'),
              url(r'^reset_password/$', password_reset,{'template_name':
              'edit/reset_password.html', 'email_template_name':'edit/reset_password_email.html'},name='reset_password'),
