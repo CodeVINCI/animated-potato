@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 import datetime
+from django.utils.encoding import smart_unicode
 
 from django.db import models
 from django.contrib.auth.models import User
@@ -36,6 +37,6 @@ class Post(models.Model):
     totalcomments=models.IntegerField(default=0)
     comment=models.IntegerField(default=0)
 
-    def __str__(self):
-        return self.headline
+    def __unicode__(self):
+        return smart_unicode(self.headline)
 
