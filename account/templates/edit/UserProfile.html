@@ -1,0 +1,107 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "edit/userprofile.css"%}" type="text/css"/>
+    <title>Socrates-Profile</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        <a class="navbar-brand" href="/home/">Socrates</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/home/"><span class="glyphicon glyphicon-home" aria-hidden="true">Home</span></a></li>
+        <li><a href="#">Compare</a></li>
+         <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Themes<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/home/politics/">Politics</a></li>
+            <li><a href="/home/sports/">Sports</a></li>
+            <li><a href="/home/market">Market</a></li>
+                <li><a href="/home/UnitedNations/">United Nations</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">News in Hindi</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/home/">News in English</a></li>
+          </ul>
+        </li>
+          <li><a href="/account/newspapers/">Newspapers</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Notifications</a></li>
+         <div class="imgAbt">
+        <li class="dropdown">
+
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+               {% if pic.url %}
+             {% load static %}
+  <img src={{ pic.url }} alt="" style="width:40px;height:40px;border:1px solid #E6E6E6;border-radius:50%;">
+</a>
+         {% else %}
+         {% load static %}
+          <img src="{% static "images/Dp.png" %}" alt="" style="width:40px;height:40px;border:1px;border-radius:50%;">
+         {% endif %} </a>
+
+                <ul class="dropdown-menu">
+            <li><a href="/account/profile">My Profile</a></li>
+            <li><a href="/account/Myblog">My Blog</a></li>
+            <li><a href="#">My Messages</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/account/settings">Settings</a></li>
+              <li role="separator" class="divider"></li>
+            <li><a href="/account/logout">Logout</a></li>
+          </ul>
+        </li>
+          </div>
+
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-flui-->
+ </nav>
+<div class="container">
+    <form method="post">
+    {% csrf_token %}
+        {{ form.non_field_errors }}
+     {{form.user.error}}
+        {{ form.user }}
+        <br>
+    {{ form.workAndemployment.errors }}
+    {{ form.workAndemployment}}
+        <br>
+    {{ form.location.errors }}
+    {{ form.location }}
+        <br>
+    {{ form.website.errors }}
+    {{ form.website }}
+        <br>
+    {{ form.description.errors }}
+    {{ form.description }}
+        <br>
+        <button type="submit" class="btn btn-success">Save Changes</button>
+    </form>
+</div>
+{% else %}
+<p><a href="/account/login">You need to login first</a></p>
+<h1>OR</h1>
+<p><a href="/account/login">Get new account here</a></p>
+{% endif %}
+
+</body>
+</html>

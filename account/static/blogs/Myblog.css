@@ -1,0 +1,187 @@
+
+/*@import 'https://fonts.googleapis.com/css?family=Open+Sans'*/
+.navbar-default {
+     background-image:linear-gradient(
+	rgb(161, 161, 161),
+	rgb(230, 230, 230)
+);
+    border-color: black;
+    padding: 5px 20px;
+    height:60px;
+}
+/* Socrates setting*/
+.navbar-default .navbar-brand {
+    color: maroon;
+    font-size: 25px;
+    font-family:"Times New Roman", Times, serif;
+}
+/*socrates hover color change*/
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    color:maroon;
+}
+/*menubar links setting*/
+.navbar-default .navbar-nav > li > a {
+    color: black;
+    margin-left: 10px;
+}
+/*menu bar links hover setting*/
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+    color: maroon;
+
+}
+/* caret,themes triangle setting */
+.navbar-default .navbar-nav > .dropdown > a .caret {
+    border-top-color: black;
+    border-bottom-color:black;
+}
+
+.navbar-default .navbar-nav > .dropdown > a:hover .caret,
+.navbar-default .navbar-nav > .dropdown > a:focus .caret {
+    border-top-color: black;
+    border-bottom-color: red;
+}
+.navbar-default .navbar-nav > .open > a .caret,
+.navbar-default .navbar-nav > .open > a:hover .caret,
+.navbar-default .navbar-nav > .open > a:focus .caret {
+    border-top-color: maroon;
+    border-bottom-color: grey;
+}
+/* mobile version */
+.navbar-default .navbar-toggle {
+    border-color: blue;
+}
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: blue;
+}
+ .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+     color: black;
+ }
+
+ .gray-wrapper{
+     margin-top: 60px;
+
+ }
+ .navbar-right
+ {
+   width:300px;
+   height:60px;
+   float:top;
+   line-height:30px;
+ }
+ .navbar-right li
+ {
+   float:left;
+   width:120px;
+ }
+ .navbar-right a{
+  float:left;
+  width:140px;
+
+ }
+ .navbar-right a.dropdown-toggle
+ {
+    background: transparent url("images/Default.ico") no-repeat center;
+   width:40px;
+   margin-top:5px;
+   height:40px;
+   float:right;
+ }
+
+ .navbar-right .dropdown
+ {
+   margin-left:30px;
+   width:30px;
+   height:30px;
+ }
+ div#bs-example-navbar-collapse-1 .collapse .navbar-collapse
+ {
+    height:60px;
+ }
+ .navbar-right .dropdown .open
+ {
+   width:30px;
+   float:center;
+ }
+
+ .navbar-right .dropdown.open .dropdown-menu li
+ {
+   text_allign:center;
+   width:160px;
+ }
+ .navbar-right .dropdown.open .dropdown-menu li a
+ {
+  width:160px;
+
+ }
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+     .row.content {height: 800px;
+         margin-top: 50px;
+     }
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+    footer {
+      background-color: black;
+      color: white;
+      padding: 15px;
+    }
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;}
+    }
+
+   /* background: transparent url("images/profile.jpg") no-repeat center;*/
+
+
+
+/*.text-left {
+    margin-top: 100px;
+    height: 200px;
+    width:200px;
+}*/
+/*.profile_photo_img{
+    margin-left: 10px;
+}*/
+.col-sm-8{
+    width:800px;
+    overflow-y=scroll;
+    margin-left:170px;
+}
+.page-header{
+    width: 700px;
+    margin-top: 80px;
+}
+.col-sm-2{
+    width:300px;
+    margin-left:999px;
+    position:fixed;
+}
+.col-sm-1{
+    width:170px;
+    position:fixed;
+}
+.container{
+    width:800px;
+    margin-top: 50px;
+}
+.col-md-6 a{
+    font-size: medium;
+}
+body
+{
+  overflow-x=hide;
+}

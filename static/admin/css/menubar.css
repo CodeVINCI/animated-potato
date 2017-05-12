@@ -1,0 +1,60 @@
+@ charset "utf-8"
+.logo{
+
+   width:100px;
+   float:left;
+   height:45px;
+   line-height:45px;
+
+}
+.serach-box-wrapper{
+   width:200px;
+   float:left;
+   height:45px;
+   line-height:45px;
+}
+
+
+
+#menu{
+    height:45px;
+    background-color:white;
+
+
+}
+
+#menu ul{
+    list-style:none;
+    float:left;
+}
+#menu ul li{
+    background-color:white;
+    width:80px;
+    line-height:45px;
+    height:45px;
+    float:left;
+    text-allign:center;
+    position:relative;
+}
+
+#menu ul li a{
+    text-decoration:none;
+    color:black;
+    display:block
+}
+
+
+#menu ul li a:hover{
+    background-color:#FFFFFF;
+    color:maroon;
+}
+#menu ul ul{
+    position:absolute;
+    display:none;
+    margin:0px;
+    padding:0px;
+}
+#menu ul li:hover > ul
+{
+    display:block;
+}

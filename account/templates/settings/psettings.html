@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <title>privacy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="{% static "settings/privacy.css" %}" type="text/css">
+    <link rel="shortcut icon" type="image/png" href="{% static "profile/images/favicon.ico" %}"/>
+
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        <a class="navbar-brand" href="/home/">Socrates</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+           <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search-Socrates">
+        </div>
+        <button type="submit" class="btn btn-default">&#x1f50d;</button>
+      </form>
+        <li><a href="/home/"><span class="glyphicon glyphicon-home" aria-hidden="true">Home</span></a></li>
+        <li><a href="#">Compare</a></li>
+         <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Themes<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/home/politics/">Politics</a></li>
+            <li><a href="/home/sports/">Sports</a></li>
+            <li><a href="/home/market">Market</a></li>
+                <li><a href="/home/UnitedNations/">United Nations</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">News in Hindi</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/home/">News in English</a></li>
+          </ul>
+        </li>
+          <li><a href="/account/newspapers/">Newspapers</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+       <li><a href="#">Notifications<span class="badge">5</span></a></li>
+          <div class="imgAbt">
+        <li class="dropdown">
+
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src={{ pic.url }} alt="" style="width:40px;height:40px;border:1px solid #E6E6E6;border-radius:50%;"></a>
+
+                <ul class="dropdown-menu">
+            <li><a href="/account/profile">My Profile</a></li>
+            <li><a href="/account/Myblog/">My Blog</a></li>
+            <li><a href="#">My Messages</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/account/settings">Settings</a></li>
+              <li role="separator" class="divider"></li>
+            <li><a href="/account/logout">Logout</a></li>
+          </ul>
+        </li>
+          </div>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-flui-->
+ </nav>
+
+<div class="box">
+ <div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Settings
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><a href="/account/settings/">Account</a></li>
+    <li><a href="/account/psettings/">Privacy</a></li>
+    <li><a href="/account/ensettings/">Email & Notification</a></li>
+  </ul>
+</div>
+</div>
+
+<div class="jumbotron">
+    <b>Inbox Preferences</b>
+<hr>
+    Which registered users would you like to receive message from?
+<div class="radio">
+  <label>
+    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+    Allow any person on Socrates to send me messages.
+  </label>
+</div>
+<div class="radio">
+  <label>
+    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+    Allow any person on Socrates I follow to send me messages.
+  </label>
+</div>
+<div class="radio">
+  <label>
+    <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
+    Allow no one to send me messages.
+  </label>
+</div>
+    <br><br>
+    <b>Comment Preferences</b>
+    <hr>
+    <div class="checkbox">
+  <label>
+    <input type="checkbox" value="">
+      Allow other people to reply on your comments and comments on your blogs..
+  </label>
+</div>
+    <br><br>
+
+    <b>Delete or Deactivate Your Account</b>
+    <hr>
+    <a href="#">Deactivate Accounnt</a>
+<hr>
+    <a href="#">Delete Account</a>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "home.css"%}" type="text/css"/>
+    <link rel="shortcut icon" type="image/png" href="{% static "images/favicon.ico" %}"/>
+    {% load static%}
+    <script type="text/javascript" src="{% static 'jscroll.js' %}"></script>
+    <script type="text/javascript" src="{% static 'scroll.js' %}"></script>
+    <title>Socrates-Politics</title>
+</head>
+<body style="overflow-x:scroll">
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        <a class="navbar-brand" href="/home/">Socrates</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+           <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search-Socrates">
+        </div>
+        <button type="submit" class="btn btn-default">&#x1f50d;</button>
+      </form>
+        <li><a href="/home/"><span class="glyphicon glyphicon-home" aria-hidden="true">Home</span></a></li>
+        <li><a href="#">Compare</a></li>
+         <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Themes<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/home/politics/">Politics</a></li>
+            <li><a href="/home/sports/">Sports</a></li>
+            <li><a href="/home/market">Market</a></li>
+              <li><a href="/home/market">United Nations</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">News in Hindi</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">News in English</a></li>
+          </ul>
+        </li>
+          <li><a href="/account/Newspapers/">Newspapers</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Notifications<span class="badge">5</span></a></li>
+        <div class="imgAbt">
+        <li class="dropdown">
+
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src={{ pic.url }} alt="" style="width:40px;height:40px;border:1px solid #E6E6E6;border-radius:50%;"></a>
+
+                <ul class="dropdown-menu">
+            <li><a href="/account/profile">My Profile</a></li>
+            <li><a href="/account/Myblog">My Blog</a></li>
+            <li><a href="#">My Messages</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/account/settings">Settings</a></li>
+              <li role="separator" class="divider"></li>
+            <li><a href="/account/logout">Logout</a></li>
+          </ul>
+        </li>
+          </div>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-flui-->
+ </nav>
+
+<div class="span12" id="wrap">
+    <div class="col-6 col-md-4">
+         <ul id="tiles" class="unstyled">
+        {% for post in col1 %}
+
+   <li><div class="thumbnail">
+      <img src={{ post.image.url }} alt="...">
+      <div class="caption">
+          <p style="font-size:10px;">{{ post.date }}</p>
+          <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.headline }}</h3>
+          <p style="font-size:10px;">{{ post.author }}</p>
+        <p style="font-size:20px;">{{ post.story }}</p>
+          <p style="font-size:10px;">{{ post.source }}</p>
+          <hr>
+        <p><a href={{ post.pageurl }} class="btn btn-primary" role="button">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <button class="social-like" >
+     <span class="like"><i class="glyphicon glyphicon-thumbs-up"></i></span>
+     <span class="count" >0</span>
+ </button>
+    &nbsp;
+ <button class="social-dislike" >
+     <span class="dislike" >0</span>
+     <span class="like"><i class="glyphicon glyphicon-thumbs-down"></i></span>
+ </button></p>
+
+      </div>
+    </div></li>
+ {% endfor %}
+         </ul>
+    </div>
+    <div class="col-6 col-md-4">
+       <ul id="tiles" class="unstyled">
+        {% for post in col2 %}
+
+   <li><div class="thumbnail">
+      <img src={{ post.image.url }} alt="...">
+      <div class="caption">
+          <p style="font-size:10px;">{{ post.date }}</p>
+          <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.headline }}</h3>
+          <p style="font-size:10px;">{{ post.author }}</p>
+        <p style="font-size:20px;">{{ post.story }}</p>
+          <p style="font-size:10px;">{{ post.source }}</p>
+          <hr>
+        <p><a href={{ post.pageurl }} class="btn btn-primary" role="button">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <button class="social-like" >
+     <span class="like"><i class="glyphicon glyphicon-thumbs-up"></i></span>
+     <span class="count" >0</span>
+ </button>
+    &nbsp;
+ <button class="social-dislike" >
+     <span class="dislike" >0</span>
+     <span class="like"><i class="glyphicon glyphicon-thumbs-down"></i></span>
+ </button></p>
+
+      </div>
+    </div></li>
+ {% endfor %}
+         </ul>
+    </div>
+    <div class="col-6 col-md-4">
+       <ul id="tiles" class="unstyled">
+        {% for post in col3 %}
+
+   <li><div class="thumbnail">
+      <img src={{ post.image.url }} alt="...">
+      <div class="caption">
+          <p style="font-size:10px;">{{ post.date }}</p>
+          <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.headline }}</h3>
+          <p style="font-size:10px;">{{ post.author }}</p>
+        <p style="font-size:20px;">{{ post.story }}</p>
+          <p style="font-size:10px;">{{ post.source }}</p>
+          <hr>
+        <p><a href={{ post.pageurl }} class="btn btn-primary" role="button">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <button class="social-like" >
+     <span class="like"><i class="glyphicon glyphicon-thumbs-up"></i></span>
+     <span class="count" >0</span>
+ </button>
+    &nbsp;
+ <button class="social-dislike" >
+     <span class="dislike" >0</span>
+     <span class="like"><i class="glyphicon glyphicon-thumbs-down"></i></span>
+ </button></p>
+      </div>
+    </div></li>
+ {% endfor %}
+         </ul>
+    </div>
+  </div>
+
+
+
+
+</body>
+</html>

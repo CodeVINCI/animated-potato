@@ -1,0 +1,86 @@
+body{
+ background: white url("images/socrates1.jpg") no-repeat right bottom;
+ background-size:100% 100%;
+}
+.jumbotron
+{
+  margin-top:0px;
+  height: 145px;
+  background-image:linear-gradient(
+	rgb(161, 161, 161),
+	rgb(230, 230, 230)
+);
+
+  padding: 15px 20px 15px 50px;
+}
+.jumbotron h1
+{
+  text-allign:left;
+  font-family:"Times New Roman", Times, serif;
+}
+h2
+{
+  padding: 15px 20px 15px 50px;
+}
+/*.form-horizontal
+{
+  width:500px;
+  padding: 15px 20px 15px 50px;
+}*/
+.Moto h2
+{
+  margin-left:570px;
+  font-family:"Times New Roman", Times, serif;
+  font-size:30px;
+}
+.btn btn-default
+{
+  background-color:#FAFCBD;
+}
+.jumbotron2{
+  width: 700px;
+}
+.form-control1{
+  width: 200px;
+    border: 2px solid white;
+    border-radius: 5px;
+  height: 34px ;
+
+}
+
+.form-control2 {
+  width: 200px;
+  border: 2px solid white;
+  border-radius: 5px;
+  height: 34px;
+
+
+}
+.form-control{
+  width: 410px;
+   border: 2px solid white;
+  border-radius: 5px;
+
+}
+.form-control3 {
+  width: 200px;
+  border: 2px solid white;
+  border-radius: 5px;
+  height: 34px;
+
+}
+.form-control4{
+  width: 200px;
+  border: 2px solid white;
+  border-radius: 5px;
+  height: 34px;
+}
+.form-control5{
+  width:100px;
+  height: 34px;
+  border: 2px solid white;
+  border-radius: 5px;
+}
+.btn-default{
+  margin-left: 310px;
+}
