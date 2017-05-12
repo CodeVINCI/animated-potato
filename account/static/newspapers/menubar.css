@@ -117,20 +117,38 @@
   width:160px;
 
  }
- .verticalLine {
-  border-left: thin solid #e6e6e6;
-     margin-left: 1050px;
 
+.select-newspaper
+{
+ width:200px;
+ margin-left:5px;
 }
- .verticalLine span {
-     margin-left: 10px;
-     position: fixed;
-     background-color: white;
-     width: 200px;
+.box
+{
+ margin-top:65px;
+ overflow-y:fixed;
+}
+.span12{
+  background-color:white;
+  margin-top:40px;
+}
+.verticalLine {
+  border-left: thick solid #ff0000;
+}
+.thumbnail
+{
+background-color:rgb(250,250,250);
+border-radius:30px;
+width:390px;
+}
+.thumbnail img
+{
+border-radius:28px;
+}
 
- }
- .verticalLine a{
-      overflow-y: scroll;
-
- }
-
+#tiles li
+{
+width:400px;
+display:inline-block;
+float:center;
+}

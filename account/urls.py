@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from . import views
-from account.views import UserProfileEdit,Profileupload,Search_results,Profile,People_search,createblog,blog,Myblog,signup
+from account.views import UserProfileEdit,Profileupload,Search_results,Profile,People_search,createblog,blog,Myblog,signup,newspapers
 from django.contrib.auth.views import login,logout,password_reset,password_reset_done,password_reset_confirm,password_reset_complete
 
 urlpatterns=[url(r'^$', views.login),
@@ -13,8 +13,8 @@ urlpatterns=[url(r'^$', views.login),
              url(r'^ensettings/$',views.ensettings,name='ensettings'),
              url(r'^changepassword/$',views.changepassword,name='changepassword'),
              url(r'^blogs/$', views.blogs, name='blogs'),
-             url(r'^newspapers/$', views.newspapers, name='newspapers'),
-             url(r'^Newspapers/$', views.newspapers, name='newspapers'),
+             url(r'^newspapers/(?P<sitename>.+)$', newspapers.as_view(), name='newspapers'),
+             url(r'^Newspapers/(?P<action>.+)$', newspapers.as_view(), name='newspapers'),
              url(r'^Welcome-to-socrates/$', views.Welcome,name='Welcome'),
              url(r'^profile/basic_edit/$',views.UserBasicEdit,name='UserBasicEdit'),
              url(r'^profile/User_profile/$', UserProfileEdit.as_view(),name='UserProfileEdit'),

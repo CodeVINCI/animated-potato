@@ -80,14 +80,78 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-flui-->
  </nav>
-
 <div class="box">
-<div class="verticalLine">
-<div class="gray-wrapper">
-  <div class="cf home main-box">
-    <div class="main-title content-title ">
-      <span>News Websites</span>
+<div class="col-6 col-md-9">
+<div class="select-newspaper">
+  <select style="background-color:white;">
+      {% for subscription in subscriptions %}
+  <option value="{{ subscription.name }}">{{ subscription.name }}</option>
+      {% endfor %}
+</select>
+</div>
+    <div class="span12">
+        <div class="col-6 col-md-6">
+             <ul id="tiles" class="unstyled">
+        {% for post in col1 %}
+
+   <li><div class="thumbnail">
+      <img src={{ post.image.url }} alt="...">
+      <div class="caption">
+          <p style="font-size:10px;">{{ post.date }}</p>
+          <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.headline }}</h3>
+          <p style="font-size:10px;">{{ post.author }}</p>
+        <p style="font-size:20px;">{{ post.story }}</p>
+          <p style="font-size:10px;">{{ post.source }}</p>
+          <hr>
+        <p><a href={{ post.pageurl }} class="btn btn-primary" role="button">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <button class="social-like" >
+     <span class="like"><i class="glyphicon glyphicon-thumbs-up"></i></span>
+     <span class="count" >0</span>
+ </button>
+    &nbsp;
+ <button class="social-dislike" >
+     <span class="dislike" >0</span>
+     <span class="like"><i class="glyphicon glyphicon-thumbs-down"></i></span>
+ </button></p>
+
+      </div>
+    </div></li>
+ {% endfor %}
+         </ul>
+        </div>
+        <div class="col-6 col-md-6">
+             <ul id="tiles" class="unstyled">
+        {% for post in col2 %}
+
+   <li><div class="thumbnail">
+      <img src={{ post.image.url }} alt="...">
+      <div class="caption">
+          <p style="font-size:10px;">{{ post.date }}</p>
+          <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.headline }}</h3>
+          <p style="font-size:10px;">{{ post.author }}</p>
+        <p style="font-size:20px;">{{ post.story }}</p>
+          <p style="font-size:10px;">{{ post.source }}</p>
+          <hr>
+        <p><a href={{ post.pageurl }} class="btn btn-primary" role="button">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         <button class="social-like" >
+     <span class="like"><i class="glyphicon glyphicon-thumbs-up"></i></span>
+     <span class="count" >0</span>
+ </button>
+    &nbsp;
+ <button class="social-dislike" >
+     <span class="dislike" >0</span>
+     <span class="like"><i class="glyphicon glyphicon-thumbs-down"></i></span>
+ </button></p>
+
+      </div>
+    </div></li>
+ {% endfor %}
+         </ul>
+        </div>
+
     </div>
+</div>
+<div class="col-6 col-md-3" style="overflow-y:scroll;border-left:thick solid #f2f2f2;">
     <div class="content-links content-links-bottom flex">
       <div class="bottom-left-col flex">
         <div class="link-col flex-child flex-one">
@@ -98,46 +162,9 @@
           <div class="widget-box drudge_link_posts" id="drudge-column-links-7"><div class="wpd-static-links"><ul class="links-list static-links-category-8"><li class="cf"><a class="headline-link" href="http://pmindia.nic.in" target="_blank">Prime Minister&#039;s Office</a></li><li class="cf"><a class="headline-link" href="http://www.reuters.com/" target="_blank">Reuters</a></li><li class="cf"><a class="headline-link" href="http://www.sahilonline.org/" target="_blank">Sahil Online</a></li><li class="cf"><a class="headline-link" href="http://www.samachar.com/" target="_blank">Samachar</a></li><li class="cf"><a class="headline-link" href="http://swarajyamag.com/" target="_blank">Swarajya</a></li><li class="cf"><a class="headline-link" href="http://www.tehelka.com/%20" target="_blank">Tehelka</a></li><li class="cf"><a class="headline-link" href="http://www.telegraphindia.com/" target="_blank">Telegraph India</a></li><li class="cf"><a class="headline-link" href="http://www.telegraph.co.uk/news/worldnews/asia/india/" target="_blank">Telegraph UK</a></li><li class="cf"><a class="headline-link" href="http://www.caravanmagazine.in/" target="_blank">The Caravan</a></li><li class="cf"><a class="headline-link" href="http://www.economist.com/topics/india" target="_blank">The Economist</a></li><li class="cf"><a class="headline-link" href="http://www.hinduonnet.com" target="_blank">The Hindu</a></li><li class="cf"><a class="headline-link" href="http://www.hindustantimes.com/" target="_blank">The Hindustan Times</a></li><li class="cf"><a class="headline-link" href="http://janataparty.org" target="_blank">The Janata Party</a></li><li class="cf"><a class="headline-link" href="http://www.newindianexpress.com/" target="_blank">The New Indian Express</a></li><li class="cf"><a class="headline-link" href="http://www.dailypioneer.com/" target="_blank">The Pioneer</a></li><li class="cf"><a class="headline-link" href="http://www.thestatesman.net/" target="_blank">The Statesman</a></li><li class="cf"><a class="headline-link" href="http://tribuneindia.com/" target="_blank">The Tribune</a></li><li class="cf"><a class="headline-link" href="http://www.timesofindia.com/" target="_blank">Times of India</a></li><li class="cf"><a class="headline-link" href="http://www.TMZ.com" target="_blank">TMZ</a></li><li class="cf"><a class="headline-link" href="http://www.vanityfair.com" target="_blank">Vanity Fair</a></li><li class="cf"><a class="headline-link" href="http://www.vogue.in/" target="_blank">Vogue India</a></li><li class="cf"><a class="headline-link" href="http://www.the-week.com/" target="_blank">Week, The</a></li><li class="cf"><a class="headline-link" href="http://www.weeklystandard.com/section/india" target="_blank">Weekly Standard</a></li><li class="cf"><a class="headline-link" href="https://in.yahoo.com/" target="_blank">Yahoo India</a></li><li class="cf"><a class="headline-link" href="http://zeenews.india.com/" target="_blank">Zee News</a></li></ul></div></div>        </div>
       </div>
     </div>
-  </div>
-    <!--
-  <div class="jumbotron">
-  <h1><font color="maroon">Socrates</font></h1>
-<!--<div class="container">-->
-   <!-- <form class="form-inline" method="post">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit" class="btn btn-default">Login</button>
-  <!--<div class="form-group">
-    <label for='username'>Email/Username</label>
-    <input type="email" class="form-control" id="username" placeholder="jane.doe@example.com">
-  </div>
-  <div class="form-group">
-    <label for='password'>Password</label>
-    <input type="password" class="form-control" id="password" placeholder="Password">
-  </div>
-         <button type="submit" class="btn btn-default">Login</button>
-        <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <div class="checkbox">
-        <label>
-          <input type="checkbox"> Remember me</label>
-      </div>
-    </div>
-  </div>-->
-<!--</form>
-<!--</div>-->
-<!--</div>
-<div class="container">
-<h2>Create new account now</h2>
-<br>
-<div class="btn-group" role="group" aria-label="...">
-    <a class="btn btn-default" href="/account/signup">Get new account</a>
 </div>
-    <br><br>
-<div class="Moto">
-  <h2><font color="maroon">I know nothing except the fact of my ignorance.&#160;&#160;- <i>Socrates</i></font></h2>
 </div>
-</div>-->
+
 </body>
 </html>
 

@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from account.forms import UserProfile_form,Upload_form,SocratesSearchForm,SignUp_form,UserBasicEdit_form
 from account.models import Userprofile,SocratesSearch,Following,newspaper
+from home.models import Post
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from account.handle_upload import handle_uploaded_file
@@ -55,11 +56,12 @@ class Profile(TemplateView):
                  followers=followers+1
 
          following=followingobj.users.all()
+         firstpaper=followingobj.newspaper.all()[0]
          followingno= len(following)
          details=userprofile[0]
          pic=details.image
          form=SocratesSearchForm()
-         args={'user':request.user,'details':details,'pic':pic,'form':form,'following':following,'followingno':followingno,"followerno":followers}
+         args={'user':request.user,'details':details,'pic':pic,'form':form,'following':following,'followingno':followingno,"followerno":followers,"firstpaper":firstpaper}
          return render(request,self.template_name,args)
 
     def post(self,request):
@@ -97,7 +99,6 @@ def mysubscription(request,user):
     subscriptionsobj=Following.objects.get(current_user__username=user)
     subscriptions=subscriptionsobj.newspaper.all()
     subscribemore=newspaper.objects.exclude(id__in=subscriptions)
-    print(subscribemore)
     args={"subscriptions":subscriptions,"subscribemore":subscribemore}
     return render(request,'following/subscribe.html',args)
 
@@ -179,15 +180,27 @@ def blogs(request):
 
 
 # view for personalised newspaper page /account/newspapers
-@login_required
-def newspapers(request):
-    name=request.user
-    userprofile=Userprofile.objects.filter(user=name)
-    details=userprofile[0]
-    pic=details.image
-    form=SocratesSearchForm()
-    args={'user':request.user,'details':details,'pic':pic,'form':form}
-    return render(request,'newspapers/Newspapers.html',args)
+class newspapers(TemplateView):
+    template_name = 'newspapers/Newspapers.html'
+    def get(self,request,sitename):
+        name=request.user
+        userprofile=Userprofile.objects.filter(user=name)
+        details=userprofile[0]
+        pic=details.image
+        form=SocratesSearchForm()
+        subscriptionsobj=Following.objects.get(current_user__username=request.user)
+        subscriptions=subscriptionsobj.newspaper.all()
+        col1=[]
+        col2=[]
+        all_posts=Post.objects.filter(source=sitename).order_by('date').reverse()
+        j=0
+        for i in xrange(0, len(all_posts), 2):
+            col1.insert(j,all_posts[i])
+            if (i+1)<len(all_posts):
+                col2.insert(j,all_posts[i+1])
+            j=j+1
+        args={'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'col1':col1,'col2':col2}
+        return render(request,'newspapers/Newspapers.html',args)
 
 # /account/Welcome-to-socrates
 @login_required

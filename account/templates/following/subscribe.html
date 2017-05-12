@@ -15,7 +15,7 @@
 </head>
 <body>
 <div class="col-6 col-md-6">
-   <div style="width:100%; height:80px;margin-top:5px;margin-left:20px;">
+   <div style="width:100%; height:80px;margin-top:10px;margin-left:20px;">
  <div style="float:left; width=100px;">
         <a href="/account/{{ user }}/following/"><button type="button" value="People" style="width:300px;backgroung-color:gray;font:16px;border:none;padding:15px 32px;">People</button></a>
     </div>
@@ -31,8 +31,8 @@
 {% endfor %}
         </ul>
    </div>
-<div class="col-6 col-md-6" style="border-left: thick solid #f2f2f2;overflow-y:scroll;height:700px;">
-    <h1 style="height:80px;margin-top:5px;">Add more newspapers here</h1>
+<div class="col-6 col-md-6" style="border-left: thick solid #f2f2f2;overflow-y:scroll;height:670px;">
+    <h1 style="height:80px;margin-top:10px;">Add more newspapers here</h1>
 <ul>
     {% for morenewspaper in subscribemore %}
     <li>{{ morenewspaper.name }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/account/connect/{{ possibleaction }}/{{ user.pk }}"><button type="button" class="btn btn-secondary" style="width:100px;height:25px;padding:2px;background-color:maroon;color:white;">Subscribe</button></a></li>
