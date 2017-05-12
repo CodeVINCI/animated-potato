@@ -5,6 +5,7 @@ import requests
 import tempfile
 
 from django.core import files
+from django.utils import timezone
 
 
 
@@ -12,8 +13,8 @@ from django.core import files
 
 
 
-def get_news():
-    url="https://newsapi.org/v1/articles?source=the-hindu&sortBy=latest&apiKey=7b761e381bcc40ca88311d8ef360da90"
+def get_news(URL):
+    url=URL
     response=urllib.urlopen(url)
     data=json.loads(response.read())
     source= data["source"].encode('utf-8')
@@ -22,12 +23,19 @@ def get_news():
         storedarticles=Post.objects.filter(headline=article["title"])
         if len(storedarticles)==0:
                 articlesource=source
-                author=article["author"].encode('utf-8')
+                if article["author"]==None:
+                    author="Anonymous"
+                else:
+                    author=article["author"].encode('utf-8')
                 headline=article["title"].encode('utf-8')
                 story=article["description"].encode('utf-8')
                 url=article["url"].encode('utf-8')
-                date=article["publishedAt"].encode('utf-8')
-                date=date[:10]
+                if article["publishedAt"]==None:
+                    date= str(timezone.now())
+                    date=date[:10]
+                else:
+                    date=article["publishedAt"].encode('utf-8')
+                    date=date[:10]
                 image_url=article["urlToImage"].encode('utf-8')
                 request = requests.get(image_url, stream=True)
 

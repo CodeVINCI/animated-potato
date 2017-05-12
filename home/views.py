@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 from account.forms import SocratesSearchForm
 from account.models import Userprofile
 from home.models import Post,comment
+from account.models import Following
 from home.forms import comment_form
 from home.scrapers.ScrapeUN import UN
 from django.utils import timezone
@@ -32,8 +33,10 @@ class home(TemplateView):
             if (i+2)<len(all_posts):
                 col3.insert(j,all_posts[i+2])
             j=j+1
+        followingobj=Following.objects.get(current_user=name)
+        firstpaper=followingobj.newspaper.all()[0]
 
-        args={'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox}
+        args={'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper}
         return render(request,self.template_name,args)
 
 def homeSports(request):

@@ -199,7 +199,7 @@ class newspapers(TemplateView):
             if (i+1)<len(all_posts):
                 col2.insert(j,all_posts[i+1])
             j=j+1
-        args={'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'col1':col1,'col2':col2}
+        args={'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'col1':col1,'col2':col2,'source':sitename}
         return render(request,'newspapers/Newspapers.html',args)
 
 # /account/Welcome-to-socrates

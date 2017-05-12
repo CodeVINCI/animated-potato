@@ -23,8 +23,8 @@ class comment(models.Model):
 class Post(models.Model):
     created_on = models.DateTimeField(default=timezone.now)
     updated_on = models.DateTimeField(default=timezone.now)
-    source=models.CharField(max_length=50,default="Anonymous")
-    author=models.CharField(max_length=25,default="Anonymous")
+    source=models.CharField(max_length=100,default="Anonymous")
+    author=models.CharField(max_length=100,default="Anonymous")
     headline=models.TextField(max_length=1000,default="")
     story=models.TextField(max_length=10000,default="")
     link = models.URLField("Photo Link",blank=True, max_length=255, help_text="The URL to the image page")

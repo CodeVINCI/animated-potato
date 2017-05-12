@@ -48,7 +48,7 @@
             <li><a href="#">News in English</a></li>
           </ul>
         </li>
-          <li><a href="/account/newspapers/">Newspapers</a></li>
+          <li><a href="/account/newspapers/{{ source }}">Newspapers</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
       <li><a href="#">Notifications<span class="badge">5</span></a></li>
@@ -85,7 +85,7 @@
 <div class="select-newspaper">
   <select style="background-color:white;">
       {% for subscription in subscriptions %}
-  <option value="{{ subscription.name }}">{{ subscription.name }}</option>
+      <option value="{{ subscription.name }}">{{ subscription.name }}</option>
       {% endfor %}
 </select>
 </div>
