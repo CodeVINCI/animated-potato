@@ -8,7 +8,7 @@ from home.TheHindu import get_news
 logger = get_task_logger(__name__)
 
 @periodic_task(
-    run_every=(crontab(minute='*/5')),
+    run_every=(crontab(minute='*/60')),
     name= "scrape_Thehindu_task",
     ignore_results=True)
 def scrape_Thehindu_task():

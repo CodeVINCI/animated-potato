@@ -35,7 +35,7 @@
     <h1 style="height:80px;margin-top:10px;">Add more newspapers here</h1>
 <ul>
     {% for morenewspaper in subscribemore %}
-    <li>{{ morenewspaper.name }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/account/connect/{{ possibleaction }}/{{ user.pk }}"><button type="button" class="btn btn-secondary" style="width:100px;height:25px;padding:2px;background-color:maroon;color:white;">Subscribe</button></a></li>
+    <li>{{ morenewspaper.name }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/account/unsubscribe/{{ morenewspaper.pk }}"><button type="button" class="btn btn-secondary" style="width:100px;height:25px;padding:2px;background-color:maroon;color:white;">Subscribe</button></a></li>
     <hr>
     {% endfor %}
 </ul>

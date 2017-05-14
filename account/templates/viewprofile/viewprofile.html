@@ -2,10 +2,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script
+			  src="https://code.jquery.com/jquery-3.2.1.min.js"
+			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+			  crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     {% load static %}
+    <script src="{% static 'js/viewprofile.js' %}"></script>
     <link rel="stylesheet" href="{% static "profile/profile.css"%}" type="text/css"/>
     <link rel="shortcut icon" type="image/png" href="{% static "profile/images/favicon.ico" %}"/>
     <title>Socrates-{{user.first_name}} {{user.last_name}}</title>
@@ -119,7 +124,10 @@
         <p>{{ details.description }}</p>
         <p>My Website:&nbsp;<a href="#">{{ details.website }}</a></p>
         {% if not viewer.username == user.username %}
-        <a href="/account/connect/{{ possibleaction }}/{{ user.pk }}"><button type="button" class="btn btn-secondary" style="background-color:maroon;color:white;">{{ possibleaction }}</button></a>
+        <div class="my-button">
+        <button type="button" class="btn btn-secondary" style="background-color:maroon;color:white;">{{ possibleaction }}</button>
+        <meta id="my-data" data-possibleaction="{{possibleaction}}" data-pk="{{user.pk}}">
+        </div>
         {% endif %}
         </div>
     </div>

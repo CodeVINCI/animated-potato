@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import SetPasswordForm,PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from account.friends_search import FriendSearch
+from django.http import JsonResponse
 import random
 
 # view for login /account/login
@@ -387,11 +388,18 @@ class Myblog(TemplateView):
 
 
 def connections(request,action,pk):
-    person=User.objects.get(pk=pk)
-    if action=='Follow':
-        Following.followfriend(request.user, person)
-    elif action=='Unfollow':
-        Following.unfollowfriend(request.user, person)
-    profile=Userprofile.objects.get(user=person).pk
-    return redirect('/account/viewprofile/'+str(profile))
+    if request.method=='GET':
+        person=User.objects.get(pk=pk)
+        if action=='Follow':
+            Following.followfriend(request.user, person)
+            #args={'button':'<button type="button" class="btn btn-secondary" style="background-color:maroon;color:white;">Unfollow</button>',
+             #     'meta':'<meta id="my-data" data-possibleaction="Unfollow" data-pk="'+str(pk)+'">'}
+            args={"code":'<button type="button" class="btn btn-secondary" style="background-color:maroon;color:white;">Unfollow</button>'+'<meta id="my-data" data-possibleaction="Unfollow" data-pk="'+str(pk)+'">'}
+            return JsonResponse(args)
+        elif action=='Unfollow':
+            Following.unfollowfriend(request.user, person)
+            #args={'button':'<button type="button" class="btn btn-secondary" style="background-color:maroon;color:white;">Follow</button>',
+             #     'meta':'<meta id="my-data" data-possibleaction="Follow" data-pk="'+str(pk)+'">'}
+            args={"code":'<button type="button" class="btn btn-secondary" style="background-color:maroon;color:white;">Follow</button>'+'<meta id="my-data" data-possibleaction="Follow" data-pk="'+str(pk)+'">'}
+            return JsonResponse(args)
 
