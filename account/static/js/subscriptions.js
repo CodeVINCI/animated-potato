@@ -7,7 +7,7 @@ $(document).ready(function()
  var ur = ('/account/connect/').concat(action,'/');
  var li = $(this).closest('li')
 li.fadeOut('slow', function() { li.remove(); });
-var hr =$(this).next('hr')
+var hr =li.next('hr')
 hr.fadeOut('slow',function() { hr.remove(); });
  $.ajax(
  {
@@ -28,7 +28,7 @@ hr.fadeOut('slow',function() { hr.remove(); });
  var ur = ('/account/connect/').concat(action,'/');
  var li = $(this).closest('li')
 li.fadeOut('slow', function() { li.remove(); });
- var hr =$(this).next('hr')
+ var hr =li.next('hr')
 hr.fadeOut('slow',function() { hr.remove(); });
  $.ajax(
  {
