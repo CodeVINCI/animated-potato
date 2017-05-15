@@ -4,7 +4,7 @@ $(document).ready(function()
  {
  event.preventDefault();
  var action= $(this).closest('li').text().replace(/\s\s+/g, '/');
- var ur = ('/account/connect/').concat(action,'/');
+ var ur = ('/account/subscription/').concat(action,'/');
  var li = $(this).closest('li')
 li.fadeOut('slow', function() { li.remove(); });
 var hr =li.next('hr')
@@ -25,7 +25,7 @@ hr.fadeOut('slow',function() { hr.remove(); });
  {
  event.preventDefault();
  var action= $(this).closest('li').text().replace(/\s\s+/g, '/');
- var ur = ('/account/connect/').concat(action,'/');
+ var ur = ('/account/subscription/').concat(action,'/');
  var li = $(this).closest('li')
 li.fadeOut('slow', function() { li.remove(); });
  var hr =li.next('hr')

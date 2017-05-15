@@ -24,7 +24,7 @@ class home(TemplateView):
         col1=[]
         col2=[]
         col3=[]
-        all_posts=Post.objects.exclude().order_by('date').reverse()
+        all_posts=Post.objects.exclude().order_by('date').reverse()[:30]
         j=0
         for i in xrange(0, len(all_posts), 3):
             col1.insert(j,all_posts[i])
