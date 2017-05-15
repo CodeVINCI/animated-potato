@@ -57,12 +57,14 @@ class Profile(TemplateView):
                  followers=followers+1
 
          following=followingobj.users.all()
+         subscription=followingobj.newspaper.all()
          firstpaper=followingobj.newspaper.all()[0]
          followingno= len(following)
+         subscriptionno=len(subscription)
          details=userprofile[0]
          pic=details.image
          form=SocratesSearchForm()
-         args={'user':request.user,'details':details,'pic':pic,'form':form,'following':following,'followingno':followingno,"followerno":followers,"firstpaper":firstpaper}
+         args={'user':request.user,'details':details,'pic':pic,'form':form,'following':following,'subscription':subscription,'subscriptionno':subscriptionno,'followingno':followingno,"followerno":followers,"firstpaper":firstpaper}
          return render(request,self.template_name,args)
 
     def post(self,request):
@@ -75,12 +77,13 @@ class Profile(TemplateView):
 
 
 def myfollowers(request,user):
-    all=Following.objects.all()
+    userobj=User.objects.get(username=user)
+    alluser=Following.objects.all()
     followers=[]
     profiles=[]
-    for person in all:
-        if user in person.users.all():
-            followers.append(person)
+    for person in alluser:
+        if userobj in person.users.all():
+            followers.append(User.objects.get(username=person.current_user))
     for person in followers:
         profiles.append(Userprofile.objects.get(user=person))
     args={'followers':zip(followers,profiles)}

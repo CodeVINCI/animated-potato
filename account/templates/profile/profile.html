@@ -93,7 +93,7 @@
       <p><a href="#">Activity</a></p>
       <a href="#">Blog<span class="badge">5</span></a><br><br>
 <a href="/account/{{ user }}/followers/">Followers<span class="badge">{{ followerno }}</span></a><br><br>
-<a href="/account/{{ user }}/following/">Following<span class="badge">{{ followingno }}</span></a><br><br>
+<a href="/account/{{ user }}/following/">Following<span class="badge">{{ followingno }}+{{ subscriptionno }}</span></a><br><br>
 <a href="#">Messages<span class="badge">2</span></a><br><br>
         <a href="#">Follow your Comments<span class="badge">2</span></a><br><br>
     </div>
@@ -116,9 +116,9 @@
      </div>
     <div class="col-md-6">
         <h2>{{user.first_name}}&nbsp; {{user.last_name}}&nbsp;<a href="/account/profile/basic_edit">Edit</a></h2>
-        <p>{{ details.description }}</p>
-        <p><a href ="/account/{{ user }}/subscriptions">Addnewspapers</a></p>
-        <p>My Website:&nbsp;<a href="#">{{ details.website }}</a></p>
+        <p><b>Description</b>:{{ details.description }}</p>
+        <p><b>Subscriptions</b>:{{subscription.0}},&nbsp;{{subscription.1}}...<a href ="/account/{{ user }}/subscriptions">more</a></p>
+        <p><b>My Website</b>:&nbsp;<a href="#">{{ details.website }}</a></p>
         </div>
     </div>
 <hr>
