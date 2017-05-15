@@ -203,6 +203,7 @@ class newspapers(TemplateView):
         args={'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'col1':col1,'col2':col2,'source':sitename}
         return render(request,'newspapers/Newspapers.html',args)
 
+
 # /account/Welcome-to-socrates
 @login_required
 def Welcome(request):
