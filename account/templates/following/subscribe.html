@@ -3,15 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script
+			  src="https://code.jquery.com/jquery-3.2.1.min.js"
+			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+			  crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     {% load static %}
     <link rel="stylesheet" href="{% static "home.css"%}" type="text/css"/>
+    <link rel="shortcut icon" type="image/png" href="{% static "profile/images/favicon.ico" %}"/>
     {% load static%}
     <script type="text/javascript" src="{% static 'jscroll.js' %}"></script>
     <script type="text/javascript" src="{% static 'scroll.js' %}"></script>
-    <title>Following</title>
+    <script src="{% static 'js/subscriptions.js' %}"></script>
+    <title>Subscriptions</title>
 </head>
 <body>
 <div class="col-6 col-md-6">
@@ -24,21 +30,25 @@
     </div>
     <br><br>
 </div>
+    <div id="subscription-list">
     <ul>
 {% for newspaper in subscriptions %}
-        <li>{{ newspaper.name }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/account/connect/{{ possibleaction }}/{{ user.pk }}"><button type="button" class="btn btn-secondary" style="width:100px;height:25px;padding:2px;background-color:maroon;color:white;">Unsubscribe</button></a></li>
+        <li>{{ newspaper.name }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-secondary" style="width:100px;height:25px;padding:2px;background-color:maroon;color:white;">Unsubscribe</button></li>
     <hr>
 {% endfor %}
         </ul>
+    </div>
    </div>
 <div class="col-6 col-md-6" style="border-left: thick solid #f2f2f2;overflow-y:scroll;height:670px;">
     <h1 style="height:80px;margin-top:10px;">Add more newspapers here</h1>
+    <div id="subscribe-options-list">
 <ul>
     {% for morenewspaper in subscribemore %}
-    <li>{{ morenewspaper.name }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/account/unsubscribe/{{ morenewspaper.pk }}"><button type="button" class="btn btn-secondary" style="width:100px;height:25px;padding:2px;background-color:maroon;color:white;">Subscribe</button></a></li>
+    <li>{{ morenewspaper.name }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-secondary" style="width:100px;height:25px;padding:2px;background-color:maroon;color:white;">Subscribe</button></li>
     <hr>
     {% endfor %}
 </ul>
+    </div>
 </div>
 </body>
 </html>

@@ -404,3 +404,16 @@ def connections(request,action,pk):
             args={"code":'<button type="button" class="btn btn-secondary" style="background-color:maroon;color:white;">Follow</button>'+'<meta id="my-data" data-possibleaction="Follow" data-pk="'+str(pk)+'">'}
             return JsonResponse(args)
 
+def subscriptions(request,newssite,action):
+    print("reached")
+    if request.method=='GET':
+        if action=='Subscribe':
+            key=newspaper.objects.get(name=newssite)
+            Following.Subscribenews(request.user,key)
+            args={"code":'<li>'+str(newssite)+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-secondary" style="width:100px;height:25px;padding:2px;background-color:maroon;color:white;">Unsubscribe</button></li><hr>'}
+            return JsonResponse(args)
+        elif action=='Unsubscribe':
+            key=newspaper.objects.get(name=newssite)
+            Following.Unsubscribenews(request.user,key)
+            args={"code":'<li>'+str(newssite)+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-secondary" style="width:100px;height:25px;padding:2px;background-color:maroon;color:white;">Subscribe</button></li><hr>'}
+            return JsonResponse(args)

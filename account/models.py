@@ -60,6 +60,21 @@ class Following(models.Model):
         )
         follower.users.remove(new_following)
 
+    @classmethod
+    def Subscribenews(cls,current_user,new_newspaper):
+        follower,created=cls.objects.get_or_create(
+            current_user=current_user
+        )
+        follower.newspaper.add(new_newspaper)
+
+    @classmethod
+    def Unsubscribenews(cls,current_user,new_newspaper):
+        follower,created=cls.objects.get_or_create(
+            current_user=current_user
+        )
+        follower.newspaper.remove(new_newspaper)
+
+
 
 
 
