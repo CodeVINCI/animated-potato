@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from django.views.generic import TemplateView
 
 from account.forms import SocratesSearchForm
@@ -7,7 +7,17 @@ from home.models import Post,comment
 from account.models import Following
 from home.forms import comment_form
 from home.scrapers.ScrapeUN import UN
+from django.http import HttpResponse
+try:
+    from django.utils import simplejson as json
+except ImportError:
+    import json
+from django.http import JsonResponse
 from django.utils import timezone
+from django.forms.models import model_to_dict
+from django.shortcuts import get_object_or_404
+from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -38,6 +48,32 @@ class home(TemplateView):
 
         args={'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper}
         return render(request,self.template_name,args)
+
+def create_comment(request):
+    if request.method == 'POST':
+        comment_text = comment.objects.create(text = request.POST['text'])
+        return JsonResponse(model_to_dict(comment_text))
+
+
+@login_required()
+@require_POST
+def like(request):
+    if request.method == 'POST':
+        user = request.user
+        slug = request.POST.get('slug', None)
+        post = get_object_or_404(Post, slug=slug)
+
+        if post.likes.filter(id=user.id).exists():
+            post.likes.remove(user)
+            message = 'You disliked this'
+        else:
+            post.likes.add(user)
+            message = 'You liked this'
+    ctx = {'likes_count':post.total_likes,'message': message}
+    return HttpResponse(json.dumps(ctx), content_type='application/json')
+
+
+
 
 def homeSports(request):
     name=request.user

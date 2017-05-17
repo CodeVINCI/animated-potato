@@ -1,8 +1,12 @@
 from django.conf.urls import url
 from . import views
 from .views import unitednations,home
+from home import views as home_views
 
 urlpatterns=[url(r'^$', home.as_view(), name='home'),
+             #url(r'^(?P<post_id>\d+)/$', views.home, name='home'),
+             url(r'^create_comment/$', views.create_comment, name='create_comment'),
+             url(r'^like/$', home_views.like, name='like'),
              url(r'^Politics/$',views.home,name='home'),
              url(r'^politics/$',views.home,name='home'),
              url(r'^Sports/$',views.homeSports,name='home-sports'),
@@ -11,4 +15,5 @@ urlpatterns=[url(r'^$', home.as_view(), name='home'),
              url(r'^market/$',views.homeMarket,name='home-market'),
              url(r'^UnitedNations/$',unitednations.as_view(),name='home-unitednations'),
              url(r'^unitednations/$',unitednations.as_view(),name='home-unitednations'),
+
              ]
