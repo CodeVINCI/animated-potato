@@ -3,7 +3,7 @@ from .models import comment,Post
 
 # Register your models here
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('source','headline','date','likes','totalcomments')
+    list_display = ('source','headline','date','totalcomments')
     search_fields = ('source',)
     list_filter = ('date',)
     date_hierarchy = 'date'

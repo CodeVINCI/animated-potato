@@ -32,7 +32,6 @@ urlpatterns=[url(r'^$', views.login),
              url(r'^(?P<user>.+)/followers/$',views.myfollowers,name='followers'),
              url(r'^reset_password/$', password_reset,{'template_name':
              'edit/reset_password.html', 'email_template_name':'edit/reset_password_email.html'},name='reset_password'),
-
             url(r'^reset_password/done/$',password_reset_done,{'template_name':'edit/reset_password_done.html'},name='password_reset_done'),
             url(r'^reset_password/confirm/(?P<uidb64>[0-9A-Za-z]+)/(?P<token>.+)/$',password_reset_confirm,
                  {'template_name':'edit/reset_password_confirm.html'}, name='password_reset_confirm'),

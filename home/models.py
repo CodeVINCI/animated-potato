@@ -5,6 +5,7 @@ from django.utils.encoding import smart_unicode
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.template.defaultfilters import slugify
 
 class comment(models.Model):
     created_on = models.DateTimeField(default=timezone.now)
@@ -31,7 +32,7 @@ class Post(models.Model):
     image=models.ImageField(upload_to="Newspictures",blank=True,default='profile_pictures/Dp.png')
     date=models.DateField(default=timezone.now)
     pageurl=models.URLField("Pagelink",blank=True,max_length=500,help_text="The URL to newspage")
-    likes=models.IntegerField(default=0)
+    likes=models.ManyToManyField(User, related_name='likes')
     dislikes=models.IntegerField(default=0)
     suggestions=models.IntegerField(default=0)
     totalcomments=models.IntegerField(default=0)
@@ -39,4 +40,11 @@ class Post(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.headline)
+    @property
+    def total_likes(self):
+        return self.likes.count()
+    
+    def save(self,*args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Post, self).save(*args, **kwargs)
 
