@@ -2,6 +2,10 @@
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
+    <script
+			  src="https://code.jquery.com/jquery-3.2.1.min.js"
+			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+			  crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -12,6 +16,7 @@
     {% load static%}
     <script type="text/javascript" src="{% static 'jscroll.js' %}"></script>
     <script type="text/javascript" src="{% static 'scroll.js' %}"></script>
+     <script src="{% static 'js/home.js' %}"></script>
     <title>Socrates-Politics</title>
 </head>
 <body style="overflow-x:scroll">
@@ -79,6 +84,17 @@
  </nav>
 
 <div class="span12" id="wrap">
+    <div class="select_filters" style="margin-left:30px;margin-bottom:20px;"><b>Filters</b>:
+    <select id="filters" style="background-color:white;">
+        <option value="most_visited">most visited</option>
+        <option value="most_liked">most liked</option>
+        <option value="most_liked">most disliked</option>
+        <option value="most_commented">most commented</option>
+        <option value="most_suggested">most suggested</option>
+        <option value="your_subscriptions">only your subscribed</option>
+    </select>
+        <button type="button" class="btn btn-secondary" style="width:100px;height:22px;padding:1px;background-color:maroon;color:white;">Go</button>
+    </div>
     <div class="col-6 col-md-4">
          <ul id="tiles" class="unstyled">
         {% for post in col1 %}
@@ -92,7 +108,7 @@
         <p style="font-size:20px;">{{ post.story }}</p>
           <p style="font-size:10px;">{{ post.source }}</p>
           <hr>
-        <p><a href={{ post.pageurl }} class="btn btn-primary" role="button">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <p><a href={{ post.pageurl }} class="btn btn-primary" role="button" target="_blank">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
          <button class="social-like" >
      <span class="like"><i class="glyphicon glyphicon-thumbs-up"></i></span>
      <span class="count" >0</span>
@@ -121,7 +137,7 @@
         <p style="font-size:20px;">{{ post.story }}</p>
           <p style="font-size:10px;">{{ post.source }}</p>
           <hr>
-        <p><a href={{ post.pageurl }} class="btn btn-primary" role="button">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <p><a href={{ post.pageurl }} class="btn btn-primary" role="button" target="_blank">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
          <button class="social-like" >
      <span class="like"><i class="glyphicon glyphicon-thumbs-up"></i></span>
      <span class="count" >0</span>
@@ -150,7 +166,7 @@
         <p style="font-size:20px;">{{ post.story }}</p>
           <p style="font-size:10px;">{{ post.source }}</p>
           <hr>
-        <p><a href={{ post.pageurl }} class="btn btn-primary" role="button">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <p><a href={{ post.pageurl }} class="btn btn-primary" role="button" target="_blank">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
          <button class="social-like" >
      <span class="like"><i class="glyphicon glyphicon-thumbs-up"></i></span>
      <span class="count" >0</span>

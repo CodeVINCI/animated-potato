@@ -27,7 +27,7 @@ class home(TemplateView):
         col1=[]
         col2=[]
         col3=[]
-        all_posts=Post.objects.filter(date=date_today).order_by('?')
+        all_posts=Post.objects.filter(date=date_today)
         j=0
         for i in xrange(0, len(all_posts), 3):
             col1.insert(j,all_posts[i])

@@ -201,7 +201,7 @@ class newspapers(TemplateView):
         subscriptions=subscriptionsobj.newspaper.all()
         col1=[]
         col2=[]
-        all_posts=Post.objects.filter(source=sitename).filter(date=date_today).order_by('?')
+        all_posts=Post.objects.filter(source=sitename).filter(date=date_today)
         j=0
         for i in xrange(0, len(all_posts), 2):
             col1.insert(j,all_posts[i])
