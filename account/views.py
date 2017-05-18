@@ -13,6 +13,7 @@ from django.contrib.auth import update_session_auth_hash
 from account.friends_search import FriendSearch
 from django.http import JsonResponse
 import random
+from django.utils import timezone
 
 # view for login /account/login
 def login(request):
@@ -187,6 +188,8 @@ def blogs(request):
 class newspapers(TemplateView):
     template_name = 'newspapers/Newspapers.html'
     def get(self,request,sitename):
+        date_today=str(timezone.now())
+        date_today=date_today[:10]
         name=request.user
         userprofile=Userprofile.objects.filter(user=name)
         details=userprofile[0]
@@ -196,7 +199,7 @@ class newspapers(TemplateView):
         subscriptions=subscriptionsobj.newspaper.all()
         col1=[]
         col2=[]
-        all_posts=Post.objects.filter(source=sitename).order_by('date').reverse()
+        all_posts=Post.objects.filter(source=sitename).filter(date=date_today).order_by('?')
         j=0
         for i in xrange(0, len(all_posts), 2):
             col1.insert(j,all_posts[i])

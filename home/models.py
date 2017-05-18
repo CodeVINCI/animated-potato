@@ -5,21 +5,27 @@ from django.utils.encoding import smart_unicode
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+#model for comments
 
 class comment(models.Model):
-    created_on = models.DateTimeField(default=timezone.now)
-    updated_on = models.DateTimeField(default=timezone.now)
-    user=models.OneToOneField(User)
-    text=models.TextField(max_length=200,default="",blank=True)
-    likes=models.IntegerField(default=0)
-    post=models.IntegerField()
-    replyto=models.IntegerField(default=0)
+    created_on = models.DateTimeField(default=timezone.now)    #when comment was created first
+    updated_on = models.DateTimeField(default=timezone.now)    #if edited else equal to created_on value
+    user=models.OneToOneField(User)    #user who made the comment
+    text=models.TextField(max_length=1000,default="",blank=True)    #text of the comment max_length 1000 handle error for max length
+    likes=models.IntegerField(default=0)    #total number of likes on that commemt
+        #no dislike for comments
+    post=models.IntegerField()    #post id to which the comment belongs
+    replyto=models.IntegerField(default=0)    #comment id to whom this comment is reply to else value remains zero
 
     def __str__(self):
-        return self.user.username
+        return self.user.username    #to show username in admin interface
+
+#class likes
+
+#class suggestions
 
 
-
+#
 class Post(models.Model):
     created_on = models.DateTimeField(default=timezone.now)
     updated_on = models.DateTimeField(default=timezone.now)

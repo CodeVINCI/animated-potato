@@ -8,13 +8,16 @@ from account.models import Following
 from home.forms import comment_form
 from home.scrapers.ScrapeUN import UN
 from django.utils import timezone
+from random import shuffle
 
 
-# Create your views here.
+# Home page view.
 class home(TemplateView):
     template_name = "home/home.html"
 
     def get(self,request):
+        date_today= str(timezone.now())
+        date_today=date_today[:10]
         name=request.user
         userprofile=Userprofile.objects.filter(user=name)
         details=userprofile[0]
@@ -24,7 +27,7 @@ class home(TemplateView):
         col1=[]
         col2=[]
         col3=[]
-        all_posts=Post.objects.exclude().order_by('date').reverse()[:30]
+        all_posts=Post.objects.filter(date=date_today).order_by('?')
         j=0
         for i in xrange(0, len(all_posts), 3):
             col1.insert(j,all_posts[i])
