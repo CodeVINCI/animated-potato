@@ -36,6 +36,18 @@ class home(TemplateView):
             if (i+2)<len(all_posts):
                 col3.insert(j,all_posts[i+2])
             j=j+1
+            for j in range(len(col1)-1):
+                for i in range(len(col1)-1):
+                    if col1[i+1].likes > col1[i].likes:
+                        (col1[i],col1[i+1])=(col1[i+1],col1[i])
+            for j in range(len(col2)-1):
+                for i in range(len(col2)-1):
+                    if col2[i+1].likes > col2[i].likes:
+                        (col2[i],col2[i+1])=(col2[i+1],col2[i])
+            for j in range(len(col3)-1):
+                for i in range(len(col3)-1):
+                    if col3[i+1].likes > col3[i].likes:
+                        (col3[i],col1[i+1])=(col3[i+1],col3[i])
         followingobj=Following.objects.get(current_user=name)
         firstpaper=followingobj.newspaper.all()[0]
 

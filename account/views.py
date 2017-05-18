@@ -208,6 +208,14 @@ class newspapers(TemplateView):
             if (i+1)<len(all_posts):
                 col2.insert(j,all_posts[i+1])
             j=j+1
+        for j in range(len(col1)-1):
+            for i in range(len(col1)-1):
+                if col1[i+1].likes > col1[i].likes:
+                    (col1[i],col1[i+1])=(col1[i+1],col1[i])
+        for j in range(len(col2)-1):
+            for i in range(len(col2)-1):
+                if col2[i+1].likes > col2[i].likes:
+                    (col2[i],col2[i+1])=(col2[i+1],col2[i])
         args={'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'col1':col1,'col2':col2,'source':sitename,'date_today':date_today}
         return render(request,'newspapers/Newspapers.html',args)
 
