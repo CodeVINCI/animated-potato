@@ -48,6 +48,8 @@ class Profile(TemplateView):
     template_name = 'profile/profile.html'
 
     def get(self,request):
+         date_today=str(timezone.now())
+         date_today=date_today[:10]
          name=request.user
          userprofile=Userprofile.objects.filter(user=name)
          followingobj=Following.objects.get(current_user=name)
@@ -65,7 +67,7 @@ class Profile(TemplateView):
          details=userprofile[0]
          pic=details.image
          form=SocratesSearchForm()
-         args={'user':request.user,'details':details,'pic':pic,'form':form,'following':following,'subscription':subscription,'subscriptionno':subscriptionno,'followingno':followingno,"followerno":followers,"firstpaper":firstpaper}
+         args={'user':request.user,'details':details,'pic':pic,'form':form,'following':following,'subscription':subscription,'subscriptionno':subscriptionno,'followingno':followingno,"followerno":followers,"firstpaper":firstpaper,'date_today':date_today}
          return render(request,self.template_name,args)
 
     def post(self,request):
@@ -206,7 +208,7 @@ class newspapers(TemplateView):
             if (i+1)<len(all_posts):
                 col2.insert(j,all_posts[i+1])
             j=j+1
-        args={'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'col1':col1,'col2':col2,'source':sitename}
+        args={'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'col1':col1,'col2':col2,'source':sitename,'date_today':date_today}
         return render(request,'newspapers/Newspapers.html',args)
 
 

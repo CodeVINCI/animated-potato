@@ -39,7 +39,7 @@ class home(TemplateView):
         followingobj=Following.objects.get(current_user=name)
         firstpaper=followingobj.newspaper.all()[0]
 
-        args={'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper}
+        args={'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
         return render(request,self.template_name,args)
 
 def homeSports(request):
