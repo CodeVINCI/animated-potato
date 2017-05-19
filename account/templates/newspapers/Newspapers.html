@@ -116,7 +116,7 @@
      <span class="like"><i class="glyphicon glyphicon-thumbs-up custom"></i></span>
      <span class="count" >{{ post.likes }}</span>
  </button>
-    &nbsp;
+  <meta id="{{ post.pk }}" data-postid="{{ post.pk }}">  &nbsp;
  <button class="social-dislike" style="border:none;background-color:transparent;">
      <span class="dislike" >{{ post.dislikes }}</span>
      <span class="like"><i class="glyphicon glyphicon-thumbs-down custom"></i></span>
@@ -145,7 +145,7 @@
      <span class="like"><i class="glyphicon glyphicon-thumbs-up custom"></i></span>
      <span class="count" >{{ post.likes }}</span>
  </button>
-    &nbsp;
+  <meta id="{{ post.pk }}" data-postid="{{ post.pk }}">  &nbsp;
  <button class="social-dislike" style="border:none;background-color:transparent;">
      <span class="dislike" >{{ post.dislikes }}</span>
      <span class="like"><i class="glyphicon glyphicon-thumbs-down custom"></i></span>
