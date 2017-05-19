@@ -2,9 +2,9 @@ from django.conf.urls import url
 from . import views
 from .views import unitednations,home
 
-urlpatterns=[url(r'^$', home.as_view(), name='home'),
-             url(r'^Politics/$',views.home,name='home'),
-             url(r'^politics/$',views.home,name='home'),
+urlpatterns=[url(r'^(?P<filter>.+)$', home.as_view(), name='home'),
+             url(r'^Politics/(?P<filter>.+)$',home.as_view(),name='home'),
+             url(r'^politics/(?P<filter>.+)$',home.as_view(),name='home'),
              url(r'^Sports/$',views.homeSports,name='home-sports'),
              url(r'^sports/$',views.homeSports,name='home-sports'),
              url(r'^Market/$',views.homeMarket,name='home-market'),
