@@ -22,7 +22,6 @@ from . import views
 urlpatterns = [
     url(r'^$', views.login_redirect ,name='login_redirect'),
     url(r'^admin/', admin.site.urls),
-    url(r'^home/',include('home.urls')),
-    url(r'^Home/',include('home.urls')),
     url(r'^account/',include('account.urls')),
+    url(r'^home/',include('home.urls',namespace='home')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

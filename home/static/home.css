@@ -142,11 +142,6 @@ display:inline-block;
 float:center;
 }
 
-.custom{
-  color:#7f8c8d;
-  opacity:0.7;
-}
-
 .custom:active{
   color:red;
 }

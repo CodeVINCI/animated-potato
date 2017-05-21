@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import comment,Post
+from .models import comment,Post,Likes,Dislikes
 
 # Register your models here
 class PostAdmin(admin.ModelAdmin):
@@ -10,3 +10,5 @@ class PostAdmin(admin.ModelAdmin):
     ordering = ('-date',)
 admin.site.register(comment)
 admin.site.register(Post,PostAdmin)
+admin.site.register(Likes)
+admin.site.register(Dislikes)

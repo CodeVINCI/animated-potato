@@ -36,36 +36,37 @@ def get_news(URL):
                 else:
                     date=article["publishedAt"].encode('utf-8')
                     date=date[:10]
-                image_url=article["urlToImage"].encode('utf-8')
-                request = requests.get(image_url, stream=True)
+                if not(article['urlToImage']==None):
+                    image_url=article["urlToImage"].encode('utf-8')
+                    request = requests.get(image_url, stream=True)
 
-                # Was the request OK?
-                if request.status_code != requests.codes.ok:
+                    # Was the request OK?
+                    if request.status_code != requests.codes.ok:
                     # Nope, error handling, skip file etc etc etc
-                    continue
+                        continue
 
-                # Get the filename from the url, used for saving later
-                file_name = image_url.split('/')[-1]
+                    # Get the filename from the url, used for saving later
+                    file_name = image_url.split('/')[-1]
 
-                # Create a temporary file
-                lf = tempfile.NamedTemporaryFile()
+                    # Create a temporary file
+                    lf = tempfile.NamedTemporaryFile()
 
-                # Read the streamed image in sections
-                for block in request.iter_content(1024 * 8):
+                    # Read the streamed image in sections
+                    for block in request.iter_content(1024 * 8):
 
-                    # If no more file then stop
-                    if not block:
-                        break
+                        # If no more file then stop
+                        if not block:
+                            break
 
-                    # Write image block to temporary file
-                    lf.write(block)
+                        # Write image block to temporary file
+                        lf.write(block)
 
-                # Create the model you want to save the image to
-                a=Post(source=articlesource,author=author,headline=headline,story=story,link=image_url,date=date,pageurl=url)
+                    # Create the model you want to save the image to
+                    a=Post(source=articlesource,author=author,headline=headline,story=story,link=image_url,date=date,pageurl=url)
 
-                # Save the temporary image to the model#
-                # This saves the model so be sure that is it valid
-                a.image.save(file_name, files.File(lf))
+                    # Save the temporary image to the model#
+                    # This saves the model so be sure that is it valid
+                    a.image.save(file_name, files.File(lf))
 
 
 

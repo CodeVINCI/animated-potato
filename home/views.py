@@ -1,16 +1,17 @@
 from django.shortcuts import render,redirect
 from django.views.generic import TemplateView
-
+from django.contrib.auth import update_session_auth_hash
 from account.forms import SocratesSearchForm
 from account.models import Userprofile
-from home.models import Post,comment
+from home.models import Post,comment,Likes,Dislikes
 from account.models import Following
 from home.forms import comment_form
 from home.scrapers.ScrapeUN import UN
 from django.utils import timezone
 from random import shuffle
-
-
+from django.http import JsonResponse,HttpResponse
+from django.contrib.auth.models import User
+from django.db.models import F
 # Home page view.
 class home(TemplateView):
     template_name = "home/home.html"
@@ -136,4 +137,51 @@ class unitednations(TemplateView):
             socratessearch.user=request.user
             socratessearch.save()
             return redirect('/account/searchsocrates')
+
+
+def sociallike(request,action,pk):
+    if request.method=='GET':
+        user=request.user
+        post=Post.objects.get(pk=pk)
+        if action=='social-like':
+            Post.objects.filter(pk=pk).update(likes = F('likes')+1)
+            Likes.like(post,user)
+            dis=Dislikes.objects.filter(post=post)
+            if dis.count()>0:
+                if user in dis[0].users.all():
+                    Post.objects.filter(pk=pk).update(dislikes = F('dislikes')-1)
+                    Dislikes.undislike(post,user)
+            postupdate=Post.objects.get(pk=pk)
+            args={"code":'<span class="like"><i style="color:maroon;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span><span class="count">'+str(postupdate.likes)+'</span>'}
+            return JsonResponse(args)
+
+        elif action=='social-unlike':
+            Post.objects.filter(pk=pk).update(likes = F('likes')-1)
+            Likes.unlike(post,user)
+            postupdate=Post.objects.get(pk=pk)
+            args={'code':'<span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span><span class="count">'+str(postupdate.likes)+'</span>'}
+            return JsonResponse(args)
+
+        elif action=='social-dislike':
+            Post.objects.filter(pk=pk).update(dislikes = F('dislikes')+1)
+            Dislikes.dislike(post,user)
+            lik=Likes.objects.filter(post=post)
+            if lik.count()>0:
+                if user in lik[0].users.all():
+                    Post.objects.filter(pk=pk).update(likes = F('likes')-1)
+                    Likes.unlike(post,user)
+            postupdate=Post.objects.get(pk=pk)
+            args={'code':'<span class="dislike" >'+str(postupdate.dislikes)+'</span><span class="like"><i style="color:maroon;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>'}
+            return JsonResponse(args)
+
+        elif action=='social-undislike':
+            Post.objects.filter(pk=pk).update(dislikes = F('dislikes')-1)
+            Dislikes.undislike(post,user)
+            postupdate=Post.objects.get(pk=pk)
+            args={'code':'<span class="dislike" >'+str(postupdate.dislikes)+'</span><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>'}
+            return JsonResponse(args)
+
+
+
+
 

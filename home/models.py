@@ -46,3 +46,43 @@ class Post(models.Model):
     def __unicode__(self):
         return smart_unicode(self.headline)
 
+
+class Likes(models.Model):
+    post = models.ForeignKey(Post, related_name='likedpost')
+    users = models.ManyToManyField(User)
+
+    def __unicode__(self):
+        return smart_unicode(self.post.headline)
+
+    @classmethod
+    def like(cls,postid,liker):
+        lik,created=cls.objects.get_or_create(
+            post=postid
+          )
+        lik.users.add(liker)
+
+    @classmethod
+    def unlike(cls,postid,unliker):
+        unlik,created=cls.objects.get_or_create(post=postid)
+        unlik.users.remove(unliker)
+
+class Dislikes(models.Model):
+    post=models.ForeignKey(Post,related_name='dislikedpost')
+    users=models.ManyToManyField(User)
+
+    def __unicode__(self):
+        return smart_unicode(self.post.headline)
+
+    @classmethod
+    def dislike(cls,postid,disliker):
+        dislik,created=cls.objects.get_or_create(
+            post=postid
+          )
+        dislik.users.add(disliker)
+
+    @classmethod
+    def undislike(cls,postid,undisliker):
+        undislik,created=cls.objects.get_or_create(
+            post=postid
+          )
+        undislik.users.remove(undisliker)
