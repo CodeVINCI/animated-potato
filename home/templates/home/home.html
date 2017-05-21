@@ -11,7 +11,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     {% load static %}
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
     <link rel="stylesheet" href="{% static "home.css"%}" type="text/css"/>
     <link rel="shortcut icon" type="image/png" href="{% static "images/favicon.ico" %}"/>
     {% load static%}
@@ -112,28 +111,30 @@
         <p style="font-size:20px;">{{ post.0.story }}</p>
           <p style="font-size:10px;">{{ post.0.source }}</p>
           <hr>
-             <div class="button_container" id="button_container">
-       <div class="social_buttons" id="social" style="float:left;display:inline-block;width:-moz-calc(100% - 170px);width: -webkit-calc(100% - 170px);width: calc(100% - 170px);">
+       <div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 170px);width: -webkit-calc(100% - 170px);width: calc(100% - 170px);">
            <button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">
                {% if post.1 %}
+               <meta id="button_data" data-nextaction="social-unlike" data-pk="{{ post.0.pk }}">
      <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
                {% else %}
+               <meta id="button_data" data-nextaction="social-like" data-pk="{{ post.0.pk }}">
       <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
                {% endif %}
      <span class="count" >{{ post.0.likes }}</span>
  </button>
-    &nbsp;<meta id="{{ post.0.pk }}" data-postid="{{ post.0.pk }}">
+    &nbsp;
  <button id="dislike" class="social-dislike" style="border:none;background-color:transparent;">
      <span class="dislike" >{{ post.0.dislikes }}</span>
      {% if post.2 %}
+     <meta id="button_data" data-nextaction="social-undislike" data-pk="{{ post.0.pk }}">
      <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
      {% else %}
+     <meta id="button_data" data-nextaction="social-dislike" data-pk="{{ post.0.pk }}">
      <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
      {% endif %}
  </button></div>
         <p><a href={{ post.0.pageurl }} class="btn btn-primary" role="button" target="_blank">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
-      </div>
       </div></div></li>
  {% endfor %}
          </ul>
@@ -151,27 +152,27 @@
         <p style="font-size:20px;">{{ post.0.story }}</p>
           <p style="font-size:10px;">{{ post.0.source }}</p>
           <hr>
-             <div class="button_container" id="button_container">
-       <div class="social_buttons" id="social" style="float:left;display:inline-block;width:-moz-calc(100% - 170px);width: -webkit-calc(100% - 170px);width: calc(100% - 170px);">
+       <div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 170px);width: -webkit-calc(100% - 170px);width: calc(100% - 170px);">
            <button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">
                   {% if post.1 %}
+               <meta id="button_data" data-nextaction="social-unlike" data-pk="{{ post.0.pk }}">
      <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
                {% else %}
+               <meta id="button_data" data-nextaction="social-like" data-pk="{{ post.0.pk }}">
       <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
                {% endif %}
      <span class="count" >{{ post.0.likes }}</span>
  </button>
-    &nbsp;<meta id="{{ post.0.pk }}" data-postid="{{ post.0.pk }}">
+    &nbsp;
  <button id="dislike" class="social-dislike" style="border:none;background-color:transparent;">
      <span class="dislike" >{{ post.0.dislikes }}</span>
      {% if post.2 %}
-     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
+     <span class="like"><meta id="button_data" data-nextaction="social-undislike" data-pk="{{ post.0.pk }}"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
      {% else %}
-     <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
+     <span class="like"><meta id="button_data" data-nextaction="social-dislike" data-pk="{{ post.0.pk }}"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
      {% endif %}
  </button></div>
         <p><a href={{ post.0.pageurl }} class="btn btn-primary" role="button" target="_blank">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-              </div>
       </div></div></li>
  {% endfor %}
          </ul>
@@ -189,27 +190,27 @@
         <p style="font-size:20px;">{{ post.0.story }}</p>
           <p style="font-size:10px;">{{ post.0.source }}</p>
           <hr>
-          <div class="button_container" id="button_container">
-       <div class="social_buttons" id="social" style="float:left;display:inline-block;width:-moz-calc(100% - 170px);width: -webkit-calc(100% - 170px);width: calc(100% - 170px);">
+       <div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 170px);width: -webkit-calc(100% - 170px);width: calc(100% - 170px);">
            <button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">
                   {% if post.1 %}
+               <meta id="button_data" data-nextaction="social-unlike" data-pk="{{ post.0.pk }}">
      <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
                {% else %}
+               <meta id="button_data" data-nextaction="social-like" data-pk="{{ post.0.pk }}">
       <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
                {% endif %}
      <span class="count" >{{ post.0.likes }}</span>
  </button>
-    &nbsp;<meta id="{{ post.0.pk }}" data-postid="{{ post.0.pk }}">
+    &nbsp;
  <button id="dislike" class="social-dislike" style="border:none;background-color:transparent;">
      <span class="dislike" >{{ post.0.dislikes }}</span>
       {% if post.2 %}
-     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
+     <span class="like"><meta id="button_data" data-nextaction="social-undislike" data-pk="{{ post.0.pk }}"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
      {% else %}
-     <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
+     <span class="like"><meta id="button_data" data-nextaction="social-dislike" data-pk="{{ post.0.pk }}"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
      {% endif %}
  </button></div>
         <p><a href={{ post.0.pageurl }} class="btn btn-primary" role="button" target="_blank">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-      </div>
       </div></div></li>
  {% endfor %}
          </ul>

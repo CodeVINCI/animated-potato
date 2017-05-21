@@ -13,29 +13,20 @@ window.location.href = ur;
 
 });
 
-$('#wrap').on('click', "#like", function(event)
+$('.social_buttons').on('click', "#like", function(event)
 {
 event.preventDefault();
-var id =$(this).next('meta').data().postid;
-var action =$(this).closest('p #like').attr('class');
-var q = $(this).closest('p #like').html();
-var ur =("/home/vote/").concat(action,"/",id);
-if (action=='social-like'){
-$(this).closest('p #like').attr('class','social-unlike');
-$(this).nextAll("button").first().attr('class','social-dislike');
-}
-else
-{
-$(this).closest('p #like').attr('class','social-like');
-}
-var out =$(this)
+var id =$(this).children('meta').data().pk;
+var action=$(this).children('meta').data().nextaction;
+var ur =("/home/vote/").concat(action,'/',id);
+var out = $(this)
 $.ajax(
  {
  url:ur,
  method:'get',
  success:function(response)
  {
-  out.closest('p #like').replaceWith(response.code);
+  out.parent('div').html(response.codeself);
  }
  });
 

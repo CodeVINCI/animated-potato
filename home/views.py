@@ -175,14 +175,18 @@ def sociallike(request,action,pk):
                     Post.objects.filter(pk=pk).update(dislikes = F('dislikes')-1)
                     Dislikes.undislike(post,user)
             postupdate=Post.objects.get(pk=pk)
-            args={"code":'<span class="like"><i style="color:maroon;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span><span class="count">'+str(postupdate.likes)+'</span>'}
+            args={"codeself":'<button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;"><meta id="button_data" data-nextaction="social-unlike" data-pk='+str(pk)+'><span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-up custom"></i></span><span class="count">'+str(postupdate.likes)+'</span></button>&nbsp;'
+                  +'<button id="dislike" class="social-dislike" style="border:none;background-color:transparent;"><span class="dislike" >'+str(postupdate.dislikes)+'</span><meta id="button_data" data-nextaction="social-dislike" data-pk="{{ post.0.pk }}"><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span></button>'}
+
             return JsonResponse(args)
 
         elif action=='social-unlike':
             Post.objects.filter(pk=pk).update(likes = F('likes')-1)
             Likes.unlike(post,user)
             postupdate=Post.objects.get(pk=pk)
-            args={'code':'<span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span><span class="count">'+str(postupdate.likes)+'</span>'}
+            args={"codeself":'<button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;"><meta id="button_data" data-nextaction="social-unlike" data-pk='+str(pk)+'><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span><span class="count">'+str(postupdate.likes)+'</span></button>&nbsp;'
+                  +'<button id="dislike" class="social-dislike" style="border:none;background-color:transparent;"><span class="dislike" >'+str(postupdate.dislikes)+'</span><meta id="button_data" data-nextaction="social-dislike" data-pk="{{ post.0.pk }}"><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span></button>'}
+
             return JsonResponse(args)
 
         elif action=='social-dislike':
@@ -194,7 +198,7 @@ def sociallike(request,action,pk):
                     Post.objects.filter(pk=pk).update(likes = F('likes')-1)
                     Likes.unlike(post,user)
             postupdate=Post.objects.get(pk=pk)
-            args={'code':'<span class="dislike" >'+str(postupdate.dislikes)+'</span><span class="like"><i style="color:maroon;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>'}
+            args={'codeself':'<span class="dislike" >'+str(postupdate.dislikes)+'</span><span class="like"><i style="color:maroon;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>'}
             return JsonResponse(args)
 
         elif action=='social-undislike':
