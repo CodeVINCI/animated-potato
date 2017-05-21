@@ -46,7 +46,7 @@ def get_news(URL):
                         continue
 
                     # Get the filename from the url, used for saving later
-                    file_name = image_url.split('/')[-1]
+                    file_name = image_url.split('/')[-1]+".jpg"
 
                     # Create a temporary file
                     lf = tempfile.NamedTemporaryFile()

@@ -12,6 +12,7 @@ from random import shuffle
 from django.http import JsonResponse,HttpResponse
 from django.contrib.auth.models import User
 from django.db.models import F
+from django.shortcuts import get_object_or_404
 # Home page view.
 class home(TemplateView):
     template_name = "home/home.html"
@@ -28,71 +29,93 @@ class home(TemplateView):
         col1=[]
         col2=[]
         col3=[]
-        all_posts=Post.objects.filter(date=date_today)
+        liked_posts=[]
+        disliked_posts=[]
+        all_posts=Post.objects.filter(date=date_today).order_by('?')
+        k=0
+        for post in all_posts:
+            p=Likes.objects.filter(post=post)
+            if p.count()>0 and request.user in p[0].users.all():
+                liked_posts.insert(k,1)
+                k=k+1
+            else:
+                liked_posts.insert(k,0)
+                k=k+1
+        l=0
+        for post in all_posts:
+            p=Dislikes.objects.filter(post=post)
+            if p.count()>0 and request.user in p[0].users.all():
+                disliked_posts.insert(l,1)
+                l=l+1
+            else:
+                disliked_posts.insert(l,0)
+                l=l+1
+
+
         j=0
         for i in xrange(0, len(all_posts), 3):
-            col1.insert(j,all_posts[i])
+            col1.insert(j,(all_posts[i],liked_posts[i],disliked_posts[i]))
             if (i+1)<len(all_posts):
-                col2.insert(j,all_posts[i+1])
+                col2.insert(j,(all_posts[i+1],liked_posts[i+1],disliked_posts[i+1]))
             if (i+2)<len(all_posts):
-                col3.insert(j,all_posts[i+2])
+                col3.insert(j,(all_posts[i+2],liked_posts[i+2],disliked_posts[i+2]))
             j=j+1
             if filter=='most_liked':
                 for j in range(len(col1)-1):
                     for i in range(len(col1)-1):
-                        if col1[i+1].likes > col1[i].likes:
+                        if col1[i+1][0].likes > col1[i][0].likes:
                             (col1[i],col1[i+1])=(col1[i+1],col1[i])
                 for j in range(len(col2)-1):
                     for i in range(len(col2)-1):
-                        if col2[i+1].likes > col2[i].likes:
+                        if col2[i+1][0].likes > col2[i][0].likes:
                             (col2[i],col2[i+1])=(col2[i+1],col2[i])
                 for j in range(len(col3)-1):
                     for i in range(len(col3)-1):
-                        if col3[i+1].likes > col3[i].likes:
+                        if col3[i+1][0].likes > col3[i][0].likes:
                             (col3[i],col3[i+1])=(col3[i+1],col3[i])
             elif filter=='most_disliked':
                 for j in range(len(col1)-1):
                     for i in range(len(col1)-1):
-                        if col1[i+1].dislikes > col1[i].dislikes:
+                        if col1[i+1][0].dislikes > col1[i][0].dislikes:
                             (col1[i],col1[i+1])=(col1[i+1],col1[i])
                 for j in range(len(col2)-1):
                     for i in range(len(col2)-1):
-                        if col2[i+1].dislikes > col2[i].dislikes:
+                        if col2[i+1][0].dislikes > col2[i][0].dislikes:
                             (col2[i],col2[i+1])=(col2[i+1],col2[i])
                 for j in range(len(col3)-1):
                     for i in range(len(col3)-1):
-                        if col3[i+1].dislikes > col3[i].dislikes:
+                        if col3[i+1][0].dislikes > col3[i][0].dislikes:
                             (col3[i],col3[i+1])=(col3[i+1],col3[i])
             elif filter=='most_suggested':
                 for j in range(len(col1)-1):
                     for i in range(len(col1)-1):
-                        if col1[i+1].suggestions > col1[i].suggestions:
+                        if col1[i+1][0].suggestions > col1[i][0].suggestions:
                             (col1[i],col1[i+1])=(col1[i+1],col1[i])
                 for j in range(len(col2)-1):
                     for i in range(len(col2)-1):
-                        if col2[i+1].suggestions > col2[i].suggestions:
+                        if col2[i+1][0].suggestions > col2[i][0].suggestions:
                             (col2[i],col2[i+1])=(col2[i+1],col2[i])
                 for j in range(len(col3)-1):
                     for i in range(len(col3)-1):
-                        if col3[i+1].suggestions > col3[i].suggestions:
+                        if col3[i+1][0].suggestions > col3[i][0].suggestions:
                             (col3[i],col3[i+1])=(col3[i+1],col3[i])
             elif filter=='most_commented':
                 for j in range(len(col1)-1):
                     for i in range(len(col1)-1):
-                        if col1[i+1].totalcomments > col1[i].totalcomments:
+                        if col1[i+1][0].totalcomments > col1[i][0].totalcomments:
                             (col1[i],col1[i+1])=(col1[i+1],col1[i])
                 for j in range(len(col2)-1):
                     for i in range(len(col2)-1):
-                        if col2[i+1].totalcomments > col2[i].totalcomments:
+                        if col2[i+1][0].totalcomments > col2[i][0].totalcomments:
                             (col2[i],col2[i+1])=(col2[i+1],col2[i])
                 for j in range(len(col3)-1):
                     for i in range(len(col3)-1):
-                        if col3[i+1].totalcomments > col3[i].totalcomments:
+                        if col3[i+1][0].totalcomments > col3[i][0].totalcomments:
                             (col3[i],col3[i+1])=(col3[i+1],col3[i])
         followingobj=Following.objects.get(current_user=name)
         firstpaper=followingobj.newspaper.all()[0]
 
-        args={'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
+        args={'disliked_posts':disliked_posts,'liked_posts':liked_posts,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
         return render(request,self.template_name,args)
 
 def homeSports(request):

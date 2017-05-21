@@ -111,16 +111,18 @@
         <p style="font-size:20px;">{{ post.story }}</p>
           <p style="font-size:10px;">{{ post.source }}</p>
           <hr>
-        <p><a href={{ post.pageurl }} class="btn btn-primary" role="button" target="_blank">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-         <button class="social-like" style="border:none;background-color:transparent;">
-     <span class="like"><i class="glyphicon glyphicon-thumbs-up custom"></i></span>
+           <div class="button_container" id="button_container">
+       <div class="social_buttons" id="social" style="float:left;display:inline-block;width:-moz-calc(100% - 170px);width: -webkit-calc(100% - 170px);width: calc(100% - 170px);">
+           <button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">
+     <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
      <span class="count" >{{ post.likes }}</span>
  </button>
-  <meta id="{{ post.pk }}" data-postid="{{ post.pk }}">  &nbsp;
- <button class="social-dislike" style="border:none;background-color:transparent;">
+    &nbsp;<meta id="{{ post.pk }}" data-postid="{{ post.pk }}">
+ <button id="dislike" class="social-dislike" style="border:none;background-color:transparent;">
      <span class="dislike" >{{ post.dislikes }}</span>
-     <span class="like"><i class="glyphicon glyphicon-thumbs-down custom"></i></span>
- </button></p>
+     <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
+ </button></div>
+        <p><a href={{ post.pageurl }} class="btn btn-primary" role="button" target="_blank">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
       </div>
     </div></li>
@@ -140,16 +142,18 @@
         <p style="font-size:20px;">{{ post.story }}</p>
           <p style="font-size:10px;">{{ post.source }}</p>
           <hr>
-        <p><a href={{ post.pageurl }} class="btn btn-primary" role="button" target="_blank">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-         <button class="social-like" style="border:none;background-color:transparent;">
-     <span class="like"><i class="glyphicon glyphicon-thumbs-up custom"></i></span>
+           <div class="button_container" id="button_container">
+       <div class="social_buttons" id="social" style="float:left;display:inline-block;width:-moz-calc(100% - 170px);width: -webkit-calc(100% - 170px);width: calc(100% - 170px);">
+           <button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">
+     <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
      <span class="count" >{{ post.likes }}</span>
  </button>
-  <meta id="{{ post.pk }}" data-postid="{{ post.pk }}">  &nbsp;
- <button class="social-dislike" style="border:none;background-color:transparent;">
+    &nbsp;<meta id="{{ post.pk }}" data-postid="{{ post.pk }}">
+ <button id="dislike" class="social-dislike" style="border:none;background-color:transparent;">
      <span class="dislike" >{{ post.dislikes }}</span>
-     <span class="like"><i class="glyphicon glyphicon-thumbs-down custom"></i></span>
- </button></p>
+     <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
+ </button></div>
+        <p><a href={{ post.pageurl }} class="btn btn-primary" role="button" target="_blank">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
       </div>
     </div></li>
