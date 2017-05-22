@@ -40,6 +40,7 @@ class Post(models.Model):
     likes=models.IntegerField(default=0)
     dislikes=models.IntegerField(default=0)
     suggestions=models.IntegerField(default=0)
+    visits=models.PositiveIntegerField(default=0)
     totalcomments=models.IntegerField(default=0)
     comment=models.IntegerField(default=0)
 

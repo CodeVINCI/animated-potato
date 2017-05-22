@@ -51,4 +51,12 @@ $.ajax(
 
 });
 
+$('.thumbnail').on('click', '#visitbutton', function(event)
+{
+var id=$(this).parent('p').attr('id');
+var ur = ('/home/visitors/').concat(id);
+$.get(ur)
+return true;
+});
+
 });

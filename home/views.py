@@ -112,6 +112,20 @@ class home(TemplateView):
                     for i in range(len(col3)-1):
                         if col3[i+1][0].totalcomments > col3[i][0].totalcomments:
                             (col3[i],col3[i+1])=(col3[i+1],col3[i])
+            elif filter=='most_visited':
+                for j in range(len(col1)-1):
+                    for i in range(len(col1)-1):
+                        if col1[i+1][0].visits > col1[i][0].visits:
+                            (col1[i],col1[i+1])=(col1[i+1],col1[i])
+                for j in range(len(col2)-1):
+                    for i in range(len(col2)-1):
+                        if col2[i+1][0].visits > col2[i][0].visits:
+                            (col2[i],col2[i+1])=(col2[i+1],col2[i])
+                for j in range(len(col3)-1):
+                    for i in range(len(col3)-1):
+                        if col3[i+1][0].visits > col3[i][0].visits:
+                            (col3[i],col3[i+1])=(col3[i+1],col3[i])
+
         followingobj=Following.objects.get(current_user=name)
         firstpaper=followingobj.newspaper.all()[0]
 
@@ -212,6 +226,10 @@ def sociallike(request,action,pk):
 
             return JsonResponse(args)
 
+def visits(request,pk):
+    if request.method=='GET':
+        Post.objects.filter(pk=pk).update(visits = F('visits')+1)
+        return JsonResponse({'success':'success'})
 
 
 
