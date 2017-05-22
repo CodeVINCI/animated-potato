@@ -101,62 +101,79 @@
         <div class="col-6 col-md-6">
              <ul id="tiles" class="unstyled">
         {% for post in col1 %}
-
-   <li><div class="thumbnail">
-      <img src={{ post.image.url }} alt="...">
+                 <li><div class="thumbnail">
+      <img src={{ post.0.image.url }} alt="...">
       <div class="caption">
-          <p style="font-size:10px;">{{ post.date }}</p>
-          <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.headline }}</h3>
-          <p style="font-size:10px;">{{ post.author }}</p>
-        <p style="font-size:20px;">{{ post.story }}</p>
-          <p style="font-size:10px;">{{ post.source }}</p>
+          <p style="font-size:10px;">{{ post.0.date }}</p>
+          <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.0.headline }}</h3>
+          <p style="font-size:10px;">{{ post.0.author }}</p>
+        <p style="font-size:20px;">{{ post.0.story }}</p>
+          <p style="font-size:10px;">{{ post.0.source }}</p>
           <hr>
-           <div class="button_container" id="button_container">
-       <div class="social_buttons" id="social" style="float:left;display:inline-block;width:-moz-calc(100% - 170px);width: -webkit-calc(100% - 170px);width: calc(100% - 170px);">
+       <div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 170px);width: -webkit-calc(100% - 170px);width: calc(100% - 170px);">
            <button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">
-     <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
-     <span class="count" >{{ post.likes }}</span>
+               {% if post.1 %}
+               <meta id="button_data" data-nextaction="social-unlike" data-pk="{{ post.0.pk }}">
+     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
+               {% else %}
+               <meta id="button_data" data-nextaction="social-like" data-pk="{{ post.0.pk }}">
+      <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
+               {% endif %}
+     <span class="count" >{{ post.0.likes }}</span>
  </button>
-    &nbsp;<meta id="{{ post.pk }}" data-postid="{{ post.pk }}">
+    &nbsp;
  <button id="dislike" class="social-dislike" style="border:none;background-color:transparent;">
-     <span class="dislike" >{{ post.dislikes }}</span>
+     <span class="dislike" >{{ post.0.dislikes }}</span>
+     {% if post.2 %}
+     <meta id="button_data" data-nextaction="social-undislike" data-pk="{{ post.0.pk }}">
+     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
+     {% else %}
+     <meta id="button_data" data-nextaction="social-dislike" data-pk="{{ post.0.pk }}">
      <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
+     {% endif %}
  </button></div>
-        <p><a href={{ post.pageurl }} class="btn btn-primary" role="button" target="_blank">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+        <p><a href={{ post.0.pageurl }} class="btn btn-primary" role="button" target="_blank">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
-      </div>
-    </div></li>
- {% endfor %}
+      </div></div></li>
+   {% endfor %}
          </ul>
         </div>
         <div class="col-6 col-md-6">
              <ul id="tiles" class="unstyled">
         {% for post in col2 %}
-
-   <li><div class="thumbnail">
-      <img src={{ post.image.url }} alt="...">
+                 <li><div class="thumbnail">
+      <img src={{ post.0.image.url }} alt="...">
       <div class="caption">
-          <p style="font-size:10px;">{{ post.date }}</p>
-          <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.headline }}</h3>
-          <p style="font-size:10px;">{{ post.author }}</p>
-        <p style="font-size:20px;">{{ post.story }}</p>
-          <p style="font-size:10px;">{{ post.source }}</p>
+          <p style="font-size:10px;">{{ post.0.date }}</p>
+          <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.0.headline }}</h3>
+          <p style="font-size:10px;">{{ post.0.author }}</p>
+        <p style="font-size:20px;">{{ post.0.story }}</p>
+          <p style="font-size:10px;">{{ post.0.source }}</p>
           <hr>
-           <div class="button_container" id="button_container">
-       <div class="social_buttons" id="social" style="float:left;display:inline-block;width:-moz-calc(100% - 170px);width: -webkit-calc(100% - 170px);width: calc(100% - 170px);">
+       <div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 170px);width: -webkit-calc(100% - 170px);width: calc(100% - 170px);">
            <button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">
-     <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
-     <span class="count" >{{ post.likes }}</span>
+                  {% if post.1 %}
+               <meta id="button_data" data-nextaction="social-unlike" data-pk="{{ post.0.pk }}">
+     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
+               {% else %}
+               <meta id="button_data" data-nextaction="social-like" data-pk="{{ post.0.pk }}">
+      <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
+               {% endif %}
+     <span class="count" >{{ post.0.likes }}</span>
  </button>
-    &nbsp;<meta id="{{ post.pk }}" data-postid="{{ post.pk }}">
+    &nbsp;
  <button id="dislike" class="social-dislike" style="border:none;background-color:transparent;">
-     <span class="dislike" >{{ post.dislikes }}</span>
+     <span class="dislike" >{{ post.0.dislikes }}</span>
+     {% if post.2 %}
+     <meta id="button_data" data-nextaction="social-undislike" data-pk="{{ post.0.pk }}">
+     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
+     {% else %}
+     <meta id="button_data" data-nextaction="social-dislike" data-pk="{{ post.0.pk }}">
      <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
+     {% endif %}
  </button></div>
-        <p><a href={{ post.pageurl }} class="btn btn-primary" role="button" target="_blank">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-
-      </div>
-    </div></li>
+        <p><a href={{ post.0.pageurl }} class="btn btn-primary" role="button" target="_blank">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+      </div></div></li>
  {% endfor %}
          </ul>
         </div>

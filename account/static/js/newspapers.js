@@ -1,9 +1,11 @@
 $(document).ready(function()
 {
 var valnow=$('#my-data').data().source;
+
 $(function() {
     $("#subscriptions").val(valnow);
 });
+
 $('div.select-newspaper').on('click', ".btn.btn-secondary", function(event)
 {
 var target= document.getElementById("subscriptions").value;
@@ -11,19 +13,42 @@ var ur = ("/account/newspapers/").concat(target);
 window.location.href = ur;
 });
 
-$('.box').on('click', "button.social-like", function(event)
+$('.social_buttons').on('click', "#like", function(event)
 {
 event.preventDefault();
-var id =$(this).next('meta').data().postid;
-var ur =("/post/like/").concat(id);
-alert(ur);
+var id =$(this).children('meta').data().pk;
+var action=$(this).children('meta').data().nextaction;
+var ur =("/home/vote/").concat(action,'/',id);
+var out = $(this)
+$.ajax(
+ {
+ url:ur,
+ method:'get',
+ success:function(response)
+ {
+  out.parent('div').html(response.codeself);
+ }
+ });
+
 });
 
-$('.box').on('click', "button.social-dislike", function(event)
+$('.social_buttons').on('click', "#dislike", function(event)
 {
 event.preventDefault();
-var id =$(this).prev('meta').data().postid;
-var ur =("/post/dislike/").concat(id);
-alert(ur);
+var id =$(this).children('meta').data().pk;
+var action=$(this).children('meta').data().nextaction;
+var ur =("/home/vote/").concat(action,'/',id);
+var out = $(this)
+$.ajax(
+ {
+ url:ur,
+ method:'get',
+ success:function(response)
+ {
+  out.parent('div').html(response.codeself);
+ }
+ });
+
 });
+
 });
