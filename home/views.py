@@ -233,4 +233,8 @@ def visits(request,pk):
 
 
 
-
+def suggest(request,pk):
+    if request.method=='GET':
+        Post.objects.filter(pk=pk).update(suggestions=F('suggestions')+1)
+        # make function to trigger a notification to all the followers username suggested post.headline post.source
+        return JsonResponse({'message':'Article has been suggeted to your friends'})
