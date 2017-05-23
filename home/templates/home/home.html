@@ -62,10 +62,10 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" style="width:60px;position:relative;"><a style="width:40px;padding-right:0px;padding-left:0px;" href="#" class="dropdown-notification" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-bell"></span>{% if ping %}<span class="badge">{{ ping }}</span>{% endif %}</a>
-        <ul class="dropdown-menu" style="width:460px;">
+        <ul class="dropdown-menu" style="width:480px;">
             {% for notification in all_notifications %}
-            <li><div class="notify" style="padding:10px;"><a style="width:460px;color:black;white-space:nowrap;overflow-x:hidden;" href="{{ notification.onclick_url }}">{{ notification.message }}</a></div></li>
-            <li style="width:460px;" role="separator" class="divider"></li>
+            <li><div class="notify" style="padding:10px;"><a style="width:480px;color:black;white-space:nowrap;overflow-x:hidden;" href="{{ notification.onclick_url }}"><span class="glyphicon glyphicon-pencil">&nbsp;</span>{{ notification.message }}</a></div></li>
+            <li style="width:480px;" role="separator" class="divider"></li>
             {% endfor %}
         </ul>
         </li>
