@@ -124,7 +124,7 @@ STATIC_URL = '/static/'
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'website/media')
 STATIC_ROOT = 'static/'
-LOGIN_REDIRECT_URL='/home/'
+LOGIN_REDIRECT_URL='/home/most_liked'
 
 
 # CELERY SETTINGS
