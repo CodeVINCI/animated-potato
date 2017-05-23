@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.views.generic import TemplateView
 from django.contrib.auth import update_session_auth_hash
 from account.forms import SocratesSearchForm
-from account.models import Userprofile
+from account.models import Userprofile,Notification,Following
 from home.models import Post,comment,Likes,Dislikes
 from account.models import Following
 from home.forms import comment_form
@@ -28,6 +28,9 @@ class home(TemplateView):
         pic=details.image
         form=SocratesSearchForm()
         commentbox=comment_form()
+        all_notifications=Notification.objects.filter(user=request.user)
+        new_notifications=all_notifications.filter(seen=0)
+        ping= new_notifications.count()
         col1=[]
         col2=[]
         col3=[]
@@ -114,10 +117,24 @@ class home(TemplateView):
                     for i in range(len(col3)-1):
                         if col3[i+1][0].totalcomments > col3[i][0].totalcomments:
                             (col3[i],col3[i+1])=(col3[i+1],col3[i])
+            elif filter=='most_visited':
+                for j in range(len(col1)-1):
+                    for i in range(len(col1)-1):
+                        if col1[i+1][0].visits > col1[i][0].visits:
+                            (col1[i],col1[i+1])=(col1[i+1],col1[i])
+                for j in range(len(col2)-1):
+                    for i in range(len(col2)-1):
+                        if col2[i+1][0].visits > col2[i][0].visits:
+                            (col2[i],col2[i+1])=(col2[i+1],col2[i])
+                for j in range(len(col3)-1):
+                    for i in range(len(col3)-1):
+                        if col3[i+1][0].visits > col3[i][0].visits:
+                            (col3[i],col3[i+1])=(col3[i+1],col3[i])
+
         followingobj=Following.objects.get(current_user=name)
         firstpaper=followingobj.newspaper.all()[0]
 
-        args={'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
+        args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
         return render(request,self.template_name,args)
 
 
@@ -240,4 +257,15 @@ def post_comment(request):
         )
 
 
+def visits(request,pk):
+    if request.method=='GET':
+        Post.objects.filter(pk=pk).update(visits = F('visits')+1)
+        return JsonResponse({'success':'success'})
 
+
+
+def suggest(request,pk):
+    if request.method=='GET':
+        Post.objects.filter(pk=pk).update(suggestions=F('suggestions')+1)
+        # make function to trigger a notification to all the followers username suggested post.headline post.source
+        return JsonResponse({'message':'Article has been suggeted to your friends'})

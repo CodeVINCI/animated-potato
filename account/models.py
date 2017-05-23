@@ -75,6 +75,15 @@ class Following(models.Model):
         follower.newspaper.remove(new_newspaper)
 
 
+class Notification(models.Model):
+    user=models.ForeignKey(User)
+    message=models.CharField(max_length=1000)
+    onclick_url=models.URLField(blank=True)
+    seen=models.BooleanField(default=0)
+    created_on=models.DateTimeField(auto_now_add=True)
+    seen_on=models.DateTimeField(auto_now=True)
 
+    def __unicode__(self):
+        return self.user.username
 
 

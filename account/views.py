@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from account.forms import UserProfile_form,Upload_form,SocratesSearchForm,SignUp_form,UserBasicEdit_form
-from account.models import Userprofile,SocratesSearch,Following,newspaper
-from home.models import Post
+from account.models import Userprofile,SocratesSearch,Following,newspaper,Notification
+from home.models import Post,Likes,Dislikes
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from account.handle_upload import handle_uploaded_file
@@ -201,20 +201,42 @@ class newspapers(TemplateView):
         subscriptions=subscriptionsobj.newspaper.all()
         col1=[]
         col2=[]
+        liked_posts=[]
+        disliked_posts=[]
         all_posts=Post.objects.filter(source=sitename).filter(date=date_today).order_by('?')
+        k=0
+        for post in all_posts:
+            p=Likes.objects.filter(post=post)
+            if p.count()>0 and request.user in p[0].users.all():
+                liked_posts.insert(k,1)
+                k=k+1
+            else:
+                liked_posts.insert(k,0)
+                k=k+1
+        l=0
+        for post in all_posts:
+            p=Dislikes.objects.filter(post=post)
+            if p.count()>0 and request.user in p[0].users.all():
+                disliked_posts.insert(l,1)
+                l=l+1
+            else:
+                disliked_posts.insert(l,0)
+                l=l+1
         j=0
         for i in xrange(0, len(all_posts), 2):
-            col1.insert(j,all_posts[i])
+            col1.insert(j,(all_posts[i],liked_posts[i],disliked_posts[i]))
             if (i+1)<len(all_posts):
-                col2.insert(j,all_posts[i+1])
+                col2.insert(j,(all_posts[i+1],liked_posts[i+1],disliked_posts[i+1]))
             j=j+1
+
         for j in range(len(col1)-1):
             for i in range(len(col1)-1):
-                if col1[i+1].likes > col1[i].likes:
+                if col1[i+1][0].likes > col1[i][0].likes:
                     (col1[i],col1[i+1])=(col1[i+1],col1[i])
+
         for j in range(len(col2)-1):
             for i in range(len(col2)-1):
-                if col2[i+1].likes > col2[i].likes:
+                if col2[i+1][0].likes > col2[i][0].likes:
                     (col2[i],col2[i+1])=(col2[i+1],col2[i])
         args={'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'col1':col1,'col2':col2,'source':sitename,'date_today':date_today}
         return render(request,'newspapers/Newspapers.html',args)
@@ -409,6 +431,11 @@ def connections(request,action,pk):
         person=User.objects.get(pk=pk)
         if action=='Follow':
             Following.followfriend(request.user, person)
+            msg= str(request.user.username)+" :"+str(request.user.first_name)+" "+(request.user.last_name) +" started following you, click here to view profile"
+            id=Userprofile.objects.get(user=request.user).pk
+            url="/account/viewprofile/"+str(id)
+            notification=Notification(user=person, message=msg, onclick_url=url, seen=0, created_on=timezone.now() )
+            notification.save()
             #args={'button':'<button type="button" class="btn btn-secondary" style="background-color:maroon;color:white;">Unfollow</button>',
              #     'meta':'<meta id="my-data" data-possibleaction="Unfollow" data-pk="'+str(pk)+'">'}
             args={"code":'<button type="button" class="btn btn-secondary" style="background-color:maroon;color:white;">Unfollow</button>'+'<meta id="my-data" data-possibleaction="Unfollow" data-pk="'+str(pk)+'">'}
