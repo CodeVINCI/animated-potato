@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.views.generic import TemplateView
 from django.contrib.auth import update_session_auth_hash
 from account.forms import SocratesSearchForm
-from account.models import Userprofile
+from account.models import Userprofile,Notification,Following
 from home.models import Post,comment,Likes,Dislikes
 from account.models import Following
 from home.forms import comment_form
@@ -26,6 +26,9 @@ class home(TemplateView):
         pic=details.image
         form=SocratesSearchForm()
         commentbox=comment_form()
+        all_notifications=Notification.objects.filter(user=request.user)
+        new_notifications=all_notifications.filter(seen=0)
+        ping= new_notifications.count()
         col1=[]
         col2=[]
         col3=[]
@@ -129,7 +132,7 @@ class home(TemplateView):
         followingobj=Following.objects.get(current_user=name)
         firstpaper=followingobj.newspaper.all()[0]
 
-        args={'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
+        args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
         return render(request,self.template_name,args)
 
 def homeSports(request):

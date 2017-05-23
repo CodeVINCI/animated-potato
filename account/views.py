@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from account.forms import UserProfile_form,Upload_form,SocratesSearchForm,SignUp_form,UserBasicEdit_form
-from account.models import Userprofile,SocratesSearch,Following,newspaper
+from account.models import Userprofile,SocratesSearch,Following,newspaper,Notification
 from home.models import Post,Likes,Dislikes
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
@@ -431,6 +431,11 @@ def connections(request,action,pk):
         person=User.objects.get(pk=pk)
         if action=='Follow':
             Following.followfriend(request.user, person)
+            msg= str(request.user.username)+" :"+str(request.user.first_name)+" "+(request.user.last_name) +" started following you, click here to view profile"
+            id=Userprofile.objects.get(user=request.user).pk
+            url="/account/viewprofile/"+str(id)
+            notification=Notification(user=person, message=msg, onclick_url=url, seen=0, created_on=timezone.now() )
+            notification.save()
             #args={'button':'<button type="button" class="btn btn-secondary" style="background-color:maroon;color:white;">Unfollow</button>',
              #     'meta':'<meta id="my-data" data-possibleaction="Unfollow" data-pk="'+str(pk)+'">'}
             args={"code":'<button type="button" class="btn btn-secondary" style="background-color:maroon;color:white;">Unfollow</button>'+'<meta id="my-data" data-possibleaction="Unfollow" data-pk="'+str(pk)+'">'}
