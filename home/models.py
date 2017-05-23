@@ -17,8 +17,8 @@ class comment(models.Model):
     post=models.IntegerField()    #post id to which the comment belongs
     replyto=models.IntegerField(default=0)    #comment id to whom this comment is reply to else value remains zero
 
-    def __str__(self):
-        return self.user.username    #to show username in admin interface
+    def __unicode__(self):
+        return self.text+' - '+self.user.username    #to show username in admin interface
 
 #class likes
 
