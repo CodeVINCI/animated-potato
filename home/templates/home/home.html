@@ -61,7 +61,14 @@
           <li><a href="/account/newspapers/{{ firstpaper }}">Newspapers</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Notifications<span class="badge">5</span></a></li>
+        <li class="dropdown" style="width:60px;position:relative;"><a style="width:40px;padding-right:0px;padding-left:0px;" href="#" class="dropdown-notification" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-bell"></span>{% if ping %}<span class="badge">{{ ping }}</span>{% endif %}</a>
+        <ul class="dropdown-menu" style="width:480px;">
+            {% for notification in all_notifications %}
+            <li><div class="notify" style="padding:10px;"><a style="width:480px;color:black;white-space:nowrap;overflow-x:hidden;" href="{{ notification.onclick_url }}"><span class="glyphicon glyphicon-pencil">&nbsp;</span>{{ notification.message }}</a></div></li>
+            <li style="width:480px;" role="separator" class="divider"></li>
+            {% endfor %}
+        </ul>
+        </li>
         <div class="imgAbt">
         <li class="dropdown">
 
@@ -133,6 +140,7 @@
      <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
      {% endif %}
  </button></div>
+
         <p><a href={{ post.0.pageurl }} class="btn btn-primary" role="button" target="_blank">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
           <!-- Button trigger modal -->
@@ -195,6 +203,9 @@
   </div>
 </div>
 
+
+        <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
       </div></div></li>
  {% endfor %}
          </ul>
@@ -234,8 +245,8 @@
      <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
      {% endif %}
  </button></div>
-        <p><a href={{ post.0.pageurl }} class="btn btn-primary" role="button" target="_blank">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-      </div></div></li>
+         <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+            </div></div></li>
  {% endfor %}
          </ul>
     </div>
@@ -274,7 +285,8 @@
      <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
      {% endif %}
  </button></div>
-        <p><a href={{ post.0.pageurl }} class="btn btn-primary" role="button" target="_blank">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+        <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+          <div id="messageBox"></div>
       </div></div></li>
  {% endfor %}
          </ul>

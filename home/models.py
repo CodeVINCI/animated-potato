@@ -27,8 +27,8 @@ class comment(models.Model):
 
 #
 class Post(models.Model):
-    created_on = models.DateTimeField(default=timezone.now)
-    updated_on = models.DateTimeField(default=timezone.now)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
     source=models.CharField(max_length=100,default="Anonymous")
     author=models.CharField(max_length=100,default="Anonymous")
     headline=models.TextField(max_length=1000,default="")
@@ -40,12 +40,15 @@ class Post(models.Model):
     likes=models.IntegerField(default=0)
     dislikes=models.IntegerField(default=0)
     suggestions=models.IntegerField(default=0)
+    visits=models.PositiveIntegerField(default=0)
     totalcomments=models.IntegerField(default=0)
     comment=models.IntegerField(default=0)
 
     def __unicode__(self):
         return smart_unicode(self.headline)
 
+    class Meta:
+        unique_together=("headline","author")
 
 class Likes(models.Model):
     post = models.ForeignKey(Post, related_name='likedpost')

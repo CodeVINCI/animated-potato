@@ -3,7 +3,7 @@ import json
 from home.models import Post
 import requests
 import tempfile
-
+import ssl
 from django.core import files
 from django.utils import timezone
 
@@ -15,12 +15,13 @@ from django.utils import timezone
 
 def get_news(URL):
     url=URL
-    response=urllib.urlopen(url)
+    context = ssl._create_unverified_context()
+    response=urllib.urlopen(url,context=context)
     data=json.loads(response.read())
     source= data["source"].encode('utf-8')
     articles=data["articles"]
     for article in articles:
-        storedarticles=Post.objects.filter(headline=article["title"])
+        storedarticles=Post.objects.filter(headline=article["title"].encode('utf-8'))
         if len(storedarticles)==0:
                 articlesource=source
                 if article["author"]==None:
