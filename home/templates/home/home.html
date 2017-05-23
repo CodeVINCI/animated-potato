@@ -139,7 +139,72 @@
      <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
      {% endif %}
  </button></div>
+
+        <p><a href={{ post.0.pageurl }} class="btn btn-primary" role="button" target="_blank">Visit Site</a> <a href="#" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+          <!-- Button trigger modal -->
+<a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
+  {{commentbox.text}}
+</a>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong{{post.0.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+           <p style="font-size:10px;">{{ post.0.date }}</p>
+           <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.0.headline }}</h3>
+      </div>
+      <div class="modal-body">
+          <div class="conatiner">
+              <img src={{ post.0.image.url }} alt="..." style="width:568px;height:400px;">
+              <p style="font-size:10px;">{{ post.0.author }}</p>
+              <p style="font-size:20px;">{{ post.0.story }}</p>
+          <p style="font-size:10px;">{{ post.0.source }}</p>
+
+
+               <div class="media">
+    <div class="media-left">
+       {% if pic.url %}
+             {% load static %}
+  <img src={{ pic.url }} alt="" style="width:40px;height:40px;border:1px solid #E6E6E6;border-radius:50%;">
+</a>
+         {% else %}
+         {% load static %}
+          <img src="{% static "images/Dp.png" %}" alt="" style="width:40px;height:40px;border:1px;border-radius:50%;">
+         {% endif %} </a>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">  {{user.first_name}}&nbsp; {{user.last_name}}&nbsp;</h4>
+        <form action="http://127.0.0.1:8000/home/most_liked#exampleModalLong{{post.0.pk}}" id="post-form" method="POST">
+                       {% csrf_token %}
+                       {{commentbox.text}}
+                        <button type="submit" class="btn btn-default">Comment</button>
+                    </form>
+<!--change this according to views and url-->
+        <h2>{{text}}</h2>
+
+    </div>
+  </div>
+
+
+
+
+
+          </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
         <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
       </div></div></li>
  {% endfor %}
          </ul>
@@ -226,9 +291,5 @@
          </ul>
     </div>
   </div>
-
-
-
-
 </body>
 </html>

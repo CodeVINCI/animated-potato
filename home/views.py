@@ -12,6 +12,8 @@ from random import shuffle
 from django.http import JsonResponse,HttpResponse
 from django.contrib.auth.models import User
 from django.db.models import F
+import json
+
 from django.shortcuts import get_object_or_404
 # Home page view.
 class home(TemplateView):
@@ -135,6 +137,8 @@ class home(TemplateView):
         args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
         return render(request,self.template_name,args)
 
+
+
 def homeSports(request):
     name=request.user
     userprofile=Userprofile.objects.filter(user=name)
@@ -228,6 +232,30 @@ def sociallike(request,action,pk):
                   +'<button id="dislike" class="social-dislike" style="border:none;background-color:transparent;"><span class="dislike" >'+str(postupdate.dislikes)+'</span><meta id="button_data" data-nextaction="social-dislike" data-pk='+str(pk)+'><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span></button>'}
 
             return JsonResponse(args)
+#modified this view according to ajax and write a regex url for this if needed
+def post_comment(request):
+    if request.method == 'POST':
+        post_text = request.POST.get('the_post')
+        response_data = {}
+
+        the_comment = comment(text=post_text, user=request.user)
+        the_comment.save()
+
+        response_data['the_commentpk'] = the_comment.pk
+        response_data['text'] = the_comment.text
+        response_data['created_on'] = the_comment.created_on.strftime('%B %d, %Y %I:%M %p')
+        response_data['user'] = the_comment.user.username
+
+        return HttpResponse(
+            json.dumps(response_data),
+            content_type="application/json"
+        )
+    else:
+        return HttpResponse(
+            json.dumps({"nothing to see": "this isn't happening"}),
+            content_type="application/json"
+        )
+
 
 def visits(request,pk):
     if request.method=='GET':
