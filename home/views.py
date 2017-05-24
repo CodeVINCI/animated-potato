@@ -199,8 +199,8 @@ def sociallike(request,action,pk):
                     Post.objects.filter(pk=pk).update(dislikes = F('dislikes')-1)
                     Dislikes.undislike(post,user)
             postupdate=Post.objects.get(pk=pk)
-            args={"codeself":'<button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;"><meta id="button_data" data-nextaction="social-unlike" data-pk='+str(pk)+'><span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-up custom"></i></span><span class="count">'+str(postupdate.likes)+'</span></button>&nbsp;'
-                  +'<button id="dislike" class="social-dislike" style="border:none;background-color:transparent;"><span class="dislike" >'+str(postupdate.dislikes)+'</span><meta id="button_data" data-nextaction="social-dislike" data-pk='+str(pk)+'><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span></button>'}
+            args={"codeself":'<button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;"><meta id="button_data" data-nextaction="social-unlike" data-pk='+str(pk)+'><span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-up custom"></i></span><span class="count">&nbsp;'+str(postupdate.likes)+'</span></button>&nbsp;'
+                  +'<button id="dislike" class="social-dislike" style="border:none;background-color:transparent;"><span class="dislike" >&nbsp;'+str(postupdate.dislikes)+'&nbsp;</span><meta id="button_data" data-nextaction="social-dislike" data-pk='+str(pk)+'><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span></button>'}
 
             return JsonResponse(args)
 
@@ -208,8 +208,8 @@ def sociallike(request,action,pk):
             Post.objects.filter(pk=pk).update(likes = F('likes')-1)
             Likes.unlike(post,user)
             postupdate=Post.objects.get(pk=pk)
-            args={"codeself":'<button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;"><meta id="button_data" data-nextaction="social-like" data-pk='+str(pk)+'><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span><span class="count">'+str(postupdate.likes)+'</span></button>&nbsp;'
-                  +'<button id="dislike" class="social-dislike" style="border:none;background-color:transparent;"><span class="dislike" >'+str(postupdate.dislikes)+'</span><meta id="button_data" data-nextaction="social-dislike" data-pk='+str(pk)+'><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span></button>'}
+            args={"codeself":'<button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;"><meta id="button_data" data-nextaction="social-like" data-pk='+str(pk)+'><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span><span class="count">&nbsp;'+str(postupdate.likes)+'</span></button>&nbsp;'
+                  +'<button id="dislike" class="social-dislike" style="border:none;background-color:transparent;"><span class="dislike" >&nbsp;'+str(postupdate.dislikes)+'&nbsp;</span><meta id="button_data" data-nextaction="social-dislike" data-pk='+str(pk)+'><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span></button>'}
 
             return JsonResponse(args)
 
@@ -222,8 +222,8 @@ def sociallike(request,action,pk):
                     Post.objects.filter(pk=pk).update(likes = F('likes')-1)
                     Likes.unlike(post,user)
             postupdate=Post.objects.get(pk=pk)
-            args={"codeself":'<button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;"><meta id="button_data" data-nextaction="social-like" data-pk='+str(pk)+'><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span><span class="count">'+str(postupdate.likes)+'</span></button>&nbsp;'
-                  +'<button id="dislike" class="social-dislike" style="border:none;background-color:transparent;"><span class="dislike" >'+str(postupdate.dislikes)+'</span><meta id="button_data" data-nextaction="social-undislike" data-pk='+str(pk)+'><span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-down custom"></i></span></button>'}
+            args={"codeself":'<button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;"><meta id="button_data" data-nextaction="social-like" data-pk='+str(pk)+'><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span><span class="count">&nbsp;'+str(postupdate.likes)+'</span></button>&nbsp;'
+                  +'<button id="dislike" class="social-dislike" style="border:none;background-color:transparent;"><span class="dislike" >&nbsp;'+str(postupdate.dislikes)+'&nbsp;</span><meta id="button_data" data-nextaction="social-undislike" data-pk='+str(pk)+'><span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-down custom"></i></span></button>'}
 
             return JsonResponse(args)
 
@@ -231,8 +231,8 @@ def sociallike(request,action,pk):
             Post.objects.filter(pk=pk).update(dislikes = F('dislikes')-1)
             Dislikes.undislike(post,user)
             postupdate=Post.objects.get(pk=pk)
-            args={"codeself":'<button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;"><meta id="button_data" data-nextaction="social-like" data-pk='+str(pk)+'><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span><span class="count">'+str(postupdate.likes)+'</span></button>&nbsp;'
-                  +'<button id="dislike" class="social-dislike" style="border:none;background-color:transparent;"><span class="dislike" >'+str(postupdate.dislikes)+'</span><meta id="button_data" data-nextaction="social-dislike" data-pk='+str(pk)+'><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span></button>'}
+            args={"codeself":'<button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;"><meta id="button_data" data-nextaction="social-like" data-pk='+str(pk)+'><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span><span class="count">&nbsp;'+str(postupdate.likes)+'</span></button>&nbsp;'
+                  +'<button id="dislike" class="social-dislike" style="border:none;background-color:transparent;"><span class="dislike" >&nbsp;'+str(postupdate.dislikes)+'&nbsp;</span><meta id="button_data" data-nextaction="social-dislike" data-pk='+str(pk)+'><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span></button>'}
 
             return JsonResponse(args)
 #modified this view according to ajax and write a regex url for this if needed
@@ -271,4 +271,12 @@ def suggest(request,pk):
     if request.method=='GET':
         Post.objects.filter(pk=pk).update(suggestions=F('suggestions')+1)
         # make function to trigger a notification to all the followers username suggested post.headline post.source
+        p=Post.objects.get(pk=pk)
+        people=Following.objects.get(current_user=request.user)
+        people=people.users.all()
+        for person in people:
+            message = str((request.user.username).encode('utf-8'))+': '+ str((request.user.first_name).encode('utf-8'))+' '+str((request.user.last_name).encode('utf-8'))+' suggested "'+str((p.headline).encode('utf-8'))+'"by "'+str((p.source).encode('utf-8'))+'".'
+            url='account/suggested/'+str(pk)
+            n= Notification(user=person,message=message,onclick_url=url)
+            n.save()
         return JsonResponse({'message':'Article has been suggeted to your friends'})

@@ -52,6 +52,12 @@ class Profile(TemplateView):
          date_today=str(timezone.now())
          date_today=date_today[:10]
          name=request.user
+
+         all_notifications=Notification.objects.filter(user=request.user)
+         new_notifications=all_notifications.filter(seen=0)
+         ping= new_notifications.count()
+
+
          userprofile=Userprofile.objects.filter(user=name)
          followingobj=Following.objects.get(current_user=name)
          all=Following.objects.all()
@@ -68,7 +74,7 @@ class Profile(TemplateView):
          details=userprofile[0]
          pic=details.image
          form=SocratesSearchForm()
-         args={'user':request.user,'details':details,'pic':pic,'form':form,'following':following,'subscription':subscription,'subscriptionno':subscriptionno,'followingno':followingno,"followerno":followers,"firstpaper":firstpaper,'date_today':date_today}
+         args={'new_notifications':new_notifications,'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form,'following':following,'subscription':subscription,'subscriptionno':subscriptionno,'followingno':followingno,"followerno":followers,"firstpaper":firstpaper,'date_today':date_today}
          return render(request,self.template_name,args)
 
     def post(self,request):
@@ -191,16 +197,25 @@ def blogs(request):
 class newspapers(TemplateView):
     template_name = 'newspapers/Newspapers.html'
     def get(self,request,sitename):
+        #dates
         date_today=str(timezone.now())
         date_today=date_today[:10]
         d = str(datetime.today() - timedelta(days=1))
         d=d[:10]
+        # today and a day before
+
+        #navbar content
+        all_notifications=Notification.objects.filter(user=request.user)
+        new_notifications=all_notifications.filter(seen=0)
+        ping= new_notifications.count()
+
         commentbox=comment_form()
         name=request.user
         userprofile=Userprofile.objects.filter(user=name)
         details=userprofile[0]
         pic=details.image
         form=SocratesSearchForm()
+
         subscriptionsobj=Following.objects.get(current_user__username=request.user)
         subscriptions=subscriptionsobj.newspaper.all()
         col1=[]
@@ -242,7 +257,7 @@ class newspapers(TemplateView):
             for i in range(len(col2)-1):
                 if col2[i+1][0].likes > col2[i][0].likes:
                     (col2[i],col2[i+1])=(col2[i+1],col2[i])
-        args={'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'col1':col1,'col2':col2,'source':sitename,'date_today':date_today}
+        args={'new_notifications':new_notifications,'all_notifications':all_notifications,'ping':ping,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'col1':col1,'col2':col2,'source':sitename,'date_today':date_today}
         return render(request,'newspapers/Newspapers.html',args)
 
 
@@ -435,7 +450,7 @@ def connections(request,action,pk):
         person=User.objects.get(pk=pk)
         if action=='Follow':
             Following.followfriend(request.user, person)
-            msg= str(request.user.username)+" :"+str(request.user.first_name)+" "+(request.user.last_name) +" started following you, click here to view profile this is a test message does not matter"
+            msg= str(request.user.username)+": "+str(request.user.first_name)+" "+(request.user.last_name) +" started following you, click here to view profile this is a test message does not matter"
             id=Userprofile.objects.get(user=request.user).pk
             url="/account/viewprofile/"+str(id)
             notification=Notification(user=person, message=msg, onclick_url=url, seen=0, created_on=timezone.now() )

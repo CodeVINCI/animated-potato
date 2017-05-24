@@ -13,6 +13,7 @@ window.location.href = ur;
 
 });
 
+
 $('.social_buttons').on('click', "#like", function(event)
 {
 event.preventDefault();
