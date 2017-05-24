@@ -1,18 +1,4 @@
-
-'utc_enabled', (5632, 5)
-'tz', (5120, 21)
-'__version__', (4608, 14)
-<<<<<<< HEAD
-'entries', (4096, 419)
-=======
-
-'entries', (4096, 429)
-
 'utc_enabled', (1536, 5)
 'tz', (1024, 21)
 '__version__', (512, 14)
-'entries', (0, 435)
-
-'entries', (4096, 425)
-
->>>>>>> 8ce5503e1383360afabcacba782cb376be5d8a6a
+'entries', (0, 419)

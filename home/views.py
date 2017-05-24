@@ -13,6 +13,7 @@ from django.http import JsonResponse,HttpResponse
 from django.contrib.auth.models import User
 from django.db.models import F
 import json
+from datetime import datetime, timedelta
 
 from django.shortcuts import get_object_or_404
 # Home page view.
@@ -22,6 +23,8 @@ class home(TemplateView):
     def get(self,request,filter):
         date_today= str(timezone.now())
         date_today=date_today[:10]
+        d = str(datetime.today() - timedelta(days=1))
+        d=d[:10]
         name=request.user
         userprofile=Userprofile.objects.filter(user=name)
         details=userprofile[0]
