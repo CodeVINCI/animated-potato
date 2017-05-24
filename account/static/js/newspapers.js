@@ -82,46 +82,32 @@ return false;
     });
 //this is ajax of comment sectioon do something to it so that it will work
 /*handling comment form submission*/
-$('#post-form').on('submit', function(event){
+$('.thumbnail').on('click','#comment_button', function(event){
     event.preventDefault();
-    console.log("form submitted!")  // sanity check
-    post_comment();
+    console.log("form submitted!")
+     var id = $(this).prev('meta').data().pk// sanity check
     // AJAX for posting
-    function post_comment() {
-    console.log("create post is working!") // sanity check
-
-    $.ajax({
-       url : "#exampleModalLong{{post.0.pk}}/",//the endpoint
-       type : "POST",
-       data :{ the_post : $('#post-comment').val()},
-       //handle a successful response
-       success : function(json){
-          $('#post-comment').val('');//remove the value from the input
-          console.log(json);//log the returned json to the console
-          $("#talk").prepend("<li><strong>"+json.text+"</strong>-<em>"+json.user+"</em> - <span>"+json.created_on+"</span></li>"
-          );
-          console.log("success");
-
-       },
-       //handle a non-successful response
-       error : function(xhr,errmsg,err){
-          $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+
-          "<a href='#' class='close'>&times;</a></div>");//add the error to the dom
-          console.log(xhr.status + ": "+xhr.responseText);//provide a bit more info about the error to the console
-       }
+    var ur = ('/home/make_comment/').concat(id,'/');
+    var ht = $(this).siblings('#post-comment').val();
+    var csrf=$(this).siblings('#post-comment').prev('input').attr('value');
+    var out=$(this);
+    var da={the_post:ht, pk:id, csrfmiddlewaretoken: csrf};
+    $.ajax(
+    {
+      url:ur,
+      type:'POST',
+      data:da,
+      dataType:'json',
+      success:function(response)
+      {
+       out.siblings('#post-comment').val('');
+       out.parent().next("#talk").prepend(response.text);
+      }
     });
-};
-});
-
-
 
 
 });
-
-
-
-
-
+});
 
 
 //this is csrf_token in javascript don't remove it.

@@ -236,28 +236,16 @@ def sociallike(request,action,pk):
 
             return JsonResponse(args)
 #modified this view according to ajax and write a regex url for this if needed
-def post_comment(request):
+def post_comment(request,pk):
     if request.method == 'POST':
         post_text = request.POST.get('the_post')
-        response_data = {}
+        concerned_post=Post.objects.get(pk=pk)
 
-        the_comment = comment(text=post_text, user=request.user)
+        the_comment = comment(text=post_text, user=request.user,post=concerned_post)
         the_comment.save()
-
-        response_data['the_commentpk'] = the_comment.pk
-        response_data['text'] = the_comment.text
-        response_data['created_on'] = the_comment.created_on.strftime('%B %d, %Y %I:%M %p')
-        response_data['user'] = the_comment.user.username
-
-        return HttpResponse(
-            json.dumps(response_data),
-            content_type="application/json"
-        )
-    else:
-        return HttpResponse(
-            json.dumps({"nothing to see": "this isn't happening"}),
-            content_type="application/json"
-        )
+        a="<li><strong>"+post_text+"</strong>-<em>"+request.user.username+"</em> - <span>"+str(the_comment.created_on)+"</span></li>"
+        args={'text':a}
+        return JsonResponse(args)
 
 
 def visits(request,pk):

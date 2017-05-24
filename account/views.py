@@ -450,7 +450,7 @@ def connections(request,action,pk):
         person=User.objects.get(pk=pk)
         if action=='Follow':
             Following.followfriend(request.user, person)
-            msg= str(request.user.username)+": "+str(request.user.first_name)+" "+(request.user.last_name) +" started following you, click here to view profile this is a test message does not matter"
+            msg= str(request.user.username)+": "+str(request.user.first_name)+" "+(request.user.last_name) +" started following you, click here to view profile."
             id=Userprofile.objects.get(user=request.user).pk
             url="/account/viewprofile/"+str(id)
             notification=Notification(user=person, message=msg, onclick_url=url, seen=0, created_on=timezone.now() )
