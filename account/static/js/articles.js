@@ -1,29 +1,17 @@
 $(document).ready(function()
 {
-var valnow=$('#my-data').data().filter;
-$(function() {
-    $("#filters").val(valnow);
-});
-$('div.select_filters').on('click', ".btn.btn-secondary", function(event)
-{
-event.preventDefault();
-var target= document.getElementById("filters").value;
-var ur = ("/home/").concat(target);
-window.location.href = ur;
-
-});
 
 $('.thumbnail').on('click', "#readlater", function(event)
 {
 var id=$(this).parent().prev('p').attr('id');
-var ur = ('/account/save/readlater/').concat(id);
+var ur = ('/account/remove/readlater/').concat(id);
 $.ajax(
 {
 url:ur,
 method:'get',
 success:function(response)
 {
- alert('Post is saved to your library');
+ alert('Post is removed from your library');
 }
 });
 });
@@ -122,6 +110,7 @@ $('.thumbnail').on('click','#comment_button', function(event){
 
 
 });
+
 });
 
 

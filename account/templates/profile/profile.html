@@ -54,7 +54,7 @@
           <li><a href="/account/newspapers/{{ firstpaper }}">Newspapers</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown" style="width:60px;position:relative;"><a style="width:40px;padding-right:0px;padding-left:0px;" href="#" class="dropdown-notification" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-bell"></span>{% if ping %}<span class="badge">{{ ping }}</span>{% endif %}</a>
+        <li class="dropdown" style="width:60px;position:relative;"><a style="width:50px;padding-right:0px;padding-left:0px;" href="#" class="dropdown-notification" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="font-size:20px;" class="glyphicon glyphicon-globe"></span>{% if ping %}<span class="badge">{{ ping }}</span>{% endif %}</a>
         <ul class="dropdown-menu" style="width:450px;">
             {% for notification in all_notifications %}
             <li><div class="notify" style="padding:10px;white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><a style="width:450px;color:black;white-space:wrap;overflow-x:hidden;" href="{{ notification.onclick_url }}"><p style="font-size:12px;"><span class="glyphicon glyphicon-pencil">&nbsp;</span>{{ notification.message }}</p></a></div></li>
@@ -134,11 +134,11 @@
     <div class="col-sm-2 sidenav">
       <div class="well">
 
-          <p><b>Credentials & Highlights &nbsp;</b><a href="/account/profile/User_profile">edit</a><hr><a href="/account/profile/User_profile">Work and employment</a><br>{{ details.workAndemployment }}<br><br><a href="/account/profile/User_profile">Location</a><br>{{ details.location }}</p>
+          <p><b>Credentials & Highlights &nbsp;</b><a href="/account/profile/User_profile">edit</a><hr><a href="/account/profile/User_profile"><b>Work and employment</b></a><br>{{ details.workAndemployment }}<br><br><a href="/account/profile/User_profile"><b>Location</b></a><br>{{ details.location }}</p>
 
       </div>
       <div class="well">
-        <p><b>Interested In &nbsp;<b><a href="/account/profile/User_profile">edit</a><hr></p><a href="#">Politics</a><br><br><a href="#">Sports</a><br><br><a href="#">Market</a>
+          <p><b>Dash-board</b></p><hr><a href="/account/{{ user.username }}/subscriptions"><b>My Newspapers</b></a><br><br><a href="/account/{{ user.username }}/articles"><b>My Articles</b></a><br><br><a href="#"><b>Blogs</b></a>
       </div>
     </div>
   </div>

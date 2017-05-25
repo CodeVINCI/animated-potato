@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.forms import ModelForm
+from home.models import Post
 
 # Create your models here.
 
@@ -41,7 +42,8 @@ class SocratesSearch(models.Model):
 class Following(models.Model):
     users=models.ManyToManyField(User,related_name='people')
     newspaper=models.ManyToManyField(newspaper)
-    current_user=models.ForeignKey(User, related_name='owner', null=True)
+    post=models.ManyToManyField(Post)
+    current_user=models.ForeignKey(User, related_name='owner',null=True)
 
     def __unicode__(self):
         return str(self.current_user)
@@ -74,6 +76,19 @@ class Following(models.Model):
         )
         follower.newspaper.remove(new_newspaper)
 
+    @classmethod
+    def addpost(cls,current_user,post):
+        follower,created=cls.objects.get_or_create(
+            current_user=current_user
+        )
+        follower.post.add(post)
+
+    @classmethod
+    def removepost(cls,current_user,post):
+        follower,created=cls.objects.get_or_create(
+            current_user=current_user
+        )
+        follower.post.remove(post)
 
 class Notification(models.Model):
     user=models.ForeignKey(User)

@@ -14,8 +14,8 @@
     {% load static %}
     <link rel="stylesheet" href="{% static "home.css"%}" type="text/css"/>
     <link rel="shortcut icon" type="image/png" href="{% static "images/favicon.ico" %}"/>
-         <script src="{% static 'js/home.js' %}"></script>
-    <title>Socrates-Politics</title>
+         <script src="{% static 'js/articles.js' %}"></script>
+    <title>Socrates-Dashboard</title>
 </head>
 <body style="overflow-x:scroll">
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -91,17 +91,7 @@
 
 <meta id="my-data" data-filter="{{ filter }}">
 <div class="span12" id="wrap">
-    <div class="select_filters" style="margin-left:30px;margin-bottom:20px;"><b>Filters</b>:
-    <select id="filters" style="background-color:white;">
-        <option value="most_visited">most_visited</option>
-        <option value="most_liked">most_liked</option>
-        <option value="most_disliked">most_disliked</option>
-        <option value="most_commented">most_commented</option>
-        <option value="most_suggested">most_suggested</option>
-        <option value="your_subscriptions">your_subscriptions</option>
-    </select>
-        <button type="button" class="btn btn-secondary" style="width:100px;height:22px;padding:1px;background-color:maroon;color:white;"><b>Go</b></button>
-    </div>
+    <h2 style="margin-left:25px;">Your Saved Articles</h2><br>
     <div class="col-6 col-md-4">
          <ul id="tiles" class="unstyled">
 
@@ -143,7 +133,7 @@
           <!-- Button trigger modal -->
 <p><a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
   {{commentbox.text}}
-</a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button></p>
+</a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-trash"></span></button></p>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalLong{{post.0.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -185,40 +175,7 @@
                         <button type="button" id="comment_button" class="btn btn-default">Comment</button>
                     </form>
 <!--change this according to views and url-->
-        <p id="talk">
-
-        </p>
-
-         <div class="modal-footer">
-
-
-             <div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 250px);width: -webkit-calc(100% - 250px);width: calc(100% - 250px);">
-           <button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">
-               {% if post.1 %}
-               <meta id="button_data" data-nextaction="social-unlike" data-pk="{{ post.0.pk }}">
-     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
-               {% else %}
-               <meta id="button_data" data-nextaction="social-like" data-pk="{{ post.0.pk }}">
-      <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
-               {% endif %}
-     <span class="count" >{{ post.0.likes }}</span>
- </button>
-    &nbsp;
- <button id="dislike" class="social-dislike" style="border:none;background-color:transparent;">
-     <span class="dislike" >{{ post.0.dislikes }}</span>
-     {% if post.2 %}
-     <meta id="button_data" data-nextaction="social-undislike" data-pk="{{ post.0.pk }}">
-     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
-     {% else %}
-     <meta id="button_data" data-nextaction="social-dislike" data-pk="{{ post.0.pk }}">
-     <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
-     {% endif %}
- </button></div>
-
-          <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></p>
-
-      </div>
-
+        <ul id="talk"></ul>
 
     </div>
   </div>
@@ -278,7 +235,7 @@
                 <!-- Button trigger modal -->
 <p><a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
   {{commentbox.text}}
-</a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button></p>
+</a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-trash"></span></button></p>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalLong{{post.0.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -321,36 +278,6 @@
                     </form>
 <!--change this according to views and url-->
         <ul id="talk"></ul>
-
-         <div class="modal-footer">
-
-
-             <div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 250px);width: -webkit-calc(100% - 250px);width: calc(100% - 250px);">
-           <button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">
-               {% if post.1 %}
-               <meta id="button_data" data-nextaction="social-unlike" data-pk="{{ post.0.pk }}">
-     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
-               {% else %}
-               <meta id="button_data" data-nextaction="social-like" data-pk="{{ post.0.pk }}">
-      <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
-               {% endif %}
-     <span class="count" >{{ post.0.likes }}</span>
- </button>
-    &nbsp;
- <button id="dislike" class="social-dislike" style="border:none;background-color:transparent;">
-     <span class="dislike" >{{ post.0.dislikes }}</span>
-     {% if post.2 %}
-     <meta id="button_data" data-nextaction="social-undislike" data-pk="{{ post.0.pk }}">
-     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
-     {% else %}
-     <meta id="button_data" data-nextaction="social-dislike" data-pk="{{ post.0.pk }}">
-     <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
-     {% endif %}
- </button></div>
-
-          <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></p>
-
-      </div>
 
     </div>
   </div>
@@ -410,7 +337,7 @@
 
 <p><a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
   {{commentbox.text}}
-</a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button></p>
+</a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-trash"></span></button></p>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalLong{{post.0.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -453,37 +380,6 @@
                     </form>
 <!--change this according to views and url-->
         <ul id="talk"></ul>
-
-          <div class="modal-footer">
-
-
-             <div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 250px);width: -webkit-calc(100% - 250px);width: calc(100% - 250px);">
-           <button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">
-               {% if post.1 %}
-               <meta id="button_data" data-nextaction="social-unlike" data-pk="{{ post.0.pk }}">
-     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
-               {% else %}
-               <meta id="button_data" data-nextaction="social-like" data-pk="{{ post.0.pk }}">
-      <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
-               {% endif %}
-     <span class="count" >{{ post.0.likes }}</span>
- </button>
-    &nbsp;
- <button id="dislike" class="social-dislike" style="border:none;background-color:transparent;">
-     <span class="dislike" >{{ post.0.dislikes }}</span>
-     {% if post.2 %}
-     <meta id="button_data" data-nextaction="social-undislike" data-pk="{{ post.0.pk }}">
-     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
-     {% else %}
-     <meta id="button_data" data-nextaction="social-dislike" data-pk="{{ post.0.pk }}">
-     <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
-     {% endif %}
- </button></div>
-
-          <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></p>
-
-      </div>
-
 
     </div>
   </div>

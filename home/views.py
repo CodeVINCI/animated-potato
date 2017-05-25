@@ -21,9 +21,9 @@ class home(TemplateView):
     template_name = "home/home.html"
 
     def get(self,request,filter):
-        date_today= str(timezone.now())
+        date_today=str(datetime.today())
         date_today=date_today[:10]
-        d = str(datetime.today() - timedelta(days=1))
+        d = str(datetime.today() - timedelta(days=2))
         d=d[:10]
         name=request.user
         userprofile=Userprofile.objects.filter(user=name)
@@ -39,7 +39,7 @@ class home(TemplateView):
         col3=[]
         liked_posts=[]
         disliked_posts=[]
-        all_posts=Post.objects.filter(date=date_today).order_by('?')
+        all_posts=Post.objects.filter(date=d).order_by('?')
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)
