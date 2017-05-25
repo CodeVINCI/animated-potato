@@ -243,7 +243,7 @@ def post_comment(request,pk):
 
         the_comment = comment(text=post_text, user=request.user,post=concerned_post)
         the_comment.save()
-        a="<li><strong>"+post_text+"</strong>-<em>"+request.user.username+"</em> - <span>"+str(the_comment.created_on)+"</span></li>"
+        a="<p><h4>"+request.user.first_name+" "+request.user.last_name+"</h4> "+post_text+"  <span>"+str(the_comment.created_on)+"</span></p>"
         args={'text':a}
         return JsonResponse(args)
 
