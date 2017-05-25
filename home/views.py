@@ -39,7 +39,7 @@ class home(TemplateView):
         col3=[]
         liked_posts=[]
         disliked_posts=[]
-        all_posts=Post.objects.filter(date=date_today).order_by('?')
+        all_posts=Post.objects.filter(date=d).order_by('?')
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)
