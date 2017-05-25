@@ -16,8 +16,16 @@ window.location.href = ur;
 $('.thumbnail').on('click', "#readlater", function(event)
 {
 var id=$(this).parent().prev('p').attr('id');
-var ur = ('/account/save/readlater/').concat(id,'/');
-alert(ur);
+var ur = ('/account/save/readlater/').concat(id);
+$.ajax(
+{
+url:ur,
+method:'get',
+success:function(response)
+{
+ alert('Post is saved to your library');
+}
+});
 });
 
 $('.social_buttons').on('click', "#like", function(event)
