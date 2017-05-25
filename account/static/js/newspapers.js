@@ -13,6 +13,13 @@ var ur = ("/account/newspapers/").concat(target);
 window.location.href = ur;
 });
 
+$('.thumbnail').on('click', "#readlater", function(event)
+{
+var id=$(this).parent().prev('p').attr('id');
+var ur = ('/account/save/readlater/').concat(id,'/');
+alert(ur);
+});
+
 $('.social_buttons').on('click', "#like", function(event)
 {
 event.preventDefault();
@@ -107,6 +114,7 @@ $('.thumbnail').on('click','#comment_button', function(event){
 
 
 });
+
 });
 
 

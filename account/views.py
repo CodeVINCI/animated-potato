@@ -198,9 +198,9 @@ class newspapers(TemplateView):
     template_name = 'newspapers/Newspapers.html'
     def get(self,request,sitename):
         #dates
-        date_today=str(timezone.now())
+        date_today=str(datetime.today())
         date_today=date_today[:10]
-        d = str(datetime.today() - timedelta(days=1))
+        d = str(datetime.today() - timedelta(days=2))
         d=d[:10]
         # today and a day before
 

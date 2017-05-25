@@ -2,21 +2,19 @@
 <html lang="en">
 {% load static %}
 <head>
-    <meta charset="UTF-8">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script
 			  src="https://code.jquery.com/jquery-3.2.1.min.js"
 			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 			  crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {% load static %}
     <link rel="stylesheet" href="{% static "home.css"%}" type="text/css"/>
     <link rel="shortcut icon" type="image/png" href="{% static "images/favicon.ico" %}"/>
-    <script type="text/javascript" src="{% static 'jscroll.js' %}"></script>
-    <script type="text/javascript" src="{% static 'scroll.js' %}"></script>
-     <script src="{% static 'js/home.js' %}"></script>
+         <script src="{% static 'js/home.js' %}"></script>
     <title>Socrates-Politics</title>
 </head>
 <body style="overflow-x:scroll">
@@ -145,7 +143,7 @@
           <!-- Button trigger modal -->
 <p><a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
   {{commentbox.text}}
-</a><a href="/home/most_liked" style="float:right;margin-top:10px;font-size:15px;"><span class="glyphicon glyphicon-pushpin"></span></span></a></p>
+</a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button></p>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalLong{{post.0.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -247,7 +245,7 @@
                 <!-- Button trigger modal -->
 <p><a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
   {{commentbox.text}}
-</a><a href="/home/most_liked" style="float:right;margin-top:10px;font-size:15px;"><span class="glyphicon glyphicon-pushpin"></span></span></a></p>
+</a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button></p>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalLong{{post.0.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -349,7 +347,7 @@
 
 <p><a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
   {{commentbox.text}}
-</a><a href="/home/most_liked" style="float:right;margin-top:10px;font-size:15px;"><span class="glyphicon glyphicon-pushpin"></span></span></a></p>
+</a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button></p>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalLong{{post.0.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
