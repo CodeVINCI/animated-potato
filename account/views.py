@@ -535,3 +535,7 @@ def subscriptions(request,newssite,action):
 def savepost(request,pk):
     Following.addpost(request.user,Post.objects.get(pk=pk))
     return JsonResponse({'g':'h'})
+
+def removepost(request,pk):
+    Following.removepost(request.user,Post.objects.get(pk=pk))
+    return JsonResponse({'g':'h'})

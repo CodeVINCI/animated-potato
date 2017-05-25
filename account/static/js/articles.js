@@ -4,14 +4,14 @@ $(document).ready(function()
 $('.thumbnail').on('click', "#readlater", function(event)
 {
 var id=$(this).parent().prev('p').attr('id');
-var ur = ('/account/save/readlater/').concat(id);
+var ur = ('/account/remove/readlater/').concat(id);
 $.ajax(
 {
 url:ur,
 method:'get',
 success:function(response)
 {
- alert('Post is saved to your library');
+ alert('Post is removed from your library');
 }
 });
 });
