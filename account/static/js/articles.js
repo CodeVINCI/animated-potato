@@ -5,13 +5,15 @@ $('.thumbnail').on('click', "#readlater", function(event)
 {
 var id=$(this).parent().prev('p').attr('id');
 var ur = ('/account/remove/readlater/').concat(id);
+var li = $(this).closest('.thumbnail')
+
 $.ajax(
 {
 url:ur,
 method:'get',
 success:function(response)
 {
- alert('Post is removed from your library');
+li.fadeOut('slow', function() { li.remove(); });
 }
 });
 });
