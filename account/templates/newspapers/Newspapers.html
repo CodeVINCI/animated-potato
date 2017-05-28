@@ -187,8 +187,12 @@
                         <button type="button" id="comment_button" class="btn btn-default">Comment</button>
                     </form>
 <!--change this according to views and url-->
-        <ul id="talk"></ul>
-
+        <ul id="talk">
+         {% for comment in post.0.comments.all reversed %}
+            <li><span style="font-size:12px;"><b><a class='via_user' href="/account/viauserpk/{{ comment.user.pk }}">{{ comment.user.first_name }}&nbsp;{{ comment.user.last_name }}</a>&nbsp;&nbsp;</b><span style="font-size:10px;"><b>{{ comment.created_on }}</b></span></span><span><p style="font-size:12px;">{{ comment.text }}</p></span></li>
+            <br>
+             {% endfor %}
+        </ul>
     </div>
   </div>
 
@@ -287,7 +291,12 @@
                         <button type="button" id="comment_button" class="btn btn-default">Comment</button>
                     </form>
 <!--change this according to views and url-->
-        <ul id="talk"></ul>
+          <ul id="talk">
+         {% for comment in post.0.comments.all reversed %}
+            <li><span style="font-size:12px;"><b><a class='via_user' href="/account/viauserpk/{{ comment.user.pk }}">{{ comment.user.first_name }}&nbsp;{{ comment.user.last_name }}</a>&nbsp;&nbsp;</b><span style="font-size:10px;"><b>{{ comment.created_on }}</b></span></span><span><p style="font-size:12px;">{{ comment.text }}</p></span></li>
+            <br>
+             {% endfor %}
+        </ul>
 
     </div>
   </div>

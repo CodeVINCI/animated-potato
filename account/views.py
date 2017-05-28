@@ -185,6 +185,22 @@ def viewprofile(request,pk):
     args={'viewer':request.user,'details':profile,'pic':pic,'form':form,'user':user,'activeuserimage':viewerimg,"following":following,"possibleaction":possibleaction}
     return render(request,'viewprofile/viewprofile.html',args)
 
+def viauserpk(request,pk):
+    user=User.objects.get(pk=pk)
+    profile=Userprofile.objects.get(user=user)
+    viewerimg=Userprofile.objects.get(user=request.user)
+    viewerimg=viewerimg.image
+    pic=profile.image
+    form=SocratesSearchForm()
+    followingobj=Following.objects.get(current_user__username=request.user)
+    following=followingobj.users.all()
+    if user in following:
+        possibleaction="Unfollow"
+    else:
+        possibleaction="Follow"
+    args={'viewer':request.user,'details':profile,'pic':pic,'form':form,'user':user,'activeuserimage':viewerimg,"following":following,"possibleaction":possibleaction}
+    return render(request,'viewprofile/viewprofile.html',args)
+
 # view for Account Settings /account/settings
 @login_required
 def settings(request):
@@ -252,7 +268,7 @@ class newspapers(TemplateView):
         #dates
         date_today=str(datetime.today())
         date_today=date_today[:10]
-        d = str(datetime.today() - timedelta(days=2))
+        d = str(datetime.today() - timedelta(days=3))
         d=d[:10]
         # today and a day before
 
