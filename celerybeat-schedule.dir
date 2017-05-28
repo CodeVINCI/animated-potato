@@ -1,4 +1,8 @@
 'utc_enabled', (1536, 5)
 'tz', (1024, 21)
 '__version__', (512, 14)
+<<<<<<< 5b2a59065102a5098e5abcebc98554bc30c61387
 'entries', (0, 429)
+=======
+'entries', (0, 422)
+>>>>>>> save button on comment modal
