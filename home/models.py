@@ -29,7 +29,7 @@ class Post(models.Model):
     suggestions=models.IntegerField(default=0)
     visits=models.PositiveIntegerField(default=0)
     totalcomments=models.IntegerField(default=0)
-    comment=models.IntegerField(default=0)
+    comments=models.ManyToManyField('comment',related_name='comments_to_post')
 
     def __unicode__(self):
         return smart_unicode(self.headline)

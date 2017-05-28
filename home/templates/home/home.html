@@ -185,9 +185,11 @@
                         <button type="button" id="comment_button" class="btn btn-default">Comment</button>
                     </form>
 <!--change this according to views and url-->
-        <p id="talk">
-
-        </p>
+        <ul id="talk">
+         {% for comment in post.0.comments.all reversed %}
+            <li><span style="font-size:12px;"><b>{{ comment.user.first_name }}&nbsp;{{ comment.user.last_name }}&nbsp;&nbsp;</b><span style="font-size:10px;"><b>{{ comment.created_on }}</b></span></span><span><p style="font-size:12px;">{{ comment.text }}</p></span></li>
+            {% endfor %}
+        </ul>
 
          <div class="modal-footer">
 
@@ -320,7 +322,11 @@
                         <button type="button" id="comment_button" class="btn btn-default">Comment</button>
                     </form>
 <!--change this according to views and url-->
-        <ul id="talk"></ul>
+        <ul id="talk">
+         {% for comment in post.0.comments.all reversed %}
+            <li><span style="font-size:12px;"><b>{{ comment.user.first_name }}&nbsp;{{ comment.user.last_name }}&nbsp;&nbsp;</b><span style="font-size:10px;"><b>{{ comment.created_on }}</b></span></span><span><p style="font-size:12px;">{{ comment.text }}</p></span></li>
+            {% endfor %}
+        </ul>
 
          <div class="modal-footer">
 
@@ -452,7 +458,12 @@
                         <button type="button" id="comment_button" class="btn btn-default">Comment</button>
                     </form>
 <!--change this according to views and url-->
-        <ul id="talk"></ul>
+         <ul id="talk">
+         {% for comment in post.0.comments.all reversed %}
+             <li><span style="font-size:12px;"><b>{{ comment.user.first_name }}&nbsp;{{ comment.user.last_name }}&nbsp;&nbsp;</b><span style="font-size:10px;"><b>{{ comment.created_on }}</b></span></span><span><p style="font-size:12px;">{{ comment.text }}</p></span></li>
+            <br>
+             {% endfor %}
+        </ul>
 
           <div class="modal-footer">
 

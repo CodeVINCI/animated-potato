@@ -23,7 +23,7 @@ class home(TemplateView):
     def get(self,request,filter):
         date_today=str(datetime.today())
         date_today=date_today[:10]
-        d = str(datetime.today() - timedelta(days=1))
+        d = str(datetime.today() - timedelta(days=3))
         d=d[:10]
         name=request.user
         userprofile=Userprofile.objects.filter(user=name)
@@ -39,7 +39,7 @@ class home(TemplateView):
         col3=[]
         liked_posts=[]
         disliked_posts=[]
-        all_posts=Post.objects.filter(date=date_today).order_by('?')
+        all_posts=Post.objects.filter(date=d).order_by('?')
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)
@@ -241,9 +241,12 @@ def post_comment(request,pk):
         post_text = request.POST.get('the_post')
         concerned_post=Post.objects.get(pk=pk)
 
+        time_now=datetime.now().time()
+
         the_comment = comment(text=post_text, user=request.user,post=concerned_post)
         the_comment.save()
-        a="<p><h4>"+request.user.first_name+" "+request.user.last_name+"</h4> "+post_text+"  <span>"+str(the_comment.created_on)+"</span></p>"
+        concerned_post.comments.add(the_comment)
+        a='<li><span style="font-size:12px;"><b>'+str(request.user.first_name)+'&nbsp;'+str(request.user.last_name)+'&nbsp;&nbsp;</b><span style="font-size:10px;"><b>'+'just now'+'</b></span></span><span><p style="font-size:12px;">'+str(the_comment.text)+'</p></span></li>'
         args={'text':a}
         return JsonResponse(args)
 
