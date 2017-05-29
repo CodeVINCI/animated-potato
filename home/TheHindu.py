@@ -49,7 +49,7 @@ def get_news(URL):
                     # Get the filename from the url, used for saving later
                     file_name = image_url.split('/')[-1]+".jpg"
                     if len(file_name)>50:
-                        file_name=file_name[:50]+."jpg"
+                        file_name=file_name[:50]+".jpg"
 
                     # Create a temporary file
                     lf = tempfile.NamedTemporaryFile()

@@ -89,4 +89,4 @@ class comment(models.Model):
     replyto=models.IntegerField(default=0)    #comment id to whom this comment is reply to else value remains zero
 
     def __unicode__(self):
-        return self.text+' - '+self.user.username    #to show username in admin interface
+        return self.text+' '+self.user.username    #to show username in admin interface
