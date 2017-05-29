@@ -246,7 +246,7 @@ def post_comment(request,pk):
         the_comment = comment(text=post_text, user=request.user,post=concerned_post)
         the_comment.save()
         concerned_post.comments.add(the_comment)
-        a='<li><span style="font-size:12px;"><b>'+str(request.user.first_name)+'&nbsp;'+str(request.user.last_name)+'&nbsp;&nbsp;</b><span style="font-size:10px;"><b>'+'just now'+'</b></span></span><span><p style="font-size:12px;">'+str(the_comment.text)+'</p></span></li><br>'
+        a='<li><span style="font-size:12px;"><b><a class="via_user" href="/account/viewprofile/'+str(Userprofile.objects.get(user=request.user).pk)+'">'+str(request.user.first_name)+'&nbsp;'+str(request.user.last_name)+'&nbsp;&nbsp;</a></b><span style="font-size:10px;"><b>'+'just now'+'</b></span></span><span><p style="font-size:12px;">'+str(the_comment.text)+'</p></span></li><br>'
         args={'text':a}
         return JsonResponse(args)
 

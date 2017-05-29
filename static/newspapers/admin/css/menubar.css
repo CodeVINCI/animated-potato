@@ -1,0 +1,26 @@
+nav{
+    height:42px;
+    background-color:white;
+
+
+}
+
+nav ul{
+    list-style:none;
+}
+
+nav ul li a{
+    float:left;
+    text-decoration:none;
+    color:black;
+    padding:0px 35px;
+    text-align:center;
+    line-hieght:42px;
+    height:42px;
+}
+
+
+nav ul li a:hover{
+    background-color:#FFFFFF;
+    color:maroon;
+}

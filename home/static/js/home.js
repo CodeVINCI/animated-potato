@@ -107,6 +107,12 @@ $('.thumbnail').on('click','#comment_button', function(event){
     var csrf=$(this).siblings('#post-comment').prev('input').attr('value');
     var out=$(this);
     var da={the_post:ht, pk:id, csrfmiddlewaretoken: csrf};
+
+    if (ht.trim() ==="")
+    {alert('Comment is empty');
+    return 0;
+    }
+
     $.ajax(
     {
       url:ur,
@@ -119,7 +125,6 @@ $('.thumbnail').on('click','#comment_button', function(event){
        out.parent().next("#talk").prepend(response.text);
       }
     });
-
 
 });
 });
