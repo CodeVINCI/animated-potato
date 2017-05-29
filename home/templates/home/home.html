@@ -141,9 +141,13 @@
 
           <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
           <!-- Button trigger modal -->
-<p><a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
+<p>
+    <a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
   {{commentbox.text}}
-</a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button></p>
+   </a>
+    <a style="float:right;" href="#" class="fa fa-facebook"></a>
+    <button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button>
+</p>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModalLong{{post.0.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -194,7 +198,7 @@
          <div class="modal-footer">
 
 
-             <div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 250px);width: -webkit-calc(100% - 250px);width: calc(100% - 250px);">
+             <div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 350px);width: -webkit-calc(100% - 350px);width: calc(100% - 350px);">
            <button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">
                {% if post.1 %}
                <meta id="button_data" data-nextaction="social-unlike" data-pk="{{ post.0.pk }}">
@@ -217,7 +221,11 @@
      {% endif %}
  </button></div>
 
-          <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></p>
+          <p id="{{ post.0.pk }}">
+              <a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a>
+              <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </p>
 
       </div>
 
@@ -322,6 +330,7 @@
                         <button type="button" id="comment_button" class="btn btn-default">Comment</button>
                     </form>
 <!--change this according to views and url-->
+
         <ul id="talk">
          {% for comment in post.0.comments.all reversed %}
             <li><span style="font-size:12px;"><b><a class='via_user' href="/account/viauserpk/{{ comment.user.pk }}">{{ comment.user.first_name }}&nbsp;{{ comment.user.last_name }}</a>&nbsp;&nbsp;</b><span style="font-size:10px;"><b>{{ comment.created_on }}</b></span></span><span><p style="font-size:12px;">{{ comment.text }}</p></span></li>
@@ -329,10 +338,11 @@
              {% endfor %}
         </ul>
 
+
          <div class="modal-footer">
 
 
-             <div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 250px);width: -webkit-calc(100% - 250px);width: calc(100% - 250px);">
+             <div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 350px);width: -webkit-calc(100% - 350px);width: calc(100% - 350px);">
            <button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">
                {% if post.1 %}
                <meta id="button_data" data-nextaction="social-unlike" data-pk="{{ post.0.pk }}">
@@ -355,7 +365,12 @@
      {% endif %}
  </button></div>
 
-          <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></p>
+          <p id="{{ post.0.pk }}">
+
+              <a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a>
+              <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </p>
 
       </div>
 
@@ -459,6 +474,7 @@
                         <button type="button" id="comment_button" class="btn btn-default">Comment</button>
                     </form>
 <!--change this according to views and url-->
+
           <ul id="talk">
          {% for comment in post.0.comments.all reversed %}
             <li><span style="font-size:12px;"><b><a class='via_user' href="/account/viauserpk/{{ comment.user.pk }}">{{ comment.user.first_name }}&nbsp;{{ comment.user.last_name }}</a>&nbsp;&nbsp;</b><span style="font-size:10px;"><b>{{ comment.created_on }}</b></span></span><span><p style="font-size:12px;">{{ comment.text }}</p></span></li>
@@ -466,10 +482,11 @@
              {% endfor %}
         </ul>
 
+
           <div class="modal-footer">
 
 
-             <div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 250px);width: -webkit-calc(100% - 250px);width: calc(100% - 250px);">
+             <div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 350px);width: -webkit-calc(100% - 350px);width: calc(100% - 350x);">
            <button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">
                {% if post.1 %}
                <meta id="button_data" data-nextaction="social-unlike" data-pk="{{ post.0.pk }}">
@@ -492,7 +509,11 @@
      {% endif %}
  </button></div>
 
-          <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a> <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></p>
+          <p id="{{ post.0.pk }}">
+              <a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a>
+              <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </p>
 
       </div>
 

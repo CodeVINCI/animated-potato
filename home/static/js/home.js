@@ -95,7 +95,7 @@ return false;
     $('.modal').on('hidden.bs.modal', function () {
         revertToOriginalURL();
     });
-//this is ajax of comment sectioon do something to it so that it will work
+
 /*handling comment form submission*/
 $('.thumbnail').on('click','#comment_button', function(event){
     event.preventDefault();
