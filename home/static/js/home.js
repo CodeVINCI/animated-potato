@@ -153,7 +153,7 @@ return false;
 });
 
 //javascript for comment like button
-$('.comment_action_line').on('click','.comment_like',function(event)
+$('.arguments').on('click','.comment_like',function(event)
 {
 var id= $(this).attr('data-pk');
 var ur= "/home/like_comment/".concat(id);
@@ -163,7 +163,7 @@ return false;
 });
 
 //javascript for comment reply button
-$('.comment_action_line').on('click','.comment_reply',function(event)
+$('.arguments').on('click','.comment_reply',function(event)
 {
 var id= $(this).attr('data-pk');
 var ur= "/home/reply_comment/".concat(id);

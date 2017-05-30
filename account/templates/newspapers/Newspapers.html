@@ -187,7 +187,7 @@
                         <button type="button" id="comment_button" class="btn btn-default">Comment</button>
                     </form>
 <!--change this according to views and url-->
-       <ul id="talk">
+       <ul id="talk" class="arguments">
          {% for comment in post.0.comments.all reversed %}
              <li><span style="font-size:12px;">
                  <b><a class='via_user' href="/account/viauserpk/{{ comment.user.pk }}">{{ comment.user.first_name }}&nbsp;{{ comment.user.last_name }}</a>&nbsp;&nbsp;</b>
@@ -342,7 +342,7 @@
                         <button type="button" id="comment_button" class="btn btn-default">Comment</button>
                     </form>
 <!--change this according to views and url-->
-         <ul id="talk">
+         <ul id="talk" class="arguments">
          {% for comment in post.0.comments.all reversed %}
              <li><span style="font-size:12px;">
                  <b><a class='via_user' href="/account/viauserpk/{{ comment.user.pk }}">{{ comment.user.first_name }}&nbsp;{{ comment.user.last_name }}</a>&nbsp;&nbsp;</b>
