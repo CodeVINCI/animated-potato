@@ -191,7 +191,7 @@
          {% for comment in post.0.comments.all reversed %}
              <li><span style="font-size:12px;"><b><a class='via_user' href="/account/viauserpk/{{ comment.user.pk }}">{{ comment.user.first_name }}&nbsp;{{ comment.user.last_name }}</a>&nbsp;&nbsp;</b><span style="font-size:10px;"><b>{{ comment.created_on }}</b></span></span><br><span style="font-size:12px;">{{ comment.text }}</span><br>
                  <div class="comment_action_line" style="height:10px;"><span style="font-size:10px;"><a class="comment_like" href="#">Like</a>&nbsp;&nbsp;&nbsp;<a class="comment_reply" href="#">Reply</a>&nbsp;&nbsp;&nbsp;{% ifequal comment.user.username user.username %} <a class="comment_delete" href="#">Delete</a> {% endifequal %}</span></div></li>
-            <br style="line-height:4px;"><br style="line-height:4px;">
+            <br style="line-height:4px;">
             {% endfor %}
         </ul>
          <div class="modal-footer">
@@ -331,7 +331,7 @@
          {% for comment in post.0.comments.all reversed %}
              <li><span style="font-size:12px;"><b><a class='via_user' href="/account/viauserpk/{{ comment.user.pk }}">{{ comment.user.first_name }}&nbsp;{{ comment.user.last_name }}</a>&nbsp;&nbsp;</b><span style="font-size:10px;"><b>{{ comment.created_on }}</b></span></span><br><span style="font-size:12px;">{{ comment.text }}</span><br>
                  <div class="comment_action_line" style="height:10px;"><span style="font-size:10px;"><a class="comment_like" href="#">Like</a>&nbsp;&nbsp;&nbsp;<a class="comment_reply" href="#">Reply</a>&nbsp;&nbsp;&nbsp;{% ifequal comment.user.username user.username %} <a class="comment_delete" href="#">Delete</a> {% endifequal %}</span></div></li>
-             <br style="line-height:4px;"><br style="line-height:4px;">
+             <br style="line-height:4px;">
               {% endfor %}
         </ul>
 

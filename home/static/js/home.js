@@ -127,8 +127,24 @@ $('.thumbnail').on('click','#comment_button', function(event){
     });
 
 });
+$('.comment_action_line').on('click','.comment_delete',function(event)
+{
+var id= $(this).attr('data-pk');
+var ur= "/home/remove_comment/".concat(id);
+var out = $(this)
+$.ajax(
+{
+url:ur,
+method:'get',
+success:function(response)
+{
+var li = out.closest('li');
+li.fadeOut('slow', function() { li.remove(); });
+}
 });
-
+return false;
+});
+});
 
 //this is csrf_token in javascript don't remove it.
 $(function() {

@@ -251,6 +251,12 @@ def post_comment(request,pk):
         args={'text':a}
         return JsonResponse(args)
 
+def remove_comment(request,pk):
+    if request.method=="GET":
+        the_comment=comment.objects.get(pk=pk)
+        the_comment.delete()
+        return JsonResponse({'code':"deleted comment"})
+
 
 def visits(request,pk):
     if request.method=='GET':
