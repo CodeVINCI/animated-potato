@@ -23,7 +23,7 @@ class home(TemplateView):
     def get(self,request,filter):
         date_today=str(datetime.today())
         date_today=date_today[:10]
-        d = str(datetime.today() - timedelta(days=2))
+        d = str(datetime.today() - timedelta(days=1))
         d=d[:10]
         name=request.user
         userprofile=Userprofile.objects.filter(user=name)
@@ -39,7 +39,7 @@ class home(TemplateView):
         col3=[]
         liked_posts=[]
         disliked_posts=[]
-        all_posts=Post.objects.filter(date=d).order_by('?')
+        all_posts=Post.objects.filter(date__range=[d,date_today]).order_by('?')
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)
@@ -247,7 +247,7 @@ def post_comment(request,pk):
         the_comment.save()
         concerned_post.comments.add(the_comment)
         Post.objects.filter(pk=pk).update(totalcomments = F('totalcomments')+1)
-        a='<li><span style="font-size:12px;"><b><a class="via_user" href="/account/viewprofile/'+str(Userprofile.objects.get(user=request.user).pk)+'">'+str(request.user.first_name)+'&nbsp;'+str(request.user.last_name)+'&nbsp;&nbsp;</a></b><span style="font-size:10px;"><b>'+'just now'+'</b></span></span><span><p style="font-size:12px;">'+str(the_comment.text)+'</p></span></li><br>'
+        a='<li><span style="font-size:12px;"><b><a class="via_user" href="/account/viewprofile/'+str(Userprofile.objects.get(user=request.user).pk)+'">'+str(request.user.first_name)+'&nbsp;'+str(request.user.last_name)+'&nbsp;&nbsp;</a></b><span style="font-size:10px;"><b>'+'just now'+'</b></span></span><br><span style="font-size:12px;">'+str(the_comment.text)+'</span><br><div class="comment_action_line" style="height:10px;"><span style="font-size:10px;"><a class="comment_like" data-pk="'+str(the_comment.pk)+'" href="#" role="button">Like</a>&nbsp;&nbsp;&nbsp;<a class="comment_reply" data-pk="'+str(the_comment.pk)+'" href="#" role="button">Reply</a>&nbsp;&nbsp;&nbsp;<a class="comment_delete" data-pk="'+str(the_comment.pk)+'" href="#" role="button">Delete</a></span></div></li>'
         args={'text':a}
         return JsonResponse(args)
 

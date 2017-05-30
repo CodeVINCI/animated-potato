@@ -28,6 +28,7 @@ success:function(response)
 });
 });
 
+//social like a post ajax request
 $('.social_buttons').on('click', "#like", function(event)
 {
 event.preventDefault();
@@ -47,6 +48,7 @@ $.ajax(
 
 });
 
+//social dislike a post ajax request
 $('.social_buttons').on('click', "#dislike", function(event)
 {
 event.preventDefault();
@@ -65,6 +67,8 @@ $.ajax(
  });
  });
 
+
+//visit site counter ajax request
  $('.thumbnail').on('click', '#visitbutton', function(event)
 {
 var id=$(this).parent('p').attr('id');
@@ -73,6 +77,7 @@ $.get(ur);
 return true;
 });
 
+//suggestions counter and generate suggest notification ajax request
 $('.thumbnail').on('click', '#suggestbutton', function(event)
 {
 var id=$(this).parent('p').attr('id');
@@ -127,7 +132,9 @@ $('.thumbnail').on('click','#comment_button', function(event){
     });
 
 });
-$('.comment_action_line').on('click','.comment_delete',function(event)
+
+//javascript for comment delete button
+$('.arguments').on('click','.comment_delete',function(event)
 {
 var id= $(this).attr('data-pk');
 var ur= "/home/remove_comment/".concat(id);
@@ -144,6 +151,29 @@ li.fadeOut('slow', function() { li.remove(); });
 });
 return false;
 });
+
+//javascript for comment like button
+$('.comment_action_line').on('click','.comment_like',function(event)
+{
+var id= $(this).attr('data-pk');
+var ur= "/home/like_comment/".concat(id);
+var out = $(this);
+alert(ur);
+return false;
+});
+
+//javascript for comment reply button
+$('.comment_action_line').on('click','.comment_reply',function(event)
+{
+var id= $(this).attr('data-pk');
+var ur= "/home/reply_comment/".concat(id);
+var out = $(this);
+alert(ur);
+return false;
+});
+
+
+//final paranthesis
 });
 
 //this is csrf_token in javascript don't remove it.

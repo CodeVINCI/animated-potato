@@ -189,7 +189,7 @@
                         <button type="button" id="comment_button" class="btn btn-default">Comment</button>
                     </form>
 <!--change this according to views and url-->
-         <ul id="talk">
+         <ul id="talk" class="arguments">
          {% for comment in post.0.comments.all reversed %}
              <li><span style="font-size:12px;">
                  <b><a class='via_user' href="/account/viauserpk/{{ comment.user.pk }}">{{ comment.user.first_name }}&nbsp;{{ comment.user.last_name }}</a>&nbsp;&nbsp;</b>
@@ -201,14 +201,20 @@
 
                  <div class="comment_action_line" style="height:10px;">
                      <span style="font-size:10px;">
-                         <a class="comment_like" href="#" role="button">Like</a>&nbsp;&nbsp;&nbsp;
-                         <a class="comment_reply" href="#" role="button">Reply</a>&nbsp;&nbsp;&nbsp;
+                         <a class="comment_like" data-pk="{{ comment.pk }}" href="#" role="button">Like</a>&nbsp;&nbsp;&nbsp;
+                         <a class="comment_reply" data-pk="{{ comment.pk }}" href="#" role="button">Reply</a>&nbsp;&nbsp;&nbsp;
 
                          {% ifequal comment.user.username user.username %}
                          <a class="comment_delete" data-pk="{{ comment.pk }}" href="#" role="button">Delete</a>
                          {% endifequal %}
 
-                     </span></div></li>
+                     </span></div>
+                 <ul id="replies">
+                     {% for reply in comment.reply.all %}
+                     <li>{{ reply.text }}</li>
+                     {% endfor %}
+                 </ul>
+             </li>
              {% endfor %}
         </ul>
          <div class="modal-footer">
@@ -347,7 +353,7 @@
                     </form>
 <!--change this according to views and url-->
 
-         <ul id="talk">
+         <ul id="talk" class="arguments">
          {% for comment in post.0.comments.all reversed %}
              <li><span style="font-size:12px;">
                  <b><a class='via_user' href="/account/viauserpk/{{ comment.user.pk }}">{{ comment.user.first_name }}&nbsp;{{ comment.user.last_name }}</a>&nbsp;&nbsp;</b>
@@ -359,8 +365,8 @@
 
                  <div class="comment_action_line" style="height:10px;">
                      <span style="font-size:10px;">
-                         <a class="comment_like" href="#" role="button">Like</a>&nbsp;&nbsp;&nbsp;
-                         <a class="comment_reply" href="#" role="button">Reply</a>&nbsp;&nbsp;&nbsp;
+                         <a class="comment_like" data-pk="{{ comment.pk }}" href="#" role="button">Like</a>&nbsp;&nbsp;&nbsp;
+                         <a class="comment_reply" data-pk="{{ comment.pk }}" href="#" role="button">Reply</a>&nbsp;&nbsp;&nbsp;
 
                          {% ifequal comment.user.username user.username %}
                          <a class="comment_delete" data-pk="{{ comment.pk }}" href="#" role="button">Delete</a>
@@ -504,7 +510,7 @@
                         <button type="button" id="comment_button" class="btn btn-default">Comment</button>
                     </form>
 <!--change this according to views and url-->
- <ul id="talk">
+ <ul id="talk" class="arguments">
          {% for comment in post.0.comments.all reversed %}
              <li><span style="font-size:12px;">
                  <b><a class='via_user' href="/account/viauserpk/{{ comment.user.pk }}">{{ comment.user.first_name }}&nbsp;{{ comment.user.last_name }}</a>&nbsp;&nbsp;</b>
@@ -516,8 +522,8 @@
 
                  <div class="comment_action_line" style="height:10px;">
                      <span style="font-size:10px;">
-                         <a class="comment_like" href="#" role="button">Like</a>&nbsp;&nbsp;&nbsp;
-                         <a class="comment_reply" href="#" role="button">Reply</a>&nbsp;&nbsp;&nbsp;
+                         <a class="comment_like" data-pk="{{ comment.pk }}" href="#" role="button">Like</a>&nbsp;&nbsp;&nbsp;
+                         <a class="comment_reply" data-pk="{{ comment.pk }}" href="#" role="button">Reply</a>&nbsp;&nbsp;&nbsp;
 
                          {% ifequal comment.user.username user.username %}
                          <a class="comment_delete" data-pk="{{ comment.pk }}" href="#" role="button">Delete</a>

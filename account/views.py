@@ -268,7 +268,7 @@ class newspapers(TemplateView):
         #dates
         date_today=str(datetime.today())
         date_today=date_today[:10]
-        d = str(datetime.today() - timedelta(days=2))
+        d = str(datetime.today() - timedelta(days=1))
         d=d[:10]
         # today and a day before
 

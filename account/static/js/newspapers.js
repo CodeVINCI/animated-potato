@@ -6,6 +6,7 @@ $(function() {
     $("#subscriptions").val(valnow);
 });
 
+//javascript for selecting a particular newspaper
 $('div.select-newspaper').on('click', ".btn.btn-secondary", function(event)
 {
 var target= document.getElementById("subscriptions").value;
@@ -13,6 +14,7 @@ var ur = ("/account/newspapers/").concat(target);
 window.location.href = ur;
 });
 
+//Ajax request to save a post to dashboard
 $('.thumbnail').on('click', "#readlater", function(event)
 {
 var id=$(this).parent().prev('p').attr('id');
@@ -28,6 +30,7 @@ success:function(response)
 });
 });
 
+//Ajax for social-like a post
 $('.social_buttons').on('click', "#like", function(event)
 {
 event.preventDefault();
@@ -47,6 +50,7 @@ $.ajax(
 
 });
 
+//Ajax for social-dislike a post
 $('.social_buttons').on('click', "#dislike", function(event)
 {
 event.preventDefault();
@@ -65,6 +69,7 @@ $.ajax(
  });
  });
 
+//Ajax for visit counter for each post
  $('.thumbnail').on('click', '#visitbutton', function(event)
 {
 var id=$(this).parent('p').attr('id');
@@ -73,6 +78,7 @@ $.get(ur);
 return true;
 });
 
+//Ajax for suggestion counter and generating suggest notifications
 $('.thumbnail').on('click', '#suggestbutton', function(event)
 {
 var id=$(this).parent('p').attr('id');
@@ -95,7 +101,8 @@ return false;
     $('.modal').on('hidden.bs.modal', function () {
         revertToOriginalURL();
     });
-//this is ajax of comment sectioon do something to it so that it will work
+
+
 /*handling comment form submission*/
 $('.thumbnail').on('click','#comment_button', function(event){
     event.preventDefault();
@@ -129,6 +136,48 @@ $('.thumbnail').on('click','#comment_button', function(event){
 
 });
 
+//javascript for comment delete button
+$('.comment_action_line').on('click','.comment_delete',function(event)
+{
+var id= $(this).attr('data-pk');
+var ur= "/home/remove_comment/".concat(id);
+var out = $(this)
+$.ajax(
+{
+url:ur,
+method:'get',
+success:function(response)
+{
+var li = out.closest('li');
+li.fadeOut('slow', function() { li.remove(); });
+}
+});
+return false;
+});
+
+//javascript for comment like button
+$('.comment_action_line').on('click','.comment_like',function(event)
+{
+var id= $(this).attr('data-pk');
+var ur= "/home/like_comment/".concat(id);
+var out = $(this);
+alert(ur);
+return false;
+});
+
+//javascript for comment reply button
+$('.comment_action_line').on('click','.comment_reply',function(event)
+{
+var id= $(this).attr('data-pk');
+var ur= "/home/reply_comment/".concat(id);
+var out = $(this);
+alert(ur);
+return false;
+});
+
+
+
+//final paranthesis
 });
 
 

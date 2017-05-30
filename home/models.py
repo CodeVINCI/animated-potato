@@ -86,7 +86,10 @@ class comment(models.Model):
     likes=models.IntegerField(default=0)    #total number of likes on that commemt
         #no dislike for comments
     post=models.ForeignKey(Post,related_name='postlink')    #post id to which the comment belongs
-    replyto=models.IntegerField(default=0)    #comment id to whom this comment is reply to else value remains zero
+    reply=models.ManyToManyField('comment')    #comment id to whom this comment is reply to else value remains zero
 
     def __unicode__(self):
         return self.text+' - '+self.user.username    #to show username in admin interface
+
+    class Meta:
+        unique_together=("user","text")
