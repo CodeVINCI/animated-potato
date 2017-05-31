@@ -16,6 +16,5 @@ urlpatterns=[url(r'^(?P<filter>[\w]+)$', home.as_view(), name='home'),
              url(r'^sports/$',views.homeSports,name='home-sports'),
              url(r'^Market/$',views.homeMarket,name='home-market'),
              url(r'^market/$',views.homeMarket,name='home-market'),
-             url(r'^UnitedNations/$',unitednations.as_view(),name='home-unitednations'),
-             url(r'^unitednations/$',unitednations.as_view(),name='home-unitednations'),
+             url(r'^UnitedNations/(?P<filter>.+)$',unitednations.as_view(),name='home-unitednations'),
              ]
