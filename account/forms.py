@@ -140,7 +140,7 @@ class Upload_form(forms.ModelForm):
 class SocratesSearchForm(forms.ModelForm):
     search=forms.CharField(max_length=200,required=False,
                                         widget=forms.TextInput(
-                                            attrs={
+                                            attrs={'id':'socrates-search',
                                                 'class':'form-control',
                                                 'placeholder': 'Search-Socrates'
                                             }

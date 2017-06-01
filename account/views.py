@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import SetPasswordForm,PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from account.friends_search import FriendSearch
+from account.primary_search import NewsArticleSearch
 from django.http import JsonResponse
 import random
 from django.utils import timezone
@@ -83,7 +84,7 @@ class Profile(TemplateView):
             socratessearch=form.save(commit=False)
             socratessearch.user=request.user
             socratessearch.save()
-            return redirect('/account/searchsocrates')
+            return redirect('/account/searchsocrates/'+str(request.POST['search']))
 
 
 def myfollowers(request,user):
@@ -431,13 +432,13 @@ class Profileupload(TemplateView):
 class Search_results(TemplateView):
     template_name = 'search/search_result_primary.html'
 
-    def get(self,request):
+    def get(self,request,search_terms):
         name=request.user
-        search_query=SocratesSearch.objects.filter(user=name)
-        search_query=search_query[0]
-        form=SocratesSearchForm(initial={'search':search_query.search})
+        form=SocratesSearchForm(initial={'search':search_terms})
         #Call the search algorithm make it return all the arguments
-        return render(request,self.template_name,{'form':form})
+        a=NewsArticleSearch()
+        all_posts=a.newsarticles(search_terms)
+        return render(request,self.template_name,{'form':form,'posts':all_posts})
 
 # view for Friends search
 class People_search(TemplateView):

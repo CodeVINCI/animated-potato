@@ -92,5 +92,8 @@
     <br><br>
     <hr>
 </div>
+{% for post in posts %}
+<p>{{ post.0.headline }}</p>
+{% endfor %}
 </body>
 </html>

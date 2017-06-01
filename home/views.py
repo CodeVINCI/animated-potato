@@ -39,7 +39,7 @@ class home(TemplateView):
         col3=[]
         liked_posts=[]
         disliked_posts=[]
-        all_posts=Post.objects.filter(date__range=[d,date_today]).order_by('?')
+        all_posts=Post.objects.filter(date__range=[d,date_today]).exclude(source='unnewsstream.org').order_by('?')
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)
@@ -346,8 +346,6 @@ def post_comment(request,pk):
     if request.method == 'POST':
         post_text = request.POST.get('the_post')
         concerned_post=Post.objects.get(pk=pk)
-
-        time_now=datetime.now().time()
 
         the_comment = comment(text=post_text, user=request.user,post=concerned_post)
         the_comment.save()
