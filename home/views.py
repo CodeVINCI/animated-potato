@@ -39,7 +39,7 @@ class home(TemplateView):
         col3=[]
         liked_posts=[]
         disliked_posts=[]
-        all_posts=Post.objects.filter(date__range=[d,date_today]).order_by('?')[:30]
+        all_posts=Post.objects.filter(date__range=[d,date_today]).order_by('?')
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)
@@ -182,7 +182,7 @@ class unitednations(TemplateView):
         col3=[]
         liked_posts=[]
         disliked_posts=[]
-        all_posts=Post.objects.filter(source="unnewsstream.org").order_by('?')[:30]
+        all_posts=Post.objects.filter(source="unnewsstream.org").order_by('?')
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)

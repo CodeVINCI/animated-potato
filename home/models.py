@@ -92,4 +92,4 @@ class comment(models.Model):
         return self.text+' - '+self.user.username    #to show username in admin interface
 
     class Meta:
-        unique_together=("user","text")
+        unique_together=("user","text","created_on")
