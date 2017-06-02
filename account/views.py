@@ -435,10 +435,75 @@ class Search_results(TemplateView):
     def get(self,request,search_terms):
         name=request.user
         form=SocratesSearchForm(initial={'search':search_terms})
+        date_today=str(datetime.today())
+        date_today=date_today[:10]
+        d = str(datetime.today() - timedelta(days=1))
+        d=d[:10]
+
+        commentbox=comment_form()
+        name=request.user
+        userprofile=Userprofile.objects.filter(user=name)
+        details=userprofile[0]
+        pic=details.image
+
         #Call the search algorithm make it return all the arguments
         a=NewsArticleSearch()
-        all_posts=a.newsarticles(search_terms)
-        return render(request,self.template_name,{'form':form,'posts':all_posts})
+        col1=[]
+        col2=[]
+        col3=[]
+        liked_posts=[]
+        disliked_posts=[]
+        all_posts=[]
+        ranks=[]
+        posts=a.newsarticles(search_terms)
+        for post in posts:
+            all_posts.append(post[0])
+        for rank in posts:
+            ranks.append(post[1])
+        k=0
+        for post in all_posts:
+            p=Likes.objects.filter(post=post)
+            if p.count()>0 and request.user in p[0].users.all():
+                liked_posts.insert(k,1)
+                k=k+1
+            else:
+                liked_posts.insert(k,0)
+                k=k+1
+        l=0
+        for post in all_posts:
+            p=Dislikes.objects.filter(post=post)
+            if p.count()>0 and request.user in p[0].users.all():
+                disliked_posts.insert(l,1)
+                l=l+1
+            else:
+                disliked_posts.insert(l,0)
+                l=l+1
+
+
+        j=0
+        for i in xrange(0, len(all_posts), 3):
+            col1.insert(j,(all_posts[i],liked_posts[i],disliked_posts[i],ranks[i]))
+            if (i+1)<len(all_posts):
+                col2.insert(j,(all_posts[i+1],liked_posts[i+1],disliked_posts[i+1],ranks[i+1]))
+            if (i+2)<len(all_posts):
+                col3.insert(j,(all_posts[i+2],liked_posts[i+2],disliked_posts[i+2],ranks[i+2]))
+            j=j+1
+            filter='most_ranked'
+            if filter=='most_ranked':
+                for j in range(len(col1)-1):
+                    for i in range(len(col1)-1):
+                        if col1[i+1][3] > col1[i][3]:
+                            (col1[i],col1[i+1])=(col1[i+1],col1[i])
+                for j in range(len(col2)-1):
+                    for i in range(len(col2)-1):
+                        if col2[i+1][3] > col2[i][3]:
+                            (col2[i],col2[i+1])=(col2[i+1],col2[i])
+                for j in range(len(col3)-1):
+                    for i in range(len(col3)-1):
+                        if col3[i+1][3] > col3[i][3]:
+                            (col3[i],col3[i+1])=(col3[i+1],col3[i])
+
+        return render(request,self.template_name,{'form':form,'col1':col1,'col2':col2,'col3':col3,'date_today':date_today,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic})
 
 # view for Friends search
 class People_search(TemplateView):
