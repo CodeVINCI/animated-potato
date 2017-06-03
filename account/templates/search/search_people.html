@@ -1,19 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
+{% load static %}
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script
+			  src="https://code.jquery.com/jquery-3.2.1.min.js"
+			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+			  crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     {% load static %}
     <link rel="stylesheet" href="{% static "home.css"%}" type="text/css"/>
-    {% load static%}
-    <script type="text/javascript" src="{% static 'jscroll.js' %}"></script>
-    <script type="text/javascript" src="{% static 'scroll.js' %}"></script>
-    <title>Socrates-Search</title>
+    <link rel="shortcut icon" type="image/png" href="{% static "images/favicon.ico" %}"/>
+         <script src="{% static 'js/home.js' %}"></script>
+    <title>Socrates-Politics</title>
 </head>
-<body>
+<body style="overflow-x:scroll">
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -24,7 +28,8 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <a class="navbar-brand" href="/home/most_liked">Socrates<p style="font-size:11px;">{{ date_today }}</p></a>
+        <a class="navbar-brand" href="/home/most_liked">Socrates <p style="font-size:11px;">{{ date_today }}</p></a>
+
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -32,47 +37,58 @@
       <ul class="nav navbar-nav">
            <form class="navbar-form navbar-left">
         <div class="form-group">
-            {% csrf_token %}
-          {{ form.search.errors }}
-    {{ form.search}}
+          {{form.search}}
         </div>
         <button type="submit" class="btn btn-default">&#x1f50d;</button>
       </form>
-        <li><a href="/home/most_liked"><span class="glyphicon glyphicon-home" aria-hidden="true">Home</span></a></li>
+          <li><a href="/home/most_liked"><span class="glyphicon glyphicon-home" aria-hidden="true"><b>Home</b></span></a></li>
         <li><a href="#">Compare</a></li>
          <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Themes<span class="caret"></span></a>
+             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Themes<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/home/politics/most_liked">Politics</a></li>
             <li><a href="/home/sports/">Sports</a></li>
             <li><a href="/home/market">Market</a></li>
-                <li><a href="/home/UnitedNations/most_liked">United Nations</a></li>
+              <li><a href="/home/UnitedNations/most_liked">United Nations</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">News in Hindi</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="/home/">News in English</a></li>
+            <li><a href="#">News in English</a></li>
           </ul>
         </li>
-          <li><a href="/account/newspapers/">Newspapers</a></li>
+          <li><a href="/account/newspapers/{{ firstpaper }}">Newspapers</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Notifications{% if ping %}<span class="badge">{{ ping }}</span>{% endif %}</a></li>
+        <li class="dropdown" style="width:60px;position:relative;"><a style="width:50px;padding-right:0px;padding-left:0px;" href="#" class="dropdown-notification" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="font-size:20px;" class="glyphicon glyphicon-globe"></span>{% if ping %}<span class="badge">{{ ping }}</span>{% endif %}</a>
+        <ul class="dropdown-menu" style="width:460px;">
+            {% for notification in all_notifications %}
+            <li><div class="notify" style="padding:10px;white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><a style="width:450px;color:black;white-space:wrap;overflow-x:hidden;" href="{{ notification.onclick_url }}"><p style="font-size:12px;"><span class="glyphicon glyphicon-pencil">&nbsp;</span>{{ notification.message }}</p></a></div></li>
+            <li style="width:450px;" role="separator" class="divider"></li>
+            {% endfor %}
+            <li><div style="text-align:center;width:450px;"><a href="#" style="width:450px;">See All</a></div></li>
+        </ul>
+        </li>
+        <div class="imgAbt">
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
-          <ul class="dropdown-menu">
+
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src={{ pic.url }} alt="" style="width:40px;height:40px;border:1px solid #E6E6E6;border-radius:50%;"></a>
+
+                <ul class="dropdown-menu">
             <li><a href="/account/profile">My Profile</a></li>
             <li><a href="/account/Myblog">My Blog</a></li>
             <li><a href="#">My Messages</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="/account/settings">Settings</a></li>
-               <li role="separator" class="divider"></li>
-            <li><a href="/account/logout/">Logout</a></li>
+              <li role="separator" class="divider"></li>
+            <li><a href="/account/logout">Logout</a></li>
           </ul>
         </li>
+          </div>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-flui-->
  </nav>
+
 <div style="width:100%; height:60px;margin-top:65px;margin-left:20px;">
  <div style="float:left; width=100px;">
         <a href="/account/searchsocrates/{{search_terms}}"><button type="button" value="News Articles" style="backgroung-color:gray;font:16px;border:none;padding:15px 32px;">News Articles</button></a>

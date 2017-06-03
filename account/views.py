@@ -441,10 +441,13 @@ class Search_results(TemplateView):
         d=d[:10]
 
         commentbox=comment_form()
-        name=request.user
         userprofile=Userprofile.objects.filter(user=name)
         details=userprofile[0]
         pic=details.image
+
+        all_notifications=Notification.objects.filter(user=request.user)
+        new_notifications=all_notifications.filter(seen=0)
+        ping= new_notifications.count()
 
         #Call the search algorithm make it return all the arguments
         a=NewsArticleSearch()
@@ -456,10 +459,11 @@ class Search_results(TemplateView):
         all_posts=[]
         ranks=[]
         posts=a.newsarticles(search_terms)
+        print (posts)
         for post in posts:
             all_posts.append(post[0])
         for rank in posts:
-            ranks.append(post[1])
+            ranks.append(rank[1])
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)
@@ -503,14 +507,23 @@ class Search_results(TemplateView):
                         if col3[i+1][3] > col3[i][3]:
                             (col3[i],col3[i+1])=(col3[i+1],col3[i])
 
-        return render(request,self.template_name,{'form':form,'col1':col1,'col2':col2,'col3':col3,'date_today':date_today,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,'search_terms':search_terms})
+        return render(request,self.template_name,{'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'form':form,'col1':col1,'col2':col2,'col3':col3,'date_today':date_today,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,'search_terms':search_terms})
 
 # view for Friends search
 class People_search(TemplateView):
     template_name = 'search/search_people.html'
 
     def get(self,request,search_terms):
+
+        all_notifications=Notification.objects.filter(user=request.user)
+        new_notifications=all_notifications.filter(seen=0)
+        ping= new_notifications.count()
+
         name=request.user
+        userprofile=Userprofile.objects.filter(user=name)
+        details=userprofile[0]
+        pic=details.image
+
         search_query=search_terms
         form=SocratesSearchForm(initial={'search':search_query})
         a=FriendSearch()
@@ -525,7 +538,7 @@ class People_search(TemplateView):
             pic_list=a.get_pics(name_split[0],emptylastname,request.user)
             final=zip(pic_list,b)
 
-        return render(request,self.template_name,{'form':form,'peoplelist':final,'search_terms':search_terms})
+        return render(request,self.template_name,{'form':form,'peoplelist':final,'search_terms':search_terms,'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic})
 
 
 # view for creating blog
