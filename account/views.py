@@ -503,20 +503,19 @@ class Search_results(TemplateView):
                         if col3[i+1][3] > col3[i][3]:
                             (col3[i],col3[i+1])=(col3[i+1],col3[i])
 
-        return render(request,self.template_name,{'form':form,'col1':col1,'col2':col2,'col3':col3,'date_today':date_today,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic})
+        return render(request,self.template_name,{'form':form,'col1':col1,'col2':col2,'col3':col3,'date_today':date_today,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,'search_terms':search_terms})
 
 # view for Friends search
 class People_search(TemplateView):
     template_name = 'search/search_people.html'
 
-    def get(self,request):
+    def get(self,request,search_terms):
         name=request.user
-        search_query=SocratesSearch.objects.filter(user=name)
-        search_query=search_query[0]
-        form=SocratesSearchForm(initial={'search':search_query.search})
+        search_query=search_terms
+        form=SocratesSearchForm(initial={'search':search_query})
         a=FriendSearch()
         emptylastname=""
-        name_split=search_query.search.split(" ")
+        name_split=search_query.split(" ")
         if len(name_split)>1:
             b=a.get_list(name_split[0],name_split[1],request.user)
             pic_list=a.get_pics(name_split[0],name_split[1],request.user)
@@ -526,7 +525,7 @@ class People_search(TemplateView):
             pic_list=a.get_pics(name_split[0],emptylastname,request.user)
             final=zip(pic_list,b)
 
-        return render(request,self.template_name,{'form':form,'peoplelist':final})
+        return render(request,self.template_name,{'form':form,'peoplelist':final,'search_terms':search_terms})
 
 
 # view for creating blog
