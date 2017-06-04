@@ -133,7 +133,9 @@ class home(TemplateView):
                     for i in range(len(col3)-1):
                         if col3[i+1][0].visits > col3[i][0].visits:
                             (col3[i],col3[i+1])=(col3[i+1],col3[i])
-
+        col1=col1[:8]
+        col2=col2[:8]
+        col3=col3[:8]
         followingobj=Following.objects.get(current_user=name)
         firstpaper=followingobj.newspaper.all()[0]
 
