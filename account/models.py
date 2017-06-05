@@ -30,6 +30,7 @@ class newspaper(models.Model):
         ordering=('name',)
 
 
+
 class SocratesSearch(models.Model):
     user=models.ForeignKey(User)
     search=models.CharField(max_length=200,default='',blank=False)

@@ -30,6 +30,7 @@ class Post(models.Model):
     visits=models.PositiveIntegerField(default=0)
     totalcomments=models.IntegerField(default=0)
     comments=models.ManyToManyField('comment',related_name='comments_to_post')
+    tags=models.ManyToManyField("Tag")
 
     def __unicode__(self):
         return smart_unicode(self.headline)
@@ -93,3 +94,13 @@ class comment(models.Model):
 
     class Meta:
         unique_together=("user","text","created_on")
+
+
+class Tag(models.Model):
+    tag_name=models.CharField(max_length=1000)
+
+    def __unicode__(self):
+        return self.tag_name
+
+    class Meta:
+        ordering=('tag_name',)

@@ -79,7 +79,7 @@ class Profile(TemplateView):
          return render(request,self.template_name,args)
 
     def post(self,request):
-        form=SocratesSearchForm(request.POST)
+        form=SocratesSearchForm(request.POST.search)
         if form.is_valid():
             socratessearch=form.save(commit=False)
             socratessearch.user=request.user
@@ -117,57 +117,68 @@ def mysubscription(request,user):
     args={"subscriptions":subscriptions,"subscribemore":subscribemore}
     return render(request,'following/subscribe.html',args)
 
-def myarticles(request,user):
-    subscriptionsobj=Following.objects.get(current_user__username=user)
-    all_posts=subscriptionsobj.post.all()
-    name=request.user
-    userprofile=Userprofile.objects.filter(user=name)
-    details=userprofile[0]
-    pic=details.image
-    form=SocratesSearchForm()
-    commentbox=comment_form()
-    all_notifications=Notification.objects.filter(user=request.user)
-    new_notifications=all_notifications.filter(seen=0)
-    ping= new_notifications.count()
-    col1=[]
-    col2=[]
-    col3=[]
-    liked_posts=[]
-    disliked_posts=[]
-    k=0
-    for post in all_posts:
-        p=Likes.objects.filter(post=post)
-        if p.count()>0 and request.user in p[0].users.all():
-            liked_posts.insert(k,1)
-            k=k+1
-        else:
-            liked_posts.insert(k,0)
-            k=k+1
-    l=0
-    for post in all_posts:
-        p=Dislikes.objects.filter(post=post)
-        if p.count()>0 and request.user in p[0].users.all():
-            disliked_posts.insert(l,1)
-            l=l+1
-        else:
-            disliked_posts.insert(l,0)
-            l=l+1
+
+class myarticles(TemplateView):
+
+    def get(request,user):
+        subscriptionsobj=Following.objects.get(current_user__username=user)
+        all_posts=subscriptionsobj.post.all()
+        name=request.user
+        userprofile=Userprofile.objects.filter(user=name)
+        details=userprofile[0]
+        pic=details.image
+        form=SocratesSearchForm()
+        commentbox=comment_form()
+        all_notifications=Notification.objects.filter(user=request.user)
+        new_notifications=all_notifications.filter(seen=0)
+        ping= new_notifications.count()
+        col1=[]
+        col2=[]
+        col3=[]
+        liked_posts=[]
+        disliked_posts=[]
+        k=0
+        for post in all_posts:
+            p=Likes.objects.filter(post=post)
+            if p.count()>0 and request.user in p[0].users.all():
+                liked_posts.insert(k,1)
+                k=k+1
+            else:
+                liked_posts.insert(k,0)
+                k=k+1
+        l=0
+        for post in all_posts:
+            p=Dislikes.objects.filter(post=post)
+            if p.count()>0 and request.user in p[0].users.all():
+                disliked_posts.insert(l,1)
+                l=l+1
+            else:
+                disliked_posts.insert(l,0)
+                l=l+1
 
 
-    j=0
-    for i in xrange(0, len(all_posts), 3):
-        col1.insert(j,(all_posts[i],liked_posts[i],disliked_posts[i]))
-        if (i+1)<len(all_posts):
-            col2.insert(j,(all_posts[i+1],liked_posts[i+1],disliked_posts[i+1]))
-        if (i+2)<len(all_posts):
-            col3.insert(j,(all_posts[i+2],liked_posts[i+2],disliked_posts[i+2]))
-        j=j+1
-    followingobj=Following.objects.get(current_user=name)
-    firstpaper=followingobj.newspaper.all()[0]
-    date_today=str(datetime.today())
-    date_today=date_today[:10]
-    args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
-    return render(request,'following/articles.html',args)
+        j=0
+        for i in xrange(0, len(all_posts), 3):
+            col1.insert(j,(all_posts[i],liked_posts[i],disliked_posts[i]))
+            if (i+1)<len(all_posts):
+                col2.insert(j,(all_posts[i+1],liked_posts[i+1],disliked_posts[i+1]))
+            if (i+2)<len(all_posts):
+                col3.insert(j,(all_posts[i+2],liked_posts[i+2],disliked_posts[i+2]))
+            j=j+1
+        followingobj=Following.objects.get(current_user=name)
+        firstpaper=followingobj.newspaper.all()[0]
+        date_today=str(datetime.today())
+        date_today=date_today[:10]
+        args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
+        return render(request,'following/articles.html',args)
+
+    def post(self,request):
+        form=SocratesSearchForm(request.POST)
+        if form.is_valid():
+            socratessearch=form.save(commit=False)
+            socratessearch.user=request.user
+            socratessearch.save()
+            return redirect('/account/searchsocrates/'+str(request.POST['search']))
 
 
 def viewprofile(request,pk):
@@ -328,6 +339,14 @@ class newspapers(TemplateView):
                     (col2[i],col2[i+1])=(col2[i+1],col2[i])
         args={'new_notifications':new_notifications,'all_notifications':all_notifications,'ping':ping,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'col1':col1,'col2':col2,'source':sitename,'date_today':date_today}
         return render(request,'newspapers/Newspapers.html',args)
+
+    def post(self,request):
+        form=SocratesSearchForm(request.POST)
+        if form.is_valid():
+            socratessearch=form.save(commit=False)
+            socratessearch.user=request.user
+            socratessearch.save()
+            return redirect('/account/searchsocrates/'+str(request.POST['search']))
 
 
 # /account/Welcome-to-socrates
