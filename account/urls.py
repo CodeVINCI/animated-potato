@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from . import views
-from account.views import UserProfileEdit,Profileupload,Search_results,Profile,People_search,createblog,blog,Myblog,signup,newspapers,myarticles
+from account.views import UserProfileEdit,Profileupload,Search_results,Profile,People_search,createblog,blog,Myblog,signup,newspapers
 from django.contrib.auth.views import login,logout,password_reset,password_reset_done,password_reset_confirm,password_reset_complete
 
 urlpatterns=[url(r'^$', views.login),
@@ -32,7 +32,7 @@ urlpatterns=[url(r'^$', views.login),
              url(r'^connect/(?P<action>.+)/(?P<pk>\d+)/$',views.connections,name='connections'),
              url(r'^(?P<user>[\w.@+-]+)/following/$',views.imfollowing,name='following'),
              url(r'^(?P<user>[\w.@+-]+)/subscriptions/$',views.mysubscription,name='subscriptions'),
-             url(r'^(?P<user>[\w.@+-]+)/articles/$',myarticles.as_view(),name='articles'),
+             url(r'^(?P<user>[\w.@+-]+)/articles/$',views.myarticles,name='articles'),
              url(r'^(?P<user>[\w.@+-]+)/followers/$',views.myfollowers,name='followers'),
              url(r'^reset_password/$', password_reset,{'template_name':
              'edit/reset_password.html', 'email_template_name':'edit/reset_password_email.html'},name='reset_password'),

@@ -1,5 +1,17 @@
 $(document).ready(function()
 {
+
+$(".navbar-form").on('click','#searchsubmit',function(event)
+{
+var search_term=$(this).siblings('div').find('#socrates-search').val();
+var ur= ("/account/searchsocrates/").concat(search_term);
+ if (search_term.trim() ==="")
+    {alert('Empty search');
+    return 0;
+    }
+ window.location.href= ur;
+});
+
 $('div.my-button').on('click', ".btn.btn-secondary", function(event)
 {
  event.preventDefault();
@@ -17,8 +29,8 @@ $('div.my-button').on('click', ".btn.btn-secondary", function(event)
  {
   $('div.my-button').html(response.code);
  }
- })
+ });
 
-})
+});
 
-})
+});
