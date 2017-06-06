@@ -341,7 +341,7 @@ class newspapers(TemplateView):
         return render(request,'newspapers/Newspapers.html',args)
 
     def post(self,request):
-        form=SocratesSearchForm(request.POST.search)
+        form=SocratesSearchForm(request.POST)
         if form.is_valid():
             socratessearch=form.save(commit=False)
             socratessearch.user=request.user
@@ -478,7 +478,6 @@ class Search_results(TemplateView):
         all_posts=[]
         ranks=[]
         posts=a.newsarticles(search_terms)
-        print (posts)
         for post in posts:
             all_posts.append(post[0])
         for rank in posts:

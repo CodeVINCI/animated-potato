@@ -6,6 +6,18 @@ $(function() {
     $("#subscriptions").val(valnow);
 });
 
+$(".navbar-form").on('click','#searchsubmit',function(event)
+{
+var search_term=$(this).siblings('div').find('#socrates-search').val();
+var ur= ("/account/searchsocrates/").concat(search_term);
+ if (search_term.trim() ==="")
+    {alert('Empty search');
+    return 0;
+    }
+ window.location.href= ur;
+});
+
+
 //javascript for selecting a particular newspaper
 $('div.select-newspaper').on('click', ".btn.btn-secondary", function(event)
 {
