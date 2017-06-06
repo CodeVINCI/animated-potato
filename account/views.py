@@ -79,7 +79,7 @@ class Profile(TemplateView):
          return render(request,self.template_name,args)
 
     def post(self,request):
-        form=SocratesSearchForm(request.POST.search)
+        form=SocratesSearchForm(request.POST)
         if form.is_valid():
             socratessearch=form.save(commit=False)
             socratessearch.user=request.user
@@ -341,7 +341,7 @@ class newspapers(TemplateView):
         return render(request,'newspapers/Newspapers.html',args)
 
     def post(self,request):
-        form=SocratesSearchForm(request.POST)
+        form=SocratesSearchForm(request.POST.search)
         if form.is_valid():
             socratessearch=form.save(commit=False)
             socratessearch.user=request.user
