@@ -39,7 +39,7 @@ class home(TemplateView):
         col3=[]
         liked_posts=[]
         disliked_posts=[]
-        all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="general").order_by('?')
+        all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="general")
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)
@@ -142,6 +142,28 @@ class home(TemplateView):
         args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
         return render(request,self.template_name,args)
 
+def loadcontent(request):
+    date_today=str(datetime.today())
+    date_today=date_today[:10]
+    d = str(datetime.today() - timedelta(days=7))
+    d=d[:10]
+
+    ex=request.GET.get('posts','')
+    ex=ex.strip()
+    ex=ex.split(" ")
+    all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="general").exclude(pk__in=ex)
+    post1=""
+    post2=""
+    post3=""
+    if len(all_posts)>=1:
+        post1=all_posts[0]
+    if len(all_posts)>=2:
+        post2=all_posts[1]
+    if len(all_posts)>=3:
+        post3=all_posts[2]
+    update= str(post1.pk)+" "+str(post2.pk)+" "+str(post3.pk)+" "
+    response={'col1':'<div class="thumbnail" id="'+str(post1.pk)+'" style="width:400px;height:800px;">'+(post1.headline).encode('utf8')+'</div>','col2':'<div style="width:400px;height:800px;">'+(post2.headline).encode("utf8")+'</div>','col3':'<div style="width:400px;height:800px;">'+(post3.headline).encode("utf8")+'</div>',"update":update}
+    return JsonResponse(response)
 
 class homeSports(TemplateView):
     template_name = "homeSports/home-sports.html"

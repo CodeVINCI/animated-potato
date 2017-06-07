@@ -3,8 +3,7 @@ from . import views
 from .views import unitednations,home,homeSports,homeMarket
 
 urlpatterns=[url(r'^(?P<filter>[\w]+)$', home.as_view(), name='home'),
-
-
+             url(r'^scroll/loadcontent/$', views.loadcontent, name='loadcontent'),
              url(r'^visitors/(?P<pk>[0-9]+)/$', views.visits,name='visits'),
              url(r'^suggestion/(?P<pk>[0-9]+)/$', views.suggest,name='suggest'),
              url(r'^make_comment/(?P<pk>[0-9]+)/$',views.post_comment,name='post_comment'),

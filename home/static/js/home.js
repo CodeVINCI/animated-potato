@@ -5,6 +5,48 @@ $(function() {
     $("#filters").val(valnow);
 });
 
+var str="";
+$('.thumbnail').each(function()
+{
+ str +=($(this).attr("id").concat(" "));
+});
+
+function yHandler()
+{
+var wrap = document.getElementById('tiles');
+var contentHeight=wrap.offsetHeight;//current height
+var yoffset = window.pageYOffset;
+var y = yoffset + window.innerHeight;
+//var column1 = getElementById('col1');
+//var column2 = getElementById('col2');
+//var column3 = getElementById('col3');
+if (y>=(contentHeight-10))
+{
+$.ajax(
+{
+url:'/home/scroll/loadcontent/',
+method:'get',
+data:{posts:str},
+dataType:'json',
+success:function(response)
+{
+
+  $("#col1").append(response.col1);
+  $("#col2").append(response.col2);
+  $("#col3").append(response.col3);
+  str += response.update;
+}
+});
+}
+}
+window.onscroll=yHandler;
+/*$(".testing").on('click','#data',function(event)
+{
+ var wrap = document.getElementById('tiles')
+ var h= wrap.offsetHeight;
+ alert(h);
+});*/
+
 $(".navbar-form").on('click','#searchsubmit',function(event)
 {
 var search_term=$(this).siblings('div').find('#socrates-search').val();

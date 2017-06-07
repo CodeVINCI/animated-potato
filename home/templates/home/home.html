@@ -102,12 +102,12 @@
     </select>
         <button type="button" class="btn btn-secondary" style="width:100px;height:22px;padding:1px;background-color:maroon;color:white;"><b>Go</b></button>
     </div>
-    <div class="col-6 col-md-4">
+    <div class="col-6 col-md-4" id="col1">
          <ul id="tiles" class="unstyled">
 
         {% for post in col1 %}
 
-   <li><div class="thumbnail">
+   <li><div class="thumbnail" id="{{post.0.pk}}">
       <img src={{ post.0.image.url }} alt="...">
       <div class="caption">
           <p style="font-size:10px;">{{ post.0.date }}</p>
@@ -271,11 +271,11 @@
  {% endfor %}
          </ul>
     </div>
-    <div class="col-6 col-md-4">
+    <div class="col-6 col-md-4" id="col2">
        <ul id="tiles" class="unstyled">
         {% for post in col2 %}
 
-   <li><div class="thumbnail">
+   <li><div class="thumbnail" id="{{post.0.pk}}">
       <img src={{ post.0.image.url }} alt="...">
       <div class="caption">
           <p style="font-size:10px;">{{ post.0.date }}</p>
@@ -429,11 +429,11 @@
  {% endfor %}
          </ul>
     </div>
-    <div class="col-6 col-md-4">
+    <div class="col-6 col-md-4" id="col3">
        <ul id="tiles" class="unstyled">
         {% for post in col3 %}
 
-   <li><div class="thumbnail">
+   <li><div class="thumbnail" id="{{post.0.pk}}">
       <img src={{ post.0.image.url }} alt="...">
       <div class="caption">
           <p style="font-size:10px;">{{ post.0.date }}</p>
@@ -586,5 +586,8 @@
          </ul>
     </div>
   </div>
+<!--<div class="testing">
+<a role="button" class="btn btn-primary" id="data">Data</a>
+</div>-->
 </body>
 </html>
