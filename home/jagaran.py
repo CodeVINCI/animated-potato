@@ -1,22 +1,43 @@
 import urllib
 import json
+import ssl
+import bs4
+from bs4 import BeautifulSoup
+import re
+import time
 from home.models import Post
 import requests
 import tempfile
-import ssl
 from django.core import files
 from django.utils import timezone
 
-
-
-
-def get_news(URL):
-    url=URL
+def Scrape_dainik_bhaskar():
+    url= "http://www.jagran.com/"
     context = ssl._create_unverified_context()
-    response=urllib.urlopen(url,context=context)
-    data=json.loads(response.read())
+    html_base=urllib.urlopen(url,context=context)
+    soup_base=BeautifulSoup(html_base,"html.parser")
+    newslinks=soup_base.findAll("ul",{"class":"tabbox"})
+    articles=[]
+    for link in newslinks:
+         urlToImage=link.find("img")['src']
+         urlToImage=urlToImage.split("?")[0]
+         headline=link.find("span",{"class":"tabtext"}).text
+         headline=headline.strip()
+         url=link.find("li").find('a')['href']
+         date=timezone.now()
+         description=" "
+
+         article={"author":"dainik-jagran","title":headline,"description":description,"url":url,"urlToImage":urlToImage,"publishedAt":date}
+         articles.append(article)
+
+    response={"source":"www.jagran.com","articles":articles}
+    response=json.dumps(response)
+
+
+    data=json.loads(response)
     source= data["source"].encode('utf-8')
     articles=data["articles"]
+
     for article in articles:
         storedarticles=Post.objects.filter(headline=article["title"].encode('utf-8'))
         if len(storedarticles)==0:
@@ -32,7 +53,7 @@ def get_news(URL):
                     date= str(timezone.now())
                     date=date[:10]
                 else:
-                    date=article["publishedAt"].encode('utf-8')
+                    date= str(timezone.now())
                     date=date[:10]
                 if not(article['urlToImage']==None):
                     image_url=article["urlToImage"].encode('utf-8')
@@ -67,6 +88,11 @@ def get_news(URL):
                     # Save the temporary image to the model#
                     # This saves the model so be sure that is it valid
                     a.image.save(file_name, files.File(lf))
+
+
+
+
+
 
 
 
