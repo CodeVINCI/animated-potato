@@ -42,6 +42,7 @@ def ScrapeUN():
 
     data=json.loads(response)
     source= data["source"].encode('utf-8')
+    category="UN"
     articles=data["articles"]
     for article in articles:
         storedarticles=Post.objects.filter(headline=article["title"].encode('utf-8'))
@@ -88,7 +89,7 @@ def ScrapeUN():
                         lf.write(block)
 
                     # Create the model you want to save the image to
-                    a=Post(source=articlesource,author=author,headline=headline,story=story,link=image_url,date=date,pageurl=url)
+                    a=Post(source=articlesource,author=author,headline=headline,story=story,link=image_url,date=date,pageurl=url,category=category)
 
                     # Save the temporary image to the model#
                     # This saves the model so be sure that is it valid

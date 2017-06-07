@@ -19,6 +19,15 @@ def get_news(URL):
     response=urllib.urlopen(url,context=context)
     data=json.loads(response.read())
     source= data["source"].encode('utf-8')
+    if source in ['business-insider','bloomberg']:
+        category="business"
+    elif source in ["bbc-sport"]:
+        category="sports"
+    elif source in ["ars-technica"]:
+        category="technology"
+    else:
+        category="general"
+
     articles=data["articles"]
     for article in articles:
         storedarticles=Post.objects.filter(headline=article["title"].encode('utf-8'))
@@ -65,7 +74,7 @@ def get_news(URL):
                         lf.write(block)
 
                     # Create the model you want to save the image to
-                    a=Post(source=articlesource,author=author,headline=headline,story=story,link=image_url,date=date,pageurl=url)
+                    a=Post(source=articlesource,author=author,headline=headline,story=story,link=image_url,date=date,pageurl=url,category=category)
 
                     # Save the temporary image to the model#
                     # This saves the model so be sure that is it valid

@@ -1,26 +1,23 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
+{% load static %}
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script
 			  src="https://code.jquery.com/jquery-3.2.1.min.js"
 			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 			  crossorigin="anonymous"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     {% load static %}
     <link rel="stylesheet" href="{% static "home.css"%}" type="text/css"/>
     <link rel="shortcut icon" type="image/png" href="{% static "images/favicon.ico" %}"/>
-    {% load static%}
-    <script type="text/javascript" src="{% static 'jscroll.js' %}"></script>
-    <script type="text/javascript" src="{% static 'scroll.js' %}"></script>
-    <script src="{% static 'homemarket.js' %}"></script>
+         <script src="{% static 'js/home.js' %}"></script>
     <title>Socrates-Politics</title>
 </head>
-<body>
+<body style="overflow-x:scroll">
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -31,26 +28,27 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <a class="navbar-brand" href="/home/most_liked">Socrates</a>
+        <a class="navbar-brand" href="/home/most_liked">Socrates <p style="font-size:11px;">{{ date_today }}</p></a>
+
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-          <form class="navbar-form navbar-left">
+           <form class="navbar-form navbar-left">
         <div class="form-group">
           <input id="socrates-search" type="text" class="form-control" placeholder="Search-Socrates">
         </div>
         <button id="searchsubmit" type="button" class="btn btn-default">&#x1f50d;</button>
       </form>
-        <li><a href="/home/most_liked"><span class="glyphicon glyphicon-home" aria-hidden="true">Home</span></a></li>
+          <li><a href="/home/most_liked"><span class="glyphicon glyphicon-home" aria-hidden="true"><b>Home</b></span></a></li>
         <li><a href="#">Compare</a></li>
          <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Themes<span class="caret"></span></a>
+             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Themes<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="/home/politics/most_liked">Politics</a></li>
             <li><a href="/home/sports/">Sports</a></li>
-            <li><a href="/home/market">Market</a></li>
+            <li><a href="/home/market/">Market</a></li>
               <li><a href="/home/UnitedNations/most_liked">United Nations</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">News in Hindi</a></li>
@@ -58,10 +56,18 @@
             <li><a href="#">News in English</a></li>
           </ul>
         </li>
-          <li><a href="/account/Newspapers/">Newspapers</a></li>
+          <li><a href="/account/newspapers/{{ firstpaper }}">Newspapers</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Notifications{% if ping %}<span class="badge">{{ ping }}</span>{% endif %}</a></li>
+        <li class="dropdown" style="width:60px;position:relative;"><a style="width:50px;padding-right:0px;padding-left:0px;" href="#" class="dropdown-notification" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="font-size:20px;" class="glyphicon glyphicon-globe"></span>{% if ping %}<span class="badge">{{ ping }}</span>{% endif %}</a>
+        <ul class="dropdown-menu" style="width:460px;">
+            {% for notification in all_notifications %}
+            <li><div class="notify" style="padding:10px;white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><a style="width:450px;color:black;white-space:wrap;overflow-x:hidden;" href="{{ notification.onclick_url }}"><p style="font-size:12px;"><span class="glyphicon glyphicon-pencil">&nbsp;</span>{{ notification.message }}</p></a></div></li>
+            <li style="width:450px;" role="separator" class="divider"></li>
+            {% endfor %}
+            <li><div style="text-align:center;width:450px;"><a href="#" style="width:450px;">See All</a></div></li>
+        </ul>
+        </li>
         <div class="imgAbt">
         <li class="dropdown">
 
@@ -69,7 +75,7 @@
 
                 <ul class="dropdown-menu">
             <li><a href="/account/profile">My Profile</a></li>
-            <li><a href="/account/{{user}}/articles">My Articles</a></li>
+                    <li><a href="/account/{{user}}/articles">My Articles</a></li>
             <li><a href="/account/{{user}}/subscriptions">My Subscriptions</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="/account/settings">Settings</a></li>
@@ -83,111 +89,502 @@
   </div><!-- /.container-flui-->
  </nav>
 
-<div class="jumbotron">
-    <div class="row content">
-    <div class="col-sm-4 text-left">
+<meta id="my-data" data-filter="{{ filter }}">
+<div class="span12" id="wrap">
+    <div class="select_filters" style="margin-left:30px;margin-bottom:20px;"><b>Filters</b>:
+    <select id="filters" style="background-color:white;">
+        <option value="most_visited">most_visited</option>
+        <option value="most_liked">most_liked</option>
+        <option value="most_disliked">most_disliked</option>
+        <option value="most_commented">most_commented</option>
+        <option value="most_suggested">most_suggested</option>
+        <option value="your_subscriptions">your_subscriptions</option>
+    </select>
+        <button type="button" class="btn btn-secondary" style="width:100px;height:22px;padding:1px;background-color:maroon;color:white;"><b>Go</b></button>
+    </div>
+    <div class="col-6 col-md-4">
+         <ul id="tiles" class="unstyled">
 
-        <div class="col-sm-4 col-md-2">
-    <div class="thumbnail">
-      <img src="..." alt="...">
+        {% for post in col1 %}
+
+   <li><div class="thumbnail">
+      <img src={{ post.0.image.url }} alt="...">
       <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+          <p style="font-size:10px;">{{ post.0.date }}</p>
+          <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.0.headline }}</h3>
+          <p style="font-size:10px;">{{ post.0.author }}</p>
+        <p style="font-size:20px;">{{ post.0.story }}</p>
+          <p style="font-size:10px;">{{ post.0.source }}</p>
+          <hr>
+       <div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 170px);width: -webkit-calc(100% - 170px);width: calc(100% - 170px);">
+           <button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">
+               {% if post.1 %}
+               <meta id="button_data" data-nextaction="social-unlike" data-pk="{{ post.0.pk }}">
+     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
+               {% else %}
+               <meta id="button_data" data-nextaction="social-like" data-pk="{{ post.0.pk }}">
+      <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
+               {% endif %}
+     <span class="count" >{{ post.0.likes }}</span>
+ </button>
+    &nbsp;
+ <button id="dislike" class="social-dislike" style="border:none;background-color:transparent;">
+     <span class="dislike" >{{ post.0.dislikes }}</span>
+     {% if post.2 %}
+     <meta id="button_data" data-nextaction="social-undislike" data-pk="{{ post.0.pk }}">
+     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
+     {% else %}
+     <meta id="button_data" data-nextaction="social-dislike" data-pk="{{ post.0.pk }}">
+     <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
+     {% endif %}
+ </button></div>
+
+          <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+          <!-- Button trigger modal -->
+<p>
+    <a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
+  {{commentbox.text}}
+   </a>
+    <a style="float:right;" href="#" class="fa fa-facebook"></a>
+    <button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button>
+</p>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong{{post.0.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+           <p style="font-size:10px;">{{ post.0.date }}</p>
+           <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.0.headline }}</h3>
       </div>
+      <div class="modal-body">
+          <div class="conatiner">
+              <img src={{ post.0.image.url }} alt="..." style="width:568px;height:400px;">
+              <p style="font-size:10px;">{{ post.0.author }}</p>
+              <p style="font-size:20px;">{{ post.0.story }}</p>
+          <p style="font-size:10px;">{{ post.0.source }}</p>
+
+
+               <div class="media">
+    <div class="media-left">
+       {% if pic.url %}
+             {% load static %}
+  <img src={{ pic.url }} alt="" style="width:40px;height:40px;border:1px solid #E6E6E6;border-radius:50%;">
+</a>
+         {% else %}
+         {% load static %}
+          <img src="{% static "images/Dp.png" %}" alt="" style="width:40px;height:40px;border:1px;border-radius:50%;">
+         {% endif %} </a>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">  {{user.first_name}}&nbsp; {{user.last_name}}&nbsp;</h4>
+        <form id="post-form">
+                       {% csrf_token %}
+                       {{commentbox.text}}
+            <meta id="comment_data" data-pk="{{ post.0.pk }}">
+                        <button type="button" id="comment_button" class="btn btn-default">Comment</button>
+                    </form>
+<!--change this according to views and url-->
+         <ul id="talk" class="arguments">
+         {% for comment in post.0.comments.all reversed %}
+             <li><span style="font-size:12px;">
+                 <b><a class='via_user' href="/account/viauserpk/{{ comment.user.pk }}">{{ comment.user.first_name }}&nbsp;{{ comment.user.last_name }}</a>&nbsp;&nbsp;</b>
+                 <span style="font-size:10px;"><b>{{ comment.created_on }}</b>
+                 </span>
+                 </span>
+                 <br><span style="font-size:12px;">{{ comment.text }}
+                 </span><br>
+
+                 <div class="comment_action_line" style="height:10px;">
+                     <span style="font-size:10px;">
+                         <a class="comment_like" data-pk="{{ comment.pk }}" href="#" role="button">Like</a>&nbsp;&nbsp;&nbsp;
+                         <a class="comment_reply" data-pk="{{ comment.pk }}" href="#" role="button">Reply</a>&nbsp;&nbsp;&nbsp;
+
+                         {% ifequal comment.user.username user.username %}
+                         <a class="comment_delete" data-pk="{{ comment.pk }}" href="#" role="button">Delete</a>
+                         {% endifequal %}
+
+                     </span></div>
+                 <ul id="replies">
+                     {% for reply in comment.reply.all %}
+                     <li>{{ reply.text }}</li>
+                     {% endfor %}
+                 </ul>
+             </li>
+             {% endfor %}
+        </ul>
+         <div class="modal-footer">
+
+
+             <div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 350px);width: -webkit-calc(100% - 350px);width: calc(100% - 350px);">
+           <button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">
+               {% if post.1 %}
+               <meta id="button_data" data-nextaction="social-unlike" data-pk="{{ post.0.pk }}">
+     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
+               {% else %}
+               <meta id="button_data" data-nextaction="social-like" data-pk="{{ post.0.pk }}">
+      <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
+               {% endif %}
+     <span class="count" >{{ post.0.likes }}</span>
+ </button>
+    &nbsp;
+ <button id="dislike" class="social-dislike" style="border:none;background-color:transparent;">
+     <span class="dislike" >{{ post.0.dislikes }}</span>
+     {% if post.2 %}
+     <meta id="button_data" data-nextaction="social-undislike" data-pk="{{ post.0.pk }}">
+     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
+     {% else %}
+     <meta id="button_data" data-nextaction="social-dislike" data-pk="{{ post.0.pk }}">
+     <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
+     {% endif %}
+ </button></div>
+
+          <p id="{{ post.0.pk }}">
+              <a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a>
+              <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </p>
+
+      </div>
+
+
     </div>
   </div>
 
-           <div class="col-sm-4 col-md-2">
-    <div class="thumbnail">
-      <img src="..." alt="...">
-      <div class="caption">
-        <h3>Thumbnail label</h3>
-        <p>...</p>
-        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+
+
+
+
+          </div>
       </div>
+
     </div>
   </div>
-
-    </div>
-
-         <div class="col-sm-4 text-left">
-                 <div class="col-sm-4 col-md-2">
-                 <div class="thumbnail">
-                 <img src="..." alt="...">
-                     <div class="caption">
-                     <h3>Thumbnail label</h3>
-                         <p>...</p>
-                         <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                        </div>
-                       </div>
-                      </div>
-
-              <div class="col-sm-4 col-md-2">
-                 <div class="thumbnail">
-                 <img src="..." alt="...">
-                     <div class="caption">
-                     <h3>Thumbnail label</h3>
-                         <p>...</p>
-                         <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                        </div>
-                       </div>
-                      </div>
-
-              <div class="col-sm-4 col-md-2">
-                 <div class="thumbnail">
-                 <img src="..." alt="...">
-                     <div class="caption">
-                     <h3>Thumbnail label</h3>
-                         <p>...</p>
-                         <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                        </div>
-                       </div>
-                      </div>
-
-              <div class="col-sm-4 col-md-2">
-                 <div class="thumbnail">
-                 <img src="..." alt="...">
-                     <div class="caption">
-                     <h3>Thumbnail label</h3>
-                         <p>...</p>
-                         <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                        </div>
-                       </div>
-                      </div>
-
-
-
-         </div>
-
-         <div class="col-sm-4 text-left">
-                <div class="col-sm-4 col-md-2">
-                <div class="thumbnail">
-                <img src="..." alt="...">
-                <div class="caption">
-                <h3>Thumbnail label</h3>
-                <p>...</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-                </div>
-                </div>
-                </div>
-
-         </div>
-
-         <div class="col-sm-1 sidenav">
-               <div class="well">
-                <p>ADS</p>
-                </div>
-                <div class="well">
-                <p>ADS</p>
-                </div>
-                </div>
-         </div>
-
-
 </div>
 
 
+      </div></div></li>
+ {% endfor %}
+         </ul>
+    </div>
+    <div class="col-6 col-md-4">
+       <ul id="tiles" class="unstyled">
+        {% for post in col2 %}
 
+   <li><div class="thumbnail">
+      <img src={{ post.0.image.url }} alt="...">
+      <div class="caption">
+          <p style="font-size:10px;">{{ post.0.date }}</p>
+          <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.0.headline }}</h3>
+          <p style="font-size:10px;">{{ post.0.author }}</p>
+        <p style="font-size:20px;">{{ post.0.story }}</p>
+          <p style="font-size:10px;">{{ post.0.source }}</p>
+          <hr>
+       <div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 170px);width: -webkit-calc(100% - 170px);width: calc(100% - 170px);">
+           <button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">
+                  {% if post.1 %}
+               <meta id="button_data" data-nextaction="social-unlike" data-pk="{{ post.0.pk }}">
+     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
+               {% else %}
+               <meta id="button_data" data-nextaction="social-like" data-pk="{{ post.0.pk }}">
+      <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
+               {% endif %}
+     <span class="count" >{{ post.0.likes }}</span>
+ </button>
+    &nbsp;
+ <button id="dislike" class="social-dislike" style="border:none;background-color:transparent;">
+     <span class="dislike" >{{ post.0.dislikes }}</span>
+     {% if post.2 %}
+     <meta id="button_data" data-nextaction="social-undislike" data-pk="{{ post.0.pk }}">
+     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
+     {% else %}
+     <meta id="button_data" data-nextaction="social-dislike" data-pk="{{ post.0.pk }}">
+     <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
+     {% endif %}
+ </button></div>
+         <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+                <!-- Button trigger modal -->
+<p><a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
+  {{commentbox.text}}
+</a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button></p>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong{{post.0.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+           <p style="font-size:10px;">{{ post.0.date }}</p>
+           <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.0.headline }}</h3>
+      </div>
+      <div class="modal-body">
+          <div class="conatiner">
+              <img src={{ post.0.image.url }} alt="..." style="width:568px;height:400px;">
+              <p style="font-size:10px;">{{ post.0.author }}</p>
+              <p style="font-size:20px;">{{ post.0.story }}</p>
+          <p style="font-size:10px;">{{ post.0.source }}</p>
+
+
+               <div class="media">
+    <div class="media-left">
+       {% if pic.url %}
+             {% load static %}
+  <img src={{ pic.url }} alt="" style="width:40px;height:40px;border:1px solid #E6E6E6;border-radius:50%;">
+</a>
+         {% else %}
+         {% load static %}
+          <img src="{% static "images/Dp.png" %}" alt="" style="width:40px;height:40px;border:1px;border-radius:50%;">
+         {% endif %} </a>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">  {{user.first_name}}&nbsp; {{user.last_name}}&nbsp;</h4>
+        <form id="post-form">
+                       {% csrf_token %}
+                       {{commentbox.text}}
+            <meta id="comment_data" data-pk="{{ post.0.pk }}">
+                        <button type="button" id="comment_button" class="btn btn-default">Comment</button>
+                    </form>
+<!--change this according to views and url-->
+
+         <ul id="talk" class="arguments">
+         {% for comment in post.0.comments.all reversed %}
+             <li><span style="font-size:12px;">
+                 <b><a class='via_user' href="/account/viauserpk/{{ comment.user.pk }}">{{ comment.user.first_name }}&nbsp;{{ comment.user.last_name }}</a>&nbsp;&nbsp;</b>
+                 <span style="font-size:10px;"><b>{{ comment.created_on }}</b>
+                 </span>
+                 </span>
+                 <br><span style="font-size:12px;">{{ comment.text }}
+                 </span><br>
+
+                 <div class="comment_action_line" style="height:10px;">
+                     <span style="font-size:10px;">
+                         <a class="comment_like" data-pk="{{ comment.pk }}" href="#" role="button">Like</a>&nbsp;&nbsp;&nbsp;
+                         <a class="comment_reply" data-pk="{{ comment.pk }}" href="#" role="button">Reply</a>&nbsp;&nbsp;&nbsp;
+
+                         {% ifequal comment.user.username user.username %}
+                         <a class="comment_delete" data-pk="{{ comment.pk }}" href="#" role="button">Delete</a>
+                         {% endifequal %}
+
+                     </span></div></li>
+             {% endfor %}
+        </ul>
+         <div class="modal-footer">
+
+
+             <div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 350px);width: -webkit-calc(100% - 350px);width: calc(100% - 350px);">
+           <button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">
+               {% if post.1 %}
+               <meta id="button_data" data-nextaction="social-unlike" data-pk="{{ post.0.pk }}">
+     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
+               {% else %}
+               <meta id="button_data" data-nextaction="social-like" data-pk="{{ post.0.pk }}">
+      <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
+               {% endif %}
+     <span class="count" >{{ post.0.likes }}</span>
+ </button>
+    &nbsp;
+ <button id="dislike" class="social-dislike" style="border:none;background-color:transparent;">
+     <span class="dislike" >{{ post.0.dislikes }}</span>
+     {% if post.2 %}
+     <meta id="button_data" data-nextaction="social-undislike" data-pk="{{ post.0.pk }}">
+     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
+     {% else %}
+     <meta id="button_data" data-nextaction="social-dislike" data-pk="{{ post.0.pk }}">
+     <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
+     {% endif %}
+ </button></div>
+
+          <p id="{{ post.0.pk }}">
+
+              <a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a>
+              <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </p>
+
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+          </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+      </div></div></li>
+ {% endfor %}
+         </ul>
+    </div>
+    <div class="col-6 col-md-4">
+       <ul id="tiles" class="unstyled">
+        {% for post in col3 %}
+
+   <li><div class="thumbnail">
+      <img src={{ post.0.image.url }} alt="...">
+      <div class="caption">
+          <p style="font-size:10px;">{{ post.0.date }}</p>
+          <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.0.headline }}</h3>
+          <p style="font-size:10px;">{{ post.0.author }}</p>
+        <p style="font-size:20px;">{{ post.0.story }}</p>
+          <p style="font-size:10px;">{{ post.0.source }}</p>
+          <hr>
+       <div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 170px);width: -webkit-calc(100% - 170px);width: calc(100% - 170px);">
+           <button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">
+                  {% if post.1 %}
+               <meta id="button_data" data-nextaction="social-unlike" data-pk="{{ post.0.pk }}">
+     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
+               {% else %}
+               <meta id="button_data" data-nextaction="social-like" data-pk="{{ post.0.pk }}">
+      <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
+               {% endif %}
+     <span class="count" >{{ post.0.likes }}</span>
+ </button>
+    &nbsp;
+ <button id="dislike" class="social-dislike" style="border:none;background-color:transparent;">
+     <span class="dislike" >{{ post.0.dislikes }}</span>
+      {% if post.2 %}
+     <meta id="button_data" data-nextaction="social-undislike" data-pk="{{ post.0.pk }}">
+     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
+     {% else %}
+     <meta id="button_data" data-nextaction="social-dislike" data-pk="{{ post.0.pk }}">
+     <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
+     {% endif %}
+ </button></div>
+        <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+
+<p><a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
+  {{commentbox.text}}
+</a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button></p>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong{{post.0.pk}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+           <p style="font-size:10px;">{{ post.0.date }}</p>
+           <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.0.headline }}</h3>
+      </div>
+      <div class="modal-body">
+          <div class="conatiner">
+              <img src={{ post.0.image.url }} alt="..." style="width:568px;height:400px;">
+              <p style="font-size:10px;">{{ post.0.author }}</p>
+              <p style="font-size:20px;">{{ post.0.story }}</p>
+          <p style="font-size:10px;">{{ post.0.source }}</p>
+
+
+               <div class="media">
+    <div class="media-left">
+       {% if pic.url %}
+             {% load static %}
+  <img src={{ pic.url }} alt="" style="width:40px;height:40px;border:1px solid #E6E6E6;border-radius:50%;">
+</a>
+         {% else %}
+         {% load static %}
+          <img src="{% static "images/Dp.png" %}" alt="" style="width:40px;height:40px;border:1px;border-radius:50%;">
+         {% endif %} </a>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">  {{user.first_name}}&nbsp; {{user.last_name}}&nbsp;</h4>
+        <form id="post-form">
+                       {% csrf_token %}
+                       {{commentbox.text}}
+            <meta id="comment_data" data-pk="{{ post.0.pk }}">
+                        <button type="button" id="comment_button" class="btn btn-default">Comment</button>
+                    </form>
+<!--change this according to views and url-->
+ <ul id="talk" class="arguments">
+         {% for comment in post.0.comments.all reversed %}
+             <li><span style="font-size:12px;">
+                 <b><a class='via_user' href="/account/viauserpk/{{ comment.user.pk }}">{{ comment.user.first_name }}&nbsp;{{ comment.user.last_name }}</a>&nbsp;&nbsp;</b>
+                 <span style="font-size:10px;"><b>{{ comment.created_on }}</b>
+                 </span>
+                 </span>
+                 <br><span style="font-size:12px;">{{ comment.text }}
+                 </span><br>
+
+                 <div class="comment_action_line" style="height:10px;">
+                     <span style="font-size:10px;">
+                         <a class="comment_like" data-pk="{{ comment.pk }}" href="#" role="button">Like</a>&nbsp;&nbsp;&nbsp;
+                         <a class="comment_reply" data-pk="{{ comment.pk }}" href="#" role="button">Reply</a>&nbsp;&nbsp;&nbsp;
+
+                         {% ifequal comment.user.username user.username %}
+                         <a class="comment_delete" data-pk="{{ comment.pk }}" href="#" role="button">Delete</a>
+                         {% endifequal %}
+
+                     </span></div></li>
+             {% endfor %}
+        </ul>
+          <div class="modal-footer">
+
+
+             <div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 350px);width: -webkit-calc(100% - 350px);width: calc(100% - 350x);">
+           <button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">
+               {% if post.1 %}
+               <meta id="button_data" data-nextaction="social-unlike" data-pk="{{ post.0.pk }}">
+     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
+               {% else %}
+               <meta id="button_data" data-nextaction="social-like" data-pk="{{ post.0.pk }}">
+      <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
+               {% endif %}
+     <span class="count" >{{ post.0.likes }}</span>
+ </button>
+    &nbsp;
+ <button id="dislike" class="social-dislike" style="border:none;background-color:transparent;">
+     <span class="dislike" >{{ post.0.dislikes }}</span>
+     {% if post.2 %}
+     <meta id="button_data" data-nextaction="social-undislike" data-pk="{{ post.0.pk }}">
+     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
+     {% else %}
+     <meta id="button_data" data-nextaction="social-dislike" data-pk="{{ post.0.pk }}">
+     <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
+     {% endif %}
+ </button></div>
+
+          <p id="{{ post.0.pk }}">
+              <a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a>
+              <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </p>
+
+      </div>
+
+
+    </div>
+  </div>
+
+
+
+
+
+          </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+      </div></div></li>
+ {% endfor %}
+         </ul>
+    </div>
+  </div>
 </body>
 </html>

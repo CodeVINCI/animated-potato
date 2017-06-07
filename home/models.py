@@ -31,6 +31,7 @@ class Post(models.Model):
     totalcomments=models.IntegerField(default=0)
     comments=models.ManyToManyField('comment',related_name='comments_to_post')
     tags=models.ManyToManyField("Tag")
+    category=models.CharField(max_length=500,default="general")
 
     def __unicode__(self):
         return smart_unicode(self.headline)
