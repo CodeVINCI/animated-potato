@@ -20,7 +20,7 @@ var y = yoffset + window.innerHeight;
 //var column1 = getElementById('col1');
 //var column2 = getElementById('col2');
 //var column3 = getElementById('col3');
-if (y>=(contentHeight-10))
+if (y>=(contentHeight))
 {
 $.ajax(
 {
@@ -34,7 +34,7 @@ success:function(response)
   $("#col1").append(response.col1);
   $("#col2").append(response.col2);
   $("#col3").append(response.col3);
-  str += response.update;
+  str = str.concat(response.update);
 }
 });
 }

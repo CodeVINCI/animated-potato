@@ -162,7 +162,7 @@ def loadcontent(request):
     if len(all_posts)>=3:
         post3=all_posts[2]
     update= str(post1.pk)+" "+str(post2.pk)+" "+str(post3.pk)+" "
-    response={'col1':'<div class="thumbnail" id="'+str(post1.pk)+'" style="width:400px;height:800px;">'+(post1.headline).encode('utf8')+'</div>','col2':'<div style="width:400px;height:800px;">'+(post2.headline).encode("utf8")+'</div>','col3':'<div style="width:400px;height:800px;">'+(post3.headline).encode("utf8")+'</div>',"update":update}
+    response={'col1':'<div class="thumbnail" id="'+str(post1.pk)+'" style="width:350px;height:500px;">'+(post1.headline).encode('utf8')+'</div>','col2':'<div class="thumbnail" id="'+str(post2.pk)+'" style="width:350px;height:600px;">'+(post2.headline).encode("utf8")+'</div>','col3':'<div class="thumbnail" id="'+str(post3.pk)+'" style="width:350px;height:600px;">'+(post3.headline).encode("utf8")+'</div>',"update":update}
     return JsonResponse(response)
 
 class homeSports(TemplateView):
