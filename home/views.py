@@ -14,6 +14,7 @@ from django.contrib.auth.models import User
 from django.db.models import F
 import json
 from datetime import datetime, timedelta
+import django.middleware.csrf
 
 from django.shortcuts import get_object_or_404
 # Home page view.
@@ -151,21 +152,44 @@ def loadcontent(request):
     ex=request.GET.get('posts','')
     ex=ex.strip()
     ex=ex.split(" ")
-    all_posts=Post.objects.filter(category="general").exclude(pk__in=ex)
-    print (len(all_posts))
-    post1=""
-    post2=""
-    post3=""
-    if len(all_posts)>=1:
-        post1=all_posts[0]
-    if len(all_posts)>=2:
-        post2=all_posts[1]
-    if len(all_posts)>=3:
-        post3=all_posts[2]
-    post4=all_posts[3]
-    post5=all_posts[4]
-    post6=all_posts[5]
-    response={'col1':'<div class="thumbnail" id="'+str(post1.pk)+'" style="width:350px;height:500px;">'+(post1.headline).encode('utf8')+'</div> <div class="thumbnail" id="'+str(post4.pk)+'" style="width:350px;height:500px;">'+(post4.headline).encode('utf8')+'</div>','col2':'<div class="thumbnail" id="'+str(post2.pk)+'" style="width:350px;height:600px;">'+(post2.headline).encode("utf8")+'</div> <div class="thumbnail" id="'+str(post5.pk)+'" style="width:350px;height:500px;">'+(post5.headline).encode('utf8')+'</div>','col3':'<div class="thumbnail" id="'+str(post3.pk)+'" style="width:350px;height:600px;">'+(post3.headline).encode("utf8")+'</div> <div class="thumbnail" id="'+str(post6.pk)+'" style="width:350px;height:500px;">'+(post6.headline).encode('utf8')+'</div>'}
+    post=list(reversed(Post.objects.filter(category="general").exclude(pk__in=ex)))
+    thumbnails=[]
+    for i in range(3):
+        whole=""
+        a='<li><div class="thumbnail" id="'+str(post[i].pk)+'"><img src="'+str(post[i].image.url)+'" alt="..."><div class="caption"><p style="font-size:10px;">'+str(post[i].date)+'</p><h3 style="font-family:"Times New Roman", Times, serif;">'+(post[i].headline).encode("utf8")+'</h3><p style="font-size:10px;">'+(post[i].author).encode("utf8")+'</p><p style="font-size:20px;">'+(post[i].story).encode("utf8")+'</p><p style="font-size:10px;">'+(post[i].source).encode("utf8")+'</p><hr><div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 170px);width: -webkit-calc(100% -170px);width: calc(100% - 170px);"><button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">'
+        if len(Likes.objects.filter(post=post[i])) and request.user in Likes.objects.get(post=post[i]).users.all():
+            b='<meta id="button_data" data-nextaction="social-unlike" data-pk="'+str(post[i].pk)+'"><span class="like"><i style="color:maroon;"class="glyphicon glyphicon-thumbs-up custom"></i></span>'
+        else:
+            b='<meta id="button_data" data-nextaction="social-like" data-pk="'+str(post[i].pk)+'"><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span>'
+
+        c='<span class="count" >'+str(post[i].likes)+'</span></button>&nbsp;<button id="dislike" class="social-dislike" style="border:none;background-color:transparent;"><span class="dislike" >'+str(post[i].dislikes)+'</span>'
+
+        if len(Dislikes.objects.filter(post=post[i])) and request.user in Dislikes.objects.get(post=post[i]).users.all():
+            d='<meta id="button_data" data-nextaction="social-undislike" data-pk="'+str(post[i].pk)+'"><span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-down custom"></i></span></button></div>'
+        else:
+            d='<meta id="button_data" data-nextaction="social-dislike" data-pk="'+str(post[i].pk)+'"><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span></button></div>'
+
+        e='<p id="'+str(post[i].pk)+'"><a href="'+str(post[i].pageurl)+'" class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><!-- Button trigger modal --><p><a href="#exampleModalLong'+str(post[i].pk)+'" class="popup" data-toggle="modal"><input id="post-comment" value="" required=True  placeholder="Write a comment..."/></a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button></p><!-- Modal --><div class="modal fade" id="exampleModalLong'+str(post[0].pk)+'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><p style="font-size:10px;">'+str(post[i].pk)+'</p><h3 style="font-family:"Times New Roman", Times, serif;">'+(post[i].headline).encode("utf8")+'</h3></div><div class="modal-body"><div class="conatiner"><img src="'+str(post[i].image.url)+'" alt="..." style="width:568px;height:400px;"><p style="font-size:10px;">'+(post[i].author).encode("utf8")+'</p><p style="font-size:20px;">'+(post[i].story).encode("utf8")+'</p><p style="font-size:10px;">'+(post[i].source).encode("utf8")+'</p><div class="media"><div class="media-left">'
+        pic=Userprofile.objects.get(user=request.user).image
+        csrf=django.middleware.csrf.get_token(request)
+
+        f='<img src="'+str(pic.url)+'" alt="" style="width:40px;height:40px;border:1px solid #E6E6E6;border-radius:50%;"></a></div><div class="media-body"><h4 class="media-heading">'+str(request.user.first_name)+'&nbsp; '+str(request.user.last_name)+'&nbsp;</h4><form id="post-form"><input type="hidden" name="csrfmiddlewaretoken" value="'+str(csrf)+'" /><input id="post-comment" value="" required=True  placeholder="Write a comment..."/><meta id="comment_data" data-pk="'+str(post[i].pk)+'"><button type="button" id="comment_button" class="btn btn-default">Comment</button></form><ul id="talk" class="arguments">'
+
+        h=""
+        for comment in reversed(post[i].comments.all()):
+            g='<li><span style="font-size:12px;"><b><a class="via_user" href="/account/viauserpk/'+str(comment.user.pk)+'">'+(comment.user.first_name).encode("utf8")+'&nbsp;'+(comment.user.last_name).encode("utf8")+'</a>&nbsp;&nbsp;</b><span style="font-size:10px;"><b>'+str(comment.created_on)+'</b></span></span><br><span style="font-size:12px;">'+(comment.text).encode("utf8")+'</span><br><div class="comment_action_line" style="height:10px;"><span style="font-size:10px;"><a class="comment_like" data-pk="'+str(comment.pk)+'" href="#" role="button">Like</a>&nbsp;&nbsp;&nbsp;<a class="comment_reply" data-pk="'+str(comment.pk)+'" href="#" role="button">Reply</a>&nbsp;&nbsp;&nbsp;'
+            if comment.user.username==request.user.username:
+                g=g+'<a class="comment_delete" data-pk="'+str(comment.pk)+'" href="#" role="button">Delete</a>'
+            h=h+g
+            replies='</span></div></li>'
+            h=h+replies
+
+        last='</ul><div class="modal-footer"><p id="'+str(post[i].pk)+'"><a href="'+str(post[i].pageurl)+'" class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a><a id="suggestbutton" class="btn btn-default" role="button">Suggest</a><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></p></div></div></div></div></div></div></div></div></div></div></li>'
+        whole=a+b+c+d+e+f+h+last
+        thumbnails.append(whole)
+
+
+    response={'col1':thumbnails[0],'col2':thumbnails[1],'col3':thumbnails[2]}
     return JsonResponse(response)
 
 class homeSports(TemplateView):

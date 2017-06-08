@@ -31,9 +31,9 @@ dataType:'json',
 success:function(response)
 {
 
-  $("#col1").append(response.col1);
-  $("#col2").append(response.col2);
-  $("#col3").append(response.col3);
+  $("#col1").children('#tiles').append(response.col1);
+  $("#col2").children('#tiles').append(response.col2);
+  $("#col3").children('#tiles').append(response.col3);
 }
 }).always(function(){
                 ready = true; //Reset the flag here
