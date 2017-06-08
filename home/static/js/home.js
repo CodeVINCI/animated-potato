@@ -5,23 +5,23 @@ $(function() {
     $("#filters").val(valnow);
 });
 
+
+var ready=true;
+function yHandler()
+{
 var str="";
 $('.thumbnail').each(function()
 {
  str +=($(this).attr("id").concat(" "));
 });
 
-function yHandler()
+//var wrap = document.getElementById('#col1');
+//var contentHeight=wrap.offsetHeight;//current height
+//var yoffset = window.pageYOffset;
+//var y = yoffset + window.innerHeight;
+if ($(window).scrollTop() == $(document).height() - $(window).height())
 {
-var wrap = document.getElementById('tiles');
-var contentHeight=wrap.offsetHeight;//current height
-var yoffset = window.pageYOffset;
-var y = yoffset + window.innerHeight;
-//var column1 = getElementById('col1');
-//var column2 = getElementById('col2');
-//var column3 = getElementById('col3');
-if (y>=(contentHeight))
-{
+ready=false;
 $.ajax(
 {
 url:'/home/scroll/loadcontent/',
@@ -34,9 +34,10 @@ success:function(response)
   $("#col1").append(response.col1);
   $("#col2").append(response.col2);
   $("#col3").append(response.col3);
-  str = str.concat(response.update);
 }
-});
+}).always(function(){
+                ready = true; //Reset the flag here
+            });
 }
 }
 window.onscroll=yHandler;

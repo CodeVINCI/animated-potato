@@ -133,9 +133,9 @@ class home(TemplateView):
                     for i in range(len(col3)-1):
                         if col3[i+1][0].visits > col3[i][0].visits:
                             (col3[i],col3[i+1])=(col3[i+1],col3[i])
-        col1=col1[:8]
-        col2=col2[:8]
-        col3=col3[:8]
+        col1=col1[:3]
+        col2=col2[:3]
+        col3=col3[:3]
         followingobj=Following.objects.get(current_user=name)
         firstpaper=followingobj.newspaper.all()[0]
 
@@ -151,7 +151,8 @@ def loadcontent(request):
     ex=request.GET.get('posts','')
     ex=ex.strip()
     ex=ex.split(" ")
-    all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="general").exclude(pk__in=ex)
+    all_posts=Post.objects.filter(category="general").exclude(pk__in=ex)
+    print (len(all_posts))
     post1=""
     post2=""
     post3=""
@@ -161,8 +162,10 @@ def loadcontent(request):
         post2=all_posts[1]
     if len(all_posts)>=3:
         post3=all_posts[2]
-    update= str(post1.pk)+" "+str(post2.pk)+" "+str(post3.pk)+" "
-    response={'col1':'<div class="thumbnail" id="'+str(post1.pk)+'" style="width:350px;height:500px;">'+(post1.headline).encode('utf8')+'</div>','col2':'<div class="thumbnail" id="'+str(post2.pk)+'" style="width:350px;height:600px;">'+(post2.headline).encode("utf8")+'</div>','col3':'<div class="thumbnail" id="'+str(post3.pk)+'" style="width:350px;height:600px;">'+(post3.headline).encode("utf8")+'</div>',"update":update}
+    post4=all_posts[3]
+    post5=all_posts[4]
+    post6=all_posts[5]
+    response={'col1':'<div class="thumbnail" id="'+str(post1.pk)+'" style="width:350px;height:500px;">'+(post1.headline).encode('utf8')+'</div> <div class="thumbnail" id="'+str(post4.pk)+'" style="width:350px;height:500px;">'+(post4.headline).encode('utf8')+'</div>','col2':'<div class="thumbnail" id="'+str(post2.pk)+'" style="width:350px;height:600px;">'+(post2.headline).encode("utf8")+'</div> <div class="thumbnail" id="'+str(post5.pk)+'" style="width:350px;height:500px;">'+(post5.headline).encode('utf8')+'</div>','col3':'<div class="thumbnail" id="'+str(post3.pk)+'" style="width:350px;height:600px;">'+(post3.headline).encode("utf8")+'</div> <div class="thumbnail" id="'+str(post6.pk)+'" style="width:350px;height:500px;">'+(post6.headline).encode('utf8')+'</div>'}
     return JsonResponse(response)
 
 class homeSports(TemplateView):
