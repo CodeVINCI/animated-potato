@@ -14,7 +14,7 @@ $('.thumbnail').each(function()
 {
  str +=($(this).attr("id").concat(" "));
 });
-if ($(window).scrollTop() == $(document).height() - $(window).height())
+if ($(window).scrollTop() == ($(document).height() - $(window).height()))
 {
 ready=false;
 $.ajax(
@@ -139,7 +139,7 @@ return false;
 
 /*showing url on opening the modal*/
   $(window.location.hash).modal('show');
-    $('a[data-toggle="modal"]').click(function(){
+    $('#wrap').on('click', 'a[data-toggle="modal"]' ,function(event){
         window.location.hash = $(this).attr('href');
     });
 
