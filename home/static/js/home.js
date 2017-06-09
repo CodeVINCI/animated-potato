@@ -14,11 +14,6 @@ $('.thumbnail').each(function()
 {
  str +=($(this).attr("id").concat(" "));
 });
-
-//var wrap = document.getElementById('#col1');
-//var contentHeight=wrap.offsetHeight;//current height
-//var yoffset = window.pageYOffset;
-//var y = yoffset + window.innerHeight;
 if ($(window).scrollTop() == $(document).height() - $(window).height())
 {
 ready=false;

@@ -12,43 +12,37 @@ from django.core import files
 from django.utils import timezone
 
 
-def Scrape_bussiness_of_fashion():
-    url="https://www.businessoffashion.com/articles/"
-    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
-    response = requests.get(url, headers=headers)
-    html_base=response.content
+def Scrape_hindustan():
+    url = "http://www.livehindustan.com/national/news"
+    context = ssl._create_unverified_context()
+    html_base=urllib.urlopen(url,context=context)
     soup_base=BeautifulSoup(html_base,"html.parser")
-    soup_base=soup_base.find("div",{"class":"col-md-17"})
-    soup_base=soup_base.find("div",{"class":"hidden-xs"})
-    newslinks=soup_base.findAll("div",{"class":"panel-article"})
+    soup_base=soup_base.find("ul",{"class":"right-top-news"})
+    newslinks=soup_base.findAll("li")
     articles=[]
     for link in newslinks:
-        headline=link.find("h3",{"class":"h2"}).text
-        headline=headline.strip()
-        d=link.findAll("span")
-        date=d[0].text
-        date=date.strip()
-        author=d[1].text
-        author=author.strip()
-        description=link.findAll("trust")[1]
-        if len(description.text)>12:
-            description=description.text.strip()
-        else:
-            description=" "
-        articleurl="https://www.businessoffashion.com"+str(link.find("a",{"class":"hover-no-underline"})['href'])
-        urlToImage=link.find("img")
-        if not(urlToImage==None):
-            urlToImage=link.find("img")['src']
-            urlToImage=urlToImage.split("?")[0]
-        article={"author":author,"title":headline,"description":description,"url":articleurl,"urlToImage":urlToImage,"publishedAt":date}
-        articles.append(article)
-
-    response={"source":"www.businessoffashion.com","articles":articles}
+        try:
+            maincol=link.find("div",{"class":"col-md-12"})
+            articleurl= "http://www.livehindustan.com/"+str(maincol.find("div",{"class":"upper-first"}).find('a')['href'])
+            urlToImage= maincol.find("div",{"class":"upper-first"}).find('a').img['src']
+            title= maincol.find("div",{"class":"upper-first"}).find("h4",{"class":"hindustan-link"}).find('a').text
+            description= maincol.find("div",{"class":"upper-first"}).find("div",{"class":"list-time-tags"}).find('p').text
+            date= maincol.find("div",{"class":"upper-first"}).find("div",{"class":"list-time-tags"}).find('span').text
+            articleurl=articleurl.strip()
+            urlToImage=urlToImage.strip()
+            title=title.strip()
+            description=description.strip()
+            date=date.strip()
+            article={"author":"hindustan.com","title":title,"description":description,"url":articleurl,"urlToImage":urlToImage,"publishedAt":date}
+            articles.append(article)
+        except:
+            pass
+    response={"source":"livehindustan.com","articles":articles}
     response=json.dumps(response)
 
     data=json.loads(response)
     source= data["source"].encode('utf-8')
-    category="fashion"
+    category="hindi"
     articles=data["articles"]
     for article in articles:
         storedarticles=Post.objects.filter(headline=article["title"].encode('utf-8'))
@@ -100,4 +94,3 @@ def Scrape_bussiness_of_fashion():
                     # Save the temporary image to the model#
                     # This saves the model so be sure that is it valid
                     a.image.save(file_name, files.File(lf))
-
