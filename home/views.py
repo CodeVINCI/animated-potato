@@ -152,9 +152,9 @@ def loadcontent(request):
     ex=request.GET.get('posts','')
     ex=ex.strip()
     ex=ex.split(" ")
-    post=list(reversed(Post.objects.filter(category="general").exclude(pk__in=ex)))
+    post=list(reversed(Post.objects.filter(category="general").exclude(pk__in=ex).order_by('date')))
     thumbnails=[]
-    for i in range(3):
+    for i in range(6):
         whole=""
         a='<li><div class="thumbnail" id="'+str(post[i].pk)+'"><img src="'+str(post[i].image.url)+'" alt="..."><div class="caption"><p style="font-size:10px;">'+str((post[i].date).strftime("%b %d,%Y"))+'</p><h3 style="font-family:"Times New Roman", Times, serif;">'+(post[i].headline).encode("utf8")+'</h3><p style="font-size:10px;">'+(post[i].author).encode("utf8")+'</p><p style="font-size:20px;">'+(post[i].story).encode("utf8")+'</p><p style="font-size:10px;">'+(post[i].source).encode("utf8")+'</p><hr><div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 170px);width: -webkit-calc(100% -170px);width: calc(100% - 170px);"><button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">'
         if len(Likes.objects.filter(post=post[i])) and request.user in Likes.objects.get(post=post[i]).users.all():
@@ -169,7 +169,7 @@ def loadcontent(request):
         else:
             d='<meta id="button_data" data-nextaction="social-dislike" data-pk="'+str(post[i].pk)+'"><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span></button></div>'
 
-        e='<p id="'+str(post[i].pk)+'"><a href="'+str(post[i].pageurl)+'" class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><!-- Button trigger modal --><p><a href="#exampleModalLong'+str(post[i].pk)+'" class="popup" data-toggle="modal"><input id="post-comment" value="" required=True  placeholder="Write a comment..."/></a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button></p><!-- Modal --><div class="modal fade" id="exampleModalLong'+str(post[0].pk)+'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><p style="font-size:10px;">'+str(post[i].pk)+'</p><h3 style="font-family:"Times New Roman", Times, serif;">'+(post[i].headline).encode("utf8")+'</h3></div><div class="modal-body"><div class="conatiner"><img src="'+str(post[i].image.url)+'" alt="..." style="width:568px;height:400px;"><p style="font-size:10px;">'+(post[i].author).encode("utf8")+'</p><p style="font-size:20px;">'+(post[i].story).encode("utf8")+'</p><p style="font-size:10px;">'+(post[i].source).encode("utf8")+'</p><div class="media"><div class="media-left">'
+        e='<p id="'+str(post[i].pk)+'"><a href="'+str(post[i].pageurl)+'" class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><!-- Button trigger modal --><p><a data="#exampleModalLong'+str(post[i].pk)+'" class="popup" data-toggle="modal"><input id="post-comment" value="" required=True  placeholder="Write a comment..."/></a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button></p><!-- Modal --><div class="modal fade" id="exampleModalLong'+str(post[0].pk)+'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><p style="font-size:10px;">'+str(post[i].pk)+'</p><h3 style="font-family:"Times New Roman", Times, serif;">'+(post[i].headline).encode("utf8")+'</h3></div><div class="modal-body"><div class="conatiner"><img src="'+str(post[i].image.url)+'" alt="..." style="width:568px;height:400px;"><p style="font-size:10px;">'+(post[i].author).encode("utf8")+'</p><p style="font-size:20px;">'+(post[i].story).encode("utf8")+'</p><p style="font-size:10px;">'+(post[i].source).encode("utf8")+'</p><div class="media"><div class="media-left">'
         pic=Userprofile.objects.get(user=request.user).image
         csrf=django.middleware.csrf.get_token(request)
 
@@ -189,7 +189,7 @@ def loadcontent(request):
         thumbnails.append(whole)
 
 
-    response={'col1':thumbnails[0],'col2':thumbnails[1],'col3':thumbnails[2]}
+    response={'col1':thumbnails[0],'col2':thumbnails[1],'col3':thumbnails[2],'col4':thumbnails[3],'col5':thumbnails[4],'col6':thumbnails[5]}
     return JsonResponse(response)
 
 class homeSports(TemplateView):

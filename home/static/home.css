@@ -135,7 +135,20 @@ width:390px;
 border-radius:28px;
 }
 
-#tiles li
+#tilescol1 li
+{
+width:400px;
+display:inline-block;
+float:center;
+}
+#tilescol2 li
+{
+width:400px;
+display:inline-block;
+float:center;
+}
+
+#tilescol3 li
 {
 width:400px;
 display:inline-block;
