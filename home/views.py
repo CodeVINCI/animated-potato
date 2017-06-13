@@ -143,7 +143,7 @@ class home(TemplateView):
         args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
         return render(request,self.template_name,args)
 
-def loadcontent(request):
+def loadcontent(request,theme):
     date_today=str(datetime.today())
     date_today=date_today[:10]
     d = str(datetime.today() - timedelta(days=7))
@@ -152,7 +152,18 @@ def loadcontent(request):
     ex=request.GET.get('posts','')
     ex=ex.strip()
     ex=ex.split(" ")
-    post=list(reversed(Post.objects.filter(category="general").exclude(pk__in=ex).order_by('date')))
+    print(theme)
+    print(ex)
+    if theme=="home":
+        post=list(reversed(Post.objects.filter(category="general").exclude(pk__in=ex).order_by('date')))
+    elif theme=="sports":
+        post=list(reversed(Post.objects.filter(category="sports").exclude(pk__in=ex).order_by('date')))
+    elif theme=="market":
+        post=list(reversed(Post.objects.filter(category="business").exclude(pk__in=ex).order_by('date')))
+    elif theme=="unitednations":
+        post=list(reversed(Post.objects.filter(category="UN").exclude(pk__in=ex).order_by('date')))
+
+
     thumbnails=[]
     for i in range(6):
         whole=""
@@ -199,7 +210,7 @@ class homeSports(TemplateView):
         filter="most_liked"
         date_today=str(datetime.today())
         date_today=date_today[:10]
-        d = str(datetime.today() - timedelta(days=1))
+        d = str(datetime.today() - timedelta(days=3))
         d=d[:10]
         name=request.user
         userprofile=Userprofile.objects.filter(user=name)
@@ -215,7 +226,7 @@ class homeSports(TemplateView):
         col3=[]
         liked_posts=[]
         disliked_posts=[]
-        all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="sports").order_by('?')
+        all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="sports").order_by('date')
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)
@@ -309,9 +320,9 @@ class homeSports(TemplateView):
                     for i in range(len(col3)-1):
                         if col3[i+1][0].visits > col3[i][0].visits:
                             (col3[i],col3[i+1])=(col3[i+1],col3[i])
-        col1=col1[:8]
-        col2=col2[:8]
-        col3=col3[:8]
+        col1=col1[:3]
+        col2=col2[:3]
+        col3=col3[:3]
         followingobj=Following.objects.get(current_user=name)
         firstpaper=followingobj.newspaper.all()[0]
 
@@ -326,7 +337,7 @@ class homeMarket(TemplateView):
         filter="most_liked"
         date_today=str(datetime.today())
         date_today=date_today[:10]
-        d = str(datetime.today() - timedelta(days=1))
+        d = str(datetime.today() - timedelta(days=2))
         d=d[:10]
         name=request.user
         userprofile=Userprofile.objects.filter(user=name)
@@ -436,9 +447,9 @@ class homeMarket(TemplateView):
                     for i in range(len(col3)-1):
                         if col3[i+1][0].visits > col3[i][0].visits:
                             (col3[i],col3[i+1])=(col3[i+1],col3[i])
-        col1=col1[:8]
-        col2=col2[:8]
-        col3=col3[:8]
+        col1=col1[:3]
+        col2=col2[:3]
+        col3=col3[:3]
         followingobj=Following.objects.get(current_user=name)
         firstpaper=followingobj.newspaper.all()[0]
 
@@ -470,7 +481,7 @@ class unitednations(TemplateView):
         col3=[]
         liked_posts=[]
         disliked_posts=[]
-        all_posts=Post.objects.filter(source="unnewsstream.org").filter(date__range=[d,date_today]).order_by('?')
+        all_posts=Post.objects.filter(source="unnewsstream.org").filter(date__range=[d,date_today])
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)
@@ -564,7 +575,9 @@ class unitednations(TemplateView):
                     for i in range(len(col3)-1):
                         if col3[i+1][0].visits > col3[i][0].visits:
                             (col3[i],col3[i+1])=(col3[i+1],col3[i])
-
+        col1=col1[:3]
+        col2=col2[:3]
+        col3=col3[:3]
         followingobj=Following.objects.get(current_user=name)
         firstpaper=followingobj.newspaper.all()[0]
 

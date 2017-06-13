@@ -19,7 +19,7 @@ if ($(window).scrollTop() == ($(document).height() - $(window).height()))
 ready=false;
 $.ajax(
 {
-url:'/home/scroll/loadcontent/',
+url:'/home/scroll/loadcontent/home',
 method:'get',
 data:{posts:str},
 dataType:'json',
