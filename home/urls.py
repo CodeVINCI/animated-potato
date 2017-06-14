@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from . import views
-from .views import unitednations,home,homeSports,homeMarket
+from .views import unitednations,home,homeSports,homeMarket,hindi
 
 urlpatterns=[url(r'^(?P<filter>[\w]+)$', home.as_view(), name='home'),
              url(r'^scroll/loadcontent/(?P<theme>[\w]+)$', views.loadcontent, name='loadcontent'),
@@ -11,6 +11,7 @@ urlpatterns=[url(r'^(?P<filter>[\w]+)$', home.as_view(), name='home'),
              url('^vote/(?P<action>[\w.@+-]+)/(?P<pk>[0-9]+)/$', views.sociallike,name='sociallike'),
              url(r'^Politics/(?P<filter>.+)$',home.as_view(),name='home'),
              url(r'^politics/(?P<filter>.+)$',home.as_view(),name='home'),
+             url(r'^hindinews/(?P<filter>.+)$',hindi.as_view(),name='hindi'),
              url(r'^Sports/$',homeSports.as_view(),name='home-sports'),
              url(r'^sports/$',homeSports.as_view(),name='home-sports'),
              url(r'^Market/$',homeMarket.as_view(),name='home-market'),
