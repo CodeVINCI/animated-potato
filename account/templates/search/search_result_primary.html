@@ -14,8 +14,8 @@
     {% load static %}
     <link rel="stylesheet" href="{% static "home.css"%}" type="text/css"/>
     <link rel="shortcut icon" type="image/png" href="{% static "images/favicon.ico" %}"/>
-         <script src="{% static 'js/home.js' %}"></script>
-    <title>Socrates-Politics</title>
+         <script src="{% static 'js/search_result_primary.js' %}"></script>
+    <title>Socrates-Search</title>
 </head>
 <body style="overflow-x:scroll">
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -51,7 +51,7 @@
             <li><a href="/home/market">Market</a></li>
               <li><a href="/home/UnitedNations/most_liked">United Nations</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">News in Hindi</a></li>
+            <li><a href="/home/hindinews/most_liked">News in Hindi</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">News in English</a></li>
           </ul>
@@ -108,12 +108,13 @@
     <br><br>
     <hr>
 </div>
-<div class="col-6 col-md-4">
+<div id="results">
+<div class="col-6 col-md-4" id="col1">
          <ul id="tilescol1" class="unstyled">
 
         {% for post in col1 %}
 
-   <li><div class="thumbnail">
+   <li><div class="thumbnail" id="{{post.0.pk}}">
       <img src={{ post.0.image.url }} alt="...">
       <div class="caption">
           <p style="font-size:10px;">{{ post.0.date }}</p>
@@ -148,7 +149,7 @@
           <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
           <!-- Button trigger modal -->
 <p>
-    <a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
+    <a data="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
   {{commentbox.text}}
    </a>
     <a style="float:right;" href="#" class="fa fa-facebook"></a>
@@ -277,11 +278,11 @@
  {% endfor %}
          </ul>
     </div>
-    <div class="col-6 col-md-4">
+    <div class="col-6 col-md-4" id="col2">
        <ul id="tilescol2" class="unstyled">
         {% for post in col2 %}
 
-   <li><div class="thumbnail">
+   <li><div class="thumbnail" id="{{post.0.pk}}">
       <img src={{ post.0.image.url }} alt="...">
       <div class="caption">
           <p style="font-size:10px;">{{ post.0.date }}</p>
@@ -314,7 +315,7 @@
  </button></div>
          <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                 <!-- Button trigger modal -->
-<p><a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
+<p><a data="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
   {{commentbox.text}}
 </a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button></p>
 
@@ -435,11 +436,11 @@
  {% endfor %}
          </ul>
     </div>
-    <div class="col-6 col-md-4">
+    <div class="col-6 col-md-4" id="col3">
        <ul id="tilescol3" class="unstyled">
         {% for post in col3 %}
 
-   <li><div class="thumbnail">
+   <li><div class="thumbnail" id="{{post.0.pk}}">
       <img src={{ post.0.image.url }} alt="...">
       <div class="caption">
           <p style="font-size:10px;">{{ post.0.date }}</p>
@@ -472,7 +473,7 @@
  </button></div>
         <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
-<p><a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
+<p><a data="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
   {{commentbox.text}}
 </a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button></p>
 

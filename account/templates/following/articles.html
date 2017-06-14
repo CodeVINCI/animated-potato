@@ -92,12 +92,12 @@
 <meta id="my-data" data-filter="{{ filter }}">
 <div class="span12" id="wrap">
     <h2 style="margin-left:25px;">Your Saved Articles</h2><br>
-    <div class="col-6 col-md-4">
-         <ul id="tiles" class="unstyled">
+    <div class="col-6 col-md-4" id="col1">
+         <ul id="tilescol1" class="unstyled">
 
         {% for post in col1 %}
 
-   <li><div class="thumbnail">
+   <li><div class="thumbnail" id="{{post.0.pk}}">
       <img src={{ post.0.image.url }} alt="...">
       <div class="caption">
           <p style="font-size:10px;">{{ post.0.date }}</p>
@@ -229,11 +229,11 @@
  {% endfor %}
          </ul>
     </div>
-    <div class="col-6 col-md-4">
-       <ul id="tiles" class="unstyled">
+    <div class="col-6 col-md-4" id="col2">
+       <ul id="tilescol2" class="unstyled">
         {% for post in col2 %}
 
-   <li><div class="thumbnail">
+   <li><div class="thumbnail" id="{{post.0.pk}}">
       <img src={{ post.0.image.url }} alt="...">
       <div class="caption">
           <p style="font-size:10px;">{{ post.0.date }}</p>
@@ -368,11 +368,11 @@
  {% endfor %}
          </ul>
     </div>
-    <div class="col-6 col-md-4">
-       <ul id="tiles" class="unstyled">
+    <div class="col-6 col-md-4" id="col3">
+       <ul id="tilescol3" class="unstyled">
         {% for post in col3 %}
 
-   <li><div class="thumbnail">
+   <li><div class="thumbnail" id="{{post.0.pk}}">
       <img src={{ post.0.image.url }} alt="...">
       <div class="caption">
           <p style="font-size:10px;">{{ post.0.date }}</p>
