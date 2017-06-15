@@ -11,6 +11,67 @@ import tempfile
 from django.core import files
 from django.utils import timezone
 
+#function for dainikbhaskar news scraping
+def Scrap_dainik_bhaskar():
+    url = "http://www.bhaskar.com/today-top-news/"
+    context = ssl._create_unverified_context()
+    html_base=urllib.urlopen(url,context=context)
+    soup_base=BeautifulSoup(html_base,"html.parser")
+    soup_base=soup_base.find("div",{"class":"content_lhs"})
+    newslinks=soup_base.findAll("div",{"class":"br-news-row-image"})
+    for link in newslinks:
+        try:
+            articleurl=link.find("div",{"class":"br_img"}).find('a')['href']
+            urlToimage=link.find("div",{"class":"br_img"}).find('a').img['src']
+            title=link.find("p").find('a').text
+            articleurl=articleurl.strip()
+            urlToImage=urlToImage.strip()
+            title=title.strip()
+            description="  "
+        except:
+            pass
+
+#function for dainikjagran news scraping
+def Scrape_dainik_jagran():
+    url= "http://www.jagran.com/top-news.html?src=eptn"
+    context = ssl._create_unverified_context()
+    html_base=urllib.urlopen(url,context=context)
+    soup_base=BeautifulSoup(html_base,"html.parser")
+    soup_base=soup_base.find("ul",{"class":"swipe-right"})
+    newslinks=soup_base.findAll("li")
+    for link in newslinks:
+        try:
+            url= link.find('a')['href']
+            urlToImage= link.find('a').img['src']
+            title= link.find('a')['title']
+            title=" ".join(title.split())
+            description=" "
+        except:
+            pass
+
+
+
+
+#function for amarujala news scraping
+def Scrap_amarujala():
+    url = "http://www.amarujala.com/search?search=top%20news"
+    context = ssl._create_unverified_context()
+    html_base=urllib.urlopen(url,context=context)
+    soup_base=BeautifulSoup(html_base,"html.parser")
+    soup_base=soup_base.find("div",{"id":"allDiv"})
+    newslinks=soup_base.findAll("div",{"class":"mostRdr"})
+    for link in newslinks:
+        try:
+            articleurl="www.amarujala.com"+str(link.find("section",{"class":"pd10"}).find('h3').a['href'])
+            title=link.find("section",{"class":"pd10"}).find('h3').find('a').text
+            urlToimage="http:"+str(link.find("section",{"class":"pd10"}).find("div",{"class":"imgDv"}).img['data-src'])
+            description = link.find("section",{"class":"pd10"}).find("div",{"class":"desc"}).text
+            articleurl=articleurl.strip()
+            urlToImage=urlToImage.strip()
+            title=title.strip()
+            description=description.strip()
+        except:
+            pass
 
 def Scrape_hindustan():
     url = "http://www.livehindustan.com/national/news"
