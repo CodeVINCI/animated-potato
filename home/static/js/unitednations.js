@@ -13,7 +13,52 @@ window.location.href = ur;
 
 });
 
-$('.thumbnail').on('click', "#readlater", function(event)
+$(".navbar-form").on('click','#searchsubmit',function(event)
+{
+var search_term=$(this).siblings('div').find('#socrates-search').val();
+var ur= ("/account/searchsocrates/").concat(search_term);
+ if (search_term.trim() ==="")
+    {alert('Empty search');
+    return 0;
+    }
+ window.location.href= ur;
+});
+
+var ready=true;
+function yHandler()
+{
+var str="";
+$('.thumbnail').each(function()
+{
+ str +=($(this).attr("id").concat(" "));
+});
+if ($(window).scrollTop() == ($(document).height() - $(window).height()))
+{
+ready=false;
+$.ajax(
+{
+url:'/home/scroll/loadcontent/unitednations',
+method:'get',
+data:{posts:str},
+dataType:'json',
+success:function(response)
+{
+
+  $("#col1").children('#tilescol1').append(response.col1);
+  $("#col1").children('#tilescol1').append(response.col4);
+  $("#col2").children('#tilescol2').append(response.col2);
+  $("#col2").children('#tilescol2').append(response.col5);
+  $("#col3").children('#tilescol3').append(response.col3);
+  $("#col3").children('#tilescol3').append(response.col6);
+}
+}).always(function(){
+                ready = true; //Reset the flag here
+            });
+}
+}
+window.onscroll=yHandler;
+
+$('#wrap').on('click', "#readlater", function(event)
 {
 var id=$(this).parent().prev('p').attr('id');
 var ur = ('/account/save/readlater/').concat(id);
@@ -29,7 +74,7 @@ success:function(response)
 });
 
 //social like a post ajax request
-$('.social_buttons').on('click', "#like", function(event)
+$('#wrap').on('click', "#like", function(event)
 {
 event.preventDefault();
 var id =$(this).children('meta').data().pk;
@@ -49,7 +94,7 @@ $.ajax(
 });
 
 //social dislike a post ajax request
-$('.social_buttons').on('click', "#dislike", function(event)
+$('#wrap').on('click', "#dislike", function(event)
 {
 event.preventDefault();
 var id =$(this).children('meta').data().pk;
@@ -69,7 +114,7 @@ $.ajax(
 
 
 //visit site counter ajax request
- $('.thumbnail').on('click', '#visitbutton', function(event)
+ $('#wrap').on('click', '#visitbutton', function(event)
 {
 var id=$(this).parent('p').attr('id');
 var ur = ('/home/visitors/').concat(id);
@@ -78,7 +123,7 @@ return true;
 });
 
 //suggestions counter and generate suggest notification ajax request
-$('.thumbnail').on('click', '#suggestbutton', function(event)
+$('#wrap').on('click', '#suggestbutton', function(event)
 {
 var id=$(this).parent('p').attr('id');
 var ur = ('/home/suggestion/').concat(id);
@@ -87,11 +132,14 @@ return false;
 });
 
 /*showing url on opening the modal*/
-  $(window.location.hash).modal('show');
-    $('a[data-toggle="modal"]').click(function(){
-        window.location.hash = $(this).attr('href');
+  $('#wrap').on('click', 'a[data-toggle="modal"]' ,function(event){
+        window.location.hash = $(this).attr('data');
+      var m = $(this).parent('p').nextAll('.modal').first().attr('id');
+      m = ('#').concat(m);
+      $(m).modal('show');
+      //$(window.location.hash).modal('show');
+        return false;
     });
-
     function revertToOriginalURL() {
         var original = window.location.href.substr(0, window.location.href.indexOf('#'))
         history.replaceState({}, document.title, original);
@@ -102,7 +150,7 @@ return false;
     });
 
 /*handling comment form submission*/
-$('.thumbnail').on('click','#comment_button', function(event){
+$('#wrap').on('click','#comment_button', function(event){
     event.preventDefault();
     console.log("form submitted!")
      var id = $(this).prev('meta').data().pk// sanity check
@@ -134,7 +182,7 @@ $('.thumbnail').on('click','#comment_button', function(event){
 });
 
 //javascript for comment delete button
-$('.arguments').on('click','.comment_delete',function(event)
+$('#wrap').on('click','.comment_delete',function(event)
 {
 var id= $(this).attr('data-pk');
 var ur= "/home/remove_comment/".concat(id);
@@ -153,7 +201,7 @@ return false;
 });
 
 //javascript for comment like button
-$('.arguments').on('click','.comment_like',function(event)
+$('#wrap').on('click','.comment_like',function(event)
 {
 var id= $(this).attr('data-pk');
 var ur= "/home/like_comment/".concat(id);
@@ -163,7 +211,7 @@ return false;
 });
 
 //javascript for comment reply button
-$('.arguments').on('click','.comment_reply',function(event)
+$('#wrap').on('click','.comment_reply',function(event)
 {
 var id= $(this).attr('data-pk');
 var ur= "/home/reply_comment/".concat(id);

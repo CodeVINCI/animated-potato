@@ -3,14 +3,16 @@
 {% load static %}
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script
+
+   <script
 			  src="https://code.jquery.com/jquery-3.2.1.min.js"
 			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 			  crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+
     {% load static %}
     <link rel="stylesheet" href="{% static "home.css"%}" type="text/css"/>
     <link rel="shortcut icon" type="image/png" href="{% static "images/favicon.ico" %}"/>
@@ -51,7 +53,7 @@
             <li><a href="/home/market/">Market</a></li>
               <li><a href="/home/UnitedNations/most_liked">United Nations</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="#">News in Hindi</a></li>
+            <li><a href="/home/hindinews/most_liked">News in Hindi</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">News in English</a></li>
           </ul>
@@ -103,7 +105,7 @@
         <button type="button" class="btn btn-secondary" style="width:100px;height:22px;padding:1px;background-color:maroon;color:white;"><b>Go</b></button>
     </div>
     <div class="col-6 col-md-4" id="col1">
-         <ul id="tiles" class="unstyled">
+         <ul id="tilescol1" class="unstyled">
 
         {% for post in col1 %}
 
@@ -142,7 +144,7 @@
           <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
           <!-- Button trigger modal -->
 <p>
-    <a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
+    <a data="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
   {{commentbox.text}}
    </a>
     <a style="float:right;" href="#" class="fa fa-facebook"></a>
@@ -243,7 +245,7 @@
          </ul>
     </div>
     <div class="col-6 col-md-4" id="col2">
-       <ul id="tiles" class="unstyled">
+       <ul id="tilescol2" class="unstyled">
         {% for post in col2 %}
 
    <li><div class="thumbnail" id="{{post.0.pk}}">
@@ -279,7 +281,7 @@
  </button></div>
          <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                 <!-- Button trigger modal -->
-<p><a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
+<p><a data="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
   {{commentbox.text}}
 </a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button></p>
 
@@ -377,7 +379,7 @@
          </ul>
     </div>
     <div class="col-6 col-md-4" id="col3">
-       <ul id="tiles" class="unstyled">
+       <ul id="tilescol3" class="unstyled">
         {% for post in col3 %}
 
    <li><div class="thumbnail" id="{{post.0.pk}}">
@@ -413,7 +415,7 @@
  </button></div>
         <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
-<p><a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
+<p><a data="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
   {{commentbox.text}}
 </a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button></p>
 

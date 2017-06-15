@@ -24,7 +24,7 @@ class home(TemplateView):
     def get(self,request,filter):
         date_today=str(datetime.today())
         date_today=date_today[:10]
-        d = str(datetime.today() - timedelta(days=1))
+        d = str(datetime.today() - timedelta(days=4))
         d=d[:10]
         name=request.user
         userprofile=Userprofile.objects.filter(user=name)
@@ -143,7 +143,7 @@ class home(TemplateView):
         args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
         return render(request,self.template_name,args)
 
-def loadcontent(request):
+def loadcontent(request,theme):
     date_today=str(datetime.today())
     date_today=date_today[:10]
     d = str(datetime.today() - timedelta(days=7))
@@ -152,9 +152,22 @@ def loadcontent(request):
     ex=request.GET.get('posts','')
     ex=ex.strip()
     ex=ex.split(" ")
-    post=list(reversed(Post.objects.filter(category="general").exclude(pk__in=ex)))
+    print(theme)
+    print(ex)
+    if theme=="home":
+        post=list(reversed(Post.objects.filter(category="general").exclude(pk__in=ex).order_by('date')))
+    elif theme=="sports":
+        post=list(reversed(Post.objects.filter(category="sports").exclude(pk__in=ex).order_by('date')))
+    elif theme=="market":
+        post=list(reversed(Post.objects.filter(category="business").exclude(pk__in=ex).order_by('date')))
+    elif theme=="unitednations":
+        post=list(reversed(Post.objects.filter(category="UN").exclude(pk__in=ex).order_by('date')))
+    elif theme=="hindi":
+        post=list(reversed(Post.objects.filter(category="hindi").exclude(pk__in=ex).order_by('date')))
+
+
     thumbnails=[]
-    for i in range(3):
+    for i in range(6):
         whole=""
         a='<li><div class="thumbnail" id="'+str(post[i].pk)+'"><img src="'+str(post[i].image.url)+'" alt="..."><div class="caption"><p style="font-size:10px;">'+str((post[i].date).strftime("%b %d,%Y"))+'</p><h3 style="font-family:"Times New Roman", Times, serif;">'+(post[i].headline).encode("utf8")+'</h3><p style="font-size:10px;">'+(post[i].author).encode("utf8")+'</p><p style="font-size:20px;">'+(post[i].story).encode("utf8")+'</p><p style="font-size:10px;">'+(post[i].source).encode("utf8")+'</p><hr><div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 170px);width: -webkit-calc(100% -170px);width: calc(100% - 170px);"><button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">'
         if len(Likes.objects.filter(post=post[i])) and request.user in Likes.objects.get(post=post[i]).users.all():
@@ -169,7 +182,7 @@ def loadcontent(request):
         else:
             d='<meta id="button_data" data-nextaction="social-dislike" data-pk="'+str(post[i].pk)+'"><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span></button></div>'
 
-        e='<p id="'+str(post[i].pk)+'"><a href="'+str(post[i].pageurl)+'" class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><!-- Button trigger modal --><p><a href="#exampleModalLong'+str(post[i].pk)+'" class="popup" data-toggle="modal"><input id="post-comment" value="" required=True  placeholder="Write a comment..."/></a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button></p><!-- Modal --><div class="modal fade" id="exampleModalLong'+str(post[0].pk)+'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><p style="font-size:10px;">'+str(post[i].pk)+'</p><h3 style="font-family:"Times New Roman", Times, serif;">'+(post[i].headline).encode("utf8")+'</h3></div><div class="modal-body"><div class="conatiner"><img src="'+str(post[i].image.url)+'" alt="..." style="width:568px;height:400px;"><p style="font-size:10px;">'+(post[i].author).encode("utf8")+'</p><p style="font-size:20px;">'+(post[i].story).encode("utf8")+'</p><p style="font-size:10px;">'+(post[i].source).encode("utf8")+'</p><div class="media"><div class="media-left">'
+        e='<p id="'+str(post[i].pk)+'"><a href="'+str(post[i].pageurl)+'" class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><!-- Button trigger modal --><p><a data="#exampleModalLong'+str(post[i].pk)+'" class="popup" data-toggle="modal"><input id="post-comment" value="" required=True  placeholder="Write a comment..."/></a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button></p><!-- Modal --><div class="modal fade" id="exampleModalLong'+str(post[i].pk)+'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><p style="font-size:10px;">'+str(post[i].pk)+'</p><h3 style="font-family:"Times New Roman", Times, serif;">'+(post[i].headline).encode("utf8")+'</h3></div><div class="modal-body"><div class="conatiner"><img src="'+str(post[i].image.url)+'" alt="..." style="width:568px;height:400px;"><p style="font-size:10px;">'+(post[i].author).encode("utf8")+'</p><p style="font-size:20px;">'+(post[i].story).encode("utf8")+'</p><p style="font-size:10px;">'+(post[i].source).encode("utf8")+'</p><div class="media"><div class="media-left">'
         pic=Userprofile.objects.get(user=request.user).image
         csrf=django.middleware.csrf.get_token(request)
 
@@ -189,7 +202,7 @@ def loadcontent(request):
         thumbnails.append(whole)
 
 
-    response={'col1':thumbnails[0],'col2':thumbnails[1],'col3':thumbnails[2]}
+    response={'col1':thumbnails[0],'col2':thumbnails[1],'col3':thumbnails[2],'col4':thumbnails[3],'col5':thumbnails[4],'col6':thumbnails[5]}
     return JsonResponse(response)
 
 class homeSports(TemplateView):
@@ -199,7 +212,7 @@ class homeSports(TemplateView):
         filter="most_liked"
         date_today=str(datetime.today())
         date_today=date_today[:10]
-        d = str(datetime.today() - timedelta(days=1))
+        d = str(datetime.today() - timedelta(days=4))
         d=d[:10]
         name=request.user
         userprofile=Userprofile.objects.filter(user=name)
@@ -215,7 +228,7 @@ class homeSports(TemplateView):
         col3=[]
         liked_posts=[]
         disliked_posts=[]
-        all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="sports").order_by('?')
+        all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="sports").order_by('date')
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)
@@ -309,9 +322,9 @@ class homeSports(TemplateView):
                     for i in range(len(col3)-1):
                         if col3[i+1][0].visits > col3[i][0].visits:
                             (col3[i],col3[i+1])=(col3[i+1],col3[i])
-        col1=col1[:8]
-        col2=col2[:8]
-        col3=col3[:8]
+        col1=col1[:3]
+        col2=col2[:3]
+        col3=col3[:3]
         followingobj=Following.objects.get(current_user=name)
         firstpaper=followingobj.newspaper.all()[0]
 
@@ -326,7 +339,7 @@ class homeMarket(TemplateView):
         filter="most_liked"
         date_today=str(datetime.today())
         date_today=date_today[:10]
-        d = str(datetime.today() - timedelta(days=1))
+        d = str(datetime.today() - timedelta(days=4))
         d=d[:10]
         name=request.user
         userprofile=Userprofile.objects.filter(user=name)
@@ -436,9 +449,9 @@ class homeMarket(TemplateView):
                     for i in range(len(col3)-1):
                         if col3[i+1][0].visits > col3[i][0].visits:
                             (col3[i],col3[i+1])=(col3[i+1],col3[i])
-        col1=col1[:8]
-        col2=col2[:8]
-        col3=col3[:8]
+        col1=col1[:3]
+        col2=col2[:3]
+        col3=col3[:3]
         followingobj=Following.objects.get(current_user=name)
         firstpaper=followingobj.newspaper.all()[0]
 
@@ -454,7 +467,7 @@ class unitednations(TemplateView):
     def get(self,request,filter):
         date_today=str(datetime.today())
         date_today=date_today[:10]
-        d = str(datetime.today() - timedelta(days=1))
+        d = str(datetime.today() - timedelta(days=4))
         d=d[:10]
         name=request.user
         userprofile=Userprofile.objects.filter(user=name)
@@ -470,7 +483,7 @@ class unitednations(TemplateView):
         col3=[]
         liked_posts=[]
         disliked_posts=[]
-        all_posts=Post.objects.filter(source="unnewsstream.org").filter(date__range=[d,date_today]).order_by('?')
+        all_posts=Post.objects.filter(source="unnewsstream.org").filter(date__range=[d,date_today])
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)
@@ -564,12 +577,146 @@ class unitednations(TemplateView):
                     for i in range(len(col3)-1):
                         if col3[i+1][0].visits > col3[i][0].visits:
                             (col3[i],col3[i+1])=(col3[i+1],col3[i])
-
+        col1=col1[:3]
+        col2=col2[:3]
+        col3=col3[:3]
         followingobj=Following.objects.get(current_user=name)
         firstpaper=followingobj.newspaper.all()[0]
 
         args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
         return render(request,self.template_name,args)
+
+
+
+class hindi(TemplateView):
+    template_name = "hindi/hindi.html"
+
+    def get(self,request,filter):
+        date_today=str(datetime.today())
+        date_today=date_today[:10]
+        d = str(datetime.today() - timedelta(days=4))
+        d=d[:10]
+        name=request.user
+        userprofile=Userprofile.objects.filter(user=name)
+        details=userprofile[0]
+        pic=details.image
+        form=SocratesSearchForm()
+        commentbox=comment_form()
+        all_notifications=Notification.objects.filter(user=request.user)
+        new_notifications=all_notifications.filter(seen=0)
+        ping= new_notifications.count()
+        col1=[]
+        col2=[]
+        col3=[]
+        liked_posts=[]
+        disliked_posts=[]
+        all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="hindi").order_by('date')
+        k=0
+        for post in all_posts:
+            p=Likes.objects.filter(post=post)
+            if p.count()>0 and request.user in p[0].users.all():
+                liked_posts.insert(k,1)
+                k=k+1
+            else:
+                liked_posts.insert(k,0)
+                k=k+1
+        l=0
+        for post in all_posts:
+            p=Dislikes.objects.filter(post=post)
+            if p.count()>0 and request.user in p[0].users.all():
+                disliked_posts.insert(l,1)
+                l=l+1
+            else:
+                disliked_posts.insert(l,0)
+                l=l+1
+
+
+        j=0
+        for i in xrange(0, len(all_posts), 3):
+            col1.insert(j,(all_posts[i],liked_posts[i],disliked_posts[i]))
+            if (i+1)<len(all_posts):
+                col2.insert(j,(all_posts[i+1],liked_posts[i+1],disliked_posts[i+1]))
+            if (i+2)<len(all_posts):
+                col3.insert(j,(all_posts[i+2],liked_posts[i+2],disliked_posts[i+2]))
+            j=j+1
+            if filter=='most_liked':
+                for j in range(len(col1)-1):
+                    for i in range(len(col1)-1):
+                        if col1[i+1][0].likes > col1[i][0].likes:
+                            (col1[i],col1[i+1])=(col1[i+1],col1[i])
+                for j in range(len(col2)-1):
+                    for i in range(len(col2)-1):
+                        if col2[i+1][0].likes > col2[i][0].likes:
+                            (col2[i],col2[i+1])=(col2[i+1],col2[i])
+                for j in range(len(col3)-1):
+                    for i in range(len(col3)-1):
+                        if col3[i+1][0].likes > col3[i][0].likes:
+                            (col3[i],col3[i+1])=(col3[i+1],col3[i])
+            elif filter=='most_disliked':
+                for j in range(len(col1)-1):
+                    for i in range(len(col1)-1):
+                        if col1[i+1][0].dislikes > col1[i][0].dislikes:
+                            (col1[i],col1[i+1])=(col1[i+1],col1[i])
+                for j in range(len(col2)-1):
+                    for i in range(len(col2)-1):
+                        if col2[i+1][0].dislikes > col2[i][0].dislikes:
+                            (col2[i],col2[i+1])=(col2[i+1],col2[i])
+                for j in range(len(col3)-1):
+                    for i in range(len(col3)-1):
+                        if col3[i+1][0].dislikes > col3[i][0].dislikes:
+                            (col3[i],col3[i+1])=(col3[i+1],col3[i])
+            elif filter=='most_suggested':
+                for j in range(len(col1)-1):
+                    for i in range(len(col1)-1):
+                        if col1[i+1][0].suggestions > col1[i][0].suggestions:
+                            (col1[i],col1[i+1])=(col1[i+1],col1[i])
+                for j in range(len(col2)-1):
+                    for i in range(len(col2)-1):
+                        if col2[i+1][0].suggestions > col2[i][0].suggestions:
+                            (col2[i],col2[i+1])=(col2[i+1],col2[i])
+                for j in range(len(col3)-1):
+                    for i in range(len(col3)-1):
+                        if col3[i+1][0].suggestions > col3[i][0].suggestions:
+                            (col3[i],col3[i+1])=(col3[i+1],col3[i])
+            elif filter=='most_commented':
+                for j in range(len(col1)-1):
+                    for i in range(len(col1)-1):
+                        if col1[i+1][0].totalcomments > col1[i][0].totalcomments:
+                            (col1[i],col1[i+1])=(col1[i+1],col1[i])
+                for j in range(len(col2)-1):
+                    for i in range(len(col2)-1):
+                        if col2[i+1][0].totalcomments > col2[i][0].totalcomments:
+                            (col2[i],col2[i+1])=(col2[i+1],col2[i])
+                for j in range(len(col3)-1):
+                    for i in range(len(col3)-1):
+                        if col3[i+1][0].totalcomments > col3[i][0].totalcomments:
+                            (col3[i],col3[i+1])=(col3[i+1],col3[i])
+            elif filter=='most_visited':
+                for j in range(len(col1)-1):
+                    for i in range(len(col1)-1):
+                        if col1[i+1][0].visits > col1[i][0].visits:
+                            (col1[i],col1[i+1])=(col1[i+1],col1[i])
+                for j in range(len(col2)-1):
+                    for i in range(len(col2)-1):
+                        if col2[i+1][0].visits > col2[i][0].visits:
+                            (col2[i],col2[i+1])=(col2[i+1],col2[i])
+                for j in range(len(col3)-1):
+                    for i in range(len(col3)-1):
+                        if col3[i+1][0].visits > col3[i][0].visits:
+                            (col3[i],col3[i+1])=(col3[i+1],col3[i])
+        col1=col1[:3]
+        col2=col2[:3]
+        col3=col3[:3]
+        followingobj=Following.objects.get(current_user=name)
+        firstpaper=followingobj.newspaper.all()[0]
+
+        args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
+        return render(request,self.template_name,args)
+
+
+
+
+
 
 
 def sociallike(request,action,pk):

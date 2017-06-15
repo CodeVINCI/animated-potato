@@ -1,5 +1,17 @@
 $(document).ready(function()
 {
+var valnow=$('#my-data').data().filter;
+$(function() {
+    $("#filters").val(valnow);
+});
+$('div.select_filters').on('click', ".btn.btn-secondary", function(event)
+{
+event.preventDefault();
+var target= document.getElementById("filters").value;
+var ur = ("/home/UnitedNations/").concat(target);
+window.location.href = ur;
+
+});
 
 $(".navbar-form").on('click','#searchsubmit',function(event)
 {
@@ -12,24 +24,57 @@ var ur= ("/account/searchsocrates/").concat(search_term);
  window.location.href= ur;
 });
 
-$('.thumbnail').on('click', "#readlater", function(event)
+var ready=true;
+function yHandler()
+{
+var str="";
+$('.thumbnail').each(function()
+{
+ str +=($(this).attr("id").concat(" "));
+});
+if ($(window).scrollTop() == ($(document).height() - $(window).height()))
+{
+ready=false;
+$.ajax(
+{
+url:'/home/scroll/loadcontent/sports',
+method:'get',
+data:{posts:str},
+dataType:'json',
+success:function(response)
+{
+
+  $("#col1").children('#tilescol1').append(response.col1);
+  $("#col1").children('#tilescol1').append(response.col4);
+  $("#col2").children('#tilescol2').append(response.col2);
+  $("#col2").children('#tilescol2').append(response.col5);
+  $("#col3").children('#tilescol3').append(response.col3);
+  $("#col3").children('#tilescol3').append(response.col6);
+}
+}).always(function(){
+                ready = true; //Reset the flag here
+            });
+}
+}
+window.onscroll=yHandler;
+
+$('#wrap').on('click', "#readlater", function(event)
 {
 var id=$(this).parent().prev('p').attr('id');
-var ur = ('/account/remove/readlater/').concat(id);
-var li = $(this).closest('.thumbnail')
-
+var ur = ('/account/save/readlater/').concat(id);
 $.ajax(
 {
 url:ur,
 method:'get',
 success:function(response)
 {
-li.fadeOut('slow', function() { li.remove(); });
+ alert('Post is saved to your library');
 }
 });
 });
 
-$('.social_buttons').on('click', "#like", function(event)
+//social like a post ajax request
+$('#wrap').on('click', "#like", function(event)
 {
 event.preventDefault();
 var id =$(this).children('meta').data().pk;
@@ -48,7 +93,8 @@ $.ajax(
 
 });
 
-$('.social_buttons').on('click', "#dislike", function(event)
+//social dislike a post ajax request
+$('#wrap').on('click', "#dislike", function(event)
 {
 event.preventDefault();
 var id =$(this).children('meta').data().pk;
@@ -66,7 +112,9 @@ $.ajax(
  });
  });
 
- $('.thumbnail').on('click', '#visitbutton', function(event)
+
+//visit site counter ajax request
+ $('#wrap').on('click', '#visitbutton', function(event)
 {
 var id=$(this).parent('p').attr('id');
 var ur = ('/home/visitors/').concat(id);
@@ -74,7 +122,8 @@ $.get(ur);
 return true;
 });
 
-$('.thumbnail').on('click', '#suggestbutton', function(event)
+//suggestions counter and generate suggest notification ajax request
+$('#wrap').on('click', '#suggestbutton', function(event)
 {
 var id=$(this).parent('p').attr('id');
 var ur = ('/home/suggestion/').concat(id);
@@ -83,11 +132,14 @@ return false;
 });
 
 /*showing url on opening the modal*/
-  $(window.location.hash).modal('show');
-    $('a[data-toggle="modal"]').click(function(){
-        window.location.hash = $(this).attr('href');
+  $('#wrap').on('click', 'a[data-toggle="modal"]' ,function(event){
+        window.location.hash = $(this).attr('data');
+      var m = $(this).parent('p').nextAll('.modal').first().attr('id');
+      m = ('#').concat(m);
+      $(m).modal('show');
+      //$(window.location.hash).modal('show');
+        return false;
     });
-
     function revertToOriginalURL() {
         var original = window.location.href.substr(0, window.location.href.indexOf('#'))
         history.replaceState({}, document.title, original);
@@ -96,9 +148,9 @@ return false;
     $('.modal').on('hidden.bs.modal', function () {
         revertToOriginalURL();
     });
-//this is ajax of comment sectioon do something to it so that it will work
+
 /*handling comment form submission*/
-$('.thumbnail').on('click','#comment_button', function(event){
+$('#wrap').on('click','#comment_button', function(event){
     event.preventDefault();
     console.log("form submitted!")
      var id = $(this).prev('meta').data().pk// sanity check
@@ -108,6 +160,12 @@ $('.thumbnail').on('click','#comment_button', function(event){
     var csrf=$(this).siblings('#post-comment').prev('input').attr('value');
     var out=$(this);
     var da={the_post:ht, pk:id, csrfmiddlewaretoken: csrf};
+
+    if (ht.trim() ==="")
+    {alert('Comment is empty');
+    return 0;
+    }
+
     $.ajax(
     {
       url:ur,
@@ -121,11 +179,50 @@ $('.thumbnail').on('click','#comment_button', function(event){
       }
     });
 
-
 });
 
+//javascript for comment delete button
+$('#wrap').on('click','.comment_delete',function(event)
+{
+var id= $(this).attr('data-pk');
+var ur= "/home/remove_comment/".concat(id);
+var out = $(this)
+$.ajax(
+{
+url:ur,
+method:'get',
+success:function(response)
+{
+var li = out.closest('li');
+li.fadeOut('slow', function() { li.remove(); });
+}
+});
+return false;
 });
 
+//javascript for comment like button
+$('#wrap').on('click','.comment_like',function(event)
+{
+var id= $(this).attr('data-pk');
+var ur= "/home/like_comment/".concat(id);
+var out = $(this);
+alert(ur);
+return false;
+});
+
+//javascript for comment reply button
+$('#wrap').on('click','.comment_reply',function(event)
+{
+var id= $(this).attr('data-pk');
+var ur= "/home/reply_comment/".concat(id);
+var out = $(this);
+alert(ur);
+return false;
+});
+
+
+//final paranthesis
+});
 
 //this is csrf_token in javascript don't remove it.
 $(function() {

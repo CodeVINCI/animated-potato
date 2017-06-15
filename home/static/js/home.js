@@ -19,16 +19,19 @@ if ($(window).scrollTop() == ($(document).height() - $(window).height()))
 ready=false;
 $.ajax(
 {
-url:'/home/scroll/loadcontent/',
+url:'/home/scroll/loadcontent/home',
 method:'get',
 data:{posts:str},
 dataType:'json',
 success:function(response)
 {
 
-  $("#col1").children('#tiles').append(response.col1);
-  $("#col2").children('#tiles').append(response.col2);
-  $("#col3").children('#tiles').append(response.col3);
+  $("#col1").children('#tilescol1').append(response.col1);
+  $("#col1").children('#tilescol1').append(response.col4);
+  $("#col2").children('#tilescol2').append(response.col2);
+  $("#col2").children('#tilescol2').append(response.col5);
+  $("#col3").children('#tilescol3').append(response.col3);
+  $("#col3").children('#tilescol3').append(response.col6);
 }
 }).always(function(){
                 ready = true; //Reset the flag here
@@ -138,17 +141,24 @@ return false;
 });
 
 /*showing url on opening the modal*/
-  $(window.location.hash).modal('show');
-    $('#wrap').on('click', 'a[data-toggle="modal"]' ,function(event){
-        window.location.hash = $(this).attr('href');
+  //$(window.location.hash).modal('show');
+   $('#wrap').on('click', 'a[data-toggle="modal"]' ,function(event){
+        window.location.hash = $(this).attr('data');
+      var m = $(this).parent('p').nextAll('.modal').first().attr('id');
+      m = ('#').concat(m);
+      $(m).modal('show');
+      //$(window.location.hash).modal('show');
+        return false;
     });
+    //m.modal('show');
+    //$(window.location.hash).modal('show');
 
     function revertToOriginalURL() {
         var original = window.location.href.substr(0, window.location.href.indexOf('#'))
         history.replaceState({}, document.title, original);
     }
 
-    $('.modal').on('hidden.bs.modal', function () {
+    $('#wrap').on('hidden.bs.modal','.modal', function () {
         revertToOriginalURL();
     });
 
