@@ -10,9 +10,6 @@ from django.utils import timezone
 
 
 
-
-
-
 def get_news(URL):
     url=URL
     context = ssl._create_unverified_context()
