@@ -6,7 +6,7 @@ from celery.utils.log import get_task_logger
 from home.TheHindu import get_news
 from home.unnewsstream import ScrapeUN
 from home.fashion import Scrape_bussiness_of_fashion
-from home.Hindinews import Scrape_hindustan
+from home.Hindinews import Scrape_hindustan,Scrap_amarujala,Scrap_dainik_bhaskar,Scrape_dainik_jagran
 
 logger = get_task_logger(__name__)
 
@@ -18,6 +18,13 @@ def scrape_Thehindu_task():
     URLs=["https://newsapi.org/v1/articles?source=business-insider&sortBy=latest&apiKey=7b761e381bcc40ca88311d8ef360da90","https://newsapi.org/v1/articles?source=breitbart-news&sortBy=latest&apiKey=7b761e381bcc40ca88311d8ef360da90","https://newsapi.org/v1/articles?source=bloomberg&sortBy=top&apiKey=7b761e381bcc40ca88311d8ef360da90","https://newsapi.org/v1/articles?source=bild&sortBy=top&apiKey=7b761e381bcc40ca88311d8ef360da90","https://newsapi.org/v1/articles?source=bbc-sport&sortBy=top&apiKey=7b761e381bcc40ca88311d8ef360da90","https://newsapi.org/v1/articles?source=ars-technica&sortBy=latest&apiKey=7b761e381bcc40ca88311d8ef360da90","https://newsapi.org/v1/articles?source=al-jazeera-english&sortBy=latest&apiKey=7b761e381bcc40ca88311d8ef360da90","https://newsapi.org/v1/articles?source=abc-news-au&sortBy=top&apiKey=7b761e381bcc40ca88311d8ef360da90","https://newsapi.org/v1/articles?source=the-times-of-india&sortBy=top&apiKey=7b761e381bcc40ca88311d8ef360da90","https://newsapi.org/v1/articles?source=the-new-york-times&sortBy=top&apiKey=7b761e381bcc40ca88311d8ef360da90","https://newsapi.org/v1/articles?source=the-hindu&sortBy=latest&apiKey=7b761e381bcc40ca88311d8ef360da90","https://newsapi.org/v1/articles?source=bbc-news&sortBy=top&apiKey=7b761e381bcc40ca88311d8ef360da90"]
     Scrape_hindustan()
     logger.info("Scraped livehindustan.com")
+    Scrap_amarujala()
+    logger.info("Scraped amarujala.com")
+    Scrape_dainik_jagran()
+    logger.info("Scraped jagran.com")
+    Scrap_dainik_bhaskar()
+    logger.info("Scraped bhaskar.com")
+
 
     Scrape_bussiness_of_fashion()
     logger.info('Scraped Business of fashion')
