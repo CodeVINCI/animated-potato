@@ -599,6 +599,27 @@ class Myblog(TemplateView):
             socratessearch.save()
             return redirect('/account/searchsocrates')
 
+class Compare(TemplateView):
+    template_name = 'compare/compare.html'
+    def get(self,request):
+
+        date_today=str(timezone.now())
+        date_today=date_today[:10]
+        name=request.user
+
+        userprofile=Userprofile.objects.filter(user=name)
+        followingobj=Following.objects.get(current_user=name)
+
+        all_notifications=Notification.objects.filter(user=request.user)
+        new_notifications=all_notifications.filter(seen=0)
+        ping= new_notifications.count()
+        firstpaper=followingobj.newspaper.all()[0]
+        details=userprofile[0]
+        pic=details.image
+        form=SocratesSearchForm()
+        args={'new_notifications':new_notifications,'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'date_today':date_today,'firstpaper':firstpaper}
+        return render(request,self.template_name,args)
+
 
 def connections(request,action,pk):
     if request.method=='GET':
