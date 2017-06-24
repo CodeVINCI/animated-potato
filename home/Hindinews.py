@@ -23,7 +23,7 @@ def Scrap_dainik_bhaskar():
     for link in newslinks:
         try:
             articleurl=link.find("div",{"class":"br_img"}).find('a')['href']
-            urlToimage=link.find("div",{"class":"br_img"}).find('a').img['src']
+            urlToImage=link.find("div",{"class":"br_img"}).find('a').img['src']
             title=link.find("p").find('a').text
             articleurl=articleurl.strip()
             urlToImage=urlToImage.strip()
@@ -102,7 +102,7 @@ def Scrape_dainik_jagran():
     articles=[]
     for link in newslinks:
         try:
-            articleurl= link.find('a')['href']
+            articleurl= "http://www.jagran.com"+link.find('a')['href']
             urlToImage= link.find('a').img['src']
             title= link.find('a')['title']
             title=" ".join(title.split())
@@ -183,7 +183,7 @@ def Scrap_amarujala():
     articles=[]
     for link in newslinks:
         try:
-            articleurl="www.amarujala.com"+str(link.find("section",{"class":"pd10"}).find('h3').a['href'])
+            articleurl="http://www.amarujala.com"+str(link.find("section",{"class":"pd10"}).find('h3').a['href'])
             title=link.find("section",{"class":"pd10"}).find('h3').find('a').text
             urlToimage="http:"+str(link.find("section",{"class":"pd10"}).find("div",{"class":"imgDv"}).img['data-src'])
             description = link.find("section",{"class":"pd10"}).find("div",{"class":"desc"}).text

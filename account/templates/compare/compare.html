@@ -91,6 +91,16 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-flui-->
  </nav>
+<div style="margin-top:80px;" class="container">
+{{compare_form.title}}
+    <br><br>
+    {{compare_form.posts}}
+    <br>
+    <h5>Published &nbsp;
+        {{compare_form.published}}</h5>
+    <br>
+    <button class="btn small-btn">Save</button>
+</div>
 {% else %}
 <p><a href="/account/login">You need to login first</a></p>
 <h1>OR</h1>
