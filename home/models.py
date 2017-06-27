@@ -35,6 +35,8 @@ class Post(models.Model):
 
     def __unicode__(self):
         return smart_unicode(self.headline)
+    def get_share_title(self):
+        return smart_unicode(self.headline+" "+"via Socrates.news")
 
     class Meta:
         unique_together=("headline","author")

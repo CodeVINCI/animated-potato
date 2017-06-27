@@ -91,62 +91,16 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-flui-->
  </nav>
-
-
-<div class="container-fluid text-center">
-  <div class="row content">
-    <div class="col-sm-1 sidenav">
-        <br><br><br><br>
-        <b><p>Feeds</p></b><hr>
-      <p><a href="#">Activity</a></p>
-      <a href="#">Blog<span class="badge">5</span></a><br><br>
-<a href="/account/{{ user }}/followers/">Followers<span class="badge">{{ followerno }}</span></a><br><br>
-<a href="/account/{{ user }}/following/">Following<span class="badge">{{ followingno }}+{{ subscriptionno }}</span></a><br><br>
-<a href="#">Messages<span class="badge">2</span></a><br><br>
-        <a href="#">Follow your Comments<span class="badge">2</span></a><br><br>
-    </div>
-
-<div class="col-sm-8 text-left">
-    <div class="container">
-     <div class="col-md-4">
-     <div class="imgAbt">
-         <a href="/account/profile/upload_picture">
-             {% if details.image.url %}
-             {% load static %}
-  <img src={{ pic.url }} alt="" style="width:240px;height:240px;border:5px solid #E6E6E6;border-radius:50%;">
-</a>
-         {% else %}
-         {% load static %}
-          <img src="{% static "images/Dp.png" %}" alt="" style="width:240px;height:240px;border:5px;">
-         {% endif %}
-
-     </div>
-     </div>
-    <div class="col-md-6">
-        <h2>{{user.first_name}}&nbsp; {{user.last_name}}&nbsp;<a href="/account/profile/basic_edit">Edit</a></h2>
-        <p><b>Description</b>:{{ details.description }}</p>
-        <p><b>Subscriptions</b>:{{subscription.0}},&nbsp;{{subscription.1}}...<a href ="/account/{{ user }}/subscriptions">more</a></p>
-        <p><b>My Website</b>:&nbsp;<a href="#">{{ details.website }}</a></p>
-        </div>
-    </div>
-<hr>
-    </div>
-    <div class="col-sm-2 sidenav">
-      <div class="well">
-
-          <p><b>Credentials & Highlights &nbsp;</b><a href="/account/profile/User_profile">edit</a><hr><a href="/account/profile/User_profile"><b>Work and employment</b></a><br>{{ details.workAndemployment }}<br><br><a href="/account/profile/User_profile"><b>Location</b></a><br>{{ details.location }}</p>
-
-      </div>
-      <div class="well">
-          <p><b>Dash-board</b></p><hr><a href="/account/{{ user.username }}/subscriptions"><b>My Newspapers</b></a><br><br><a href="/account/{{ user.username }}/articles"><b>My Articles</b></a><br><br><a href="#"><b>Blogs</b></a>
-      </div>
-    </div>
-  </div>
+<div style="margin-top:80px;" class="container">
+{{compare_form.title}}
+    <br><br>
+    {{compare_form.posts}}
+    <br>
+    <h5>Published &nbsp;
+        {{compare_form.published}}</h5>
+    <br>
+    <button class="btn small-btn">Save</button>
 </div>
-
-<footer class="container-fluid text-center">
-  <p>Footer Text</p>
-</footer>
 {% else %}
 <p><a href="/account/login">You need to login first</a></p>
 <h1>OR</h1>

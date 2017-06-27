@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from . import views
-from account.views import UserProfileEdit,Profileupload,Search_results,Profile,People_search,createblog,blog,Myblog,signup,newspapers
+from account.views import UserProfileEdit,Profileupload,Search_results,Profile,People_search,createblog,blog,Myblog,signup,newspapers,Compare
 from django.contrib.auth.views import login,logout,password_reset,password_reset_done,password_reset_confirm,password_reset_complete
 
 urlpatterns=[url(r'^$', views.login),
@@ -8,6 +8,7 @@ urlpatterns=[url(r'^$', views.login),
              url(r'^logout/$', logout,{'template_name':'logout/logout.html'}),
              url(r'^signup/$', signup.as_view(), name='signup'),
              url(r'^profile/$', Profile.as_view(), name='profile'),
+             url(r'^compare/$', Compare.as_view(), name='compare'),
              url(r'^settings/$', views.settings, name='settings'),
              url(r'^psettings/$',views.psettings,name='psettings'),
              url(r'^ensettings/$',views.ensettings,name='ensettings'),

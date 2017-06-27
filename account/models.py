@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.forms import ModelForm
 from home.models import Post
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 
@@ -102,4 +103,12 @@ class Notification(models.Model):
     def __unicode__(self):
         return self.user.username
 
+class Compare(models.Model):
+    user=models.ForeignKey(User)
+    title=models.CharField(max_length=1000)
+    posts=models.ManyToManyField(Post)
+    published=models.BooleanField(default=False)
+
+    def __unicode__(self):
+        return self.title
 

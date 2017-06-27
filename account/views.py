@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from account.forms import UserProfile_form,Upload_form,SocratesSearchForm,SignUp_form,UserBasicEdit_form
+from account.forms import UserProfile_form,Upload_form,SocratesSearchForm,SignUp_form,UserBasicEdit_form,Compare_form
 from account.models import Userprofile,SocratesSearch,Following,newspaper,Notification
 from home.models import Post,Likes,Dislikes
 from django.contrib.auth.decorators import login_required
@@ -271,7 +271,7 @@ class newspapers(TemplateView):
         #dates
         date_today=str(datetime.today())
         date_today=date_today[:10]
-        d = str(datetime.today() - timedelta(days=1))
+        d = str(datetime.today() - timedelta(days=2))
         d=d[:10]
         # today and a day before
 
@@ -598,6 +598,28 @@ class Myblog(TemplateView):
             socratessearch.user=request.user
             socratessearch.save()
             return redirect('/account/searchsocrates')
+
+class Compare(TemplateView):
+    template_name = 'compare/compare.html'
+    def get(self,request):
+
+        date_today=str(timezone.now())
+        date_today=date_today[:10]
+        name=request.user
+
+        userprofile=Userprofile.objects.filter(user=name)
+        followingobj=Following.objects.get(current_user=name)
+
+        all_notifications=Notification.objects.filter(user=request.user)
+        new_notifications=all_notifications.filter(seen=0)
+        ping= new_notifications.count()
+        firstpaper=followingobj.newspaper.all()[0]
+        details=userprofile[0]
+        pic=details.image
+        form=SocratesSearchForm()
+        compareform=Compare_form()
+        args={'compare_form':compareform,'new_notifications':new_notifications,'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'date_today':date_today,'firstpaper':firstpaper}
+        return render(request,self.template_name,args)
 
 
 def connections(request,action,pk):

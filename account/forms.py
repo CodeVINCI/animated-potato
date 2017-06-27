@@ -6,6 +6,7 @@ from django.db.models.signals import post_save
 from django.core.files.images import get_image_dimensions
 from django.contrib.auth.forms import UserCreationForm,UserChangeForm
 from django import forms
+from .models import Compare
 
 
 class SignUp_form(UserCreationForm):
@@ -157,3 +158,11 @@ class UserBasicEdit_form(UserChangeForm):
         fields=('first_name',
                 'last_name',
         )
+
+
+class Compare_form(forms.ModelForm):
+    title=forms.CharField(max_length=1000,required=False,
+                          widget=forms.Textarea(attrs={'cols': 100, 'rows': 2,'placeholder':'Some words about it...'}))
+    class Meta:
+        model=Compare
+        fields= ('title','posts','published',)

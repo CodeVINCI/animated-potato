@@ -20,23 +20,28 @@ def ScrapeUN():
     newslinks=soup_base.findAll("div",{"class":"news"})
     articles=[]
     for link in newslinks:
-        urlToImage=link.find("div",{"class":"media-box-image"})
-        urlToImage=urlToImage.findAll('div')[0]['data-thumbnail']
+        try:
+            urlToImage=link.find("div",{"class":"media-box-image"})
+            urlToImage=urlToImage.findAll('div')[0]['data-thumbnail']
 
-        title=link.find("div",{"class":"media-box-title"}).text+"."
-        title=" ".join(title.split())
+            title=link.find("div",{"class":"media-box-title"}).text+"."
+            title=" ".join(title.split())
+            try:
+                description=link.find("div",{"class":"media-box-text"}).text
+                description=" ".join(description.split())
+            except:
+                description=" "
 
-        description=link.find("div",{"class":"media-box-text"}).text
-        description=" ".join(description.split())
+            url=link.find("div",{"class":"media-box-title"}).find('a')['href']
 
-        url=link.find("div",{"class":"media-box-title"}).find('a')['href']
+            date=link.find("div",{"class":"media-box-date"})
+            date=date.text
+            date=date.strip()
 
-        date=link.find("div",{"class":"media-box-date"})
-        date=date.text
-        date=date.strip()
-
-        article={"author":"un-news-stream","title":title,"description":description,"url":url,"urlToImage":urlToImage,"publishedAt":date}
-        articles.append(article)
+            article={"author":"un-news-stream","title":title,"description":description,"url":url,"urlToImage":urlToImage,"publishedAt":date}
+            articles.append(article)
+        except:
+            pass
     response={"source":"unnewsstream.org","articles":articles}
     response=json.dumps(response)
 
