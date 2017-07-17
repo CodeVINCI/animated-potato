@@ -15,7 +15,8 @@ from django.utils import timezone
 def Scrape_bussiness_of_fashion():
     url="https://www.businessoffashion.com/articles/"
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
-    response = requests.get(url, headers=headers)
+    context = ssl._create_unverified_context()
+    response = requests.get(url, headers=headers,context=context)
     html_base=response.content
     soup_base=BeautifulSoup(html_base,"html.parser")
     soup_base=soup_base.find("div",{"class":"col-md-17"})

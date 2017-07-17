@@ -22,11 +22,11 @@ def scrape_Thehindu_task():
     logger.info("Scraped amarujala.com")
     Scrape_dainik_jagran()
     logger.info("Scraped jagran.com")
-    Scrap_dainik_bhaskar()
+    #Scrap_dainik_bhaskar()
     logger.info("Scraped bhaskar.com")
 
 
-    Scrape_bussiness_of_fashion()
+    #Scrape_bussiness_of_fashion()
     logger.info('Scraped Business of fashion')
 
     ScrapeUN()

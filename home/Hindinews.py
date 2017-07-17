@@ -33,7 +33,7 @@ def Scrap_dainik_bhaskar():
             articles.append(article)
         except:
             pass
-    response={"source":"Dainik Bhaskar","articles":articles}
+    response={"source":"dainik-bhaskar","articles":articles}
     response=json.dumps(response)
 
     data=json.loads(response)
@@ -111,7 +111,7 @@ def Scrape_dainik_jagran():
             articles.append(article)
         except:
             pass
-    response={"source":"Dainik Jagran","articles":articles}
+    response={"source":"dainik-jagran","articles":articles}
     response=json.dumps(response)
 
     data=json.loads(response)
@@ -195,7 +195,7 @@ def Scrap_amarujala():
             articles.append(article)
         except:
             pass
-    response={"source":"Amarujala","articles":articles}
+    response={"source":"amarujala","articles":articles}
     response=json.dumps(response)
 
     data=json.loads(response)
