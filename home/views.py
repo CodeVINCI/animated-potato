@@ -4,7 +4,7 @@ from django.contrib.auth import update_session_auth_hash
 from account.forms import SocratesSearchForm
 from account.models import Userprofile,Notification,Following
 from home.models import Post,comment,Likes,Dislikes
-from account.models import Following
+from account.models import Following,Compare
 from home.forms import comment_form
 from home.scrapers.ScrapeUN import UN
 from django.utils import timezone
@@ -139,8 +139,9 @@ class home(TemplateView):
         col3=col3[:3]
         followingobj=Following.objects.get(current_user=name)
         firstpaper=followingobj.newspaper.all()[0]
+        compares=Compare.objects.filter(user=name)
 
-        args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
+        args={'compares':compares,'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
         return render(request,self.template_name,args)
 
 def loadcontent(request,theme):
@@ -182,7 +183,7 @@ def loadcontent(request,theme):
         else:
             d='<meta id="button_data" data-nextaction="social-dislike" data-pk="'+str(post[i].pk)+'"><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span></button></div>'
 
-        e='<p id="'+str(post[i].pk)+'"><a href="'+str(post[i].pageurl)+'" class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><!-- Button trigger modal --><p><a data="#exampleModalLong'+str(post[i].pk)+'" class="popup" data-toggle="modal"><input id="post-comment" value="" required=True  placeholder="Write a comment..."/></a><a style="float:right;" href="http://www.facebook.com/sharer/sharer.php?u='+str(post[i].pageurl)+'&app_id=1885028298402855&image='+str(post[i].link)+'" target="_blank" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button><button id="addtocompare" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span class="glyphicon glyphicon-plus-sign"></span></button></p><!-- Modal --><div class="modal fade" id="exampleModalLong'+str(post[i].pk)+'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><p style="font-size:10px;">'+str((post[i].created_on).strftime("%b %d,%Y"))+'</p><h3 style="font-family:"Times New Roman", Times, serif;">'+(post[i].headline).encode("utf8")+'</h3></div><div class="modal-body"><div class="conatiner"><img src="'+str(post[i].image.url)+'" alt="..." style="width:568px;height:400px;"><p style="font-size:10px;">'+(post[i].author).encode("utf8")+'</p><p style="font-size:20px;">'+(post[i].story).encode("utf8")+'</p><p style="font-size:10px;">'+(post[i].source).encode("utf8")+'</p><div class="media"><div class="media-left">'
+        e='<p id="'+str(post[i].pk)+'"><a href="'+str(post[i].pageurl)+'" class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><!-- Button trigger modal --><p><a data="#exampleModalLong'+str(post[i].pk)+'" class="popup" data-toggle="modal"><input id="post-comment" value="" required=True  placeholder="Write a comment..."/></a><a style="float:right;" href="http://www.facebook.com/sharer/sharer.php?u='+str(post[i].pageurl)+'&app_id=1885028298402855&image='+str(post[i].link)+'" target="_blank" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button><button id="addtocompare" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus-sign"></span></button></p><!-- Modal --><div class="modal fade" id="exampleModalLong'+str(post[i].pk)+'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><p style="font-size:10px;">'+str((post[i].created_on).strftime("%b %d,%Y"))+'</p><h3 style="font-family:"Times New Roman", Times, serif;">'+(post[i].headline).encode("utf8")+'</h3></div><div class="modal-body"><div class="conatiner"><img src="'+str(post[i].image.url)+'" alt="..." style="width:568px;height:400px;"><p style="font-size:10px;">'+(post[i].author).encode("utf8")+'</p><p style="font-size:20px;">'+(post[i].story).encode("utf8")+'</p><p style="font-size:10px;">'+(post[i].source).encode("utf8")+'</p><div class="media"><div class="media-left">'
         pic=Userprofile.objects.get(user=request.user).image
         csrf=django.middleware.csrf.get_token(request)
 
@@ -327,8 +328,9 @@ class homeSports(TemplateView):
         col3=col3[:3]
         followingobj=Following.objects.get(current_user=name)
         firstpaper=followingobj.newspaper.all()[0]
+        compares=Compare.objects.filter(user=name)
 
-        args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
+        args={'compares':compares,'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
         return render(request,self.template_name,args)
 
 
@@ -454,8 +456,9 @@ class homeMarket(TemplateView):
         col3=col3[:3]
         followingobj=Following.objects.get(current_user=name)
         firstpaper=followingobj.newspaper.all()[0]
+        compares=Compare.objects.filter(user=name)
 
-        args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
+        args={'compares':compares,'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
         return render(request,self.template_name,args)
 
 
@@ -582,8 +585,9 @@ class unitednations(TemplateView):
         col3=col3[:3]
         followingobj=Following.objects.get(current_user=name)
         firstpaper=followingobj.newspaper.all()[0]
+        compares=Compare.objects.filter(user=name)
 
-        args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
+        args={'compares':compares,'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
         return render(request,self.template_name,args)
 
 
@@ -709,8 +713,9 @@ class hindi(TemplateView):
         col3=col3[:3]
         followingobj=Following.objects.get(current_user=name)
         firstpaper=followingobj.newspaper.all()[0]
+        compares=Compare.objects.filter(user=name)
 
-        args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
+        args={'compares':compares,'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
         return render(request,self.template_name,args)
 
 

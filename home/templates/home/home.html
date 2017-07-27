@@ -171,7 +171,7 @@
    </a>
     <a style="float:right;" href="http://www.facebook.com/sharer/sharer.php?u={{ post.0.pageurl }}&app_id=1885028298402855&image={{ post.0.link }}" target="_blank" class="fb-share-button fa fa-facebook"></a>
     <button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button>
-    <button id="addtocompare" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span class="glyphicon glyphicon-plus-sign"></span></button>
+    <button id="addtocompare" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus-sign"></span></button>
 </p>
 
 <!-- Modal -->
@@ -308,7 +308,7 @@
   {{commentbox.text}}
 </a><a style="float:right;" href="http://www.facebook.com/sharer/sharer.php?u={{ post.0.pageurl }}&app_id=1885028298402855&image={{ post.0.link }}" target="_blank" class="fa fa-facebook"></a>
     <button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button>
-<button id="addtocompare" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span class="glyphicon glyphicon-plus-sign"></span></button>
+<button id="addtocompare" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus-sign"></span></button>
 </p>
 
 <!-- Modal -->
@@ -446,7 +446,7 @@
 </a>
     <a style="float:right;" href="http://www.facebook.com/sharer/sharer.php?u={{ post.0.pageurl }}&app_id=1885028298402855&image={{ post.0.link }}" target="_blank" class="fa fa-facebook"></a>
     <button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button>
-<button id="addtocompare" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span class="glyphicon glyphicon-plus-sign"></span></button>
+<button id="addtocompare" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus-sign"></span></button>
 </p>
 
 <!-- Modal -->
@@ -537,6 +537,31 @@
 </div>
 
       </div></div></li>
+
+           <!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><b>Add article to your Comparisons</b></h4>
+      </div>
+      <div class="modal-body">
+          {% for compare in compares %}
+        <p><span class="glyphicon glyphicon-grain"></span>&nbsp;{{compare.title}}<span style="float:right;">{{compare.posts.count}}</span></p>
+          {% endfor %}
+          <hr>
+          <p><span class="glyphicon glyphicon-leaf"></span>&nbsp;Create new Compare</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
  {% endfor %}
          </ul>
     </div>

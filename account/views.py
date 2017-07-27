@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from account.forms import UserProfile_form,Upload_form,SocratesSearchForm,SignUp_form,UserBasicEdit_form,Compare_form
-from account.models import Userprofile,SocratesSearch,Following,newspaper,Notification
+from account.models import Userprofile,SocratesSearch,Following,newspaper,Notification,Compare
 from home.models import Post,Likes,Dislikes
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
@@ -328,7 +328,8 @@ class newspapers(TemplateView):
             for i in range(len(col2)-1):
                 if col2[i+1][0].likes > col2[i][0].likes:
                     (col2[i],col2[i+1])=(col2[i+1],col2[i])
-        args={'new_notifications':new_notifications,'all_notifications':all_notifications,'ping':ping,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'col1':col1,'col2':col2,'source':sitename,'date_today':date_today}
+        compares=Compare.objects.filter(user=name)
+        args={'compares':compares,'new_notifications':new_notifications,'all_notifications':all_notifications,'ping':ping,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'col1':col1,'col2':col2,'source':sitename,'date_today':date_today}
         return render(request,'newspapers/Newspapers.html',args)
 
     def post(self,request):
@@ -599,7 +600,7 @@ class Myblog(TemplateView):
             socratessearch.save()
             return redirect('/account/searchsocrates')
 
-class Compare(TemplateView):
+class ComparePublish(TemplateView):
     template_name = 'compare/compare.html'
     def get(self,request):
 
