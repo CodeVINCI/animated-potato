@@ -610,6 +610,7 @@ class ComparePublish(TemplateView):
 
         userprofile=Userprofile.objects.filter(user=name)
         followingobj=Following.objects.get(current_user=name)
+        compareobj = Compare.objects.filter(user=name)
 
         all_notifications=Notification.objects.filter(user=request.user)
         new_notifications=all_notifications.filter(seen=0)
@@ -619,7 +620,7 @@ class ComparePublish(TemplateView):
         pic=details.image
         form=SocratesSearchForm()
         compareform=Compare_form()
-        args={'compare_form':compareform,'new_notifications':new_notifications,'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'date_today':date_today,'firstpaper':firstpaper}
+        args={'comp':compareobj,'new_notifications':new_notifications,'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'date_today':date_today,'firstpaper':firstpaper}
         return render(request,self.template_name,args)
 
 

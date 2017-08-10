@@ -6,9 +6,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     {% load static %}
-    <link rel="stylesheet" href="{% static "profile/profile.css"%}" type="text/css"/>
+    <link rel="stylesheet" href="{% static "compare/compare.css"%}" type="text/css"/>
     <link rel="shortcut icon" type="image/png" href="{% static "profile/images/favicon.ico" %}"/>
-    <title>Socrates-{{user.first_name}} {{user.last_name}}</title>
+    <title>Socrates-Compare</title>
 </head>
 <body>
 {% if user.is_authenticated %}
@@ -91,16 +91,144 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-flui-->
  </nav>
-<div style="margin-top:80px;" class="container">
-{{compare_form.title}}
-    <br><br>
-    {{compare_form.posts}}
-    <br>
-    <h5>Published &nbsp;
-        {{compare_form.published}}</h5>
-    <br>
-    <button class="btn small-btn">Save</button>
+<div class="container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-1 sidenav">
+        <br><br><br><br>
+        <b><p>Feeds</p></b><hr>
+
+    </div>
+
+<div class="col-sm-8 text-left">
+    <div class="container">
+<table><tr>
+    <th>Date</th>
+    <th>Comparison Title</th>
+    <th>Description</th>
+    <th>Compared posts</th>
+</tr>
+    {% for compare in comp %}
+
+    <tr>
+        <td>{{compare.created_on}}</td>
+        <td><a href="#" data-toggle="modal" data-target="#myModal{{forloop.counter}}">{{compare.title|truncatechars:100}}</a></td>
+    <td>{{compare.description|truncatechars:100}}</td>
+    <td>{% for post in compare.posts.all %}
+        <p>{{forloop.counter}}.&nbsp;{{post.headline}}&nbsp;<b>{{post.source}}</b></p>
+    {% endfor %}
+    </td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+        {% for compare in comp %}
+   <!-- Modal -->
+<div class="modal fade" id="myModal{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+           <p style="font-size:10px;">{{ compare.created_on }}</p>
+           <h3 style="font-family:"Times New Roman", Times, serif;">{{ compare.title }}</h3>
+      </div>
+      <div class="modal-body">
+          <div class="conatiner">
+              <img src={{ compare.posts.all.0.image.url }} alt="..." style="width:568px;height:400px;">
+              <p style="font-size:10px;">{{ compare.user.first_name }}&nbsp;{{ compare.user.last_name }}</p>
+              <p style="font-size:20px;">{{ compare.description }}</p>
+          <p style="font-size:10px;">(To be deleted or changed)</p>
+
+
+               <div class="media">
+    <div class="media-left">
+       {% if pic.url %}
+             {% load static %}
+  <img src={{ pic.url }} alt="" style="width:40px;height:40px;border:1px solid #E6E6E6;border-radius:50%;">
+
+         {% else %}
+         {% load static %}
+          <img src="{% static "images/Dp.png" %}" alt="" style="width:40px;height:40px;border:1px;border-radius:50%;">
+         {% endif %}
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">  {{user.first_name}}&nbsp; {{user.last_name}}&nbsp;</h4>
+        <form id="post-form">
+                       {% csrf_token %}
+                       {{commentbox.text}}
+            <meta id="comment_data" data-pk="{{ post.0.pk }}">
+                        <button type="button" id="comment_button" class="btn btn-default">Comment</button>
+                    </form>
+<!--change this according to views and url-->
+ <ul id="talk" class="arguments">
+         {% for comment in post.0.comments.all reversed %}
+             <li><span style="font-size:12px;">
+                 <b><a class='via_user' href="/account/viauserpk/{{ comment.user.pk }}">{{ comment.user.first_name }}&nbsp;{{ comment.user.last_name }}</a>&nbsp;&nbsp;</b>
+                 <span style="font-size:10px;"><b>{{ comment.created_on }}</b>
+                 </span>
+                 </span>
+                 <br><span style="font-size:12px;">{{ comment.text }}
+                 </span><br>
+
+                 <div class="comment_action_line" style="height:10px;">
+                     <span style="font-size:10px;">
+                         <a class="comment_like" data-pk="{{ comment.pk }}" href="#" role="button">Like</a>&nbsp;&nbsp;&nbsp;
+                         <a class="comment_reply" data-pk="{{ comment.pk }}" href="#" role="button">Reply</a>&nbsp;&nbsp;&nbsp;
+
+                         {% ifequal comment.user.username user.username %}
+                         <a class="comment_delete" data-pk="{{ comment.pk }}" href="#" role="button">Delete</a>
+                         {% endifequal %}
+
+                     </span></div></li>
+             {% endfor %}
+        </ul>
+          <div class="modal-footer">
+
+          <p id="{{ post.0.pk }}">
+              <a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a>
+              <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </p>
+
+      </div>
+
+
+    </div>
+  </div>
+
+
+
+
+
+          </div>
+      </div>
+
+    </div>
+  </div>
 </div>
+{% endfor %}
+  </div>
+</div>
+
+
+    </div>
+    </div>
+    <div class="col-sm-2 sidenav">
+      <div class="well">
+
+          <p><b>Credentials & Highlights &nbsp;</b><a href="/account/profile/User_profile">edit</a><hr><a href="/account/profile/User_profile"><b>Work and employment</b></a><br>{{ details.workAndemployment }}<br><br><a href="/account/profile/User_profile"><b>Location</b></a><br>{{ details.location }}</p>
+
+      </div>
+      <div class="well">
+          <p><b>Dash-board</b></p><hr><a href="/account/{{ user.username }}/subscriptions"><b>My Newspapers</b></a><br><br><a href="/account/{{ user.username }}/articles"><b>My Articles</b></a><br><br><a href="#"><b>Blogs</b></a>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% else %}
 <p><a href="/account/login">You need to login first</a></p>
 <h1>OR</h1>

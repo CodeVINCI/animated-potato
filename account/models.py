@@ -104,8 +104,10 @@ class Notification(models.Model):
         return self.user.username
 
 class Compare(models.Model):
+    created_on=models.DateTimeField(auto_now_add=True)
     user=models.ForeignKey(User)
-    title=models.CharField(max_length=1000)
+    title=models.CharField(max_length=500,default="")
+    description=models.CharField(max_length=10000,default="")
     posts=models.ManyToManyField(Post)
     published=models.BooleanField(default=False)
 
