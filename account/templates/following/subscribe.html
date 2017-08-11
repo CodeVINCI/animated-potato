@@ -33,7 +33,7 @@
     <div id="subscription-list">
     <ul>
 {% for newspaper in subscriptions %}
-        <li>{{ newspaper.name }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-secondary" style="width:100px;height:25px;padding:2px;background-color:maroon;color:white;">Unsubscribe</button></li>
+        <li>{{ newspaper.name }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-secondary" style="width:100px;height:25px;padding:2px;background-color:maroon;color:white;float:right;">Unsubscribe</button></li>
     <hr>
 {% endfor %}
         </ul>
@@ -45,7 +45,7 @@
     <div id="subscribe-options-list">
 <ul>
     {% for morenewspaper in subscribemore %}
-    <li>{{ morenewspaper.name }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-secondary" style="width:100px;height:25px;padding:2px;background-color:maroon;color:white;">Subscribe</button></li>
+    <li>{{ morenewspaper.name }} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-secondary" style="float:right;width:100px;height:25px;padding:2px;background-color:maroon;color:white;">Subscribe</button></li>
     <hr>
     {% endfor %}
 </ul>
