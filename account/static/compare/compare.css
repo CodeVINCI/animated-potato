@@ -196,3 +196,8 @@ td {
     border: 1px solid black;
     padding:3px;
 }
+
+#talk li{
+width:400px;
+display:inline-block;
+}

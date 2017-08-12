@@ -5,7 +5,7 @@ from home.models import Post,Likes,Dislikes
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from account.handle_upload import handle_uploaded_file
-from home.forms import comment_form
+from home.forms import comment_form,compare_comment_form
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import SetPasswordForm,PasswordChangeForm
@@ -614,7 +614,7 @@ class ComparePublish(TemplateView):
         date_today=date_today[:10]
         name=request.user
 
-        commentbox=comment_form()
+        commentbox=compare_comment_form()
         userprofile=Userprofile.objects.filter(user=name)
         followingobj=Following.objects.get(current_user=name)
         compareobj = Compare.objects.filter(user=name)

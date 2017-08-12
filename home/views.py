@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.views.generic import TemplateView
 from django.contrib.auth import update_session_auth_hash
 from account.forms import SocratesSearchForm
-from account.models import Userprofile,Notification,Following
+from account.models import Userprofile,Notification,Following,compare_comment
 from home.models import Post,comment,Likes,Dislikes
 from account.models import Following,Compare
 from home.forms import comment_form
@@ -787,9 +787,28 @@ def post_comment(request,pk):
         args={'text':a}
         return JsonResponse(args)
 
+def post_compare_comment(request,pk):
+    if request.method == 'POST':
+        post_text = request.POST.get('the_post')
+        concerned_compare=Compare.objects.get(pk=pk)
+
+        the_comment = compare_comment(text=post_text, user=request.user,post=concerned_compare)
+        the_comment.save()
+        #concerned_compare.comments.add(the_comment)
+        #Post.objects.filter(pk=pk).update(totalcomments = F('totalcomments')+1)
+        a='<li><span style="font-size:12px;"><b><a class="via_user" href="/account/viewprofile/'+str(Userprofile.objects.get(user=request.user).pk)+'">'+str(request.user.first_name)+'&nbsp;'+str(request.user.last_name)+'&nbsp;&nbsp;</a></b><span style="font-size:10px;"><b>'+'just now'+'</b></span></span><br><span style="font-size:12px;">'+str(the_comment.text)+'</span><br><div class="comment_action_line" style="height:10px;"><span style="font-size:10px;"><a class="comment_like" data-pk="'+str(the_comment.pk)+'" href="#" role="button">Like</a>&nbsp;&nbsp;&nbsp;<a class="comment_reply" data-pk="'+str(the_comment.pk)+'" href="#" role="button">Reply</a>&nbsp;&nbsp;&nbsp;<a class="comment_delete" data-pk="'+str(the_comment.pk)+'" href="#" role="button">Delete</a></span></div></li>'
+        args={'text':a}
+        return JsonResponse(args)
+
 def remove_comment(request,pk):
     if request.method=="GET":
         the_comment=comment.objects.get(pk=pk)
+        the_comment.delete()
+        return JsonResponse({'code':"deleted comment"})
+
+def remove_compare_comment(request,pk):
+    if request.method=="GET":
+        the_comment=compare_comment.objects.get(pk=pk)
         the_comment.delete()
         return JsonResponse({'code':"deleted comment"})
 

@@ -5,11 +5,6 @@ $(function() {
     $("#filters").val(valnow);
 });
 
-$(document).on('click','#create_compare',function(event)
-{
-
-});
-
 var ready=true;
 function yHandler()
 {

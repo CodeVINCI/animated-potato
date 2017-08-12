@@ -205,13 +205,13 @@
         <form id="post-form">
                        {% csrf_token %}
                        {{commentbox.text}}
-            <meta id="comment_data" data-pk="{{ post.0.pk }}">
+            <meta id="comment_data" data-pk="{{ compare.pk }}">
                         <button type="button" id="comment_button" class="btn btn-default">Comment</button>
                     </form>
 <!--change this according to views and url-->
  <ul id="talk" class="arguments">
-         {% for comment in post.0.comments.all reversed %}
-             <li><span style="font-size:12px;">
+         {% for comment in compare.comparelink.all reversed %}
+             <li><span style="font-size:12px">
                  <b><a class='via_user' href="/account/viauserpk/{{ comment.user.pk }}">{{ comment.user.first_name }}&nbsp;{{ comment.user.last_name }}</a>&nbsp;&nbsp;</b>
                  <span style="font-size:10px;"><b>{{ comment.created_on }}</b>
                  </span>
@@ -234,7 +234,7 @@
           <div class="modal-footer">
 
           <p id="{{ post.0.pk }}">
-              <a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a>
+              <!--<a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a>-->
               <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </p>
