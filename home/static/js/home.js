@@ -5,10 +5,11 @@ $(function() {
     $("#filters").val(valnow);
 });
 
-function myFunction(url) {
-alert('clicked');
-//return window.open(url,'sharer','toolbar=0,status=0,width=548,height=325');
-}
+$(document).on('click','#create_compare',function(event)
+{
+
+});
+
 var ready=true;
 function yHandler()
 {

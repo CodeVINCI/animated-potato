@@ -17,9 +17,9 @@ class SignUp_form(UserCreationForm):
             'placeholder': 'Enter Your Email Address'
         }
                            ))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}))
     class Meta:
-        password1 = forms.CharField(widget=forms.PasswordInput())
-        password2 = forms.CharField(widget=forms.PasswordInput())
         model = User
         widgets = {
             'first_name': forms.TextInput(attrs={'class': 'form-control1',

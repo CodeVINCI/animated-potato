@@ -550,10 +550,10 @@
       </div>
       <div class="modal-body">
           {% for compare in compares %}
-        <p><span class="glyphicon glyphicon-grain"></span>&nbsp;{{compare.title}}<span style="float:right;">{{compare.posts.count}}</span></p>
+        <p><span class="glyphicon glyphicon-grain"></span>&nbsp;{{compare.title|truncatechars:50}}<span style="float:right;">{{compare.posts.count}}</span></p>
           <hr>
           {% endfor %}
-          <p><span class="glyphicon glyphicon-leaf"></span>&nbsp;Create new Compare</p>
+          <p><a id="create_compare" href="#"><span class="glyphicon glyphicon-leaf"></span>&nbsp;Create new Compare</a></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -114,3 +114,18 @@ class Compare(models.Model):
     def __unicode__(self):
         return self.title
 
+class compare_comment(models.Model):
+    created_on = models.DateTimeField(auto_now_add=True)    #when comment was created first
+    updated_on = models.DateTimeField(auto_now=True)    #if edited else equal to created_on value
+    user=models.ForeignKey(User)    #user who made the comment
+    text=models.TextField(max_length=1000,blank=False)    #text of the comment max_length 1000 handle error for max length
+    likes=models.IntegerField(default=0)    #total number of likes on that commemt
+        #no dislike for comments
+    post=models.ForeignKey(Compare,related_name='comparelink')    #post id to which the comment belongs
+    reply=models.ManyToManyField('compare_comment')    #comment id to whom this comment is reply to else value remains zero
+
+    def __unicode__(self):
+        return self.text+' - '+self.user.username    #to show username in admin interface
+
+    class Meta:
+        unique_together=("user","text","created_on")
