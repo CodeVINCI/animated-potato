@@ -658,12 +658,12 @@ def subscriptions(request,newssite,action):
         if action=='Subscribe':
             key=newspaper.objects.get(name=newssite)
             Following.Subscribenews(request.user,key)
-            args={"code":'<li>'+str(newssite)+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-secondary" style="width:100px;height:25px;padding:2px;background-color:maroon;color:white;">Unsubscribe</button></li><hr>'}
+            args={"code":'<li>'+str(newssite)+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-secondary" style="float:right;width:100px;height:25px;padding:2px;background-color:maroon;color:white;">Unsubscribe</button></li><hr>'}
             return JsonResponse(args)
         elif action=='Unsubscribe':
             key=newspaper.objects.get(name=newssite)
             Following.Unsubscribenews(request.user,key)
-            args={"code":'<li>'+str(newssite)+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-secondary" style="width:100px;height:25px;padding:2px;background-color:maroon;color:white;">Subscribe</button></li><hr>'}
+            args={"code":'<li>'+str(newssite)+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-secondary" style="float:right;width:100px;height:25px;padding:2px;background-color:maroon;color:white;">Subscribe</button></li><hr>'}
             return JsonResponse(args)
 
 def savepost(request,pk):
