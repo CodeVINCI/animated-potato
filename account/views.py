@@ -16,6 +16,8 @@ from django.http import JsonResponse
 import random
 from django.utils import timezone
 from datetime import datetime, timedelta
+from django.contrib.auth import authenticate
+from django.contrib.auth import login as auth_login
 
 # view for login /account/login
 def login(request):
@@ -36,8 +38,12 @@ class signup(TemplateView):
         print (form.is_valid())
         if form.is_valid():
             user=form.save(commit=False)
-            user.is_active=True
+           # user.is_active=True
             user.save()
+            new_user = authenticate(username=form.cleaned_data['username'],
+                                    password=form.cleaned_data['password1'],
+                                    )
+            auth_login(request, new_user)
             Userprofile.objects.create(user=user)
             Following.objects.create(current_user=user)
             return redirect('/account/Welcome-to-socrates')

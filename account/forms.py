@@ -27,17 +27,10 @@ class SignUp_form(UserCreationForm):
 
                                                  }),
             'last_name': forms.TextInput(attrs={'class': 'form-control2',
-                                                 'placeholder': 'Surname',
+                                                 'placeholder': 'Lastname',
 
                                                  }),
-            'password1': forms.PasswordInput(attrs={'class': 'form-control4',
-                                                   'placeholder': 'Password',
 
-            }),
-            'password2': forms.PasswordInput(attrs={'class': 'form-control5',
-                                                   'placeholder': 'Confirm Password',
-
-            }),
             'username': forms.TextInput(attrs={'class': 'form-control3',
                                                     'placeholder': 'Username'
 
