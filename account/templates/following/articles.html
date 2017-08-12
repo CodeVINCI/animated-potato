@@ -17,7 +17,7 @@
          <script src="{% static 'js/articles.js' %}"></script>
     <title>Socrates-Dashboard</title>
 </head>
-<body style="overflow-x:scroll">
+<body>
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -92,7 +92,7 @@
 <meta id="my-data" data-filter="{{ filter }}">
 <div class="span12" id="wrap">
     <h2 style="margin-left:25px;">Your Saved Articles</h2><br>
-    <div class="col-6 col-md-4" id="col1">
+    <div class="col-6 col-md-4 post" id="col1">
          <ul id="tilescol1" class="unstyled">
 
         {% for post in col1 %}
@@ -229,7 +229,7 @@
  {% endfor %}
          </ul>
     </div>
-    <div class="col-6 col-md-4" id="col2">
+    <div class="col-6 col-md-4 post" id="col2">
        <ul id="tilescol2" class="unstyled">
         {% for post in col2 %}
 
@@ -368,7 +368,7 @@
  {% endfor %}
          </ul>
     </div>
-    <div class="col-6 col-md-4" id="col3">
+    <div class="col-6 col-md-4 post" id="col3">
        <ul id="tilescol3" class="unstyled">
         {% for post in col3 %}
 
