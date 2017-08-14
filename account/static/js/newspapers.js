@@ -6,6 +6,13 @@ $(function() {
     $("#subscriptions").val(valnow);
 });
 
+
+$('.navbar-form').on('keyup',"#socrates-search",function(event){
+    if(event.keyCode == 13){
+        $("#searchsubmit").click();
+    }
+});
+
 $(".navbar-form").on('click','#searchsubmit',function(event)
 {
 var search_term=$(this).siblings('div').find('#socrates-search').val();

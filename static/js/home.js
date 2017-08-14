@@ -5,10 +5,18 @@ $(function() {
     $("#filters").val(valnow);
 });
 
-function myFunction(url) {
-alert('clicked');
-//return window.open(url,'sharer','toolbar=0,status=0,width=548,height=325');
-}
+$("#socrates-search").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#searchsubmit").click();
+    }
+});
+
+$("#post-comment").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#comment_button").click();
+    }
+});
+
 var ready=true;
 function yHandler()
 {

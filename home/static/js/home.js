@@ -5,6 +5,12 @@ $(function() {
     $("#filters").val(valnow);
 });
 
+$('.navbar-form').on('keyup',"#socrates-search",function(event){
+    if(event.keyCode == 13){
+        $("#searchsubmit").click();
+    }
+});
+
 var ready=true;
 function yHandler()
 {
@@ -192,6 +198,13 @@ $('#wrap').on('click','#comment_button', function(event){
     });
 
 });
+
+$("#post-comment").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#comment_button").click();
+    }
+});
+
 
 //javascript for comment delete button
 $('#wrap').on('click','.comment_delete',function(event)

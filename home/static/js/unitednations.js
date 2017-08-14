@@ -4,6 +4,15 @@ var valnow=$('#my-data').data().filter;
 $(function() {
     $("#filters").val(valnow);
 });
+
+
+$('.navbar-form').on('keyup',"#socrates-search",function(event){
+    if(event.keyCode == 13){
+        $("#searchsubmit").click();
+    }
+});
+
+
 $('div.select_filters').on('click', ".btn.btn-secondary", function(event)
 {
 event.preventDefault();

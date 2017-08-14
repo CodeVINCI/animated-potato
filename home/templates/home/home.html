@@ -61,7 +61,7 @@
       <ul class="nav navbar-nav">
            <form class="navbar-form navbar-left">
         <div class="form-group">
-          <input id="socrates-search" type="text" class="form-control" placeholder="Search-Socrates">
+          <input id="socrates-search" type="text" class="form-control" placeholder="Search-Socrates" autocomplete="off">
         </div>
         <button id="searchsubmit" type="button" class="btn btn-default">&#x1f50d;</button>
       </form>
@@ -84,7 +84,7 @@
         <li class="dropdown" style="width:60px;position:relative;"><a style="width:50px;padding-right:0px;padding-left:0px;" href="#" class="dropdown-notification" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="font-size:20px;" class="glyphicon glyphicon-globe"></span>{% if ping %}<span class="badge">{{ ping }}</span>{% endif %}</a>
         <ul class="dropdown-menu" style="width:460px;">
             {% for notification in all_notifications %}
-            <li><div class="notify" style="padding:10px;white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><a style="width:450px;color:black;white-space:wrap;overflow-x:hidden;" href="{{ notification.onclick_url }}"><p style="font-size:12px;"><span class="glyphicon glyphicon-pencil">&nbsp;</span>{{ notification.message }}</p></a></div></li>
+            <li><div class="notify" style="padding:10px;white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><a style="width:450px;color:black;white-space:wrap;overflow-x:hidden;" href="{{ notification.onclick_url }}"><p style="font-size:12px;"><span class="glyphicon glyphicon-pencil">&nbsp;</span>{{ notification.message|truncatechars:150 }}</p></a></div></li>
             <li style="width:450px;" role="separator" class="divider"></li>
             {% endfor %}
             <li><div style="text-align:center;width:450px;"><a href="#" style="width:450px;">See All</a></div></li>

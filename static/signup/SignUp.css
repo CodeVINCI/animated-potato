@@ -29,7 +29,7 @@ h2
 }*/
 .Moto h2
 {
-  margin-left:570px;
+  margin-left:520px;
   font-family:"Times New Roman", Times, serif;
   font-size:30px;
 }
@@ -69,14 +69,14 @@ h2
   height: 34px;
 
 }
-.form-control4{
+#id_password1{
   width: 200px;
   border: 2px solid white;
   border-radius: 5px;
   height: 34px;
 }
-.form-control5{
-  width:100px;
+#id_password2{
+  width:200px;
   height: 34px;
   border: 2px solid white;
   border-radius: 5px;

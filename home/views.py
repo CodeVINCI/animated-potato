@@ -833,3 +833,17 @@ def suggest(request,pk):
             n= Notification(user=person,message=message,onclick_url=url)
             n.save()
         return JsonResponse({'message':'Article has been suggeted to your friends'})
+
+def suggest_compare(request,pk):
+    if request.method=='GET':
+        #Compare.objects.filter(pk=pk).update(suggestions=F('suggestions')+1)
+        # make function to trigger a notification to all the followers username suggested post.headline post.source
+        p=Compare.objects.get(pk=pk)
+        people=Following.objects.get(current_user=request.user)
+        people=people.users.all()
+        for person in people:
+            message = str((request.user.username).encode('utf-8'))+': '+ str((request.user.first_name).encode('utf-8'))+' '+str((request.user.last_name).encode('utf-8'))+' suggested "'+str((p.title).encode('utf-8'))+'"by "'+str((p.user).encode('utf-8'))+'".'
+            url='account/suggested/'+str(pk)
+            n= Notification(user=person,message=message,onclick_url=url)
+            n.save()
+        return JsonResponse({'message':'Article has been suggeted to your friends'})

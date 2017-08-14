@@ -54,3 +54,12 @@ return false;
 });
 
 });
+
+$(document).on('click', '#suggestbutton', function(event)
+{
+var id=$(this).parent('p').attr('id');
+var ur = ('/home/suggestion_compare/').concat(id);
+$.get(ur);
+alert("This article has been suggested to your friends");
+return false;
+});
