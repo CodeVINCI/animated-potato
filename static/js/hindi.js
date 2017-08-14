@@ -1,17 +1,50 @@
 $(document).ready(function()
 {
-var valnow=$('#my-data').data().source;
-
+var valnow=$('#my-data').data().filter;
 $(function() {
-    $("#subscriptions").val(valnow);
+    $("#filters").val(valnow);
 });
 
-$('#socrates-search').keypress(function(e){
-    if(e.which === 13){
-        $("#searchsubmit").click();
-        return false;
-    }
+
+var ready=true;
+function yHandler()
+{
+var str="";
+$('.thumbnail').each(function()
+{
+ str +=($(this).attr("id").concat(" "));
 });
+if ($(window).scrollTop() == ($(document).height() - $(window).height()))
+{
+ready=false;
+$.ajax(
+{
+url:'/home/scroll/loadcontent/hindi',
+method:'get',
+data:{posts:str},
+dataType:'json',
+success:function(response)
+{
+
+  $("#col1").children('#tilescol1').append(response.col1);
+  $("#col1").children('#tilescol1').append(response.col4);
+  $("#col2").children('#tilescol2').append(response.col2);
+  $("#col2").children('#tilescol2').append(response.col5);
+  $("#col3").children('#tilescol3').append(response.col3);
+  $("#col3").children('#tilescol3').append(response.col6);
+}
+}).always(function(){
+                ready = true; //Reset the flag here
+            });
+}
+}
+window.onscroll=yHandler;
+/*$(".testing").on('click','#data',function(event)
+{
+ var wrap = document.getElementById('tiles')
+ var h= wrap.offsetHeight;
+ alert(h);
+});*/
 
 $(".navbar-form").on('click','#searchsubmit',function(event)
 {
@@ -19,23 +52,21 @@ var search_term=$(this).siblings('div').find('#socrates-search').val();
 var ur= ("/account/searchsocrates/").concat(search_term);
  if (search_term.trim() ==="")
     {alert('Empty search');
-    return false;
+    return 0;
     }
  window.location.href= ur;
- return false;
 });
 
-
-//javascript for selecting a particular newspaper
-$('div.select-newspaper').on('click', ".btn.btn-secondary", function(event)
+$('div.select_filters').on('click', ".btn.btn-secondary", function(event)
 {
-var target= document.getElementById("subscriptions").value;
-var ur = ("/account/newspapers/").concat(target);
+event.preventDefault();
+var target= document.getElementById("filters").value;
+var ur = ("/home/").concat(target);
 window.location.href = ur;
+
 });
 
-//Ajax request to save a post to dashboard
-$('.thumbnail').on('click', "#readlater", function(event)
+$('#wrap').on('click', "#readlater", function(event)
 {
 var id=$(this).parent().prev('p').attr('id');
 var ur = ('/account/save/readlater/').concat(id);
@@ -50,8 +81,8 @@ success:function(response)
 });
 });
 
-//Ajax for social-like a post
-$('.social_buttons').on('click', "#like", function(event)
+//social like a post ajax request
+$('#wrap').on('click', "#like", function(event)
 {
 event.preventDefault();
 var id =$(this).children('meta').data().pk;
@@ -70,8 +101,8 @@ $.ajax(
 
 });
 
-//Ajax for social-dislike a post
-$('.social_buttons').on('click', "#dislike", function(event)
+//social dislike a post ajax request
+$('#wrap').on('click', "#dislike", function(event)
 {
 event.preventDefault();
 var id =$(this).children('meta').data().pk;
@@ -89,8 +120,9 @@ $.ajax(
  });
  });
 
-//Ajax for visit counter for each post
- $('.thumbnail').on('click', '#visitbutton', function(event)
+
+//visit site counter ajax request
+ $('#wrap').on('click', '#visitbutton', function(event)
 {
 var id=$(this).parent('p').attr('id');
 var ur = ('/home/visitors/').concat(id);
@@ -98,33 +130,40 @@ $.get(ur);
 return true;
 });
 
-//Ajax for suggestion counter and generating suggest notifications
-$('.thumbnail').on('click', '#suggestbutton', function(event)
+//suggestions counter and generate suggest notification ajax request
+$('#wrap').on('click', '#suggestbutton', function(event)
 {
 var id=$(this).parent('p').attr('id');
 var ur = ('/home/suggestion/').concat(id);
 $.get(ur);
+alert("This article has been suggested to your friends");
 return false;
 });
 
 /*showing url on opening the modal*/
-  $(window.location.hash).modal('show');
-    $('a[data-toggle="modal"]').click(function(){
-        window.location.hash = $(this).attr('href');
+  //$(window.location.hash).modal('show');
+   $('#wrap').on('click', 'a[data-toggle="modal"]' ,function(event){
+        window.location.hash = $(this).attr('data');
+      var m = $(this).parent('p').nextAll('.modal').first().attr('id');
+      m = ('#').concat(m);
+      $(m).modal('show');
+      //$(window.location.hash).modal('show');
+        return false;
     });
+    //m.modal('show');
+    //$(window.location.hash).modal('show');
 
     function revertToOriginalURL() {
         var original = window.location.href.substr(0, window.location.href.indexOf('#'))
         history.replaceState({}, document.title, original);
     }
 
-    $('.modal').on('hidden.bs.modal', function () {
+    $('#wrap').on('hidden.bs.modal','.modal', function () {
         revertToOriginalURL();
     });
 
-
 /*handling comment form submission*/
-$('.thumbnail').on('click','#comment_button', function(event){
+$('#wrap').on('click','#comment_button', function(event){
     event.preventDefault();
     console.log("form submitted!")
      var id = $(this).prev('meta').data().pk// sanity check
@@ -135,7 +174,7 @@ $('.thumbnail').on('click','#comment_button', function(event){
     var out=$(this);
     var da={the_post:ht, pk:id, csrfmiddlewaretoken: csrf};
 
-     if (ht.trim() ==="")
+    if (ht.trim() ==="")
     {alert('Comment is empty');
     return 0;
     }
@@ -153,11 +192,10 @@ $('.thumbnail').on('click','#comment_button', function(event){
       }
     });
 
-
 });
 
 //javascript for comment delete button
-$('.arguments').on('click','.comment_delete',function(event)
+$('#wrap').on('click','.comment_delete',function(event)
 {
 var id= $(this).attr('data-pk');
 var ur= "/home/remove_comment/".concat(id);
@@ -176,7 +214,7 @@ return false;
 });
 
 //javascript for comment like button
-$('.arguments').on('click','.comment_like',function(event)
+$('#wrap').on('click','.comment_like',function(event)
 {
 var id= $(this).attr('data-pk');
 var ur= "/home/like_comment/".concat(id);
@@ -186,7 +224,7 @@ return false;
 });
 
 //javascript for comment reply button
-$('.arguments').on('click','.comment_reply',function(event)
+$('#wrap').on('click','.comment_reply',function(event)
 {
 var id= $(this).attr('data-pk');
 var ur= "/home/reply_comment/".concat(id);
@@ -196,10 +234,8 @@ return false;
 });
 
 
-
 //final paranthesis
 });
-
 
 //this is csrf_token in javascript don't remove it.
 $(function() {

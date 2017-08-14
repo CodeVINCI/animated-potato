@@ -5,9 +5,10 @@ $(function() {
     $("#filters").val(valnow);
 });
 
-$('.navbar-form').on('keyup',"#socrates-search",function(event){
-    if(event.keyCode == 13){
+$('#socrates-search').keypress(function(e){
+    if(e.which === 13){
         $("#searchsubmit").click();
+        return false;
     }
 });
 
@@ -27,9 +28,10 @@ var search_term=$(this).siblings('div').find('#socrates-search').val();
 var ur= ("/account/searchsocrates/").concat(search_term);
  if (search_term.trim() ==="")
     {alert('Empty search');
-    return 0;
+    return false;
     }
  window.location.href= ur;
+ return false;
 });
 
 var ready=true;
