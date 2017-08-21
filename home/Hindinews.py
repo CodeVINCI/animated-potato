@@ -35,61 +35,7 @@ def Scrap_dainik_bhaskar():
             pass
     response={"source":"dainik-bhaskar","articles":articles}
     response=json.dumps(response)
-
-    data=json.loads(response)
-    source= data["source"].encode('utf-8')
-    category="hindi"
-    articles=data["articles"]
-    for article in articles:
-        storedarticles=Post.objects.filter(headline=article["title"].encode('utf-8'))
-        if len(storedarticles)==0:
-                articlesource=source
-                if article["author"]==None:
-                    author="Anonymous"
-                else:
-                    author=article["author"].encode('utf-8')
-                headline=article["title"].encode('utf-8')
-                story=article["description"].encode('utf-8')
-                url=article["url"].encode('utf-8')
-                if article["publishedAt"]==None:
-                    date= str(timezone.now())
-                    date=date[:10]
-                else:
-                    date= str(timezone.now())
-                    date=date[:10]
-                if not(article['urlToImage']==None):
-                    image_url=article["urlToImage"].encode('utf-8')
-                    request = requests.get(image_url, stream=True)
-
-                    # Was the request OK?
-                    if request.status_code != requests.codes.ok:
-                    # Nope, error handling, skip file etc etc etc
-                        continue
-
-                    # Get the filename from the url, used for saving later
-                    file_name = image_url.split('/')[-1]+".jpg"
-                    if len(file_name)>50:
-                        file_name=file_name[:50]+".jpg"
-
-                    # Create a temporary file
-                    lf = tempfile.NamedTemporaryFile()
-
-                    # Read the streamed image in sections
-                    for block in request.iter_content(1024 * 8):
-
-                        # If no more file then stop
-                        if not block:
-                            break
-
-                        # Write image block to temporary file
-                        lf.write(block)
-
-                    # Create the model you want to save the image to
-                    a=Post(source=articlesource,author=author,headline=headline,story=story,link=image_url,date=date,pageurl=url,category=category)
-
-                    # Save the temporary image to the model#
-                    # This saves the model so be sure that is it valid
-                    a.image.save(file_name, files.File(lf))
+    articlesave(response)
 
 #function for dainikjagran news scraping
 def Scrape_dainik_jagran():
@@ -113,6 +59,10 @@ def Scrape_dainik_jagran():
             pass
     response={"source":"dainik-jagran","articles":articles}
     response=json.dumps(response)
+    articlesave(response)
+
+
+def articlesave(response):
 
     data=json.loads(response)
     source= data["source"].encode('utf-8')
@@ -197,61 +147,7 @@ def Scrap_amarujala():
             pass
     response={"source":"amarujala","articles":articles}
     response=json.dumps(response)
-
-    data=json.loads(response)
-    source= data["source"].encode('utf-8')
-    category="hindi"
-    articles=data["articles"]
-    for article in articles:
-        storedarticles=Post.objects.filter(headline=article["title"].encode('utf-8'))
-        if len(storedarticles)==0:
-                articlesource=source
-                if article["author"]==None:
-                    author="Anonymous"
-                else:
-                    author=article["author"].encode('utf-8')
-                headline=article["title"].encode('utf-8')
-                story=article["description"].encode('utf-8')
-                url=article["url"].encode('utf-8')
-                if article["publishedAt"]==None:
-                    date= str(timezone.now())
-                    date=date[:10]
-                else:
-                    date= str(timezone.now())
-                    date=date[:10]
-                if not(article['urlToImage']==None):
-                    image_url=article["urlToImage"].encode('utf-8')
-                    request = requests.get(image_url, stream=True)
-
-                    # Was the request OK?
-                    if request.status_code != requests.codes.ok:
-                    # Nope, error handling, skip file etc etc etc
-                        continue
-
-                    # Get the filename from the url, used for saving later
-                    file_name = image_url.split('/')[-1]+".jpg"
-                    if len(file_name)>50:
-                        file_name=file_name[:50]+".jpg"
-
-                    # Create a temporary file
-                    lf = tempfile.NamedTemporaryFile()
-
-                    # Read the streamed image in sections
-                    for block in request.iter_content(1024 * 8):
-
-                        # If no more file then stop
-                        if not block:
-                            break
-
-                        # Write image block to temporary file
-                        lf.write(block)
-
-                    # Create the model you want to save the image to
-                    a=Post(source=articlesource,author=author,headline=headline,story=story,link=image_url,date=date,pageurl=url,category=category)
-
-                    # Save the temporary image to the model#
-                    # This saves the model so be sure that is it valid
-                    a.image.save(file_name, files.File(lf))
+    articlesave(response)
 
 def Scrape_hindustan():
     url = "http://www.livehindustan.com/national/news"
@@ -280,58 +176,5 @@ def Scrape_hindustan():
             pass
     response={"source":"livehindustan.com","articles":articles}
     response=json.dumps(response)
+    articlesave(response)
 
-    data=json.loads(response)
-    source= data["source"].encode('utf-8')
-    category="hindi"
-    articles=data["articles"]
-    for article in articles:
-        storedarticles=Post.objects.filter(headline=article["title"].encode('utf-8'))
-        if len(storedarticles)==0:
-                articlesource=source
-                if article["author"]==None:
-                    author="Anonymous"
-                else:
-                    author=article["author"].encode('utf-8')
-                headline=article["title"].encode('utf-8')
-                story=article["description"].encode('utf-8')
-                url=article["url"].encode('utf-8')
-                if article["publishedAt"]==None:
-                    date= str(timezone.now())
-                    date=date[:10]
-                else:
-                    date= str(timezone.now())
-                    date=date[:10]
-                if not(article['urlToImage']==None):
-                    image_url=article["urlToImage"].encode('utf-8')
-                    request = requests.get(image_url, stream=True)
-
-                    # Was the request OK?
-                    if request.status_code != requests.codes.ok:
-                    # Nope, error handling, skip file etc etc etc
-                        continue
-
-                    # Get the filename from the url, used for saving later
-                    file_name = image_url.split('/')[-1]+".jpg"
-                    if len(file_name)>50:
-                        file_name=file_name[:50]+".jpg"
-
-                    # Create a temporary file
-                    lf = tempfile.NamedTemporaryFile()
-
-                    # Read the streamed image in sections
-                    for block in request.iter_content(1024 * 8):
-
-                        # If no more file then stop
-                        if not block:
-                            break
-
-                        # Write image block to temporary file
-                        lf.write(block)
-
-                    # Create the model you want to save the image to
-                    a=Post(source=articlesource,author=author,headline=headline,story=story,link=image_url,date=date,pageurl=url,category=category)
-
-                    # Save the temporary image to the model#
-                    # This saves the model so be sure that is it valid
-                    a.image.save(file_name, files.File(lf))
