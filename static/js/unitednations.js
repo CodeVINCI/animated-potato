@@ -4,6 +4,16 @@ var valnow=$('#my-data').data().filter;
 $(function() {
     $("#filters").val(valnow);
 });
+
+
+$('#socrates-search').keypress(function(e){
+    if(e.which === 13){
+        $("#searchsubmit").click();
+        return false;
+    }
+});
+
+
 $('div.select_filters').on('click', ".btn.btn-secondary", function(event)
 {
 event.preventDefault();
@@ -19,9 +29,10 @@ var search_term=$(this).siblings('div').find('#socrates-search').val();
 var ur= ("/account/searchsocrates/").concat(search_term);
  if (search_term.trim() ==="")
     {alert('Empty search');
-    return 0;
+    return false;
     }
  window.location.href= ur;
+ return false;
 });
 
 var ready=true;

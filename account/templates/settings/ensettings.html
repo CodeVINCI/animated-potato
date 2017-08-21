@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     {% load static %}
-    <title>privacy</title>
+    <title>Socrates-Email & Notifications</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="{% static "settings/email.css" %}" type="text/css">
@@ -52,7 +52,15 @@
           <li><a href="/account/newspapers/">Newspapers</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-       <li><a href="#">Notifications{% if ping %}<span class="badge">{{ ping }}</span>{% endif %}</a></li>
+       <li class="dropdown" style="width:60px;position:relative;"><a style="width:50px;padding-right:0px;padding-left:0px;" href="#" class="dropdown-notification" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="font-size:20px;" class="glyphicon glyphicon-globe"></span>{% if ping %}<span class="badge">{{ ping }}</span>{% endif %}</a>
+            <ul id="noti" class="dropdown-menu" style="width: 460px;max-height: 350px;overflow-y: scroll;overflow-x: hidden;margin-top: 24px;">
+            {% for notification in all_notifications %}
+            <li><div class="notify" style="padding:10px;width:450px;white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><a style="text-decoration:none;width:450px;color:black;white-space:wrap;overflow-x:hidden;" href="{{ notification.onclick_url }}"><p style="font-size:12px;"><span class="glyphicon glyphicon-pencil">&nbsp;</span>{{ notification.message|truncatechars:200 }}</p></a></div></li>
+            <li style="width:450px;" role="separator" class="divider"></li>
+            {% endfor %}
+            <li><div style="text-align:center;width:450px;"><a href="#" style="width:450px;">See All</a></div></li>
+        </ul>
+        </li>
          <div class="imgAbt">
         <li class="dropdown">
 
@@ -89,102 +97,5 @@
 </div>
 
 <div class="jumbotron">
-<b>Content for you</b>
-    <hr>
- <div class="checkbox">
-    <input type="checkbox" value="">
-          <b>Socrates Digests</b>
-      <br>
-          Socrates Digest emails consist of Top Stories and other popular content from your feed.
-      <br>
-      Email Frequensy: <label class="radio-inline">
-  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Up to once a day
-</label>
-<label class="radio-inline">
-  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Weekly
-</label>
- </div>
-  <hr>
-
-      <input type="checkbox" value="">
-          <b>People You Follow</b>
-      <br>
-          We'll email you about new questions and answers written or upvoted by people you follow.
-      <br>
-      Email Frequensy: <label class="radio-inline">
-  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Up to once a day
-</label>
-<label class="radio-inline">
-  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Weekly
-</label>
-      <hr>
-
-      <input type="checkbox" value="">
-          <b>Topics You Follow</b>
- </label>
-      <br>
-          We'll email you about popular news from the topic you follow.
-      <br>
-  <hr>
-
-     <input type="checkbox" value="">
-          <b>Socrates Session Recapes</b>
- </label>
-      <br>
-          Session Recap emails consist of the best answers from<a href="#">Best Read</a>
-      <br>
-  <hr>
-
-<b>Likes , Comments and New Followers</b>
-    <hr>
- <div class="checkbox">
-    <input type="checkbox" value="">
-          <b>Likes & Comments</b>
-      <br>
-      We will email you when another person like or comment on your blog.
-      <br>
-      Notify Me About: <label class="radio-inline">
-  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Everything
-</label>
-<label class="radio-inline">
-  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">Smart Filte Approved Content
-</label>
-<hr>
-
-      <div class="checkbox">
-    <input type="checkbox" value="">
-          <b>New Followers</b>
-      <br>
-      We will email you when a new person starts following you.
-      <br>
-      Notify Me About: <label class="radio-inline">
-  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Everything
-</label>
-<label class="radio-inline">
-  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">Smart Filte Approved Content
-</label>
-          <hr>
-
-<input type="checkbox" value="">
-          <b>People You Might Know </b>
-      <br>
-          We'll email you when we find people you might want to know.
-      <br>
-<hr>
-          <b>Mentions & Messages </b>
-<hr>
-          <input type="checkbox" value="">
-          <b>Messages</b>
-      <br>
-          We'll email you when someone send you a new message on Socrates.
-      <br>
-<hr>
-           <input type="checkbox" value="">
-          <b>Mentions</b>
-      <br>
-          We'll email you when someone mention you in a comment or blog.
-      <br>
-<hr>
-</div>
-</div>
+    <h1>Coming soon with emails and notifications</h1>
 </div>

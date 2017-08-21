@@ -46,6 +46,8 @@ class signup(TemplateView):
             auth_login(request, new_user)
             Userprofile.objects.create(user=user)
             Following.objects.create(current_user=user)
+            paper1=newspaper.objects.get(name='unnewsstream.org')
+            Following.Subscribenews(current_user=user,new_newspaper=paper1)
             return redirect('/account/Welcome-to-socrates')
 
 
@@ -218,7 +220,10 @@ def settings(request):
     details=userprofile[0]
     pic=details.image
     form=SocratesSearchForm()
-    args={'user':request.user,'details':details,'pic':pic,'form':form}
+    all_notifications=Notification.objects.filter(user=request.user)
+    new_notifications=all_notifications.filter(seen=0)
+    ping= new_notifications.count()
+    args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form}
     return render(request,'settings/settings.html',args)
 
 
@@ -250,7 +255,10 @@ def psettings(request):
     details=userprofile[0]
     pic=details.image
     form=SocratesSearchForm()
-    args={'user':request.user,'details':details,'pic':pic,'form':form}
+    all_notifications=Notification.objects.filter(user=request.user)
+    new_notifications=all_notifications.filter(seen=0)
+    ping= new_notifications.count()
+    args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form}
     return render(request,'settings/psettings.html',args)
 
 # view for email and notifications settings
@@ -261,7 +269,10 @@ def ensettings(request):
     details=userprofile[0]
     pic=details.image
     form=SocratesSearchForm()
-    args={'user':request.user,'details':details,'pic':pic,'form':form}
+    all_notifications=Notification.objects.filter(user=request.user)
+    new_notifications=all_notifications.filter(seen=0)
+    ping= new_notifications.count()
+    args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form}
     return render(request,'settings/ensettings.html',args)
 
 

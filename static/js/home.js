@@ -5,15 +5,10 @@ $(function() {
     $("#filters").val(valnow);
 });
 
-$("#socrates-search").keyup(function(event){
-    if(event.keyCode == 13){
+$('#socrates-search').keypress(function(e){
+    if(e.which === 13){
         $("#searchsubmit").click();
-    }
-});
-
-$("#post-comment").keyup(function(event){
-    if(event.keyCode == 13){
-        $("#comment_button").click();
+        return false;
     }
 });
 
@@ -57,16 +52,20 @@ window.onscroll=yHandler;
  alert(h);
 });*/
 
+
 $(".navbar-form").on('click','#searchsubmit',function(event)
 {
 var search_term=$(this).siblings('div').find('#socrates-search').val();
 var ur= ("/account/searchsocrates/").concat(search_term);
  if (search_term.trim() ==="")
     {alert('Empty search');
-    return 0;
+    return false;
     }
- window.location.href= ur;
+ window.location.href = ur;
+ return false;
 });
+
+
 
 $('div.select_filters').on('click', ".btn.btn-secondary", function(event)
 {
@@ -204,6 +203,13 @@ $('#wrap').on('click','#comment_button', function(event){
     });
 
 });
+
+$("#post-comment").keyup(function(event){
+    if(event.keyCode == 13){
+        $("#comment_button").click();
+    }
+});
+
 
 //javascript for comment delete button
 $('#wrap').on('click','.comment_delete',function(event)

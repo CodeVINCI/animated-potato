@@ -49,7 +49,15 @@
           <li><a href="/account/newspapers/">Newspapers</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      <li><a href="#">Notifications{% if ping %}<span class="badge">{{ ping }}</span>{% endif %}</a></li>
+      <li class="dropdown" style="width:60px;position:relative;"><a style="width:50px;padding-right:0px;padding-left:0px;" href="#" class="dropdown-notification" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="font-size:20px;" class="glyphicon glyphicon-globe"></span>{% if ping %}<span class="badge">{{ ping }}</span>{% endif %}</a>
+            <ul id="noti" class="dropdown-menu" style="width: 460px;max-height: 350px;overflow-y: scroll;overflow-x: hidden;margin-top: 24px;">
+            {% for notification in all_notifications %}
+            <li><div class="notify" style="padding:10px;width:450px;white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><a style="text-decoration:none;width:450px;color:black;white-space:wrap;overflow-x:hidden;" href="{{ notification.onclick_url }}"><p style="font-size:12px;"><span class="glyphicon glyphicon-pencil">&nbsp;</span>{{ notification.message|truncatechars:200 }}</p></a></div></li>
+            <li style="width:450px;" role="separator" class="divider"></li>
+            {% endfor %}
+            <li><div style="text-align:center;width:450px;"><a href="#" style="width:450px;">See All</a></div></li>
+        </ul>
+        </li>
           <div class="imgAbt">
         <li class="dropdown">
 
@@ -92,11 +100,11 @@
     <tbody>
       <tr>
         <td>Primary Email</td>
-        <td><a href="#">Email</a></td>
+        <td><a data-toggle="modal" data-target="#myModal">{{user.email}}</a></td>
       </tr>
       <tr>
         <td>Password</td>
-        <td><a href="http://127.0.0.1:8000/account/changepassword/">Change Password</a>&nbsp;<a href="http://127.0.0.1:8000/account/reset-password/">,&nbsp;Reset Password</a></td>
+        <td><a href="/account/changepassword/">Change Password</a></td>
       </tr>
       <tr>
         <td>Logout</td>
@@ -129,6 +137,25 @@
       </tr>
     </tbody>
 </table>
+</div>
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><b>Add article to your Comparisons</b></h4>
+      </div>
+      <div class="modal-body">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
 </div>
 </body>
 </html>
