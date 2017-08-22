@@ -155,9 +155,9 @@ class UserBasicEdit_form(UserChangeForm):
 
 class Compare_form(forms.ModelForm):
     title=forms.CharField(max_length=500,required=False,
-                          widget=forms.Textarea(attrs={'cols': 100, 'rows': 2,'placeholder':'Title of your comparison...'}))
+                          widget=forms.Textarea(attrs={'cols': 40, 'rows': 2,'placeholder':'Title of your comparison...'}))
 
-    description=forms.CharField(max_length=10000,required=False,widget=forms.Textarea(attrs={'cols': 100, 'rows': 2,'placeholder':'Some words about it...'}))
+    description=forms.CharField(max_length=10000,required=False,widget=forms.Textarea(attrs={'cols': 40, 'rows': 4,'placeholder':'Some words about it...'}))
     class Meta:
         model=Compare
-        fields= ('title','description','posts','published',)
+        fields= ('title','description',)

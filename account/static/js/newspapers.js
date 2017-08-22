@@ -108,7 +108,7 @@ return false;
 });
 
 /*showing url on opening the modal*/
-  $('#wrap').on('click', 'a[data-toggle="modal"]' ,function(event){
+  $(document).on('click', 'a[data-toggle="modal"]' ,function(event){
         window.location.hash = $(this).attr('data');
       var m = $(this).parent('p').nextAll('.modal').first().attr('id');
       m = ('#').concat(m);

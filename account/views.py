@@ -346,7 +346,7 @@ class newspapers(TemplateView):
                 if col2[i+1][0].likes > col2[i][0].likes:
                     (col2[i],col2[i+1])=(col2[i+1],col2[i])
         compares=Compare.objects.filter(user=name)
-        args={'compares':compares,'new_notifications':new_notifications,'all_notifications':all_notifications,'ping':ping,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'col1':col1,'col2':col2,'source':sitename,'date_today':date_today}
+        args={'compareform':Compare_form(),'compares':compares,'new_notifications':new_notifications,'all_notifications':all_notifications,'ping':ping,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'col1':col1,'col2':col2,'source':sitename,'date_today':date_today}
         return render(request,'newspapers/Newspapers.html',args)
 
     def post(self,request):

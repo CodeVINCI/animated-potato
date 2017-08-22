@@ -149,7 +149,7 @@
  </button></div>
        <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                           <!-- Button trigger modal -->
-<p><a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
+<p><a data="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
   {{commentbox.text}}
 </a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button>
 <button id="addtocompare" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus-sign"></span></button>
@@ -306,7 +306,7 @@
  </button></div>
       <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                           <!-- Button trigger modal -->
-<p><a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
+<p><a data="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
   {{commentbox.text}}
 </a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button>
 <button id="addtocompare" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus-sign"></span></button>
@@ -441,10 +441,33 @@
         <p><span class="glyphicon glyphicon-grain"></span>&nbsp;{{compare.title}}<span style="float:right;">{{compare.posts.count}}</span></p>
           {% endfor %}
           <hr>
-          <p><span class="glyphicon glyphicon-leaf"></span>&nbsp;Create new Compare</p>
+          <a id="create_compare" href="#formModal" data-toggle="modal" data-dismiss="modal"><p><span class="glyphicon glyphicon-leaf"></span>&nbsp;Create new Compare</p></a>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+                 <div id="formModal" class="modal fade" role="dialog">
+  <div class="modal-dialog" id="formDialogue">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><b>New Compare</b></h4>
+      </div>
+      <div class="modal-body">
+          {{compareform}}
+          <br>
+          <p style="font-size:12px;">*the current post will be automatically added to your new compare</p>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
       </div>
     </div>
 
