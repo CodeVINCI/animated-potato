@@ -35,7 +35,7 @@ window.location.href = ur;
 });
 
 //Ajax request to save a post to dashboard
-$('.thumbnail').on('click', "#readlater", function(event)
+$('#wrap').on('click', "#readlater", function(event)
 {
 var id=$(this).parent().prev('p').attr('id');
 var ur = ('/account/save/readlater/').concat(id);
@@ -51,7 +51,7 @@ success:function(response)
 });
 
 //Ajax for social-like a post
-$('.social_buttons').on('click', "#like", function(event)
+$('#wrap').on('click', "#like", function(event)
 {
 event.preventDefault();
 var id =$(this).children('meta').data().pk;
@@ -71,7 +71,7 @@ $.ajax(
 });
 
 //Ajax for social-dislike a post
-$('.social_buttons').on('click', "#dislike", function(event)
+$('#wrap').on('click', "#dislike", function(event)
 {
 event.preventDefault();
 var id =$(this).children('meta').data().pk;
@@ -90,7 +90,7 @@ $.ajax(
  });
 
 //Ajax for visit counter for each post
- $('.thumbnail').on('click', '#visitbutton', function(event)
+ $('#wrap').on('click', '#visitbutton', function(event)
 {
 var id=$(this).parent('p').attr('id');
 var ur = ('/home/visitors/').concat(id);
@@ -99,7 +99,7 @@ return true;
 });
 
 //Ajax for suggestion counter and generating suggest notifications
-$('.thumbnail').on('click', '#suggestbutton', function(event)
+$('#wrap').on('click', '#suggestbutton', function(event)
 {
 var id=$(this).parent('p').attr('id');
 var ur = ('/home/suggestion/').concat(id);
@@ -108,23 +108,29 @@ return false;
 });
 
 /*showing url on opening the modal*/
-  $(window.location.hash).modal('show');
-    $('a[data-toggle="modal"]').click(function(){
-        window.location.hash = $(this).attr('href');
+  $('#wrap').on('click', 'a[data-toggle="modal"]' ,function(event){
+        window.location.hash = $(this).attr('data');
+      var m = $(this).parent('p').nextAll('.modal').first().attr('id');
+      m = ('#').concat(m);
+      $(m).modal('show');
+      //$(window.location.hash).modal('show');
+        return false;
     });
+    //m.modal('show');
+    //$(window.location.hash).modal('show');
 
     function revertToOriginalURL() {
         var original = window.location.href.substr(0, window.location.href.indexOf('#'))
         history.replaceState({}, document.title, original);
     }
 
-    $('.modal').on('hidden.bs.modal', function () {
+    $('#wrap').on('hidden.bs.modal','.modal', function () {
         revertToOriginalURL();
     });
 
 
 /*handling comment form submission*/
-$('.thumbnail').on('click','#comment_button', function(event){
+$('#wrap').on('click','#comment_button', function(event){
     event.preventDefault();
     console.log("form submitted!")
      var id = $(this).prev('meta').data().pk// sanity check
@@ -157,7 +163,7 @@ $('.thumbnail').on('click','#comment_button', function(event){
 });
 
 //javascript for comment delete button
-$('.arguments').on('click','.comment_delete',function(event)
+$('#wrap').on('click','.comment_delete',function(event)
 {
 var id= $(this).attr('data-pk');
 var ur= "/home/remove_comment/".concat(id);
@@ -176,7 +182,7 @@ return false;
 });
 
 //javascript for comment like button
-$('.arguments').on('click','.comment_like',function(event)
+$('#wrap').on('click','.comment_like',function(event)
 {
 var id= $(this).attr('data-pk');
 var ur= "/home/like_comment/".concat(id);
@@ -186,7 +192,7 @@ return false;
 });
 
 //javascript for comment reply button
-$('.arguments').on('click','.comment_reply',function(event)
+$('#wrap').on('click','.comment_reply',function(event)
 {
 var id= $(this).attr('data-pk');
 var ur= "/home/reply_comment/".concat(id);
