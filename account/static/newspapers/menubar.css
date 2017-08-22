@@ -145,7 +145,8 @@ width:390px;
 border-radius:28px;
 }
 
-#tiles li
+#tilescol1 li,
+#tilescol2 li
 {
 width:400px;
 display:inline-block;

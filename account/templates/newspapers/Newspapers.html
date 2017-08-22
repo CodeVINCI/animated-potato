@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 {% load static %}
 <head>
@@ -11,7 +12,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="{% static 'js/newspapers.js' %}"></script>
      <link rel="stylesheet" href="{% static 'newspapers/menubar.css' %}" type="text/css">
   <link rel="shortcut icon" type="image/png" href="{% static "profile/images/favicon.ico" %}"/>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -21,6 +21,7 @@
     enable_page_level_ads: true
   });
 </script>
+    <script src="{% static 'js/newspapers.js' %}"></script>
 </head>
 <body>
 
@@ -112,10 +113,10 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/account/{{user}}/subscriptions"><button type="button" class="btn btn-secondary" style="width:150px;height:22px;padding:1px;background-color:maroon;color:white;"><b>Subscribe more</b></button></a>
 </div>
     <div class="span12">
-        <div class="col-6 col-md-6">
-             <ul id="tiles" class="unstyled">
+        <div class="col-6 col-md-6" id="col1">
+             <ul id="tilescol1" class="unstyled">
         {% for post in col1 %}
-                 <li><div class="thumbnail">
+                 <li><div class="thumbnail" id="{{post.0.pk}}">
       <img src={{ post.0.image.url }} alt="...">
       <div class="caption">
           <p style="font-size:10px;">{{ post.0.date }}</p>
@@ -269,10 +270,10 @@
    {% endfor %}
          </ul>
         </div>
-        <div class="col-6 col-md-6">
-             <ul id="tiles" class="unstyled">
+        <div class="col-6 col-md-6" id="col2">
+             <ul id="tilescol2" class="unstyled">
         {% for post in col2 %}
-                 <li><div class="thumbnail">
+                 <li><div class="thumbnail" id="{{post.0.pk}}">
       <img src={{ post.0.image.url }} alt="...">
       <div class="caption">
           <p style="font-size:10px;">{{ post.0.date }}</p>

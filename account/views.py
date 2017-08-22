@@ -310,7 +310,7 @@ class newspapers(TemplateView):
         col2=[]
         liked_posts=[]
         disliked_posts=[]
-        all_posts=Post.objects.filter(source=sitename).filter(date__range=[d,date_today]).order_by('?')
+        all_posts=Post.objects.filter(source=sitename).filter(date__range=[d,date_today])[0:6]
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)

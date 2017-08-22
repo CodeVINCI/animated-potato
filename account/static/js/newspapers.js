@@ -196,6 +196,43 @@ return false;
 });
 
 
+var ready=true;
+function yHandler()
+{
+var str="";
+$('.thumbnail').each(function()
+{
+ str +=($(this).attr("id").concat(" "));
+});
+var name= $('#subscriptions').val();
+if ($(window).scrollTop() == ($(document).height() - $(window).height()))
+{
+ready=false;
+$.ajax(
+{
+url:'/home/scroll/loadcontent/newspapers',
+method:'get',
+data:{posts:str,source:name},
+dataType:'json',
+success:function(response)
+{
+
+  $("#col1").children('#tilescol1').append(response.col1);
+  $("#col1").children('#tilescol1').append(response.col4);
+  $("#col2").children('#tilescol2').append(response.col2);
+  $("#col2").children('#tilescol2').append(response.col5);
+  $("#col1").children('#tilescol1').append(response.col3);
+  $("#col2").children('#tilescol2').append(response.col6);
+}
+}).always(function(){
+                ready = true; //Reset the flag here
+            });
+}
+}
+window.onscroll=yHandler;
+
+
+
 
 //final paranthesis
 });

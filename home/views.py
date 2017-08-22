@@ -165,6 +165,9 @@ def loadcontent(request,theme):
         post=list(reversed(Post.objects.filter(category="UN").exclude(pk__in=ex).order_by('date')))
     elif theme=="hindi":
         post=list(reversed(Post.objects.filter(category="hindi").exclude(pk__in=ex).order_by('date')))
+    elif theme=="newspapers":
+        source = request.GET.get('source','')
+        post=list(reversed(Post.objects.filter(source=source).exclude(pk__in=ex).order_by('date')))
 
 
     thumbnails=[]

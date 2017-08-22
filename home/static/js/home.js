@@ -12,6 +12,7 @@ $('#socrates-search').keypress(function(e){
     }
 });
 
+
 var ready=true;
 function yHandler()
 {
