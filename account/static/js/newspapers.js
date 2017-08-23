@@ -237,68 +237,64 @@ success:function(response)
 }
 window.onscroll=yHandler;
 
+$('#wrap').on('click','#newcomparesave',function(event)
+{
+var title= $('#id_title').val();
+var description = $('#id_description').val();
+var id = $('#selectedpost').attr('data-pk')
+var replace = '<a style="cursor:pointer;text-decoration:none;" data=""><p><span class="glyphicon glyphicon-grain"></span>&nbsp;'.concat(title,'<span style="float:right;">1</span></p></a>');
+$.ajax(
+{
+url:'/account/newcompare',
+method:'get',
+data:{title:title,description:description,post:id},
+dataType:'json',
+success:function(response)
+{
+$('#oldcompare').prepend(replace);
+$('#oldcompare').children('a[data=""]').attr('data',response.data);
+}
+});
 
+});
 
+$('#wrap').on('click','#addtocompare',function(event)
+{
+var id = $(this).closest('.thumbnail').attr('id');
+
+$('#selectedpost').attr('data-pk',id);
+
+});
+
+$('#wrap').on('click','#addpost',function(event)
+{
+var id = $('#selectedpost').attr('data-pk');
+var comp = $(this).attr('data');
+var out = $(this)
+var count = $(this).find('span[style="float:right;"]').html();
+
+if (count < 3)
+{
+$.ajax(
+{
+url:'/account/addposttocompare',
+method:'get',
+data:{compare:comp,post:id},
+dataType:'json',
+success:function(response)
+{
+out.find('span[style="float:right;"]').html(response.count);
+}
+});
+}
+else
+{
+alert('Max 3 can be added to any compare');
+}
+
+});
 
 //final paranthesis
 });
 
-
-//this is csrf_token in javascript don't remove it.
-$(function() {
-
-
-    // This function gets cookie with a given name
-    function getCookie(name) {
-        var cookieValue = null;
-        if (document.cookie && document.cookie != '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = jQuery.trim(cookies[i]);
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-    var csrftoken = getCookie('csrftoken');
-
-    /*
-    The functions below will create a header with csrftoken
-    */
-
-    function csrfSafeMethod(method) {
-        // these HTTP methods do not require CSRF protection
-        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-    }
-    function sameOrigin(url) {
-        // test that a given url is a same-origin URL
-        // url could be relative or scheme relative or absolute
-        var host = document.location.host; // host + port
-        var protocol = document.location.protocol;
-        var sr_origin = '//' + host;
-        var origin = protocol + sr_origin;
-        // Allow absolute or scheme relative URLs to same origin
-        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
-            (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
-            // or any other URL that isn't scheme relative or absolute i.e relative.
-            !(/^(\/\/|http:|https:).*/.test(url));
-    }
-
-    $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
-                // Send the token to same-origin, relative URLs only.
-                // Send the token only if the method warrants CSRF protection
-                // Using the CSRFToken value acquired earlier
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            }
-        }
-    });
-
-
-});
 

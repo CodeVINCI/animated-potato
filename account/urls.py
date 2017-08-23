@@ -2,6 +2,7 @@ from django.conf.urls import url
 from . import views
 from account.views import UserProfileEdit,Profileupload,Search_results,Profile,People_search,createblog,blog,Myblog,signup,newspapers,ComparePublish
 from django.contrib.auth.views import login,logout,password_reset,password_reset_done,password_reset_confirm,password_reset_complete
+from . import ajax
 
 urlpatterns=[url(r'^$', views.login),
              url(r'^login/$', login,{'template_name':'login/login.html'} ),
@@ -9,6 +10,8 @@ urlpatterns=[url(r'^$', views.login),
              url(r'^signup/$', signup.as_view(), name='signup'),
              url(r'^profile/$', Profile.as_view(), name='profile'),
              url(r'^compare/$', ComparePublish.as_view(), name='compare'),
+             url(r'^newcompare/$',ajax.newcompare, name='newcompare'),
+             url(r'^addposttocompare/$',ajax.addposttocompare, name='addposttocompare'),
              url(r'^settings/$', views.settings, name='settings'),
              url(r'^psettings/$',views.psettings,name='psettings'),
              url(r'^ensettings/$',views.ensettings,name='ensettings'),
