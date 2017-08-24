@@ -89,7 +89,6 @@
    width:120px;
  }
  .navbar-right a{
-  float:left;
   width:130px;
 
  }
@@ -138,5 +137,8 @@
  {
   margin-left:40px;
  }
-
+#profilemenu
+{
+ margin-top:16px;
+}
 

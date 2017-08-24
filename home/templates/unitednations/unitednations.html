@@ -78,7 +78,7 @@
 
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src={{ pic.url }} alt="" style="width:40px;height:40px;border:1px solid #E6E6E6;border-radius:50%;"></a>
 
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu" id="profilemenu">
             <li><a href="/account/profile">My Profile</a></li>
             <li><a href="/account/{{user}}/articles">My Articles</a></li>
             <li><a href="/account/{{user}}/subscriptions">My Subscriptions</a></li>
@@ -150,7 +150,7 @@
     <a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
   {{commentbox.text}}
    </a>
-    <a style="float:right;" href="#" class="fa fa-facebook"></a>
+    <a style="float:right;" href="http://www.facebook.com/sharer/sharer.php?u={{ post.0.pageurl }}&app_id=1885028298402855&image={{ post.0.link }}" target="_blank" class="fb-share-button fa fa-facebook"></a>
     <button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button>
     <button id="addtocompare" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span class="glyphicon glyphicon-plus-sign"></span></button>
 </p>
@@ -316,7 +316,9 @@
                 <!-- Button trigger modal -->
 <p><a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
   {{commentbox.text}}
-</a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button>
+</a>
+    <a style="float:right;" href="http://www.facebook.com/sharer/sharer.php?u={{ post.0.pageurl }}&app_id=1885028298402855&image={{ post.0.link }}" target="_blank" class="fb-share-button fa fa-facebook"></a>
+    <button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button>
 <button id="addtocompare" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span class="glyphicon glyphicon-plus-sign"></span></button>
 </p>
 
@@ -476,7 +478,9 @@
 
 <p><a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
   {{commentbox.text}}
-</a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button>
+</a>
+    <a style="float:right;" href="http://www.facebook.com/sharer/sharer.php?u={{ post.0.pageurl }}&app_id=1885028298402855&image={{ post.0.link }}" target="_blank" class="fb-share-button fa fa-facebook"></a>
+    <button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button>
 <button id="addtocompare" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span class="glyphicon glyphicon-plus-sign"></span></button>
 </p>
 

@@ -72,10 +72,12 @@
  }
  .navbar-right li
  {
+   float:left;
    width:120px;
  }
  .navbar-right a{
   width:130px;
+
  }
  .navbar-right a.dropdown-toggle
  {
@@ -194,13 +196,13 @@ float:right;
 .post{
 padding:0px !important;
 }
-
-#not
+#formDialogue
 {
- width: 460px;
- max-height: 350px;
- overflow-y: scroll;
- overflow-x: hidden;
- margin-top: 24px;
+ width:400px;
+ margin-top:100px;
+}
 
+#profilemenu
+{
+ margin-top:16px;
 }

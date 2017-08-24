@@ -76,7 +76,6 @@
    width:120px;
  }
  .navbar-right a{
-  float:left;
   width:140px;
 
  }
@@ -146,7 +145,8 @@ width:390px;
 border-radius:28px;
 }
 
-#tiles li
+#tilescol1 li,
+#tilescol2 li
 {
 width:400px;
 display:inline-block;
@@ -192,4 +192,14 @@ border:none;
 background-color:transparent;
 margin-top:10px;
 float:right;
+}
+
+#formDialogue
+{
+ width:400px;
+ margin-top:100px;
+}
+#profilemenu
+{
+ margin-top:16px;
 }

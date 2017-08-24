@@ -35,7 +35,7 @@ window.location.href = ur;
 });
 
 //Ajax request to save a post to dashboard
-$('.thumbnail').on('click', "#readlater", function(event)
+$('#wrap').on('click', "#readlater", function(event)
 {
 var id=$(this).parent().prev('p').attr('id');
 var ur = ('/account/save/readlater/').concat(id);
@@ -51,7 +51,7 @@ success:function(response)
 });
 
 //Ajax for social-like a post
-$('.social_buttons').on('click', "#like", function(event)
+$('#wrap').on('click', "#like", function(event)
 {
 event.preventDefault();
 var id =$(this).children('meta').data().pk;
@@ -71,7 +71,7 @@ $.ajax(
 });
 
 //Ajax for social-dislike a post
-$('.social_buttons').on('click', "#dislike", function(event)
+$('#wrap').on('click', "#dislike", function(event)
 {
 event.preventDefault();
 var id =$(this).children('meta').data().pk;
@@ -90,7 +90,7 @@ $.ajax(
  });
 
 //Ajax for visit counter for each post
- $('.thumbnail').on('click', '#visitbutton', function(event)
+ $('#wrap').on('click', '#visitbutton', function(event)
 {
 var id=$(this).parent('p').attr('id');
 var ur = ('/home/visitors/').concat(id);
@@ -99,7 +99,7 @@ return true;
 });
 
 //Ajax for suggestion counter and generating suggest notifications
-$('.thumbnail').on('click', '#suggestbutton', function(event)
+$('#wrap').on('click', '#suggestbutton', function(event)
 {
 var id=$(this).parent('p').attr('id');
 var ur = ('/home/suggestion/').concat(id);
@@ -108,23 +108,29 @@ return false;
 });
 
 /*showing url on opening the modal*/
-  $(window.location.hash).modal('show');
-    $('a[data-toggle="modal"]').click(function(){
-        window.location.hash = $(this).attr('href');
+  $(document).on('click', 'a[data-toggle="modal"]' ,function(event){
+        window.location.hash = $(this).attr('data');
+      var m = $(this).parent('p').nextAll('.modal').first().attr('id');
+      m = ('#').concat(m);
+      $(m).modal('show');
+      //$(window.location.hash).modal('show');
+        return false;
     });
+    //m.modal('show');
+    //$(window.location.hash).modal('show');
 
     function revertToOriginalURL() {
         var original = window.location.href.substr(0, window.location.href.indexOf('#'))
         history.replaceState({}, document.title, original);
     }
 
-    $('.modal').on('hidden.bs.modal', function () {
+    $('#wrap').on('hidden.bs.modal','.modal', function () {
         revertToOriginalURL();
     });
 
 
 /*handling comment form submission*/
-$('.thumbnail').on('click','#comment_button', function(event){
+$('#wrap').on('click','#comment_button', function(event){
     event.preventDefault();
     console.log("form submitted!")
      var id = $(this).prev('meta').data().pk// sanity check
@@ -157,7 +163,7 @@ $('.thumbnail').on('click','#comment_button', function(event){
 });
 
 //javascript for comment delete button
-$('.arguments').on('click','.comment_delete',function(event)
+$('#wrap').on('click','.comment_delete',function(event)
 {
 var id= $(this).attr('data-pk');
 var ur= "/home/remove_comment/".concat(id);
@@ -176,7 +182,7 @@ return false;
 });
 
 //javascript for comment like button
-$('.arguments').on('click','.comment_like',function(event)
+$('#wrap').on('click','.comment_like',function(event)
 {
 var id= $(this).attr('data-pk');
 var ur= "/home/like_comment/".concat(id);
@@ -186,7 +192,7 @@ return false;
 });
 
 //javascript for comment reply button
-$('.arguments').on('click','.comment_reply',function(event)
+$('#wrap').on('click','.comment_reply',function(event)
 {
 var id= $(this).attr('data-pk');
 var ur= "/home/reply_comment/".concat(id);
@@ -196,66 +202,100 @@ return false;
 });
 
 
+var ready=true;
+function yHandler()
+{
+var str="";
+$('.thumbnail').each(function()
+{
+ str +=($(this).attr("id").concat(" "));
+});
+var name= $('#subscriptions').val();
+if ($(window).scrollTop() == ($(document).height() - $(window).height()))
+{
+ready=false;
+$.ajax(
+{
+url:'/home/scroll/loadcontent/newspapers',
+method:'get',
+data:{posts:str,source:name},
+dataType:'json',
+success:function(response)
+{
+
+  $("#col1").children('#tilescol1').append(response.col1);
+  $("#col1").children('#tilescol1').append(response.col4);
+  $("#col2").children('#tilescol2').append(response.col2);
+  $("#col2").children('#tilescol2').append(response.col5);
+  $("#col1").children('#tilescol1').append(response.col3);
+  $("#col2").children('#tilescol2').append(response.col6);
+}
+}).always(function(){
+                ready = true; //Reset the flag here
+            });
+}
+}
+window.onscroll=yHandler;
+
+$('#wrap').on('click','#newcomparesave',function(event)
+{
+var title= $('#id_title').val();
+var description = $('#id_description').val();
+var id = $('#selectedpost').attr('data-pk')
+var replace = '<a id="addpost" style="cursor:pointer;text-decoration:none;" data=""><p><span class="glyphicon glyphicon-grain"></span>&nbsp;'.concat(title,'<span style="float:right;">1</span></p></a>');
+$.ajax(
+{
+url:'/account/newcompare',
+method:'get',
+data:{title:title,description:description,post:id},
+dataType:'json',
+success:function(response)
+{
+$('#oldcompare').prepend(replace);
+$('#oldcompare').children('a[data=""]').attr('data',response.data);
+}
+});
+
+});
+
+$('#wrap').on('click','#addtocompare',function(event)
+{
+var id = $(this).closest('.thumbnail').attr('id');
+
+$('#selectedpost').attr('data-pk',id);
+
+});
+
+$('#wrap').on('click','#addpost',function(event)
+{
+alert('about to add');
+var id = $('#selectedpost').attr('data-pk');
+var comp = $(this).attr('data');
+var out = $(this)
+var count = $(this).find('span[style="float:right;"]').html();
+
+if (count < 3)
+{
+$.ajax(
+{
+url:'/account/addposttocompare',
+method:'get',
+data:{compare:comp,post:id},
+dataType:'json',
+success:function(response)
+{
+out.find('span[style="float:right;"]').html(response.count);
+}
+});
+}
+else
+{
+alert('Max 3 can be added to any compare');
+}
+
+});
 
 //final paranthesis
 });
 
-
-//this is csrf_token in javascript don't remove it.
-$(function() {
-
-
-    // This function gets cookie with a given name
-    function getCookie(name) {
-        var cookieValue = null;
-        if (document.cookie && document.cookie != '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = jQuery.trim(cookies[i]);
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-    var csrftoken = getCookie('csrftoken');
-
-    /*
-    The functions below will create a header with csrftoken
-    */
-
-    function csrfSafeMethod(method) {
-        // these HTTP methods do not require CSRF protection
-        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-    }
-    function sameOrigin(url) {
-        // test that a given url is a same-origin URL
-        // url could be relative or scheme relative or absolute
-        var host = document.location.host; // host + port
-        var protocol = document.location.protocol;
-        var sr_origin = '//' + host;
-        var origin = protocol + sr_origin;
-        // Allow absolute or scheme relative URLs to same origin
-        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
-            (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
-            // or any other URL that isn't scheme relative or absolute i.e relative.
-            !(/^(\/\/|http:|https:).*/.test(url));
-    }
-
-    $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
-                // Send the token to same-origin, relative URLs only.
-                // Send the token only if the method warrants CSRF protection
-                // Using the CSRFToken value acquired earlier
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            }
-        }
-    });
-
-
-});
 
