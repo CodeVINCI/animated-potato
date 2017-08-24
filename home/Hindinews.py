@@ -40,10 +40,11 @@ def Scrap_dainik_bhaskar():
 #function for dainikjagran news scraping
 def Scrape_dainik_jagran():
     url= "http://www.jagran.com/top-news.html?src=eptn"
-    context = ssl._create_unverified_context()
-    html_base=urllib.urlopen(url,context=context)
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
+    response = requests.get(url, headers=headers)
+    html_base=response.content
     soup_base=BeautifulSoup(html_base,"html.parser")
-    soup_base=soup_base.find("ul",{"class":"swipe-right"})
+    soup_base=soup_base.find("ul",{"id":"grid"})
     newslinks=soup_base.findAll("li")
     articles=[]
     for link in newslinks:

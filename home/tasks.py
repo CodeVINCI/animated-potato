@@ -20,7 +20,7 @@ def scrape_Thehindu_task():
     logger.info("Scraped livehindustan.com")
     Scrap_amarujala()
     logger.info("Scraped amarujala.com")
-    #Scrape_dainik_jagran()
+    Scrape_dainik_jagran()
     logger.info("Scraped jagran.com")
     #Scrap_dainik_bhaskar()
     logger.info("Scraped bhaskar.com")
