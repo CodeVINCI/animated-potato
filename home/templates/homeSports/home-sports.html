@@ -152,7 +152,7 @@
    </a>
     <a style="float:right;" href="#" class="fa fa-facebook"></a>
     <button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button>
-    <button id="addtocompare" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span class="glyphicon glyphicon-plus-sign"></span></button>
+    <button id="addtocompare" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus-sign"></span></button>
 </p>
 
 <!-- Modal -->
@@ -317,7 +317,7 @@
 <p><a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
   {{commentbox.text}}
 </a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button>
-<button id="addtocompare" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span class="glyphicon glyphicon-plus-sign"></span></button>
+<button id="addtocompare" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus-sign"></span></button>
 </p>
 
 <!-- Modal -->
@@ -477,7 +477,7 @@
 <p><a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
   {{commentbox.text}}
 </a><a style="float:right;" href="#" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button>
-<button id="addtocompare" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span class="glyphicon glyphicon-plus-sign"></span></button>
+<button id="addtocompare" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus-sign"></span></button>
 </p>
 
 <!-- Modal -->
@@ -592,9 +592,59 @@
 </div>
 
       </div></div></li>
+
+                      <!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><b>Add article to your Comparisons</b></h4>
+      </div>
+      <div id="oldcompare" class="modal-body">
+          {% for compare in compares %}
+          <a id="addpost" style="cursor:pointer;text-decoration:none;" data="{{compare.pk}}" ><p><span class="glyphicon glyphicon-grain"></span>&nbsp;{{compare.title}}<span style="float:right;">{{compare.posts.count}}</span></p></a>
+          {% endfor %}
+          <hr>
+          <a style="text-decoration:none;" id="create_compare" href="#formModal" data-toggle="modal" data-dismiss="modal"><p><span class="glyphicon glyphicon-leaf"></span>&nbsp;Create new Compare</p></a>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+               <div id="formModal" class="modal fade" role="dialog">
+  <div class="modal-dialog" id="formDialogue">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><b>New Compare</b></h4>
+      </div>
+      <div class="modal-body">
+          {{compareform}}
+          <br>
+          <p style="font-size:12px;">*the current post will be automatically added to your new compare</p>
+      </div>
+      <div class="modal-footer">
+          <button id="newcomparesave" type="button" class="btn btn-default" data-dismiss="modal">&nbsp;Save&nbsp;</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
  {% endfor %}
          </ul>
     </div>
   </div>
+<meta id="selectedpost" data-pk="">
 </body>
 </html>

@@ -242,7 +242,7 @@ $('#wrap').on('click','#newcomparesave',function(event)
 var title= $('#id_title').val();
 var description = $('#id_description').val();
 var id = $('#selectedpost').attr('data-pk')
-var replace = '<a style="cursor:pointer;text-decoration:none;" data=""><p><span class="glyphicon glyphicon-grain"></span>&nbsp;'.concat(title,'<span style="float:right;">1</span></p></a>');
+var replace = '<a id="addpost" style="cursor:pointer;text-decoration:none;" data=""><p><span class="glyphicon glyphicon-grain"></span>&nbsp;'.concat(title,'<span style="float:right;">1</span></p></a>');
 $.ajax(
 {
 url:'/account/newcompare',
@@ -268,6 +268,7 @@ $('#selectedpost').attr('data-pk',id);
 
 $('#wrap').on('click','#addpost',function(event)
 {
+alert('about to add');
 var id = $('#selectedpost').attr('data-pk');
 var comp = $(this).attr('data');
 var out = $(this)
