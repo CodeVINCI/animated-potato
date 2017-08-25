@@ -212,8 +212,7 @@ def loadcontent(request,theme):
 class homeSports(TemplateView):
     template_name = "homeSports/home-sports.html"
 
-    def get(self,request):
-        filter="most_liked"
+    def get(self,request,filter):
         date_today=str(datetime.today())
         date_today=date_today[:10]
         d = str(datetime.today() - timedelta(days=4))
@@ -340,8 +339,7 @@ class homeSports(TemplateView):
 class homeMarket(TemplateView):
     template_name = "homeMarket/home-market.html"
 
-    def get(self,request):
-        filter="most_liked"
+    def get(self,request,filter):
         date_today=str(datetime.today())
         date_today=date_today[:10]
         d = str(datetime.today() - timedelta(days=4))

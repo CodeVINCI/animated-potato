@@ -61,7 +61,7 @@ $('div.select_filters').on('click', ".btn.btn-secondary", function(event)
 {
 event.preventDefault();
 var target= document.getElementById("filters").value;
-var ur = ("/home/").concat(target);
+var ur = ("/home/hindinews/").concat(target);
 window.location.href = ur;
 
 });

@@ -17,7 +17,7 @@ $('div.select_filters').on('click', ".btn.btn-secondary", function(event)
 {
 event.preventDefault();
 var target= document.getElementById("filters").value;
-var ur = ("/home/UnitedNations/").concat(target);
+var ur = ("/home/sports/").concat(target);
 window.location.href = ur;
 
 });
