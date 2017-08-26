@@ -110,7 +110,7 @@
 
     <tr>
         <td>{{compare.created_on}}</td>
-        <td><a class="comparetitle" href="#" data-toggle="modal" data-target="#myModal{{forloop.counter}}">{{compare.title|truncatechars:100}}</a></td>
+        <td><a class="comparetitle" href="#" data-toggle="modal" data-target="#myModal{{forloop.counter}}">{{compare.title|truncatechars:100}}</a>&nbsp;&nbsp;&nbsp;<a href="#"><span style="font-size:15px;cursor:pointer;color:maroon;" class="glyphicon glyphicon-edit"></span></a></td>
     <td>{{compare.description|truncatechars:100}}</td>
     <td>{% for post in compare.posts.all %}
         <p>{{forloop.counter}}.&nbsp;{{post.headline}}&nbsp;<b>{{post.source}}</b></p>
