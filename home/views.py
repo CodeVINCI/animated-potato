@@ -602,8 +602,7 @@ class hindi(TemplateView):
         d = str(datetime.today() - timedelta(days=4))
         d=d[:10]
         name=request.user
-        userprofile=Userprofile.objects.filter(user=name)
-        details=userprofile[0]
+        details=Userprofile.objects.get(user=name)
         pic=details.image
         form=SocratesSearchForm()
         commentbox=comment_form()
@@ -820,17 +819,16 @@ def visits(request,pk):
         return JsonResponse({'success':'success'})
 
 
-
+#create suggest notification for post and compare suggestions
 def suggest(request,pk):
     if request.method=='GET':
-        Post.objects.filter(pk=pk).update(suggestions=F('suggestions')+1)
-        # make function to trigger a notification to all the followers username suggested post.headline post.source
         p=Post.objects.get(pk=pk)
+        Post.objects.filter(pk=pk).update(suggestions=F('suggestions')+1)
         people=Following.objects.get(current_user=request.user)
         people=people.users.all()
+        message = str((request.user.username).encode('utf-8'))+': '+ str((request.user.first_name).encode('utf-8'))+' '+str((request.user.last_name).encode('utf-8'))+' suggested "'+str((p.headline).encode('utf-8'))+'"by "'+str((p.source).encode('utf-8'))+'".'
+        url='/home/notification/post/'+str(pk)
         for person in people:
-            message = str((request.user.username).encode('utf-8'))+': '+ str((request.user.first_name).encode('utf-8'))+' '+str((request.user.last_name).encode('utf-8'))+' suggested "'+str((p.headline).encode('utf-8'))+'"by "'+str((p.source).encode('utf-8'))+'".'
-            url='account/suggested/'+str(pk)
             n= Notification(user=person,message=message,onclick_url=url)
             n.save()
         return JsonResponse({'message':'Article has been suggeted to your friends'})
@@ -848,3 +846,16 @@ def suggest_compare(request,pk):
             n= Notification(user=person,message=message,onclick_url=url)
             n.save()
         return JsonResponse({'message':'Article has been suggeted to your friends'})
+
+def notificationpost(request,type,pk):
+    if request.method == "GET":
+        if type=="post":
+            post = Post.objects.get(pk=pk)
+            commentbox=comment_form()
+            details=Userprofile.objects.get(user=request.user)
+
+            all_notifications=Notification.objects.filter(user=request.user)
+            new_notifications=all_notifications.filter(seen=0)
+            ping= new_notifications.count()
+            args = {'post':post,"commentbox":commentbox,"details":details,'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,}
+            return render(request,"notificationpost.html",args)

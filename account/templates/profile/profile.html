@@ -124,7 +124,7 @@
         <h2>{{user.first_name}}&nbsp; {{user.last_name}}&nbsp;<a href="/account/profile/basic_edit">Edit</a></h2>
         <p><b>Description</b>:{{ details.description }}</p>
         <p><b>Subscriptions</b>:{{subscription.0}},&nbsp;{{subscription.1}}...<a href ="/account/{{ user }}/subscriptions">more</a></p>
-        <p><b>My Website</b>:&nbsp;<a href="#">{{ details.website }}</a></p>
+        <p><b>My Website</b>:&nbsp;<a href="{{details.website}}" target="_blank">{{ details.website }}</a></p>
         </div>
     </div>
 <hr>

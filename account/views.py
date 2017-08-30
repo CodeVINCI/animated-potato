@@ -18,7 +18,7 @@ from django.utils import timezone
 from datetime import datetime, timedelta
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
-
+import os
 # view for login /account/login
 def login(request):
     return redirect('/account/login')
@@ -450,10 +450,11 @@ class Profileupload(TemplateView):
             userprofile.pk=profile.pk
             userprofile.image= request.FILES['image']
             userprofile.save()
-            pic=form.cleaned_data['image']
+            pa = os.getcwd()+"/website"+picture.url
+            os.remove(pa)
             return redirect('/account/profile')
 
-        args={'user':request.user,'form':form,'pic':pic}
+        args={'user':request.user,'form':form,'pic':picture}
         return render(request,'profile/profile.html',args)
 
 # view for Search result default takes to news article search
