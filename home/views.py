@@ -850,6 +850,7 @@ def suggest_compare(request,pk):
 def notificationpost(request,type,pk):
     if request.method == "GET":
         if type=="post":
+            status=0
             post = Post.objects.get(pk=pk)
             commentbox=comment_form()
             details=Userprofile.objects.get(user=request.user)
@@ -857,5 +858,12 @@ def notificationpost(request,type,pk):
             all_notifications=Notification.objects.filter(user=request.user)
             new_notifications=all_notifications.filter(seen=0)
             ping= new_notifications.count()
-            args = {'post':post,"commentbox":commentbox,"details":details,'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,}
+            compares=Compare.objects.filter(user=request.user)
+            p=Likes.objects.filter(post=post).filter(users__in=[request.user])
+            d = Dislikes.objects.filter(post=post).filter(users__in=[request.user])
+            if p.count()>0:
+                status=1
+            elif d.count()>0:
+                status=2
+            args = {"status":status,'compareform':Compare_form(),'compares':compares,'post':post,"commentbox":commentbox,"details":details,'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,}
             return render(request,"notificationpost.html",args)

@@ -16,7 +16,7 @@
     {% load static %}
     <link rel="stylesheet" href="{% static "notificationpost.css"%}" type="text/css"/>
     <link rel="shortcut icon" type="image/png" href="{% static "images/favicon.ico" %}"/>
-         <script src="{% static 'js/home.js' %}"></script>
+         <script src="{% static 'js/notificationpost.js' %}"></script>
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <script>
   (adsbygoogle = window.adsbygoogle || []).push({
@@ -122,29 +122,29 @@
         <p style="font-size:10px;">{{ post.source }}</p>
         <div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 170px);width: -webkit-calc(100% - 170px);width: calc(100% - 170px);">
            <button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">
-               {% if post.1 %}
+               {% ifequal status 1 %}
                <meta id="button_data" data-nextaction="social-unlike" data-pk="{{ post.pk }}">
      <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
                {% else %}
                <meta id="button_data" data-nextaction="social-like" data-pk="{{ post.pk }}">
       <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
-               {% endif %}
+               {% endifequal %}
      <span class="count" >{{ post.likes }}</span>
  </button>
     &nbsp;
  <button id="dislike" class="social-dislike" style="border:none;background-color:transparent;">
      <span class="dislike" >{{ post.dislikes }}</span>
-     {% if post.2 %}
+     {% ifequal status 2 %}
      <meta id="button_data" data-nextaction="social-undislike" data-pk="{{ post.pk }}">
      <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
      {% else %}
      <meta id="button_data" data-nextaction="social-dislike" data-pk="{{ post.pk }}">
      <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
-     {% endif %}
+     {% endifequal %}
  </button></div>
          <p id="{{ post.pk }}"><a href={{ post.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
           <p>
-    <a style="float:right;" href="http://www.facebook.com/sharer/sharer.php?u={{ post.0.pageurl }}&app_id=1885028298402855&image={{ post.0.link }}" target="_blank" class="fb-share-button fa fa-facebook"></a>
+    <a style="float:right;" href="http://www.facebook.com/sharer/sharer.php?u={{ post.pageurl }}&app_id=1885028298402855&image={{ post.link }}" target="_blank" class="fb-share-button fa fa-facebook"></a>
     <button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button>
     <button id="addtocompare" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus-sign"></span></button>
 </p>
@@ -157,6 +157,28 @@
             <meta id="comment_data" data-pk="{{ post.pk }}">
                         <button type="button" id="comment_button" class="btn btn-default">Comment</button>
                     </form>
+        <ul id="talk" class="arguments">
+         {% for comment in post.comments.all reversed %}
+             <li><span style="font-size:12px;">
+                 <b><a class='via_user' href="/account/viauserpk/{{ comment.user.pk }}">{{ comment.user.first_name }}&nbsp;{{ comment.user.last_name }}</a>&nbsp;&nbsp;</b>
+                 <span style="font-size:10px;"><b>{{ comment.created_on }}</b>
+                 </span>
+                 </span>
+                 <br><span style="font-size:12px;">{{ comment.text }}
+                 </span><br>
+
+                 <div class="comment_action_line" style="height:10px;">
+                     <span style="font-size:10px;">
+                         <a class="comment_like" data-pk="{{ comment.pk }}" href="#" role="button">Like</a>&nbsp;&nbsp;&nbsp;
+                         <a class="comment_reply" data-pk="{{ comment.pk }}" href="#" role="button">Reply</a>&nbsp;&nbsp;&nbsp;
+
+                         {% ifequal comment.user.username user.username %}
+                         <a class="comment_delete" data-pk="{{ comment.pk }}" href="#" role="button">Delete</a>
+                         {% endifequal %}
+
+                     </span></div></li>
+             {% endfor %}
+        </ul>
     </div>
 </div>
 

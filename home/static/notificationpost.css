@@ -134,6 +134,7 @@ height:550px;
 width:310px;
 height:550px;
 padding-left:10px;
+overflow-y:scroll;
 }
 #headline
 {
@@ -153,6 +154,7 @@ height:550px;
 width:310px;
 padding-left:10px;
 background-color:rgb(250,250,250);
+overflow-y:scroll;
 }
 
 .fa {
