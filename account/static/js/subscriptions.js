@@ -41,6 +41,19 @@ hr.fadeOut('slow',function() { hr.remove(); });
 });
  });
 
+$(document).on('click', '.notify' ,function(event){
+var notificationid = $(this).attr("data");
+var ur= "/home/seennotification/".concat(notificationid);
+var out = $(this)
+
+$.ajax(
+{
+url:ur,
+method:'get',
+async: false,
+});
+
+});
 
 
 });

@@ -141,7 +141,7 @@ class home(TemplateView):
         firstpaper=followingobj.newspaper.all()[0]
         compares=Compare.objects.filter(user=name)
 
-        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
+        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
         return render(request,self.template_name,args)
 
 def loadcontent(request,theme):
@@ -332,7 +332,7 @@ class homeSports(TemplateView):
         firstpaper=followingobj.newspaper.all()[0]
         compares=Compare.objects.filter(user=name)
 
-        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
+        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
         return render(request,self.template_name,args)
 
 
@@ -459,7 +459,7 @@ class homeMarket(TemplateView):
         firstpaper=followingobj.newspaper.all()[0]
         compares=Compare.objects.filter(user=name)
 
-        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
+        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
         return render(request,self.template_name,args)
 
 
@@ -588,7 +588,7 @@ class unitednations(TemplateView):
         firstpaper=followingobj.newspaper.all()[0]
         compares=Compare.objects.filter(user=name)
 
-        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
+        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
         return render(request,self.template_name,args)
 
 
@@ -715,7 +715,7 @@ class hindi(TemplateView):
         firstpaper=followingobj.newspaper.all()[0]
         compares=Compare.objects.filter(user=name)
 
-        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
+        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
         return render(request,self.template_name,args)
 
 
@@ -865,5 +865,5 @@ def notificationpost(request,type,pk):
                 status=1
             elif d.count()>0:
                 status=2
-            args = {"status":status,'compareform':Compare_form(),'compares':compares,'post':post,"commentbox":commentbox,"details":details,'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,}
+            args = {"status":status,'compareform':Compare_form(),'compares':compares,'post':post,"commentbox":commentbox,"details":details,'all_notifications':all_notifications,'ping':ping,}
             return render(request,"notificationpost.html",args)

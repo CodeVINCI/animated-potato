@@ -138,6 +138,7 @@ $('#wrap').on('click', '#suggestbutton', function(event)
 var id=$(this).parent('p').attr('id');
 var ur = ('/home/suggestion/').concat(id);
 $.get(ur);
+alert("This article has been suggested to your friends");
 return false;
 });
 
@@ -292,6 +293,21 @@ alert('Max 3 can be added to any compare');
 $('#wrap').on('click', 'a[href="#formModal"]' ,function(event){
 var mod = $(this).attr('href');
 $(mod).modal('show');
+});
+
+
+$(document).on('click', '.notify' ,function(event){
+var notificationid = $(this).attr("data");
+var ur= "/home/seennotification/".concat(notificationid);
+var out = $(this)
+
+$.ajax(
+{
+url:ur,
+method:'get',
+async: false,
+});
+
 });
 
 

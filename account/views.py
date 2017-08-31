@@ -83,7 +83,7 @@ class Profile(TemplateView):
          details=userprofile[0]
          pic=details.image
          form=SocratesSearchForm()
-         args={'new_notifications':new_notifications,'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form,'following':following,'subscription':subscription,'subscriptionno':subscriptionno,'followingno':followingno,"followerno":followers,"firstpaper":firstpaper,'date_today':date_today}
+         args={'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form,'following':following,'subscription':subscription,'subscriptionno':subscriptionno,'followingno':followingno,"followerno":followers,"firstpaper":firstpaper,'date_today':date_today}
          return render(request,self.template_name,args)
 
     def post(self,request):
@@ -176,7 +176,7 @@ def myarticles(request,user):
     firstpaper=followingobj.newspaper.all()[0]
     date_today=str(datetime.today())
     date_today=date_today[:10]
-    args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
+    args={'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
     return render(request,'following/articles.html',args)
 
 
@@ -346,7 +346,7 @@ class newspapers(TemplateView):
                 if col2[i+1][0].likes > col2[i][0].likes:
                     (col2[i],col2[i+1])=(col2[i+1],col2[i])
         compares=Compare.objects.filter(user=name)
-        args={'compareform':Compare_form(),'compares':compares,'new_notifications':new_notifications,'all_notifications':all_notifications,'ping':ping,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'col1':col1,'col2':col2,'source':sitename,'date_today':date_today}
+        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications,'ping':ping,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'col1':col1,'col2':col2,'source':sitename,'date_today':date_today}
         return render(request,'newspapers/Newspapers.html',args)
 
     def post(self,request):
@@ -535,7 +535,7 @@ class Search_results(TemplateView):
                         if col3[i+1][3] > col3[i][3]:
                             (col3[i],col3[i+1])=(col3[i+1],col3[i])
 
-        return render(request,self.template_name,{'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'form':form,'col1':col1,'col2':col2,'col3':col3,'date_today':date_today,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,'search_terms':search_terms})
+        return render(request,self.template_name,{'all_notifications':all_notifications,'ping':ping,'form':form,'col1':col1,'col2':col2,'col3':col3,'date_today':date_today,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,'search_terms':search_terms})
 
 # view for Friends search
 class People_search(TemplateView):
@@ -566,7 +566,7 @@ class People_search(TemplateView):
             pic_list=a.get_pics(name_split[0],emptylastname,request.user)
             final=zip(pic_list,b)
 
-        return render(request,self.template_name,{'form':form,'peoplelist':final,'search_terms':search_terms,'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic})
+        return render(request,self.template_name,{'form':form,'peoplelist':final,'search_terms':search_terms,'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic})
 
 
 # view for creating blog
@@ -639,7 +639,7 @@ class ComparePublish(TemplateView):
         pic=details.image
         form=SocratesSearchForm()
         compareform=Compare_form()
-        args={'commentbox':commentbox,'comp':compareobj,'new_notifications':new_notifications,'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'date_today':date_today,'firstpaper':firstpaper}
+        args={'commentbox':commentbox,'comp':compareobj,'all_notifications':all_notifications[:10],'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'date_today':date_today,'firstpaper':firstpaper}
         return render(request,self.template_name,args)
 
 
