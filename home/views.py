@@ -40,7 +40,10 @@ class home(TemplateView):
         col3=[]
         liked_posts=[]
         disliked_posts=[]
-        all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="general")
+        if filter=='your_subscriptions':
+            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="general").filter(source__in=[x.name for x in (Following.objects.get(current_user=name)).newspaper.all()])
+        else:
+            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="general")
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)
@@ -134,6 +137,7 @@ class home(TemplateView):
                     for i in range(len(col3)-1):
                         if col3[i+1][0].visits > col3[i][0].visits:
                             (col3[i],col3[i+1])=(col3[i+1],col3[i])
+
         col1=col1[:3]
         col2=col2[:3]
         col3=col3[:3]
@@ -231,7 +235,13 @@ class homeSports(TemplateView):
         col3=[]
         liked_posts=[]
         disliked_posts=[]
-        all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="sports").order_by('date')
+        if filter=='your_subscriptions':
+            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="sports").filter(source__in=[x.name for x in (Following.objects.get(current_user=name)).newspaper.all()])
+            if not (all_posts):
+                all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="sports")
+        else:
+            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="sports")
+
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)
@@ -358,7 +368,12 @@ class homeMarket(TemplateView):
         col3=[]
         liked_posts=[]
         disliked_posts=[]
-        all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="business").order_by('?')
+        if filter=='your_subscriptions':
+            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="business").filter(source__in=[x.name for x in (Following.objects.get(current_user=name)).newspaper.all()])
+            if not (all_posts):
+                all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="business")
+        else:
+            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="business")
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)
@@ -614,7 +629,12 @@ class hindi(TemplateView):
         col3=[]
         liked_posts=[]
         disliked_posts=[]
-        all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="hindi").order_by('date')
+        if filter=='your_subscriptions':
+            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="hindi").filter(source__in=[x.name for x in (Following.objects.get(current_user=name)).newspaper.all()])
+            if not (all_posts):
+                all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="hindi")
+        else:
+            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="hindi")
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)

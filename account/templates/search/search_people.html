@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{% static "home.css"%}" type="text/css"/>
     <link rel="shortcut icon" type="image/png" href="{% static "images/favicon.ico" %}"/>
          <script src="{% static 'js/home.js' %}"></script>
-    <title>Socrates-Politics</title>
+    <title>Socrates-{{search_terms}}</title>
 </head>
 <body style="overflow-x:scroll">
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -37,7 +37,7 @@
       <ul class="nav navbar-nav">
           <form class="navbar-form navbar-left">
         <div class="form-group">
-          <input id="socrates-search" type="text" class="form-control" placeholder="Search-Socrates">
+          <input id="socrates-search" value="{{search_terms}}" type="text" class="form-control" placeholder="Search-Socrates">
         </div>
         <button id="searchsubmit" type="button" class="btn btn-default">&#x1f50d;</button>
       </form>
