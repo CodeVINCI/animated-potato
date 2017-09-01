@@ -145,7 +145,7 @@ class SocratesSearchForm(forms.ModelForm):
 
 
 
-class UserBasicEdit_form(UserChangeForm):
+class UserBasicEdit_form(forms.ModelForm):
     class Meta:
         model=User
         fields=('first_name',
