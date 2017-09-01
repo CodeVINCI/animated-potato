@@ -3,6 +3,7 @@ from . import views,ajax
 from .views import unitednations,home,homeSports,homeMarket,hindi
 
 urlpatterns=[url(r'^(?P<filter>[\w]+)$', home.as_view(), name='home'),
+             url(r'^allnotifications/seeall/$', views.allnotifications, name='allnotifications'),
              url(r'^scroll/loadcontent/(?P<theme>[\w]+)$', views.loadcontent, name='loadcontent'),
              url(r'^visitors/(?P<pk>[0-9]+)/$', views.visits,name='visits'),
              url(r'^editcompare/(?P<pk>[0-9]+)/$', ajax.editcompare,name='editcompare'),
@@ -24,5 +25,6 @@ urlpatterns=[url(r'^(?P<filter>[\w]+)$', home.as_view(), name='home'),
              url(r'^Market/(?P<filter>.+)$',homeMarket.as_view(),name='home-market'),
              url(r'^market/(?P<filter>.+)$',homeMarket.as_view(),name='home-market'),
              url(r'^UnitedNations/(?P<filter>.+)$',unitednations.as_view(),name='home-unitednations'),
+
 
              ]
