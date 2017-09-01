@@ -82,7 +82,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown" style="width:60px;position:relative;"><a style="width:50px;padding-right:0px;padding-left:0px;" href="#" class="dropdown-notification" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="font-size:20px;" class="glyphicon glyphicon-globe"></span>{% if ping %}<span class="badge">{{ ping }}</span>{% endif %}</a>
-            <ul id="noti" class="dropdown-menu" style="width: 460px;max-height: 350px;overflow-y: scroll;overflow-x: hidden;margin-top: 24px;">
+            <ul id="noti" class="dropdown-menu" style="width: 460px;max-height: 350px;overflow-y:scroll;overflow-x: hidden;margin-top: 24px;">
             {% for notification in all_notifications %}
             <li><div data="{{notification.pk}}" class="notify" style="{% if notification.seen %}background-color:grey;{% endif %}padding:10px;width:450px;white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><a style="text-decoration:none;width:450px;color:black;white-space:wrap;overflow-x:hidden;" target="_blank" href="{{ notification.onclick_url }}"><p style="font-size:12px;"><span class="glyphicon glyphicon-pencil">&nbsp;</span>{{ notification.message|truncatechars:200 }}</p></a></div></li>
             <li style="width:450px;" role="separator" class="divider"></li>

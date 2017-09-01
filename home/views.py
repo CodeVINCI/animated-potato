@@ -15,6 +15,7 @@ from django.db.models import F
 import json
 from datetime import datetime, timedelta
 import django.middleware.csrf
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.shortcuts import get_object_or_404
 # Home page view.
@@ -897,5 +898,15 @@ def notificationpost(request,type,pk):
 
 def allnotifications(request):
     all_notifications=Notification.objects.filter(user=request.user)
-    args = {'notifications': all_notifications}
+    paginator = Paginator(all_notifications, 10)
+    page = request.GET.get('page')
+    try:
+        notifications = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        notifications = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        notifications = paginator.page(paginator.num_pages)
+    args = {'notifications': notifications}
     return render(request,"allnotifications.html",args)

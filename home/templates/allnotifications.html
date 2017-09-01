@@ -89,7 +89,21 @@
             <li><div data="{{notification.pk}}" class="notify"><a target="_blank" href="{{ notification.onclick_url }}"><p style="font-size:12px;"><span class="glyphicon glyphicon-pencil">&nbsp;</span>{{ notification.message }}</p></a></div></li>
     <hr>
     {% endfor %}
-        </ul>
+</ul>
+    <div class="pagination">
+        <span class="step-links">
+            {% if notifications.has_previous %}
+            <a href="?page={{ notifications.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="current">
+                Page {{ notifications.number }} of {{ notifications.paginator.num_pages }}
+            </span>
+            {% if notifications.has_next %}
+            <a href="?page={{ notifications.next_page_number }}">next</a>
+        {% endif %}
+            </span>
+    </div>
+
 </div>
 
 </body>
