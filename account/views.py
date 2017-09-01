@@ -593,7 +593,7 @@ class ComparePublish(TemplateView):
         pic=details.image
         form=SocratesSearchForm()
         compareform=Compare_form()
-        args={'commentbox':commentbox,'comp':compareobj,'all_notifications':all_notifications[:10],'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'date_today':date_today,'firstpaper':firstpaper}
+        args={"compareform":compareform,'commentbox':commentbox,'comp':compareobj,'all_notifications':all_notifications[:10],'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'date_today':date_today,'firstpaper':firstpaper}
         return render(request,self.template_name,args)
 
 

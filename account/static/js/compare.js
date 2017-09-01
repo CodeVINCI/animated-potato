@@ -76,5 +76,38 @@ async: false,
 
 });
 
+$(document).on('click', '#edit_compare' ,function(event){
+var id = $(this).attr('data');
+var ur = '/home/editcompare/'.concat(id);
+$('#updatecompare').attr('data', id);
+$.ajax(
+{
+url:ur,
+method:'get',
+async: false,
+success:function(response)
+{
+$('#id_title').val(response.title);
+$('#id_description').val(response.description);
+}
+});
+
+});
+
+$(document).on('click', '#updatecompare' ,function(event){
+var id = $(this).attr('data');
+var ur = '/home/updatecompare/'.concat(id);
+
+$.ajax(
+{
+url:ur,
+method:'get',
+data:{"title":$('#id_title').val(),"description":$('#id_description').val()},
+success:function(response)
+{
+location.reload();
+}
+});
+});
 
 });
