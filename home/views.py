@@ -894,3 +894,8 @@ def notificationpost(request,type,pk):
                 status=2
             args = {"status":status,'compareform':Compare_form(),'compares':compares,'post':post,"commentbox":commentbox,"details":details,'all_notifications':all_notifications,'ping':ping,'date_today':time_stamp}
             return render(request,"notificationpost.html",args)
+
+def allnotifications(request):
+    all_notifications=Notification.objects.filter(user=request.user)
+    args = {'notifications': all_notifications}
+    return render(request,"allnotifications.html",args)

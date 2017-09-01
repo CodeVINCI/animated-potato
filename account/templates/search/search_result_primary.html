@@ -63,7 +63,7 @@
             <li><div data="{{notification.pk}}" class="notify" style="{% if notification.seen %}background-color:grey;{% endif %}padding:10px;width:450px;white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><a style="text-decoration:none;width:450px;color:black;white-space:wrap;overflow-x:hidden;" href="{{ notification.onclick_url }}" target="_blank"><p style="font-size:12px;"><span class="glyphicon glyphicon-pencil">&nbsp;</span>{{ notification.message|truncatechars:200 }}</p></a></div></li>
             <li style="width:450px;" role="separator" class="divider"></li>
             {% endfor %}
-            <li><div style="text-align:center;width:450px;"><a href="#" style="width:450px;">See All</a></div></li>
+            <li><div style="text-align:center;width:450px;"><a href="/home/allnotifications/seeall" style="width:450px;">See All</a></div></li>
         </ul>
         </li>
         <div class="imgAbt">

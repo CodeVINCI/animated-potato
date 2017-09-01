@@ -1,16 +1,17 @@
+ <!-- Latest compiled and minified CSS -->
 <!DOCTYPE html>
 <html lang="en">
+ {% load static %}
 <head>
     {% load static %}
-    <title>Socrates-Email & Notifications</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="{% static "settings/email.css" %}" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="{% static "signup/Welcome.css"%}" />
     <link rel="shortcut icon" type="image/png" href="{% static "profile/images/favicon.ico" %}"/>
-
-      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
+    <title>Socrates-Welcome</title>
 </head>
 <body>
 
@@ -24,7 +25,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-        <a class="navbar-brand" href="/home/most_liked">Socrates</a>
+        <a class="navbar-brand" href="/home/most_liked">Socrates<p style="font-size:11px;">{{ date_today }}</p></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -44,7 +45,7 @@
             <li><a href="/home/most_liked">General</a></li>
             <li><a href="/home/sports/most_liked">Sports</a></li>
             <li><a href="/home/market/most_liked">Market</a></li>
-              <li><a href="/home/UnitedNations/most_liked">United Nations</a></li>
+               <li><a href="/home/UnitedNations/most_liked">United Nations</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="/home/hindinews/most_liked">News in Hindi</a></li>
           </ul>
@@ -52,13 +53,13 @@
           <li><a href="/account/newspapers/">Newspapers</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-       <li class="dropdown" style="width:60px;position:relative;"><a style="width:50px;padding-right:0px;padding-left:0px;" href="#" class="dropdown-notification" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="font-size:20px;" class="glyphicon glyphicon-globe"></span>{% if ping %}<span class="badge">{{ ping }}</span>{% endif %}</a>
+          <li class="dropdown" style="width:60px;position:relative;"><a style="width:50px;padding-right:0px;padding-left:0px;" href="#" class="dropdown-notification" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="font-size:20px;" class="glyphicon glyphicon-globe"></span>{% if ping %}<span class="badge">{{ ping }}</span>{% endif %}</a>
             <ul id="noti" class="dropdown-menu" style="width: 460px;max-height: 350px;overflow-y: scroll;overflow-x: hidden;margin-top: 24px;">
             {% for notification in all_notifications %}
             <li><div data="{{notification.pk}}" class="notify" style="{% if notification.seen %}background-color:grey;{% endif %}padding:10px;width:450px;white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><a style="text-decoration:none;width:450px;color:black;white-space:wrap;overflow-x:hidden;" href="{{ notification.onclick_url }}" target="_blank"><p style="font-size:12px;"><span class="glyphicon glyphicon-pencil">&nbsp;</span>{{ notification.message|truncatechars:200 }}</p></a></div></li>
             <li style="width:450px;" role="separator" class="divider"></li>
             {% endfor %}
-            <li><div style="text-align:center;width:450px;"><a href="/home/allnotifications/seeall" style="width:450px;">See All</a></div></li>
+            <li><div style="text-align:center;width:450px;"><a href="#" style="width:450px;">See All</a></div></li>
         </ul>
         </li>
          <div class="imgAbt">
@@ -68,8 +69,8 @@
 
                 <ul class="dropdown-menu" id="profilemenu">
             <li><a href="/account/profile">My Profile</a></li>
-             <li><a href="/account/{{user}}/articles">My Articles</a></li>
-            <li><a href="/account/{{user}}/subscriptions">My Subscriptions</a></li>
+            <li><a href="/account/Myblog/">My Blog</a></li>
+            <li><a href="#">My Messages</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="/account/settings">Settings</a></li>
               <li role="separator" class="divider"></li>
@@ -77,25 +78,19 @@
           </ul>
         </li>
           </div>
+
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-flui-->
  </nav>
-
-  <div class="box">
- <div class="dropdown">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-    Settings
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-    <li><a href="/account/settings/">Account</a></li>
-    <li><a href="/account/psettings/">Privacy</a></li>
-    <li><a href="/account/ensettings/">Email & Notification</a></li>
-  </ul>
-</div>
+<div class="conatiner" style="margin-top:100px;">
+<ul>
+    {% for notification in notifications %}
+            <li><div data="{{notification.pk}}" class="notify"><a target="_blank" href="{{ notification.onclick_url }}"><p style="font-size:12px;"><span class="glyphicon glyphicon-pencil">&nbsp;</span>{{ notification.message }}</p></a></div></li>
+    <hr>
+    {% endfor %}
+        </ul>
 </div>
 
-<div class="jumbotron">
-    <h1>Coming soon with emails and notifications</h1>
-</div>
+</body>
+</html>
