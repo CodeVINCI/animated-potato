@@ -22,8 +22,9 @@ class home(TemplateView):
     template_name = "home/home.html"
 
     def get(self,request,filter):
-        date_today=str(datetime.today())
-        date_today=date_today[:10]
+        date_today=datetime.today()
+        time_stamp=date_today.strftime("%b %d,%Y")
+        date_today=str(date_today)[:10]
         d = str(datetime.today() - timedelta(days=4))
         d=d[:10]
         name=request.user
@@ -145,7 +146,7 @@ class home(TemplateView):
         firstpaper=followingobj.newspaper.all()[0]
         compares=Compare.objects.filter(user=name)
 
-        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
+        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':time_stamp}
         return render(request,self.template_name,args)
 
 def loadcontent(request,theme):
@@ -217,8 +218,9 @@ class homeSports(TemplateView):
     template_name = "homeSports/home-sports.html"
 
     def get(self,request,filter):
-        date_today=str(datetime.today())
-        date_today=date_today[:10]
+        date_today=datetime.today()
+        time_stamp=date_today.strftime("%b %d,%Y")
+        date_today=str(date_today)[:10]
         d = str(datetime.today() - timedelta(days=4))
         d=d[:10]
         name=request.user
@@ -342,7 +344,7 @@ class homeSports(TemplateView):
         firstpaper=followingobj.newspaper.all()[0]
         compares=Compare.objects.filter(user=name)
 
-        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
+        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':time_stamp}
         return render(request,self.template_name,args)
 
 
@@ -350,8 +352,9 @@ class homeMarket(TemplateView):
     template_name = "homeMarket/home-market.html"
 
     def get(self,request,filter):
-        date_today=str(datetime.today())
-        date_today=date_today[:10]
+        date_today=datetime.today()
+        time_stamp=date_today.strftime("%b %d,%Y")
+        date_today=str(date_today)[:10]
         d = str(datetime.today() - timedelta(days=4))
         d=d[:10]
         name=request.user
@@ -474,7 +477,7 @@ class homeMarket(TemplateView):
         firstpaper=followingobj.newspaper.all()[0]
         compares=Compare.objects.filter(user=name)
 
-        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
+        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':time_stamp}
         return render(request,self.template_name,args)
 
 
@@ -484,8 +487,9 @@ class unitednations(TemplateView):
     template_name = 'unitednations/unitednations.html'
 
     def get(self,request,filter):
-        date_today=str(datetime.today())
-        date_today=date_today[:10]
+        date_today=datetime.today()
+        time_stamp=date_today.strftime("%b %d,%Y")
+        date_today=str(date_today)[:10]
         d = str(datetime.today() - timedelta(days=4))
         d=d[:10]
         name=request.user
@@ -603,7 +607,7 @@ class unitednations(TemplateView):
         firstpaper=followingobj.newspaper.all()[0]
         compares=Compare.objects.filter(user=name)
 
-        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
+        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':time_stamp}
         return render(request,self.template_name,args)
 
 
@@ -612,8 +616,9 @@ class hindi(TemplateView):
     template_name = "hindi/hindi.html"
 
     def get(self,request,filter):
-        date_today=str(datetime.today())
-        date_today=date_today[:10]
+        date_today=datetime.today()
+        time_stamp=date_today.strftime("%b %d,%Y")
+        date_today=str(date_today)[:10]
         d = str(datetime.today() - timedelta(days=4))
         d=d[:10]
         name=request.user
@@ -735,7 +740,7 @@ class hindi(TemplateView):
         firstpaper=followingobj.newspaper.all()[0]
         compares=Compare.objects.filter(user=name)
 
-        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
+        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':time_stamp}
         return render(request,self.template_name,args)
 
 
@@ -868,6 +873,8 @@ def suggest_compare(request,pk):
         return JsonResponse({'message':'Article has been suggeted to your friends'})
 
 def notificationpost(request,type,pk):
+    date_today=datetime.today()
+    time_stamp=date_today.strftime("%b %d,%Y")
     if request.method == "GET":
         if type=="post":
             status=0
@@ -885,5 +892,5 @@ def notificationpost(request,type,pk):
                 status=1
             elif d.count()>0:
                 status=2
-            args = {"status":status,'compareform':Compare_form(),'compares':compares,'post':post,"commentbox":commentbox,"details":details,'all_notifications':all_notifications,'ping':ping,}
+            args = {"status":status,'compareform':Compare_form(),'compares':compares,'post':post,"commentbox":commentbox,"details":details,'all_notifications':all_notifications,'ping':ping,'date_today':time_stamp}
             return render(request,"notificationpost.html",args)

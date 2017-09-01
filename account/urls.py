@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from . import views
-from account.views import UserProfileEdit,Profileupload,Search_results,Profile,People_search,createblog,blog,Myblog,signup,newspapers,ComparePublish
+from account.views import UserProfileEdit,Profileupload,Search_results,Profile,People_search,signup,newspapers,ComparePublish
 from django.contrib.auth.views import login,logout,password_reset,password_reset_done,password_reset_confirm,password_reset_complete
 from . import ajax
 
@@ -28,9 +28,7 @@ urlpatterns=[url(r'^$', views.login),
              url(r'^profile/upload_picture/$', Profileupload.as_view(),name='Upload'),
              url(r'^searchsocrates/(?P<search_terms>.+)$',Search_results.as_view(),name='searchprimary'),
              url(r'^search_people/(?P<search_terms>.+)$', People_search.as_view(),name='peoplesearch'),
-             url(r'^createblog/$', createblog.as_view(),name='createblog'),
-             url(r'^blog/$',blog.as_view(),name='blog'),
-             url(r'^Myblog/$',Myblog.as_view(),name='Myblog'),
+
              url(r'^viewprofile/(?P<pk>[0-9]+)/$', views.viewprofile,name='viewprofile'),
              url(r'^viauserpk/(?P<pk>[0-9]+)/$', views.viauserpk,name='viauser'),
              url(r'^connect/(?P<action>.+)/(?P<pk>\d+)/$',views.connections,name='connections'),

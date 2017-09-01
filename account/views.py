@@ -58,8 +58,8 @@ class Profile(TemplateView):
     template_name = 'profile/profile.html'
 
     def get(self,request):
-         date_today=str(timezone.now())
-         date_today=date_today[:10]
+         date_today=datetime.today()
+         time_stamp=date_today.strftime("%b %d,%Y")
          name=request.user
 
          all_notifications=Notification.objects.filter(user=request.user)
@@ -83,7 +83,7 @@ class Profile(TemplateView):
          details=userprofile[0]
          pic=details.image
          form=SocratesSearchForm()
-         args={'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form,'following':following,'subscription':subscription,'subscriptionno':subscriptionno,'followingno':followingno,"followerno":followers,"firstpaper":firstpaper,'date_today':date_today}
+         args={'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form,'following':following,'subscription':subscription,'subscriptionno':subscriptionno,'followingno':followingno,"followerno":followers,"firstpaper":firstpaper,'date_today':time_stamp}
          return render(request,self.template_name,args)
 
     def post(self,request):
@@ -174,9 +174,9 @@ def myarticles(request,user):
         j=j+1
     followingobj=Following.objects.get(current_user=name)
     firstpaper=followingobj.newspaper.all()[0]
-    date_today=str(datetime.today())
-    date_today=date_today[:10]
-    args={'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':date_today}
+    date_today=datetime.today()
+    time_stamp=date_today.strftime("%b %d,%Y")
+    args={'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':time_stamp}
     return render(request,'following/articles.html',args)
 
 
@@ -286,8 +286,9 @@ class newspapers(TemplateView):
     template_name = 'newspapers/Newspapers.html'
     def get(self,request,sitename):
         #dates
-        date_today=str(datetime.today())
-        date_today=date_today[:10]
+        date_today=datetime.today()
+        time_stamp=date_today.strftime("%b %d,%Y")
+        date_today=str(date_today)[:10]
         d = str(datetime.today() - timedelta(days=3))
         d=d[:10]
         # today and a day before
@@ -346,7 +347,7 @@ class newspapers(TemplateView):
                 if col2[i+1][0].likes > col2[i][0].likes:
                     (col2[i],col2[i+1])=(col2[i+1],col2[i])
         compares=Compare.objects.filter(user=name)
-        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications,'ping':ping,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'col1':col1,'col2':col2,'source':sitename,'date_today':date_today}
+        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications,'ping':ping,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'col1':col1,'col2':col2,'source':sitename,'date_today':time_stamp}
         return render(request,'newspapers/Newspapers.html',args)
 
     def post(self,request):
@@ -464,8 +465,9 @@ class Search_results(TemplateView):
     def get(self,request,search_terms):
         name=request.user
         form=SocratesSearchForm(initial={'search':search_terms})
-        date_today=str(datetime.today())
-        date_today=date_today[:10]
+        date_today=datetime.today()
+        time_stamp=date_today.strftime("%b %d,%Y")
+        date_today=str(date_today)[:10]
         d = str(datetime.today() - timedelta(days=1))
         d=d[:10]
 
@@ -535,7 +537,7 @@ class Search_results(TemplateView):
                         if col3[i+1][3] > col3[i][3]:
                             (col3[i],col3[i+1])=(col3[i+1],col3[i])
 
-        return render(request,self.template_name,{'all_notifications':all_notifications,'ping':ping,'form':form,'col1':col1,'col2':col2,'col3':col3,'date_today':date_today,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,'search_terms':search_terms})
+        return render(request,self.template_name,{'all_notifications':all_notifications,'ping':ping,'form':form,'col1':col1,'col2':col2,'col3':col3,'date_today':time_stamp,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,'search_terms':search_terms})
 
 # view for Friends search
 class People_search(TemplateView):
@@ -569,54 +571,6 @@ class People_search(TemplateView):
         return render(request,self.template_name,{'form':form,'peoplelist':final,'search_terms':search_terms,'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic})
 
 
-# view for creating blog
-class createblog(TemplateView):
-    template_name = 'blog/createblog.html'
-
-    def get(self,request):
-        name=request.user
-        userprofile=Userprofile.objects.filter(user=name)
-        details=userprofile[0]
-        pic=details.image
-        form=SocratesSearchForm()
-        args={'user':request.user,'details':details,'pic':pic,'form':form}
-        return render(request,self.template_name,args)
-
-
-class blog(TemplateView):
-    template_name = 'blog/blog.html'
-
-    def get(self,request):
-        name=request.user
-        userprofile=Userprofile.objects.filter(user=name)
-        details=userprofile[0]
-        pic=details.image
-        form=SocratesSearchForm()
-        args={'user':request.user,'details':details,'pic':pic,'form':form}
-        return render(request,self.template_name,args)
-
-
-# view for My blogs
-class Myblog(TemplateView):
-    template_name = 'blog/Myblog.html'
-    def get(self,request):
-
-        name=request.user
-        userprofile=Userprofile.objects.filter(user=name)
-        details=userprofile[0]
-        pic=details.image
-        form=SocratesSearchForm()
-        args={'user':request.user,'details':details,'pic':pic,'form':form}
-        return render(request,self.template_name,args)
-
-    def post(self,request):
-
-        form=SocratesSearchForm(request.POST)
-        if form.is_valid():
-            socratessearch=form.save(commit=False)
-            socratessearch.user=request.user
-            socratessearch.save()
-            return redirect('/account/searchsocrates')
 
 class ComparePublish(TemplateView):
     template_name = 'compare/compare.html'
