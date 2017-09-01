@@ -100,22 +100,18 @@
         <br><br><br><br>
         <b><p>Feeds</p></b><hr>
       <p><a href="#">Activity</a></p>
-      <a href="#">Blog<span class="badge">5</span></a><br><br>
+      <a href="#">Compares<span class="badge">5</span></a><br><br>
 <a href="#">Followers<span class="badge">10</span></a><br><br>
 <a href="#">Following<span class="badge">2</span></a><br><br>
-<a href="#">Messages<span class="badge">2</span></a><br><br>
-        <a href="#">Follow your Comments<span class="badge">2</span></a><br><br>
     </div>
 
 <div class="col-sm-8 text-left">
     <div class="container">
      <div class="col-md-4">
      <div class="imgAbt">
-         <a href="/account/profile/upload_picture">
              {% if details.image.url %}
              {% load static %}
   <img src={{ pic.url }} alt="" style="width:240px;height:240px;border:5px solid #E6E6E6;border-radius:50%;">
-</a>
          {% else %}
          {% load static %}
           <img src="{% static "images/Dp.png" %}" alt="" style="width:240px;height:240px;border:5px;">
