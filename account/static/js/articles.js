@@ -105,13 +105,13 @@ return false;
         revertToOriginalURL();
     });
 
-    $('#post-comment').keypress(function(e){
+    $('#wrap').delegate('.comment_box','keypress',function(e){
     if(e.which === 13){
-        $("#comment_button").click();
+    //alert($(this).siblings('#comment_button').html());
+        $(this).siblings("#comment_button").click();
         return false;
     }
 });
-
 //this is ajax of comment sectioon do something to it so that it will work
 /*handling comment form submission*/
 $('.thumbnail').on('click','#comment_button', function(event){

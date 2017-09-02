@@ -4,9 +4,10 @@ $(document).ready(function()
 $('.carousel').carousel({ interval: 5000 });
 
 
-$('#post-comment').keypress(function(e){
+$(document).delegate('.comment_box','keypress',function(e){
     if(e.which === 13){
-        $("#comment_button").click();
+    //alert($(this).siblings('#comment_button').html());
+        $(this).siblings("#comment_button").click();
         return false;
     }
 });

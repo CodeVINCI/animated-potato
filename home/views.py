@@ -32,7 +32,6 @@ class home(TemplateView):
         userprofile=Userprofile.objects.filter(user=name)
         details=userprofile[0]
         pic=details.image
-        form=SocratesSearchForm()
         commentbox=comment_form()
         all_notifications=Notification.objects.filter(user=request.user)
         new_notifications=all_notifications.filter(seen=0)
@@ -147,7 +146,7 @@ class home(TemplateView):
         firstpaper=followingobj.newspaper.all()[0]
         compares=Compare.objects.filter(user=name)
 
-        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':time_stamp}
+        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':time_stamp}
         return render(request,self.template_name,args)
 
 def loadcontent(request,theme):
@@ -196,7 +195,7 @@ def loadcontent(request,theme):
         pic=Userprofile.objects.get(user=request.user).image
         csrf=django.middleware.csrf.get_token(request)
 
-        f='<img src="'+str(pic.url)+'" alt="" style="width:40px;height:40px;border:1px solid #E6E6E6;border-radius:50%;"></a></div><div class="media-body"><h4 class="media-heading">'+str(request.user.first_name)+'&nbsp; '+str(request.user.last_name)+'&nbsp;</h4><form id="post-form"><input type="hidden" name="csrfmiddlewaretoken" value="'+str(csrf)+'" /><input id="post-comment" value="" required=True  placeholder="Write a comment..."/><meta id="comment_data" data-pk="'+str(post[i].pk)+'"><button type="button" id="comment_button" class="btn btn-default">Comment</button></form><ul id="talk" class="arguments">'
+        f='<img src="'+str(pic.url)+'" alt="" style="width:40px;height:40px;border:1px solid #E6E6E6;border-radius:50%;"></a></div><div class="media-body"><h4 class="media-heading">'+str(request.user.first_name)+'&nbsp; '+str(request.user.last_name)+'&nbsp;</h4><form id="post-form"><input type="hidden" name="csrfmiddlewaretoken" value="'+str(csrf)+'" /><input class="comment_box" id="post-comment" value="" required=True  placeholder="Write a comment..."/><meta id="comment_data" data-pk="'+str(post[i].pk)+'"><button type="button" id="comment_button" class="btn btn-default">Comment</button></form><ul id="talk" class="arguments">'
 
         h=""
         for comment in reversed(post[i].comments.all()):
@@ -228,7 +227,6 @@ class homeSports(TemplateView):
         userprofile=Userprofile.objects.filter(user=name)
         details=userprofile[0]
         pic=details.image
-        form=SocratesSearchForm()
         commentbox=comment_form()
         all_notifications=Notification.objects.filter(user=request.user)
         new_notifications=all_notifications.filter(seen=0)
@@ -345,7 +343,7 @@ class homeSports(TemplateView):
         firstpaper=followingobj.newspaper.all()[0]
         compares=Compare.objects.filter(user=name)
 
-        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':time_stamp}
+        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':time_stamp}
         return render(request,self.template_name,args)
 
 
@@ -362,7 +360,6 @@ class homeMarket(TemplateView):
         userprofile=Userprofile.objects.filter(user=name)
         details=userprofile[0]
         pic=details.image
-        form=SocratesSearchForm()
         commentbox=comment_form()
         all_notifications=Notification.objects.filter(user=request.user)
         new_notifications=all_notifications.filter(seen=0)
@@ -478,7 +475,7 @@ class homeMarket(TemplateView):
         firstpaper=followingobj.newspaper.all()[0]
         compares=Compare.objects.filter(user=name)
 
-        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':time_stamp}
+        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':time_stamp}
         return render(request,self.template_name,args)
 
 
@@ -497,7 +494,6 @@ class unitednations(TemplateView):
         userprofile=Userprofile.objects.filter(user=name)
         details=userprofile[0]
         pic=details.image
-        form=SocratesSearchForm()
         commentbox=comment_form()
         all_notifications=Notification.objects.filter(user=request.user)
         new_notifications=all_notifications.filter(seen=0)
@@ -608,7 +604,7 @@ class unitednations(TemplateView):
         firstpaper=followingobj.newspaper.all()[0]
         compares=Compare.objects.filter(user=name)
 
-        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':time_stamp}
+        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':time_stamp}
         return render(request,self.template_name,args)
 
 
@@ -625,7 +621,6 @@ class hindi(TemplateView):
         name=request.user
         details=Userprofile.objects.get(user=name)
         pic=details.image
-        form=SocratesSearchForm()
         commentbox=comment_form()
         all_notifications=Notification.objects.filter(user=request.user)
         new_notifications=all_notifications.filter(seen=0)
@@ -741,7 +736,7 @@ class hindi(TemplateView):
         firstpaper=followingobj.newspaper.all()[0]
         compares=Compare.objects.filter(user=name)
 
-        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':time_stamp}
+        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications[:10],'ping':ping,'filter':filter,'user':request.user,'details':details,'pic':pic,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':time_stamp}
         return render(request,self.template_name,args)
 
 

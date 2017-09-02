@@ -82,8 +82,7 @@ class Profile(TemplateView):
          subscriptionno=len(subscription)
          details=userprofile[0]
          pic=details.image
-         form=SocratesSearchForm()
-         args={'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form,'following':following,'subscription':subscription,'subscriptionno':subscriptionno,'followingno':followingno,"followerno":followers,"firstpaper":firstpaper,'date_today':time_stamp}
+         args={'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'following':following,'subscription':subscription,'subscriptionno':subscriptionno,'followingno':followingno,"followerno":followers,"firstpaper":firstpaper,'date_today':time_stamp}
          return render(request,self.template_name,args)
 
     def post(self,request):
@@ -134,7 +133,6 @@ def myarticles(request,user):
     userprofile=Userprofile.objects.filter(user=name)
     details=userprofile[0]
     pic=details.image
-    form=SocratesSearchForm()
     commentbox=comment_form()
     all_notifications=Notification.objects.filter(user=request.user)
     new_notifications=all_notifications.filter(seen=0)
@@ -176,7 +174,7 @@ def myarticles(request,user):
     firstpaper=followingobj.newspaper.all()[0]
     date_today=datetime.today()
     time_stamp=date_today.strftime("%b %d,%Y")
-    args={'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':time_stamp}
+    args={'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,"col1":col1,"col2":col2,"col3":col3,"commentbox":commentbox,'firstpaper':firstpaper,'date_today':time_stamp}
     return render(request,'following/articles.html',args)
 
 
@@ -186,7 +184,6 @@ def viewprofile(request,pk):
     viewer=Userprofile.objects.get(user=request.user)
     viewerimg=viewer.image
     pic=profile.image
-    form=SocratesSearchForm()
     followingobj=Following.objects.get(current_user__username=request.user)
     following=followingobj.users.all()
     if user in following:
@@ -202,14 +199,13 @@ def viauserpk(request,pk):
     viewerimg=Userprofile.objects.get(user=request.user)
     viewerimg=viewerimg.image
     pic=profile.image
-    form=SocratesSearchForm()
     followingobj=Following.objects.get(current_user__username=request.user)
     following=followingobj.users.all()
     if user in following:
         possibleaction="Unfollow"
     else:
         possibleaction="Follow"
-    args={'viewer':request.user,'details':profile,'pic':pic,'form':form,'user':user,'activeuserimage':viewerimg,"following":following,"possibleaction":possibleaction}
+    args={'viewer':request.user,'details':profile,'pic':pic,'user':user,'activeuserimage':viewerimg,"following":following,"possibleaction":possibleaction}
     return render(request,'viewprofile/viewprofile.html',args)
 
 # view for Account Settings /account/settings
@@ -219,11 +215,10 @@ def settings(request):
     userprofile=Userprofile.objects.filter(user=name)
     details=userprofile[0]
     pic=details.image
-    form=SocratesSearchForm()
     all_notifications=Notification.objects.filter(user=request.user)
     new_notifications=all_notifications.filter(seen=0)
     ping= new_notifications.count()
-    args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form}
+    args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic}
     return render(request,'settings/settings.html',args)
 
 
@@ -254,11 +249,10 @@ def psettings(request):
     userprofile=Userprofile.objects.filter(user=name)
     details=userprofile[0]
     pic=details.image
-    form=SocratesSearchForm()
     all_notifications=Notification.objects.filter(user=request.user)
     new_notifications=all_notifications.filter(seen=0)
     ping= new_notifications.count()
-    args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form}
+    args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic}
     return render(request,'settings/psettings.html',args)
 
 # view for email and notifications settings
@@ -268,11 +262,10 @@ def ensettings(request):
     userprofile=Userprofile.objects.filter(user=name)
     details=userprofile[0]
     pic=details.image
-    form=SocratesSearchForm()
     all_notifications=Notification.objects.filter(user=request.user)
     new_notifications=all_notifications.filter(seen=0)
     ping= new_notifications.count()
-    args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form}
+    args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic}
     return render(request,'settings/ensettings.html',args)
 
 
@@ -303,7 +296,6 @@ class newspapers(TemplateView):
         userprofile=Userprofile.objects.filter(user=name)
         details=userprofile[0]
         pic=details.image
-        form=SocratesSearchForm()
 
         subscriptionsobj=Following.objects.get(current_user__username=request.user)
         subscriptions=subscriptionsobj.newspaper.all()
@@ -347,16 +339,10 @@ class newspapers(TemplateView):
                 if col2[i+1][0].likes > col2[i][0].likes:
                     (col2[i],col2[i+1])=(col2[i+1],col2[i])
         compares=Compare.objects.filter(user=name)
-        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications,'ping':ping,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'col1':col1,'col2':col2,'source':sitename,'date_today':time_stamp}
+        args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications,'ping':ping,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,"subscriptions":subscriptions,'col1':col1,'col2':col2,'source':sitename,'date_today':time_stamp}
         return render(request,'newspapers/Newspapers.html',args)
 
-    def post(self,request):
-        form=SocratesSearchForm(request.POST)
-        if form.is_valid():
-            socratessearch=form.save(commit=False)
-            socratessearch.user=request.user
-            socratessearch.save()
-            return redirect('/account/searchsocrates/'+str(request.POST['search']))
+
 
 
 # /account/Welcome-to-socrates
@@ -366,8 +352,7 @@ def Welcome(request):
     userprofile=Userprofile.objects.filter(user=name)
     details=userprofile[0]
     pic=details.image
-    form=SocratesSearchForm()
-    args={'user':request.user,'details':details,'pic':pic,'form':form}
+    args={'user':request.user,'details':details,'pic':pic}
     return render(request,'welcome/Welcome.html',args)
 
 
@@ -592,9 +577,8 @@ class ComparePublish(TemplateView):
         firstpaper=followingobj.newspaper.all()[0]
         details=userprofile[0]
         pic=details.image
-        form=SocratesSearchForm()
         compareform=Compare_form()
-        args={"compareform":compareform,'commentbox':commentbox,'comp':compareobj,'all_notifications':all_notifications[:10],'ping':ping,'user':request.user,'details':details,'pic':pic,'form':form,"subscriptions":subscriptions,'date_today':date_today,'firstpaper':firstpaper}
+        args={"compareform":compareform,'commentbox':commentbox,'comp':compareobj,'all_notifications':all_notifications[:10],'ping':ping,'user':request.user,'details':details,'pic':pic,"subscriptions":subscriptions,'date_today':date_today,'firstpaper':firstpaper}
         return render(request,self.template_name,args)
 
 
