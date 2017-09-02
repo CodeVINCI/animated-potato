@@ -10,7 +10,7 @@
 
       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-
+<script src="{% static 'js/settings.js' %}"></script>
 </head>
 <body>
 
@@ -32,7 +32,7 @@
       <ul class="nav navbar-nav">
            <form class="navbar-form navbar-left">
         <div class="form-group">
-          <input id="socrates-search" type="text" class="form-control" placeholder="Search-Socrates">
+          <input id="socrates-search" type="text" class="form-control" placeholder="Search-Socrates" autocomplete="off">
         </div>
         <button id="searchsubmit" type="button" class="btn btn-default">&#x1f50d;</button>
       </form>
@@ -97,7 +97,7 @@
 </div>
 
 <div class="jumbotron">
-    <b>Inbox Preferences</b>
+<!--    <b>Inbox Preferences</b>
 <hr>
     Which registered users would you like to receive message from?
 <div class="radio">
@@ -127,7 +127,7 @@
       Allow other people to reply on your comments..
   </label>
 </div>
-    <br><br>
+    <br><br>-->
 
     <b>Delete or Deactivate Your Account</b>
     <hr>

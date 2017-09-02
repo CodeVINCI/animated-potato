@@ -1,45 +1,18 @@
 $(document).ready(function()
 {
 
-/*var ready=true;
-function yHandler()
-{
-var str="";
-$('.thumbnail').each(function()
-{
- str +=($(this).attr("id").concat(" "));
+$(document).on('click', 'a[href="#formModal"]' ,function(event){
+var mod = $(this).attr('href');
+$(mod).modal('show');
 });
-if ($(window).scrollTop() == ($(document).height() - $(window).height()))
-{
-ready=false;
-$.ajax(
-{
-url:'/home/scroll/loadcontent/home',
-method:'get',
-data:{posts:str},
-dataType:'json',
-success:function(response)
-{
 
-  $("#col1").children('#tilescol1').append(response.col1);
-  $("#col1").children('#tilescol1').append(response.col4);
-  $("#col2").children('#tilescol2').append(response.col2);
-  $("#col2").children('#tilescol2').append(response.col5);
-  $("#col3").children('#tilescol3').append(response.col3);
-  $("#col3").children('#tilescol3').append(response.col6);
-}
-}).always(function(){
-                ready = true; //Reset the flag here
-            });
-}
-}
-window.onscroll=yHandler;*/
-/*$(".testing").on('click','#data',function(event)
-{
- var wrap = document.getElementById('tiles')
- var h= wrap.offsetHeight;
- alert(h);
-});*/
+
+$('#socrates-search').keypress(function(e){
+    if(e.which === 13){
+        $("#searchsubmit").click();
+        return false;
+    }
+});
 
 $(".navbar-form").on('click','#searchsubmit',function(event)
 {
@@ -47,10 +20,12 @@ var search_term=$(this).siblings('div').find('#socrates-search').val();
 var ur= ("/account/searchsocrates/").concat(search_term);
  if (search_term.trim() ==="")
     {alert('Empty search');
-    return 0;
+    return false;
     }
  window.location.href= ur;
+ return false;
 });
+
 
 $('#results').on('click', "#readlater", function(event)
 {
@@ -128,7 +103,7 @@ return false;
 
 /*showing url on opening the modal*/
   //$(window.location.hash).modal('show');
-   $('#results').on('click', 'a[data-toggle="modal"]' ,function(event){
+   $(document).on('click', 'a[data-toggle="modal"]' ,function(event){
         window.location.hash = $(this).attr('data');
       var m = $(this).parent('p').nextAll('.modal').first().attr('id');
       m = ('#').concat(m);
@@ -233,6 +208,64 @@ async: false,
 });
 
 });
+
+$(document).on('click','#newcomparesave',function(event)
+{
+var title= $('#id_title').val();
+var description = $('#id_description').val();
+var id = $('#selectedpost').attr('data-pk')
+var replace = '<a id="addpost" style="cursor:pointer;text-decoration:none;" data=""><p><span class="glyphicon glyphicon-grain"></span>&nbsp;'.concat(title,'<span style="float:right;">1</span></p></a>');
+$.ajax(
+{
+url:'/account/newcompare',
+method:'get',
+data:{title:title,description:description,post:id},
+dataType:'json',
+success:function(response)
+{
+$('#oldcompare').prepend(replace);
+$('#oldcompare').children('a[data=""]').attr('data',response.data);
+}
+});
+
+});
+
+$(document).on('click','#addtocompare',function(event)
+{
+var id = $(this).closest('.thumbnail').attr('id');
+$('#selectedpost').attr('data-pk',id);
+
+});
+
+$(document).on('click','#addpost',function(event)
+{
+alert('about to add');
+var id = $('#selectedpost').attr('data-pk');
+var comp = $(this).attr('data');
+var out = $(this)
+var count = $(this).find('span[style="float:right;"]').html();
+
+if (count < 3)
+{
+$.ajax(
+{
+url:'/account/addposttocompare',
+method:'get',
+data:{compare:comp,post:id},
+dataType:'json',
+success:function(response)
+{
+out.find('span[style="float:right;"]').html(response.count);
+}
+});
+}
+else
+{
+alert('Max 3 can be added to any compare');
+}
+
+});
+
 
 //final paranthesis
 });

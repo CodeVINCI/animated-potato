@@ -480,6 +480,7 @@ class Search_results(TemplateView):
         new_notifications=all_notifications.filter(seen=0)
         ping= new_notifications.count()
 
+        compares= Compare.objects.filter(user=name)
         #Call the search algorithm make it return all the arguments
         a=NewsArticleSearch()
         col1=[]
@@ -537,7 +538,7 @@ class Search_results(TemplateView):
                         if col3[i+1][3] > col3[i][3]:
                             (col3[i],col3[i+1])=(col3[i+1],col3[i])
 
-        return render(request,self.template_name,{'all_notifications':all_notifications,'ping':ping,'form':form,'col1':col1,'col2':col2,'col3':col3,'date_today':time_stamp,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,'search_terms':search_terms})
+        return render(request,self.template_name,{'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications,'ping':ping,'form':form,'col1':col1,'col2':col2,'col3':col3,'date_today':time_stamp,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,'search_terms':search_terms})
 
 # view for Friends search
 class People_search(TemplateView):

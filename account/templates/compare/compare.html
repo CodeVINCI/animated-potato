@@ -31,11 +31,9 @@
       <ul class="nav navbar-nav">
            <form class="navbar-form navbar-left" method="post">
         <div class="form-group">
-            {% csrf_token %}
-          {{ form.search.errors }}
-    {{ form.search}}
+          <input id="socrates-search" type="text" class="form-control" placeholder="Search-Socrates" autocomplete="off">
         </div>
-        <button type="submit" class="btn btn-default">&#x1f50d;</button>
+        <button id="searchsubmit" type="button" class="btn btn-default">&#x1f50d;</button>
       </form>
         <li><a href="/home/most_liked"><span class="glyphicon glyphicon-home" aria-hidden="true">Home</span></a></li>
         <li><a href="/account/compare">Compare</a></li>
@@ -149,16 +147,16 @@
           <div class="item active">
               <a href={{compare.posts.all.0.pageurl}} target="_blank"><img src={{compare.posts.all.0.image.url}} alt="Los Angeles" style="width:100%;height:300px;"></a>
         <div class="carousel-caption">
-            <a href={{compare.posts.all.0.pageurl}} target="_blank"><h3>{{compare.posts.all.0.source}}</h3></a>
-          <p>{{compare.posts.all.0.headline}}</p>
+            <a style="color:white;" href={{compare.posts.all.0.pageurl}} target="_blank"><h1>{{compare.posts.all.0.source}}</h1></a>
+          <h3>{{compare.posts.all.0.headline}}</h3>
         </div>
       </div>
     {% if compare.posts.all.1 %}
       <div class="item">
           <a href={{compare.posts.all.1.pageurl}} target="_blank"><img src={{compare.posts.all.1.image.url}} alt="Chicago" style="width:100%;height:300px;"></a>
         <div class="carousel-caption">
-            <a href={{compare.posts.all.1.pageurl}} target="_blank"><h3>{{compare.posts.all.1.source}}</h3></a>
-          <p>{{compare.posts.all.1.headline}}</p>
+            <a style="color:white;" href={{compare.posts.all.1.pageurl}} target="_blank"><h1>{{compare.posts.all.1.source}}</h1></a>
+          <h3>{{compare.posts.all.1.headline}}</h3>
         </div>
       </div>
     {% endif %}
@@ -167,8 +165,8 @@
       <div class="item">
           <a href={{compare.posts.all.2.pageurl}} target="_blank"><img src={{compare.posts.all.2.image.url}} alt="New York" style="width:100%;height:300px;"></a>
         <div class="carousel-caption">
-            <a href={{compare.posts.all.2.pageurl}} target="_blank"><h3>{{compare.posts.all.2.source}}</h3></a>
-          <p>{{compare.posts.all.2.headline}}</p>
+            <a style="color:white;" href={{compare.posts.all.2.pageurl}} target="_blank"><h1>{{compare.posts.all.2.source}}</h1></a>
+          <h3>{{compare.posts.all.2.headline}}</h3>
         </div>
       </div>
               {% endif %}
