@@ -3,6 +3,14 @@ $(document).ready(function()
 
 $('.carousel').carousel({ interval: 5000 });
 
+
+$('#post-comment').keypress(function(e){
+    if(e.which === 13){
+        $("#comment_button").click();
+        return false;
+    }
+});
+
 $(document).on('click','#comment_button', function(event){
     event.preventDefault();
      var id = $(this).prev('meta').data().pk// sanity check

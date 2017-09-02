@@ -104,6 +104,14 @@ return false;
     $('.modal').on('hidden.bs.modal', function () {
         revertToOriginalURL();
     });
+
+    $('#post-comment').keypress(function(e){
+    if(e.which === 13){
+        $("#comment_button").click();
+        return false;
+    }
+});
+
 //this is ajax of comment sectioon do something to it so that it will work
 /*handling comment form submission*/
 $('.thumbnail').on('click','#comment_button', function(event){

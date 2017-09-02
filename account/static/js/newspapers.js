@@ -128,6 +128,12 @@ return false;
         revertToOriginalURL();
     });
 
+$('#post-comment').keypress(function(e){
+    if(e.which === 13){
+        $("#comment_button").click();
+        return false;
+    }
+});
 
 /*handling comment form submission*/
 $('#wrap').on('click','#comment_button', function(event){

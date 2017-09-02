@@ -148,7 +148,7 @@
           <!-- Button trigger modal -->
 <p>
     <a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
-  {{commentbox.text}}
+  <input name="text" required="" placeholder="Write a comment..." maxlength="1000" type="text">
    </a>
     <a style="float:right;" href="http://www.facebook.com/sharer/sharer.php?u={{ post.0.pageurl }}&app_id=1885028298402855&image={{ post.0.link }}" target="_blank" class="fb-share-button fa fa-facebook"></a>
     <button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button>
@@ -315,7 +315,7 @@
          <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
                 <!-- Button trigger modal -->
 <p><a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
-  {{commentbox.text}}
+  <input name="text" required="" placeholder="Write a comment..." maxlength="1000" type="text">
 </a>
 <a style="float:right;" href="http://www.facebook.com/sharer/sharer.php?u={{ post.0.pageurl }}&app_id=1885028298402855&image={{ post.0.link }}" target="_blank" class="fb-share-button fa fa-facebook"></a>
 </a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button>
@@ -477,7 +477,7 @@
         <p id="{{ post.0.pk }}"><a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
 
 <p><a href="#exampleModalLong{{post.0.pk}}" class="popup" data-toggle="modal">
-  {{commentbox.text}}
+  <input name="text" required="" placeholder="Write a comment..." maxlength="1000" type="text">
 </a>
     <a style="float:right;" href="http://www.facebook.com/sharer/sharer.php?u={{ post.0.pageurl }}&app_id=1885028298402855&image={{ post.0.link }}" target="_blank" class="fb-share-button fa fa-facebook"></a>
     <button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button>

@@ -173,6 +173,14 @@ return false;
         revertToOriginalURL();
     });
 
+$('#post-comment').keypress(function(e){
+    if(e.which === 13){
+        $("#comment_button").click();
+        return false;
+    }
+});
+
+
 /*handling comment form submission*/
 $('#wrap').on('click','#comment_button', function(event){
     event.preventDefault();
@@ -205,11 +213,6 @@ $('#wrap').on('click','#comment_button', function(event){
 
 });
 
-$("#post-comment").keyup(function(event){
-    if(event.keyCode == 13){
-        $("#comment_button").click();
-    }
-});
 
 
 //javascript for comment delete button
