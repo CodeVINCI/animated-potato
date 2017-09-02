@@ -93,7 +93,7 @@
     <div class="col-6 col-md-4 post" id="col1">
          <ul id="tilescol1" class="unstyled">
 
-        {% for post in col1 %}
+        {% for post in col1 reversed %}
 
    <li><div class="thumbnail" id="{{post.0.pk}}">
       <img src={{ post.0.image.url }} alt="...">
@@ -226,7 +226,7 @@
     </div>
     <div class="col-6 col-md-4 post" id="col2">
        <ul id="tilescol2" class="unstyled">
-        {% for post in col2 %}
+        {% for post in col2 reversed %}
 
    <li><div class="thumbnail" id="{{post.0.pk}}">
       <img src={{ post.0.image.url }} alt="...">
@@ -363,7 +363,7 @@
     </div>
     <div class="col-6 col-md-4 post" id="col3">
        <ul id="tilescol3" class="unstyled">
-        {% for post in col3 %}
+        {% for post in col3 reversed %}
 
    <li><div class="thumbnail" id="{{post.0.pk}}">
       <img src={{ post.0.image.url }} alt="...">
