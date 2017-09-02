@@ -190,7 +190,7 @@ def viewprofile(request,pk):
         possibleaction="Unfollow"
     else:
         possibleaction="Follow"
-    args={'viewer':request.user,'details':profile,'pic':pic,'form':form,'user':user,'activeuserimage':viewerimg,"activeuser":viewer,"following":following,"possibleaction":possibleaction}
+    args={'viewer':request.user,'details':profile,'pic':pic,'user':user,'activeuserimage':viewerimg,"activeuser":viewer,"following":following,"possibleaction":possibleaction}
     return render(request,'viewprofile/viewprofile.html',args)
 
 def viauserpk(request,pk):
