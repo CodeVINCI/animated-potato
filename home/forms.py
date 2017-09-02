@@ -11,7 +11,7 @@ class comment_form(forms.ModelForm):
         fields= ['text']
         widgets = {
             'text': forms.TextInput(
-                attrs={'class':'comment_box','id': 'post-comment', 'required': True, 'placeholder': 'Write a comment...'}
+                attrs={"autocomplete":"off",'class':'comment_box','id': 'post-comment', 'required': True, 'placeholder': 'Write a comment...'}
             ),
         }
 
@@ -22,6 +22,6 @@ class compare_comment_form(forms.ModelForm):
         fields= ['text']
         widgets = {
             'text': forms.TextInput(
-                attrs={'class':'comment_box','id': 'post-comment', 'required': True, 'placeholder': 'Write a comment...'}
+                attrs={"autocomplete":"off",'class':'comment_box','id': 'post-comment', 'required': True, 'placeholder': 'Write a comment...'}
             ),
         }
