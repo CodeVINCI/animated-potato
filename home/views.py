@@ -26,7 +26,7 @@ class home(TemplateView):
         date_today=datetime.today()
         time_stamp=date_today.strftime("%b %d,%Y")
         date_today=str(date_today)[:10]
-        d = str(datetime.today() - timedelta(days=4))
+        d = str(datetime.today() - timedelta(days=1))
         d=d[:10]
         name=request.user
         userprofile=Userprofile.objects.filter(user=name)
@@ -42,9 +42,9 @@ class home(TemplateView):
         liked_posts=[]
         disliked_posts=[]
         if filter=='your_subscriptions':
-            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="general").filter(source__in=[x.name for x in (Following.objects.get(current_user=name)).newspaper.all()])
+            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="general").filter(source__in=[x.name for x in (Following.objects.get(current_user=name)).newspaper.all()]).order_by('-pk')
         else:
-            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="general")
+            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="general").order_by('-pk')
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)
@@ -161,18 +161,18 @@ def loadcontent(request,theme):
     print(theme)
     print(ex)
     if theme=="home":
-        post=list(reversed(Post.objects.filter(category="general").exclude(pk__in=ex).order_by('date')))
+        post=Post.objects.filter(category="general").exclude(pk__in=ex).order_by('-pk')
     elif theme=="sports":
-        post=list(reversed(Post.objects.filter(category="sports").exclude(pk__in=ex).order_by('date')))
+        post=Post.objects.filter(category="sports").exclude(pk__in=ex).order_by('pk')
     elif theme=="market":
-        post=list(reversed(Post.objects.filter(category="business").exclude(pk__in=ex).order_by('date')))
+        post=Post.objects.filter(category="business").exclude(pk__in=ex).order_by('-pk')
     elif theme=="unitednations":
-        post=list(reversed(Post.objects.filter(category="UN").exclude(pk__in=ex).order_by('date')))
+        post=Post.objects.filter(category="UN").exclude(pk__in=ex).order_by('-pk')
     elif theme=="hindi":
-        post=list(reversed(Post.objects.filter(category="hindi").exclude(pk__in=ex).order_by('date')))
+        post=Post.objects.filter(category="hindi").exclude(pk__in=ex).order_by('-pk')
     elif theme=="newspapers":
         source = request.GET.get('source','')
-        post=list(reversed(Post.objects.filter(source=source).exclude(pk__in=ex).order_by('date')))
+        post=Post.objects.filter(source=source).exclude(pk__in=ex).order_by('-pk')
 
 
     thumbnails=[]
@@ -221,7 +221,7 @@ class homeSports(TemplateView):
         date_today=datetime.today()
         time_stamp=date_today.strftime("%b %d,%Y")
         date_today=str(date_today)[:10]
-        d = str(datetime.today() - timedelta(days=4))
+        d = str(datetime.today() - timedelta(days=1))
         d=d[:10]
         name=request.user
         userprofile=Userprofile.objects.filter(user=name)
@@ -237,11 +237,11 @@ class homeSports(TemplateView):
         liked_posts=[]
         disliked_posts=[]
         if filter=='your_subscriptions':
-            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="sports").filter(source__in=[x.name for x in (Following.objects.get(current_user=name)).newspaper.all()])
+            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="sports").filter(source__in=[x.name for x in (Following.objects.get(current_user=name)).newspaper.all()]).order_by('-pk')
             if not (all_posts):
-                all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="sports")
+                all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="sports").order_by('-pk')
         else:
-            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="sports")
+            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="sports").order_by('-pk')
 
         k=0
         for post in all_posts:
@@ -354,7 +354,7 @@ class homeMarket(TemplateView):
         date_today=datetime.today()
         time_stamp=date_today.strftime("%b %d,%Y")
         date_today=str(date_today)[:10]
-        d = str(datetime.today() - timedelta(days=4))
+        d = str(datetime.today() - timedelta(days=1))
         d=d[:10]
         name=request.user
         userprofile=Userprofile.objects.filter(user=name)
@@ -370,11 +370,11 @@ class homeMarket(TemplateView):
         liked_posts=[]
         disliked_posts=[]
         if filter=='your_subscriptions':
-            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="business").filter(source__in=[x.name for x in (Following.objects.get(current_user=name)).newspaper.all()])
+            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="business").filter(source__in=[x.name for x in (Following.objects.get(current_user=name)).newspaper.all()]).order_by('-pk')
             if not (all_posts):
-                all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="business")
+                all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="business").order_by('-pk')
         else:
-            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="business")
+            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="business").order_by('-pk')
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)
@@ -488,7 +488,7 @@ class unitednations(TemplateView):
         date_today=datetime.today()
         time_stamp=date_today.strftime("%b %d,%Y")
         date_today=str(date_today)[:10]
-        d = str(datetime.today() - timedelta(days=4))
+        d = str(datetime.today() - timedelta(days=1))
         d=d[:10]
         name=request.user
         userprofile=Userprofile.objects.filter(user=name)
@@ -503,7 +503,7 @@ class unitednations(TemplateView):
         col3=[]
         liked_posts=[]
         disliked_posts=[]
-        all_posts=Post.objects.filter(source="unnewsstream.org").filter(date__range=[d,date_today])
+        all_posts=Post.objects.filter(source="unnewsstream.org").filter(date__range=[d,date_today]).order_by('-pk')
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)
@@ -616,7 +616,7 @@ class hindi(TemplateView):
         date_today=datetime.today()
         time_stamp=date_today.strftime("%b %d,%Y")
         date_today=str(date_today)[:10]
-        d = str(datetime.today() - timedelta(days=4))
+        d = str(datetime.today() - timedelta(days=1))
         d=d[:10]
         name=request.user
         details=Userprofile.objects.get(user=name)
@@ -631,11 +631,11 @@ class hindi(TemplateView):
         liked_posts=[]
         disliked_posts=[]
         if filter=='your_subscriptions':
-            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="hindi").filter(source__in=[x.name for x in (Following.objects.get(current_user=name)).newspaper.all()])
+            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="hindi").filter(source__in=[x.name for x in (Following.objects.get(current_user=name)).newspaper.all()]).order_by('-pk')
             if not (all_posts):
-                all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="hindi")
+                all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="hindi").order_by('-pk')
         else:
-            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="hindi")
+            all_posts=Post.objects.filter(date__range=[d,date_today]).filter(category="hindi").order_by('-pk')
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)

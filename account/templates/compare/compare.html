@@ -111,7 +111,8 @@
         <td><a class="comparetitle" href="#" data-toggle="modal" data-target="#myModal{{forloop.counter}}">{{compare.title|truncatechars:100}}</a>&nbsp;&nbsp;&nbsp;<a data="{{compare.pk}}" style="text-decoration:none;" id="edit_compare" href="#formModal" data-toggle="modal" data-dismiss="modal"><span style="font-size:15px;cursor:pointer;color:maroon;" class="glyphicon glyphicon-edit"></span></a></td>
     <td>{{compare.description|truncatechars:100}}</td>
     <td>{% for post in compare.posts.all %}
-        <p>{{forloop.counter}}.&nbsp;{{post.headline}}&nbsp;<b>{{post.source}}</b></p>
+        <p>{{forloop.counter}}.&nbsp;{{post.headline}}&nbsp;<b>{{post.source}}</b><button data-post="{{post.pk}}" data-comp="{{compare.pk}}" type="button" class="close remove_article" aria-label="Close"><span aria-hidden="true">&times;</span>
+        </button></p>
     {% endfor %}
     </td>
     </tr>
@@ -232,9 +233,13 @@
         </ul>
           <div class="modal-footer">
 
-          <p id="{{ post.0.pk }}">
-              <!--<a href={{ post.0.pageurl }} class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a>-->
-              <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>
+          <p id="{{ compare.pk }}">
+                {% if compare.published %}
+              <a href='#' class="btn btn-primary" id="unpublish_button" role="button">Unpublish</a>
+              {% else %}
+              <a href='#' class="btn btn-primary" id="publish_button" role="button">Publish</a>
+              {% endif %}
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" id="delete_compare">Delete</button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </p>
 

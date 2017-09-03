@@ -227,7 +227,7 @@ $('#wrap').on('click','.comment_like',function(event)
 var id= $(this).attr('data-pk');
 var ur= "/home/like_comment/".concat(id);
 var out = $(this);
-alert(ur);
+alert("Now you can only delete comment we are coming up with other features");
 return false;
 });
 
@@ -237,7 +237,7 @@ $('#wrap').on('click','.comment_reply',function(event)
 var id= $(this).attr('data-pk');
 var ur= "/home/reply_comment/".concat(id);
 var out = $(this);
-alert(ur);
+alert("Now you can only delete comment we are coming up with other features");
 return false;
 });
 

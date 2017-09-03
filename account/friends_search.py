@@ -1,13 +1,14 @@
 from django.contrib.auth.models import User
 from account.models import Userprofile
+from django.db.models import Q
 
 class FriendSearch:
     def get_list(self,firstname,lastname,name_user):
 
         if lastname!="":
-            people=User.objects.filter(first_name=firstname).filter(last_name=lastname)
+            people=User.objects.filter(Q(first_name__icontains=firstname) | Q(last_name__icontains=lastname))
         else:
-            people=User.objects.filter(first_name=firstname)
+            people=User.objects.filter(Q(first_name__icontains=firstname) | Q(username__icontains=firstname) | Q(last_name__icontains=firstname))
         return people
 
     def get_pics(self,firstname,lastname,name_user):

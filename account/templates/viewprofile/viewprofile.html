@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{% static "profile/profile.css"%}" type="text/css"/>
     <link rel="shortcut icon" type="image/png" href="{% static "profile/images/favicon.ico" %}"/>
     <title>Socrates-{{user.first_name}} {{user.last_name}}</title>
+    <script src="{% static 'js/viewprofile.js' %}"></script>
 </head>
 <body>
 {% if user.is_authenticated %}
@@ -35,7 +36,7 @@
       <ul class="nav navbar-nav">
            <form class="navbar-form navbar-left">
         <div class="form-group">
-          <input id="socrates-search" type="text" class="form-control" placeholder="Search-Socrates">
+          <input id="socrates-search" type="text" class="form-control" placeholder="Search-Socrates" autocomplete="off">
         </div>
         <button id="searchsubmit" type="button" class="btn btn-default">&#x1f50d;</button>
       </form>

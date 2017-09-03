@@ -11,12 +11,12 @@ from home.Hindinews import Scrape_hindustan,Scrap_amarujala,Scrap_dainik_bhaskar
 logger = get_task_logger(__name__)
 
 @periodic_task(
-    run_every=(crontab(minute='*/5')),
+    run_every=(crontab(minute='*/90')),
     name= "scrape_Thehindu_task",
     ignore_results=True)
 def scrape_Thehindu_task():
     URLs=["https://newsapi.org/v1/articles?source=business-insider&sortBy=latest&apiKey=7b761e381bcc40ca88311d8ef360da90","https://newsapi.org/v1/articles?source=breitbart-news&sortBy=latest&apiKey=7b761e381bcc40ca88311d8ef360da90","https://newsapi.org/v1/articles?source=bloomberg&sortBy=top&apiKey=7b761e381bcc40ca88311d8ef360da90","https://newsapi.org/v1/articles?source=bbc-sport&sortBy=top&apiKey=7b761e381bcc40ca88311d8ef360da90","https://newsapi.org/v1/articles?source=ars-technica&sortBy=latest&apiKey=7b761e381bcc40ca88311d8ef360da90","https://newsapi.org/v1/articles?source=al-jazeera-english&sortBy=latest&apiKey=7b761e381bcc40ca88311d8ef360da90","https://newsapi.org/v1/articles?source=abc-news-au&sortBy=top&apiKey=7b761e381bcc40ca88311d8ef360da90","https://newsapi.org/v1/articles?source=the-times-of-india&sortBy=top&apiKey=7b761e381bcc40ca88311d8ef360da90","https://newsapi.org/v1/articles?source=the-new-york-times&sortBy=top&apiKey=7b761e381bcc40ca88311d8ef360da90","https://newsapi.org/v1/articles?source=the-hindu&sortBy=latest&apiKey=7b761e381bcc40ca88311d8ef360da90","https://newsapi.org/v1/articles?source=bbc-news&sortBy=top&apiKey=7b761e381bcc40ca88311d8ef360da90"]
-    Scrape_hindustan()
+    #Scrape_hindustan()
     logger.info("Scraped livehindustan.com")
     Scrap_amarujala()
     logger.info("Scraped amarujala.com")

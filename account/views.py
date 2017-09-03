@@ -190,7 +190,7 @@ def viewprofile(request,pk):
         possibleaction="Unfollow"
     else:
         possibleaction="Follow"
-    args={'viewer':request.user,'details':profile,'pic':pic,'form':form,'user':user,'activeuserimage':viewerimg,"activeuser":viewer,"following":following,"possibleaction":possibleaction}
+    args={'viewer':request.user,'details':profile,'pic':pic,'user':user,'activeuserimage':viewerimg,"activeuser":viewer,"following":following,"possibleaction":possibleaction}
     return render(request,'viewprofile/viewprofile.html',args)
 
 def viauserpk(request,pk):
@@ -282,7 +282,7 @@ class newspapers(TemplateView):
         date_today=datetime.today()
         time_stamp=date_today.strftime("%b %d,%Y")
         date_today=str(date_today)[:10]
-        d = str(datetime.today() - timedelta(days=3))
+        d = str(datetime.today() - timedelta(days=1))
         d=d[:10]
         # today and a day before
 
@@ -303,7 +303,7 @@ class newspapers(TemplateView):
         col2=[]
         liked_posts=[]
         disliked_posts=[]
-        all_posts=Post.objects.filter(source=sitename).filter(date__range=[d,date_today])[0:6]
+        all_posts=Post.objects.filter(source=sitename).filter(date__range=[d,date_today]).order_by('-pk')[0:6]
         k=0
         for post in all_posts:
             p=Likes.objects.filter(post=post)
@@ -329,15 +329,6 @@ class newspapers(TemplateView):
                 col2.insert(j,(all_posts[i+1],liked_posts[i+1],disliked_posts[i+1]))
             j=j+1
 
-        for j in range(len(col1)-1):
-            for i in range(len(col1)-1):
-                if col1[i+1][0].likes > col1[i][0].likes:
-                    (col1[i],col1[i+1])=(col1[i+1],col1[i])
-
-        for j in range(len(col2)-1):
-            for i in range(len(col2)-1):
-                if col2[i+1][0].likes > col2[i][0].likes:
-                    (col2[i],col2[i+1])=(col2[i+1],col2[i])
         compares=Compare.objects.filter(user=name)
         args={'compareform':Compare_form(),'compares':compares,'all_notifications':all_notifications,'ping':ping,'commentbox':commentbox,'user':request.user,'details':details,'pic':pic,"subscriptions":subscriptions,'col1':col1,'col2':col2,'source':sitename,'date_today':time_stamp}
         return render(request,'newspapers/Newspapers.html',args)

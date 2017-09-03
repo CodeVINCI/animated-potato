@@ -119,6 +119,83 @@ location.reload();
 });
 });
 
+$(document).on('click', '#publish_button' ,function(event){
+var r = confirm("Confirm publishing?");
+if (r == true) {
+var out = $(this);
+var id=$(this).parent('p').attr('id');
+var ur = '/home/publishcompare/'.concat(id);
+$.ajax(
+{
+url:ur,
+method:'get',
+success:function(response)
+{
+out.html('Unpublish');
+out.attr('id','unpublish_button');
+}
+});
+}
+});
+
+$(document).on('click', '#unpublish_button' ,function(event){
+var r = confirm("Confirm unpublishing?");
+if (r == true) {
+var out = $(this);
+var id=$(this).parent('p').attr('id');
+var ur = '/home/unpublishcompare/'.concat(id);
+$.ajax(
+{
+url:ur,
+method:'get',
+success:function(response)
+{
+out.html('Publish');
+out.attr('id','publish_button');
+}
+});
+
+}
+});
+
+$(document).on('click', '.remove_article' ,function(event){
+
+var post = $(this).attr('data-post');
+var comp = $(this).attr('data-comp');
+var out = $(this);
+
+var ur = '/home/removefromcompare/'.concat(comp);
+$.ajax(
+{
+url:ur,
+method:'get',
+data:{'post':post},
+success:function(response)
+{
+var li = out.parent('p');
+li.fadeOut('slow', function() { li.remove(); });
+}
+});
+
+});
+
+$(document).on('click', '#delete_compare' ,function(event){
+var r = confirm("Confirm deleting?");
+if (r == true) {
+var id=$(this).parent('p').attr('id');
+var ur= '/home/deletecompare/'.concat(id);
+$.ajax(
+{
+url:ur,
+method:'get',
+success:function(response)
+{
+location.reload();
+}
+});
+}
+});
+
 $('#socrates-search').keypress(function(e){
     if(e.which === 13){
         $("#searchsubmit").click();
