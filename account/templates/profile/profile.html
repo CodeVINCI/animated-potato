@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="{% static "profile/profile.css"%}" type="text/css"/>
     <link rel="shortcut icon" type="image/png" href="{% static "profile/images/favicon.ico" %}"/>
     <title>Socrates-{{user.first_name}} {{user.last_name}}</title>
+    <script src="{% static 'js/profile.js' %}"></script>
 </head>
 <body>
 {% if user.is_authenticated %}
@@ -28,13 +29,11 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-           <form class="navbar-form navbar-left" method="post">
+           <form class="navbar-form navbar-left">
         <div class="form-group">
-            {% csrf_token %}
-          {{ form.search.errors }}
-    {{ form.search}}
+          <input id="socrates-search" type="text" value="{{search_terms}}" class="form-control" placeholder="Search-Socrates" autocomplete="off">
         </div>
-        <button type="submit" class="btn btn-default">&#x1f50d;</button>
+        <button id="searchsubmit" type="button" class="btn btn-default">&#x1f50d;</button>
       </form>
         <li><a href="/home/most_liked"><span class="glyphicon glyphicon-home" aria-hidden="true">Home</span></a></li>
         <li><a href="/account/compare">Compare</a></li>
