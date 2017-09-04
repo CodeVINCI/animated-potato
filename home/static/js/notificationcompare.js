@@ -86,15 +86,6 @@ $.get(ur);
 return true;
 });
 
-//suggestions counter and generate suggest notification ajax request
-$(document).on('click', '#suggestbutton', function(event)
-{
-var id=$(this).parent('p').attr('id');
-var ur = ('/home/suggestioncompare/').concat(id);
-$.get(ur);
-alert("This article has been suggested to your friends");
-return false;
-});
 
 $('#wrap').delegate('.comment_box','keypress',function(e){
     if(e.which === 13){
@@ -104,13 +95,11 @@ $('#wrap').delegate('.comment_box','keypress',function(e){
     }
 });
 
-/*handling comment form submission*/
-$('#wrap').on('click','#comment_button', function(event){
+$(document).on('click','#comment_button', function(event){
     event.preventDefault();
-    console.log("form submitted!")
      var id = $(this).prev('meta').data().pk// sanity check
     // AJAX for posting
-    var ur = ('/home/make_comment/').concat(id,'/');
+    var ur = ('/home/make_compare_comment/').concat(id,'/');
     var ht = $(this).siblings('#post-comment').val();
     var csrf=$(this).siblings('#post-comment').prev('input').attr('value');
     var out=$(this);
@@ -137,12 +126,11 @@ $('#wrap').on('click','#comment_button', function(event){
 });
 
 
-
 //javascript for comment delete button
-$('#wrap').on('click','.comment_delete',function(event)
+$(document).on('click','.comment_delete',function(event)
 {
 var id= $(this).attr('data-pk');
-var ur= "/home/remove_comment/".concat(id);
+var ur= "/home/remove_compare_comment/".concat(id);
 var out = $(this)
 $.ajax(
 {
@@ -157,26 +145,14 @@ li.fadeOut('slow', function() { li.remove(); });
 return false;
 });
 
-//javascript for comment like button
-$('#wrap').on('click','.comment_like',function(event)
+$(document).on('click', '#suggestbutton', function(event)
 {
-var id= $(this).attr('data-pk');
-var ur= "/home/like_comment/".concat(id);
-var out = $(this);
-alert("Now you can only delete comment we are coming up with other features");
+var id=$(this).parent('p').attr('id');
+var ur = ('/home/suggestion_compare/').concat(id);
+$.get(ur);
+alert("This article has been suggested to your friends");
 return false;
 });
-
-//javascript for comment reply button
-$('#wrap').on('click','.comment_reply',function(event)
-{
-var id= $(this).attr('data-pk');
-var ur= "/home/reply_comment/".concat(id);
-var out = $(this);
-alert("Now you can only delete comment we are coming up with other features");
-return false;
-});
-
 
 $(document).on('click', '.notify' ,function(event){
 var notificationid = $(this).attr("data");
