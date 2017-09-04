@@ -560,7 +560,7 @@ class ComparePublish(TemplateView):
         commentbox=compare_comment_form()
         userprofile=Userprofile.objects.filter(user=name)
         followingobj=Following.objects.get(current_user=name)
-        compareobj = Compare.objects.filter(user=name)
+        compareobj = Compare.objects.filter(user=name).filter(published=0)
 
         all_notifications=Notification.objects.filter(user=request.user)
         new_notifications=all_notifications.filter(seen=0)

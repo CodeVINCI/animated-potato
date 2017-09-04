@@ -5,19 +5,14 @@ from account.forms import SocratesSearchForm,Compare_form
 from account.models import Userprofile,Notification,Following,compare_comment
 from home.models import Post,comment,Likes,Dislikes
 from account.models import Following,Compare
-from home.forms import comment_form
-from home.scrapers.ScrapeUN import UN
-from django.utils import timezone
-from random import shuffle
+from home.forms import comment_form,compare_comment_form
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse,HttpResponse
 from django.contrib.auth.models import User
 from django.db.models import F
-import json
 from datetime import datetime, timedelta
 import django.middleware.csrf
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
-from django.shortcuts import get_object_or_404
 # Home page view.
 class home(TemplateView):
     template_name = "home/home.html"
@@ -868,6 +863,7 @@ def suggest_compare(request,pk):
             n.save()
         return JsonResponse({'message':'Article has been suggeted to your friends'})
 
+@login_required
 def notificationpost(request,type,pk):
     date_today=datetime.today()
     time_stamp=date_today.strftime("%b %d,%Y")
@@ -890,6 +886,17 @@ def notificationpost(request,type,pk):
                 status=2
             args = {"status":status,'compareform':Compare_form(),'compares':compares,'post':post,"commentbox":commentbox,"details":details,'all_notifications':all_notifications,'ping':ping,'date_today':time_stamp}
             return render(request,"notificationpost.html",args)
+        elif type=="compare":
+            compare=Compare.objects.get(pk=pk)
+            commentbox=compare_comment_form()
+            details=Userprofile.objects.get(user=request.user)
+
+            all_notifications=Notification.objects.filter(user=request.user)
+            new_notifications=all_notifications.filter(seen=0)
+            ping= new_notifications.count()
+            args = {'post':compare,"commentbox":commentbox,"details":details,'all_notifications':all_notifications,'ping':ping,'date_today':time_stamp}
+            return render(request,"notificationcompare.html",args)
+
 
 def allnotifications(request):
     all_notifications=Notification.objects.filter(user=request.user)

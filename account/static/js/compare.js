@@ -131,32 +131,12 @@ url:ur,
 method:'get',
 success:function(response)
 {
-out.html('Unpublish');
-out.attr('id','unpublish_button');
+location.reload();
 }
 });
 }
 });
 
-$(document).on('click', '#unpublish_button' ,function(event){
-var r = confirm("Confirm unpublishing?");
-if (r == true) {
-var out = $(this);
-var id=$(this).parent('p').attr('id');
-var ur = '/home/unpublishcompare/'.concat(id);
-$.ajax(
-{
-url:ur,
-method:'get',
-success:function(response)
-{
-out.html('Publish');
-out.attr('id','publish_button');
-}
-});
-
-}
-});
 
 $(document).on('click', '.remove_article' ,function(event){
 

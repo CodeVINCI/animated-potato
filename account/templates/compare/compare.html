@@ -234,11 +234,9 @@
           <div class="modal-footer">
 
           <p id="{{ compare.pk }}">
-                {% if compare.published %}
-              <a href='#' class="btn btn-primary" id="unpublish_button" role="button">Unpublish</a>
-              {% else %}
+                {% ifequal compare.published 0 %}
               <a href='#' class="btn btn-primary" id="publish_button" role="button">Publish</a>
-              {% endif %}
+              {% endifequal %}
               <button type="button" class="btn btn-secondary" data-dismiss="modal" id="delete_compare">Delete</button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </p>

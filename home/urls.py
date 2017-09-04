@@ -10,7 +10,7 @@ urlpatterns=[url(r'^(?P<filter>[\w]+)$', home.as_view(), name='home'),
              url(r'^editcompare/(?P<pk>[0-9]+)/$', ajax.editcompare,name='editcompare'),
              url(r'^updatecompare/(?P<pk>[0-9]+)/$', ajax.updatecompare,name='updatecompare'),
              url(r'^publishcompare/(?P<pk>[0-9]+)/$', ajax.publishcompare,name='publishcompare'),
-             url(r'^unpublishcompare/(?P<pk>[0-9]+)/$', ajax.unpublishcompare,name='unpublishcompare'),
+             #url(r'^unpublishcompare/(?P<pk>[0-9]+)/$', ajax.unpublishcompare,name='unpublishcompare'),
              url(r'^deletecompare/(?P<pk>[0-9]+)/$', ajax.deletecompare,name='deletecompare'),
              url(r'^removefromcompare/(?P<pk>[0-9]+)/$', ajax.removefromcompare,name='removefromcompare'),
 

@@ -1,4 +1,4 @@
-from account.models import Notification,Compare
+from account.models import Notification,Compare,Following
 from .models import Post
 from django.http import JsonResponse
 
@@ -17,12 +17,19 @@ def updatecompare(request,pk):
     return JsonResponse({"message":1})
 
 def publishcompare(request,pk):
-    Compare.objects.filter(pk=pk).update(published=1)
+    c = Compare.objects.filter(pk=pk)
+    c.update(published=1)
+    c=c[0]
+    people=Following.objects.get(current_user=request.user)
+    people=people.users.all()
+    for person in people:
+        message = str((request.user.username).encode('utf-8'))+': '+ str((request.user.first_name).encode('utf-8'))+' '+str((request.user.last_name).encode('utf-8'))+' published "'+str((c.title).encode('utf-8'))+'".'
+        url='/home/notification/compare/'+str(pk)
+        n= Notification(user=person,message=message,onclick_url=url)
+        n.save()
     return JsonResponse({'message':1})
 
-def unpublishcompare(request,pk):
-    Compare.objects.filter(pk=pk).update(published=0)
-    return JsonResponse({'message':1})
+
 def deletecompare(request,pk):
     Compare.objects.get(pk=pk).delete()
     return JsonResponse({'message':1})
