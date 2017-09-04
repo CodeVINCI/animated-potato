@@ -158,11 +158,6 @@ $('#wrap').on('click','#comment_button', function(event){
 
 });
 
-$("#post-comment").keyup(function(event){
-    if(event.keyCode == 13){
-        $("#comment_button").click();
-    }
-});
 
 
 //javascript for comment delete button

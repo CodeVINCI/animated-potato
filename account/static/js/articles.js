@@ -140,6 +140,25 @@ $('.thumbnail').on('click','#comment_button', function(event){
 
 });
 
+$('#wrap').on('click','.comment_delete',function(event)
+{
+var id= $(this).attr('data-pk');
+var ur= "/home/remove_comment/".concat(id);
+var out = $(this)
+$.ajax(
+{
+url:ur,
+method:'get',
+success:function(response)
+{
+var li = out.closest('li');
+li.fadeOut('slow', function() { li.remove(); });
+}
+});
+return false;
+});
+
+
 
 $(document).on('click', '.notify' ,function(event){
 var notificationid = $(this).attr("data");
