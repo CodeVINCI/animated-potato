@@ -77,15 +77,6 @@ $.ajax(
  });
 
 
-//visit site counter ajax request
- $(document).on('click', '#visitbutton', function(event)
-{
-var id=$(this).parent('p').attr('id');
-var ur = ('/home/visitors/').concat(id);
-$.get(ur);
-return true;
-});
-
 
 $('#wrap').delegate('.comment_box','keypress',function(e){
     if(e.which === 13){
