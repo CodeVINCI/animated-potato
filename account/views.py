@@ -65,6 +65,7 @@ class Profile(TemplateView):
          all_notifications=Notification.objects.filter(user=request.user)
          new_notifications=all_notifications.filter(seen=0)
          ping= new_notifications.count()
+         compares=Compare.objects.filter(user=request.user).filter(published=1)
 
 
          userprofile=Userprofile.objects.filter(user=name)
@@ -82,7 +83,7 @@ class Profile(TemplateView):
          subscriptionno=len(subscription)
          details=userprofile[0]
          pic=details.image
-         args={'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'following':following,'subscription':subscription,'subscriptionno':subscriptionno,'followingno':followingno,"followerno":followers,"firstpaper":firstpaper,'date_today':time_stamp}
+         args={'compares':compares,'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'following':following,'subscription':subscription,'subscriptionno':subscriptionno,'followingno':followingno,"followerno":followers,"firstpaper":firstpaper,'date_today':time_stamp}
          return render(request,self.template_name,args)
 
     def post(self,request):

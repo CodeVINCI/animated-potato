@@ -169,28 +169,7 @@
         <p style="font-size:11px;">{{ post.user }}: {{ post.user.first_name}}&nbsp;{{post.user.last_name}}</p>
         <p style="font-size:20px;">{{ post.description }}</p>
         <p style="font-size:10px;">Created on:&nbsp;{{ post.created_on }}</p>
-     <!--   <div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 170px);width: -webkit-calc(100% - 170px);width: calc(100% - 170px);">
-           <button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">
-               {% ifequal status 1 %}
-               <meta id="button_data" data-nextaction="social-unlike" data-pk="{{ post.pk }}">
-     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
-               {% else %}
-               <meta id="button_data" data-nextaction="social-like" data-pk="{{ post.pk }}">
-      <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-up custom"></i></span>
-               {% endifequal %}
-     <span class="count" >{{ post.likes }}</span>
- </button>
-    &nbsp;
- <button id="dislike" class="social-dislike" style="border:none;background-color:transparent;">
-     <span class="dislike" >{{ post.dislikes }}</span>
-     {% ifequal status 2 %}
-     <meta id="button_data" data-nextaction="social-undislike" data-pk="{{ post.pk }}">
-     <span class="like"><i style="color:maroon;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
-     {% else %}
-     <meta id="button_data" data-nextaction="social-dislike" data-pk="{{ post.pk }}">
-     <span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span>
-     {% endifequal %}
- </button></div>-->
+
          <p id="{{ post.pk }}"><a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>
     <a style="float:right;" href="http://www.facebook.com/sharer/sharer.php?u=socrates.news/home/notification/compare/{{post.pk}}&app_id=1885028298402855&image={{ post.posts.0.link }}" target="_blank" class="fb-share-button fa fa-facebook"></a>
     <!--<button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button>-->
