@@ -14,6 +14,7 @@ from account.friends_search import FriendSearch
 from account.primary_search import NewsArticleSearch
 from django.http import JsonResponse
 import random
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils import timezone
 from datetime import datetime, timedelta
 from django.contrib.auth import authenticate
@@ -646,3 +647,8 @@ def removepost(request,pk):
 def allread(request):
     Notification.objects.filter(user=request.user).update(seen=1)
     return redirect('/home/most_liked')
+
+def deactivate(request):
+    user=User.objects.get(username=request.user.username)
+    user.delete()
+    return JsonResponse({'message':1})

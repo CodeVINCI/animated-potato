@@ -7,6 +7,8 @@ from . import ajax
 urlpatterns=[url(r'^$', views.login),
              url(r'^login/$', login,{'template_name':'login/login.html'} ),
              url(r'^logout/$', logout,{'template_name':'logout/logout.html'}),
+             url(r'^deactivate/$', views.deactivate, name='deactivate'),
+
              url(r'^signup/$', signup.as_view(), name='signup'),
              url(r'^profile/$', Profile.as_view(), name='profile'),
              url(r'^markallread/$', views.allread, name='allread'),
