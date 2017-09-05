@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from . import views
-from account.views import UserProfileEdit,Profileupload,Search_results,Profile,People_search,signup,newspapers,ComparePublish
+from account.views import UserProfileEdit,Profileupload,Search_results,Profile,People_search,signup,newspapers,ComparePublish,ComparePublished
 from django.contrib.auth.views import login,logout,password_reset,password_reset_done,password_reset_confirm,password_reset_complete
 from . import ajax
 
@@ -9,18 +9,25 @@ urlpatterns=[url(r'^$', views.login),
              url(r'^logout/$', logout,{'template_name':'logout/logout.html'}),
              url(r'^signup/$', signup.as_view(), name='signup'),
              url(r'^profile/$', Profile.as_view(), name='profile'),
+
              url(r'^compare/$', ComparePublish.as_view(), name='compare'),
+             url(r'^publishedcompare/$', ComparePublished.as_view(), name='publishedcompare'),
+
              url(r'^newcompare/$',ajax.newcompare, name='newcompare'),
              url(r'^addposttocompare/$',ajax.addposttocompare, name='addposttocompare'),
+
              url(r'^settings/$', views.settings, name='settings'),
              url(r'^psettings/$',views.psettings,name='psettings'),
              url(r'^ensettings/$',views.ensettings,name='ensettings'),
              url(r'^changepassword/$',views.changepassword,name='changepassword'),
-             url(r'^blogs/$', views.blogs, name='blogs'),
+
+             #url(r'^blogs/$', views.blogs, name='blogs'),
              url(r'^save/readlater/(?P<pk>[0-9]+)$', views.savepost, name='savepost'),
              url(r'^remove/readlater/(?P<pk>[0-9]+)$', views.removepost, name='removepost'),
+
              url(r'^newspapers/(?P<sitename>[\w.@+-]+)$', newspapers.as_view(), name='newspapers'),
              url(r'^Newspapers/(?P<action>[\w.@+-]+)$', newspapers.as_view(), name='newspapers'),
+
              url(r'^subscription/(?P<newssite>[\w.@+-]+)/(?P<action>[\w.@+-]+)/$',views.subscriptions,name='addrmsubscriptions'),
              url(r'^Welcome-to-socrates/$', views.Welcome,name='Welcome'),
              url(r'^profile/basic_edit/$',views.UserBasicEdit,name='UserBasicEdit'),

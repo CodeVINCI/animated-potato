@@ -1,15 +1,15 @@
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    {% load static %}
-    <link rel="stylesheet" href="{% static "profile/profile.css"%}" type="text/css"/>
+    <link rel="stylesheet" href="{% static "compare/compare.css"%}" type="text/css"/>
     <link rel="shortcut icon" type="image/png" href="{% static "profile/images/favicon.ico" %}"/>
-    <title>Socrates-{{user.first_name}} {{user.last_name}}</title>
-    <script src="{% static 'js/profile.js' %}"></script>
+    <script src="{% static 'js/comparepublished.js' %}"></script>
+    <title>Socrates-Compare</title>
 </head>
 <body>
 {% if user.is_authenticated %}
@@ -29,7 +29,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-         <form class="navbar-form navbar-left">
+           <form class="navbar-form navbar-left" method="post">
         <div class="form-group">
           <input id="socrates-search" type="text" class="form-control" placeholder="Search-Socrates" autocomplete="off">
         </div>
@@ -43,7 +43,7 @@
             <li><a href="/home/most_liked/">General</a></li>
             <li><a href="/home/sports/most_liked">Sports</a></li>
             <li><a href="/home/market/most_liked">Market</a></li>
-                <li><a href="/home/UnitedNations/">United Nations</a></li>
+                <li><a href="/home/UnitedNations/most_liked">United Nations</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="/home/hindinews/most_liked">News in Hindi</a></li>
           </ul>
@@ -57,7 +57,7 @@
             <li><div data="{{notification.pk}}" class="notify" style="{% if notification.seen %}background-color:grey;{% endif %}padding:10px;width:450px;white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><a style="text-decoration:none;width:450px;color:black;white-space:wrap;overflow-x:hidden;" href="{{ notification.onclick_url }}" target="_blank"><p style="font-size:12px;"><span class="glyphicon glyphicon-pencil">&nbsp;</span>{{ notification.message|truncatechars:200 }}</p></a></div></li>
             <li style="width:450px;" role="separator" class="divider"></li>
             {% endfor %}
-            <li><div style="text-align:center;width:450px;"><a href="/home/allnotifications/seeall" style="width:450px;">See All</a></div></li>
+            <li><div style="text-align:center;width:450px;"><a href="#" style="width:450px;">See All</a></div></li>
         </ul>
         </li>
           <div class="imgAbt">
@@ -88,50 +88,52 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-flui-->
  </nav>
-
-
 <div class="container-fluid text-center">
   <div class="row content">
     <div class="col-sm-1 sidenav">
         <br><br><br><br>
         <b><p>Feeds</p></b><hr>
-      <p><a href="#">Activity</a></p>
-      <!--<a href="#">Blog<span class="badge">5</span></a><br><br>-->
-<a href="/account/{{ user }}/followers/">Followers<span class="badge">{{ followerno }}</span></a><br><br>
-<a href="/account/{{ user }}/following/">Following<span class="badge">{{ followingno }}+{{ subscriptionno }}</span></a><br><br>
-<!--<a href="#">Messages<span class="badge">2</span></a><br><br>-->
-        <a href="#">Follow your Comments<span class="badge">2</span></a><br><br>
+
     </div>
 
 <div class="col-sm-8 text-left">
     <div class="container">
-     <div class="col-md-4">
-     <div class="imgAbt">
-         <a href="/account/profile/upload_picture">
-             {% if details.image.url %}
-             {% load static %}
-  <img src={{ pic.url }} alt="" style="width:240px;height:240px;border:5px solid #E6E6E6;border-radius:50%;">
-</a>
-         {% else %}
-         {% load static %}
-          <img src="{% static "images/Dp.png" %}" alt="" style="width:240px;height:240px;border:5px;">
-         {% endif %}
+<table><tr>
+    <th>Date</th>
+    <th>Comparison Title</th>
+    <th>Description</th>
+    <th>Compared posts</th>
+</tr>
+    {% for compare in comp %}
 
-     </div>
-     </div>
-    <div class="col-md-6">
-        <h2>{{user.first_name}}&nbsp; {{user.last_name}}&nbsp;<a href="/account/profile/basic_edit">Edit</a></h2>
-        <p><b>Description</b>:{{ details.description }}</p>
-        <p><b>Subscriptions</b>:{{subscription.0}},&nbsp;{{subscription.1}}...<a href ="/account/{{ user }}/subscriptions">more</a></p>
-        <p><b>My Website</b>:&nbsp;<a href="{{details.website}}" target="_blank">{{ details.website }}</a></p>
-        </div>
-    </div>
-<hr>
-    <div class="container publishboard">
-        {% for compare in compares %}
-                  <div class="conatiner" style="width:70%;margin:auto">
-                      <h4>{{compare.title}}</h4>
-                      <br>
+    <tr>
+        <td>{{compare.created_on}}</td>
+        <td><a class="comparetitle" href="#" data-toggle="modal" data-target="#myModal{{forloop.counter}}">{{compare.title|truncatechars:100}}</a></td>
+    <td>{{compare.description|truncatechars:100}}</td>
+    <td>{% for post in compare.posts.all %}
+        <p>{{forloop.counter}}.&nbsp;{{post.headline}}&nbsp;<b>{{post.source}}</b></p>
+    {% endfor %}
+    </td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+        {% for compare in comp %}
+   <!-- Modal -->
+<div class="modal fade" id="myModal{{forloop.counter}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+           <p style="font-size:10px;">{{ compare.created_on }}</p>
+           <h3 style="font-family:"Times New Roman", Times, serif;">{{ compare.title }}</h3>
+      </div>
+      <div class="modal-body">
+          <div class="conatiner">
               <div id="myCarousel{{forloop.counter}}" class="carousel slide" data-ride="carousel">
                   <!-- Indicators -->
                <ol class="carousel-indicators">
@@ -182,7 +184,8 @@
     </a>
   </div>
               <p style="font-size:10px;">(click on respective image to open the full story)</p>
-              <p style="font-size:18px;">{{ compare.description|truncatechars:200 }}</p>
+              <p style="font-size:18px;">{{ compare.description }}</p>
+              <p style="font-size:10px;">-{{ compare.user.first_name }}&nbsp;{{ compare.user.last_name }}</p>
 
 
                <div class="media">
@@ -198,16 +201,60 @@
     </div>
     <div class="media-body">
       <h4 class="media-heading">  {{user.first_name}}&nbsp; {{user.last_name}}&nbsp;</h4>
-<a id="details" href="/home/open/compare/{{compare.pk}}" style="float:right;" class="btn btn-default" role="button">View Details</a>
+        <form id="post-form">
+                       {% csrf_token %}
+                       {{commentbox.text}}
+            <meta id="comment_data" data-pk="{{ compare.pk }}">
+                        <button type="button" id="comment_button" class="btn btn-default">Comment</button>
+                    </form>
+<!--change this according to views and url-->
+ <ul id="talk" class="arguments">
+         {% for comment in compare.comparelink.all reversed %}
+             <li><span style="font-size:12px">
+                 <b><a class='via_user' href="/account/viauserpk/{{ comment.user.pk }}">{{ comment.user.first_name }}&nbsp;{{ comment.user.last_name }}</a>&nbsp;&nbsp;</b>
+                 <span style="font-size:10px;"><b>{{ comment.created_on }}</b>
+                 </span>
+                 </span>
+                 <br><span style="font-size:12px;">{{ comment.text }}
+                 </span><br>
+
+                 <div class="comment_action_line" style="height:10px;">
+                     <span style="font-size:10px;">
+                         <a class="comment_like" data-pk="{{ comment.pk }}" href="#" role="button">Like</a>&nbsp;&nbsp;&nbsp;
+                         <a class="comment_reply" data-pk="{{ comment.pk }}" href="#" role="button">Reply</a>&nbsp;&nbsp;&nbsp;
+
+                         {% ifequal comment.user.username user.username %}
+                         <a class="comment_delete" data-pk="{{ comment.pk }}" href="#" role="button">Delete</a>
+                         {% endifequal %}
+
+                     </span></div></li>
+             {% endfor %}
+        </ul>
+          <div class="modal-footer">
+
+          <p id="{{ compare.pk }}">
+              <a href="http://www.facebook.com/sharer/sharer.php?u=socrates.news/home/notification/compare/{{post.pk}}&app_id=1885028298402855&image={{ post.posts.0.link }}" target="_blank" class="fb-share-button fa fa-facebook"></a>
+              <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </p>
+
+      </div>
+
 
     </div>
-  </div></div>
-        <hr>
-        {% endfor%}
-<a href="#" style="margin-left:300px;" class="btn btn-default" role="button">View All Published Compares</a>
-        <br><br>
+  </div>
+
+
+          </div>
+      </div>
+
     </div>
-    </div>
+  </div>
+</div>
+{% endfor %}
+  </div>
+</div>
+
     <div class="col-sm-2 sidenav">
       <div class="well">
 
@@ -215,15 +262,12 @@
 
       </div>
       <div class="well">
-          <p><b>Dash-board</b></p><hr><a href="/account/{{ user.username }}/subscriptions"><b>My Newspapers</b></a><br><br><a href="/account/{{ user.username }}/articles"><b>My Articles</b></a><br><br><a href="/account/publishedcompare/"><b>All Published</b></a>
+          <p><b>Dash-board</b></p><hr><a href="/account/{{ user.username }}/subscriptions"><b>My Newspapers</b></a><br><br><a href="/account/{{ user.username }}/articles"><b>My Articles</b></a><br><br><a href="#"><b>Blogs</b></a>
       </div>
     </div>
   </div>
 </div>
 
-<footer class="container-fluid text-center">
-  <p>Footer Text</p>
-</footer>
 {% else %}
 <p><a href="/account/login">You need to login first</a></p>
 <h1>OR</h1>
