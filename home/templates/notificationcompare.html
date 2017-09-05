@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <script
+			  src="https://code.jquery.com/jquery-3.2.1.min.js"
+			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+			  crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static "notificationpost.css"%}" type="text/css"/>
+    <link rel="shortcut icon" type="image/png" href="{% static "images/favicon.ico" %}"/>
+         <script src="{% static 'js/notificationcompare.js' %}"></script>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-4497560118148641",
+    enable_page_level_ads: true
+  });
+</script>
+    <title>Socrates-{{post.title}}</title>
+    <meta property="og:url"           content="http://www.your-domain.com/your-page.html" />
+  <meta property="og:type"          content="website" />
+  <meta property="og:title"         content="Your Website Title" />
+  <meta property="og:description"   content="Your description" />
+  <meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />
+</head>
+<body>
+
+<div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+        <a class="navbar-brand" href="/home/most_liked">Socrates <p style="font-size:11px;">{{ date_today }}</p></a>
+
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+           <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <input id="socrates-search" type="text" class="form-control" placeholder="Search-Socrates" autocomplete="off">
+        </div>
+        <button id="searchsubmit" type="button" class="btn btn-default">&#x1f50d;</button>
+      </form>
+          <li><a href="/home/most_liked"><span class="glyphicon glyphicon-home" aria-hidden="true"><b>Home</b></span></a></li>
+        <li><a href="/account/compare">Compare</a></li>
+         <li class="dropdown">
+             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Themes<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/home/most_liked">General</a></li>
+            <li><a href="/home/sports/most_liked">Sports</a></li>
+            <li><a href="/home/market/most_liked">Market</a></li>
+              <li><a href="/home/UnitedNations/most_liked">United Nations</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/home/hindinews/most_liked">News in Hindi</a></li>
+          </ul>
+        </li>
+          <li><a href="/account/newspapers/{{ firstpaper }}">Newspapers</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown" style="width:60px;position:relative;"><a style="width:50px;padding-right:0px;padding-left:0px;" href="#" class="dropdown-notification" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span style="font-size:20px;" class="glyphicon glyphicon-globe"></span>{% if ping %}<span class="badge">{{ ping }}</span>{% endif %}</a>
+            <ul id="noti" class="dropdown-menu" style="width: 460px;max-height: 350px;overflow-y: scroll;overflow-x: hidden;margin-top: 24px;">
+            {% for notification in all_notifications %}
+            <li><div data="{{notification.pk}}" class="notify" style="{% if notification.seen %}background-color:grey;{% endif %}padding:10px;width:450px;white-space: pre-wrap;white-space: -moz-pre-wrap;white-space: -pre-wrap;white-space: -o-pre-wrap;word-wrap: break-word;"><a style="text-decoration:none;width:450px;color:black;white-space:wrap;overflow-x:hidden;" href="{{ notification.onclick_url }}"><p style="font-size:12px;"><span class="glyphicon glyphicon-pencil">&nbsp;</span>{{ notification.message|truncatechars:200 }}</p></a></div></li>
+            <li style="width:450px;" role="separator" class="divider"></li>
+            {% endfor %}
+            <li><div style="text-align:center;width:450px;"><a href="#" style="width:450px;">See All</a></div></li>
+        </ul>
+        </li>
+        <div class="imgAbt">
+        <li class="dropdown">
+
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src={{ details.image.url }} alt="" style="width:40px;height:40px;border:1px solid #E6E6E6;border-radius:50%;"></a>
+
+                <ul class="dropdown-menu" id="profilemenu">
+            <li><a href="/account/profile">My Profile</a></li>
+                    <li><a href="/account/{{user}}/articles">My Articles</a></li>
+            <li><a href="/account/{{user}}/subscriptions">My Subscriptions</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/account/settings">Settings</a></li>
+              <li role="separator" class="divider"></li>
+            <li><a href="/account/logout">Logout</a></li>
+          </ul>
+        </li>
+          </div>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-flui-->
+ </nav>
+
+<meta id="my-data" data-filter="{{ filter }}">
+<div class="span12" id="wrap">
+<div class="container">
+                  <div id="myCarousel{{post.pk}}" class="carousel slide thumb" data-ride="carousel">
+                  <!-- Indicators -->
+               <ol class="carousel-indicators">
+                 <li data-target="#myCarousel{{post.pk}}" data-slide-to="0" class="active"></li>
+                 <li data-target="#myCarousel{{post.pk}}" data-slide-to="1"></li>
+                 <li data-target="#myCarousel{{post.pk}}" data-slide-to="2"></li>
+               </ol>
+                  <!-- Wrapper for slides -->
+          <div class="carousel-inner">
+
+          <div class="item active">
+              <a href={{post.posts.all.0.pageurl}} target="_blank"><img src={{post.posts.all.0.image.url}} alt="Los Angeles" style="width:400px;height:550px;"></a>
+        <div class="carousel-caption">
+            <a style="color:white;" href={{post.posts.all.0.pageurl}} target="_blank"><h1>{{post.posts.all.0.source}}</h1></a>
+          <h3>{{post.posts.all.0.headline}}</h3>
+        </div>
+      </div>
+    {% if post.posts.all.1 %}
+      <div class="item">
+          <a href={{post.posts.all.1.pageurl}} target="_blank"><img src={{post.posts.all.1.image.url}} alt="Chicago" style="width:400px;height:550px;"></a>
+        <div class="carousel-caption">
+            <a style="color:white;" href={{post.posts.all.1.pageurl}} target="_blank"><h1>{{post.posts.all.1.source}}</h1></a>
+          <h3>{{post.posts.all.1.headline}}</h3>
+        </div>
+      </div>
+    {% endif %}
+
+      {% if post.posts.all.2 %}
+      <div class="item">
+          <a href={{post.posts.all.2.pageurl}} target="_blank"><img src={{post.posts.all.2.image.url}} alt="New York" style="width:400px;height:550px;"></a>
+        <div class="carousel-caption">
+            <a style="color:white;" href={{post.posts.all.2.pageurl}} target="_blank"><h1>{{post.posts.all.2.source}}</h1></a>
+          <h3>{{post.posts.all.2.headline}}</h3>
+        </div>
+      </div>
+              {% endif %}
+
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel{{post.pk}}" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel{{post.pk}}" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+    <div class="thumb" id="contentsection">
+        <h3 id="headline">{{post.title}}</h3>
+        <p style="font-size:11px;">{{ post.user }}: {{ post.user.first_name}}&nbsp;{{post.user.last_name}}</p>
+        <p style="font-size:20px;">{{ post.description }}</p>
+        <p style="font-size:10px;">Created on:&nbsp;{{ post.created_on }}</p>
+
+         <p id="{{ post.pk }}"><a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>
+    <a style="float:right;" href="http://www.facebook.com/sharer/sharer.php?u=socrates.news/home/notification/compare/{{post.pk}}&app_id=1885028298402855&image={{ post.posts.0.link }}" target="_blank" class="fb-share-button fa fa-facebook"></a>
+    <!--<button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button>-->
+</p>
+
+    </div>
+    <div class="thumb" id="commentsection">
+   <form id="post-form">
+                       {% csrf_token %}
+                       {{commentbox.text}}
+            <meta id="comment_data" data-pk="{{ post.pk }}">
+                        <button type="button" id="comment_button" class="btn btn-default">Comment</button>
+                    </form>
+        <ul id="talk" class="arguments">
+         {% for comment in post.comparelink.all reversed %}
+             <li><span style="font-size:12px;">
+                 <b><a class='via_user' href="/account/viauserpk/{{ comment.user.pk }}">{{ comment.user.first_name }}&nbsp;{{ comment.user.last_name }}</a>&nbsp;&nbsp;</b>
+                 <span style="font-size:10px;"><b>{{ comment.created_on }}</b>
+                 </span>
+                 </span>
+                 <br><span style="font-size:12px;">{{ comment.text }}
+                 </span><br>
+
+                 <div class="comment_action_line" style="height:10px;">
+                     <span style="font-size:10px;">
+                         <a class="comment_like" data-pk="{{ comment.pk }}" href="#" role="button">Like</a>&nbsp;&nbsp;&nbsp;
+                         <a class="comment_reply" data-pk="{{ comment.pk }}" href="#" role="button">Reply</a>&nbsp;&nbsp;&nbsp;
+
+                         {% ifequal comment.user.username user.username %}
+                         <a class="comment_delete" data-pk="{{ comment.pk }}" href="#" role="button">Delete</a>
+                         {% endifequal %}
+
+                     </span></div></li>
+             {% endfor %}
+        </ul>
+    </div>
+</div>
+    </div>
+<!--<div class="testing">
+<a role="button" class="btn btn-primary" id="data">Data</a>
+</div>-->
+</body>
+
+</html>
+

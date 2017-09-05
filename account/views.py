@@ -65,6 +65,7 @@ class Profile(TemplateView):
          all_notifications=Notification.objects.filter(user=request.user)
          new_notifications=all_notifications.filter(seen=0)
          ping= new_notifications.count()
+         compares=Compare.objects.filter(user=request.user).filter(published=1)
 
 
          userprofile=Userprofile.objects.filter(user=name)
@@ -82,7 +83,7 @@ class Profile(TemplateView):
          subscriptionno=len(subscription)
          details=userprofile[0]
          pic=details.image
-         args={'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'following':following,'subscription':subscription,'subscriptionno':subscriptionno,'followingno':followingno,"followerno":followers,"firstpaper":firstpaper,'date_today':time_stamp}
+         args={'compares':compares[:3],'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic,'following':following,'subscription':subscription,'subscriptionno':subscriptionno,'followingno':followingno,"followerno":followers,"firstpaper":firstpaper,'date_today':time_stamp}
          return render(request,self.template_name,args)
 
     def post(self,request):
@@ -560,7 +561,7 @@ class ComparePublish(TemplateView):
         commentbox=compare_comment_form()
         userprofile=Userprofile.objects.filter(user=name)
         followingobj=Following.objects.get(current_user=name)
-        compareobj = Compare.objects.filter(user=name)
+        compareobj = Compare.objects.filter(user=name).filter(published=0)
 
         all_notifications=Notification.objects.filter(user=request.user)
         new_notifications=all_notifications.filter(seen=0)
@@ -571,6 +572,30 @@ class ComparePublish(TemplateView):
         compareform=Compare_form()
         args={"compareform":compareform,'commentbox':commentbox,'comp':compareobj,'all_notifications':all_notifications[:10],'ping':ping,'user':request.user,'details':details,'pic':pic,"subscriptions":subscriptions,'date_today':date_today,'firstpaper':firstpaper}
         return render(request,self.template_name,args)
+
+class ComparePublished(TemplateView):
+    template_name = 'compare/comparepublished.html'
+    def get(self,request):
+
+        date_today=str(timezone.now())
+        date_today=date_today[:10]
+        name=request.user
+
+        commentbox=compare_comment_form()
+        userprofile=Userprofile.objects.filter(user=name)
+        followingobj=Following.objects.get(current_user=name)
+        compareobj = Compare.objects.filter(user=name).filter(published=1)
+
+        all_notifications=Notification.objects.filter(user=request.user)
+        new_notifications=all_notifications.filter(seen=0)
+        ping= new_notifications.count()
+        firstpaper=followingobj.newspaper.all()[0]
+        details=userprofile[0]
+        pic=details.image
+        compareform=Compare_form()
+        args={"compareform":compareform,'commentbox':commentbox,'comp':compareobj,'all_notifications':all_notifications[:10],'ping':ping,'user':request.user,'details':details,'pic':pic,"subscriptions":subscriptions,'date_today':date_today,'firstpaper':firstpaper}
+        return render(request,self.template_name,args)
+
 
 
 def connections(request,action,pk):
@@ -615,3 +640,7 @@ def savepost(request,pk):
 def removepost(request,pk):
     Following.removepost(request.user,Post.objects.get(pk=pk))
     return JsonResponse({'g':'h'})
+
+def allread(request):
+    Notification.objects.filter(user=request.user).update(seen=1)
+    return redirect('/home/most_liked')
