@@ -640,3 +640,7 @@ def savepost(request,pk):
 def removepost(request,pk):
     Following.removepost(request.user,Post.objects.get(pk=pk))
     return JsonResponse({'g':'h'})
+
+def allread(request):
+    Notification.objects.filter(user=request.user).update(seen=1)
+    return redirect('/home/most_liked')

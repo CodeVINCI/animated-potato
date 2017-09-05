@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from account.models import Compare
+from account.models import Compare,Notification
 from home.models import Post
 
 def newcompare(request):
@@ -16,4 +16,5 @@ def addposttocompare(request):
     comp=Compare.objects.get(pk=compare_id)
     comp.posts.add(Post.objects.get(pk=post_id))
     return JsonResponse({'count':comp.posts.count()})
+
 

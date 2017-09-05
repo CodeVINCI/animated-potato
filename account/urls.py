@@ -9,6 +9,7 @@ urlpatterns=[url(r'^$', views.login),
              url(r'^logout/$', logout,{'template_name':'logout/logout.html'}),
              url(r'^signup/$', signup.as_view(), name='signup'),
              url(r'^profile/$', Profile.as_view(), name='profile'),
+             url(r'^markallread/$', views.allread, name='allread'),
 
              url(r'^compare/$', ComparePublish.as_view(), name='compare'),
              url(r'^publishedcompare/$', ComparePublished.as_view(), name='publishedcompare'),
