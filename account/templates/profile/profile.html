@@ -204,7 +204,14 @@
   </div></div>
         <hr>
         {% endfor%}
-<a href="#" style="margin-left:300px;" class="btn btn-default" role="button">View All Published Compares</a>
+
+        {% if compares %}
+<a href="/account/publishedcompare/" style="margin-left:300px;" class="btn btn-default" role="button">View All Published Compares</a>
+        {% else %}
+        <h3>No Published Compares</h3>
+        You should try publishing some work! It's like unlocking Mysteries.
+        {% endif %}
+
         <br><br>
     </div>
     </div>

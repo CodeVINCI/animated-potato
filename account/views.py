@@ -187,11 +187,13 @@ def viewprofile(request,pk):
     pic=profile.image
     followingobj=Following.objects.get(current_user__username=request.user)
     following=followingobj.users.all()
+    compares=Compare.objects.filter(user=profile.user).filter(published=1)
+
     if user in following:
         possibleaction="Unfollow"
     else:
         possibleaction="Follow"
-    args={'viewer':request.user,'details':profile,'pic':pic,'user':user,'activeuserimage':viewerimg,"activeuser":viewer,"following":following,"possibleaction":possibleaction}
+    args={'compares':compares[:5],'viewer':request.user,'details':profile,'pic':pic,'user':user,'activeuserimage':viewerimg,"activeuser":viewer,"following":following,"possibleaction":possibleaction}
     return render(request,'viewprofile/viewprofile.html',args)
 
 def viauserpk(request,pk):
