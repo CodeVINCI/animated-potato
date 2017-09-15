@@ -9,6 +9,8 @@ urlpatterns=[url(r'^$', views.login),
              url(r'^logout/$', logout,{'template_name':'logout/logout.html'}),
              url(r'^deactivate/$', views.deactivate, name='deactivate'),
 
+             url(r'^dictionary/$', ajax.dictionary, name='dictionary'),
+
              url(r'^signup/$', signup.as_view(), name='signup'),
              url(r'^profile/$', Profile.as_view(), name='profile'),
              url(r'^markallread/$', views.allread, name='allread'),
