@@ -134,7 +134,8 @@ CELERY_IGNORE_RESULTS='False'
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Asia/Calcutta'
-
+#CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
+#CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 
 # email settings
 EMAIL_HOST = 'localhost'

@@ -12,6 +12,27 @@ $('#socrates-search').keypress(function(e){
     }
 });
 
+$('#dictionary-search').keypress(function(e){
+    if(e.which === 13){
+    var words = $(this).val();
+$.ajax(
+{
+url:'/account/dictionary',
+method:'get',
+data:{term:words},
+dataType:'json',
+success:function(response)
+{
+var r = $('#dictionary-menu');
+var mean='<li style="width:250px;" role="separator" class="divider"></li><li style="width:250px;">Meaning:&nbsp;'.concat(response.meaning,'</li>','<li style="width:250px;" role="separator" class="divider"></li>');
+var ex = '<li style="width:250px;">Example:&nbsp;'.concat(response.example,'</li>');
+r.append(mean);
+r.append(ex);
+}
+    });
+    }
+});
+
 
 var ready=true;
 function yHandler()

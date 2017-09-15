@@ -21,4 +21,20 @@ var ur= ("/account/searchsocrates/").concat(search_term);
  return false;
 });
 
+$(document).on('click', '#deactivate' ,function(event){
+var r = confirm("Are you sure you want to deactivate account");
+if (r == true) {
+var ur= '/account/deactivate/';
+$.ajax(
+{
+url:ur,
+method:'get',
+success:function(response)
+{
+window.location.href="/account/signup"
+}
+});
+}
+});
+
 });

@@ -114,7 +114,7 @@ return false;
 });
 //this is ajax of comment sectioon do something to it so that it will work
 /*handling comment form submission*/
-$('.thumbnail').on('click','#comment_button', function(event){
+$('#wrap').on('click','#comment_button', function(event){
     event.preventDefault();
     console.log("form submitted!")
      var id = $(this).prev('meta').data().pk// sanity check
@@ -124,6 +124,12 @@ $('.thumbnail').on('click','#comment_button', function(event){
     var csrf=$(this).siblings('#post-comment').prev('input').attr('value');
     var out=$(this);
     var da={the_post:ht, pk:id, csrfmiddlewaretoken: csrf};
+
+     if (ht.trim() ==="")
+    {alert('Comment is empty');
+    return 0;
+    }
+
     $.ajax(
     {
       url:ur,
@@ -139,6 +145,7 @@ $('.thumbnail').on('click','#comment_button', function(event){
 
 
 });
+
 
 $('#wrap').on('click','.comment_delete',function(event)
 {
