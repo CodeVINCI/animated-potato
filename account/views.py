@@ -18,6 +18,7 @@ from django.utils import timezone
 from datetime import datetime, timedelta
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import os
 # view for login /account/login
 def login(request):
@@ -545,8 +546,18 @@ class People_search(TemplateView):
             b=a.get_list(name_split[0],emptylastname,request.user)
             pic_list=a.get_pics(name_split[0],emptylastname,request.user)
             final=zip(pic_list,b)
+        paginator = Paginator(final, 2)
+        page = request.GET.get('page')
+        try:
+            finalList = paginator.page(page)
+        except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+            finalList = paginator.page(1)
+        except EmptyPage:
+           # If page is out of range (e.g. 9999), deliver last page of results.
+            finalList = paginator.page(paginator.num_pages)
 
-        return render(request,self.template_name,{'form':form,'peoplelist':final,'search_terms':search_terms,'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic})
+        return render(request,self.template_name,{'form':form,'peoplelist':finalList,'search_terms':search_terms,'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic})
 
 
 
