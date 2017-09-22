@@ -14,8 +14,10 @@ from django.utils import timezone
 
 def ScrapeUN():
     url= "http://unnewsstream.org/"
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
     context = ssl._create_unverified_context()
-    html_base=urllib.urlopen(url,context=context)
+    response = requests.get(url, headers=headers,context=context)
+    html_base=response.content
     soup_base=BeautifulSoup(html_base,"html.parser")
     newslinks=soup_base.findAll("div",{"class":"news"})
     articles=[]

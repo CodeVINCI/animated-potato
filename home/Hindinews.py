@@ -14,8 +14,10 @@ from django.utils import timezone
 #function for dainikbhaskar news scraping
 def Scrap_dainik_bhaskar():
     url = "http://www.bhaskar.com/today-top-news/"
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
     context = ssl._create_unverified_context()
-    html_base=urllib.urlopen(url,context=context)
+    response = requests.get(url, headers=headers,context=context)
+    html_base=response.content
     soup_base=BeautifulSoup(html_base,"html.parser")
     soup_base=soup_base.find("div",{"class":"content_lhs"})
     newslinks=soup_base.findAll("div",{"class":"br-news-row-image"})
@@ -41,7 +43,8 @@ def Scrap_dainik_bhaskar():
 def Scrape_dainik_jagran():
     url= "http://www.jagran.com/top-news.html?src=eptn"
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
-    response = requests.get(url, headers=headers)
+    context = ssl._create_unverified_context()
+    response = requests.get(url, headers=headers,context=context)
     html_base=response.content
     soup_base=BeautifulSoup(html_base,"html.parser")
     soup_base=soup_base.find("ul",{"id":"grid"})
@@ -126,8 +129,10 @@ def articlesave(response):
 #function for amarujala news scraping
 def Scrap_amarujala():
     url = "http://www.amarujala.com/search?search=top%20news"
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
     context = ssl._create_unverified_context()
-    html_base=urllib.urlopen(url,context=context)
+    response = requests.get(url, headers=headers,context=context)
+    html_base=response.content
     soup_base=BeautifulSoup(html_base,"html.parser")
     soup_base=soup_base.find("div",{"id":"allDiv"})
     newslinks=soup_base.findAll("div",{"class":"mostRdr"})
@@ -152,8 +157,10 @@ def Scrap_amarujala():
 
 def Scrape_hindustan():
     url = "http://www.livehindustan.com/national/news"
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
     context = ssl._create_unverified_context()
-    html_base=urllib.urlopen(url,context=context)
+    response = requests.get(url, headers=headers, context = context)
+    html_base=response.content
     soup_base=BeautifulSoup(html_base,"html.parser")
     soup_base=soup_base.find("ul",{"class":"right-top-news"})
     newslinks=soup_base.findAll("li")

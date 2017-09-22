@@ -42,14 +42,14 @@ def scrape_Thehindu_task():
         logger.info("Scraped "+source)
 
 @periodic_task(
-    run_every=(crontab(minute='*/1440')),
+    run_every=(crontab(minute='*/5')),
     name= "delete_Post",
     ignore_results=True)
 def delete_Post():
     all_exclusions = []
     all_compares=Compare.objects.all()
-    for compare in all_compares:
-        all_exclusions= all_exclusions+list(Compare.posts.all())
+    for co in all_compares:
+        all_exclusions= all_exclusions+list(co.posts.all())
     all_followings= Following.objects.all()
     for following in all_followings:
         all_exclusions= all_exclusions+list(following.post.all())
@@ -58,6 +58,7 @@ def delete_Post():
         all_pks.append(exclusion.pk)
     date_today = datetime.today()
     d = str(datetime.today()-timedelta(days=14))
+    d = d[:10]
     all_deletes = Post.objects.exclude(pk__in = all_pks).exclude(date__range=[d,date_today])
     for post in all_deletes:
         url = post.image.url
