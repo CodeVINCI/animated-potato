@@ -1,6 +1,14 @@
 $(document).ready(function()
 {
 
+$('#socrates-search').keypress(function(e){
+    if(e.which === 13){
+        $("#searchsubmit").click();
+        return false;
+    }
+});
+
+
 $(".navbar-form").on('click','#searchsubmit',function(event)
 {
 var search_term=$(this).siblings('div').find('#socrates-search').val();
@@ -30,6 +38,20 @@ $('div.my-button').on('click', ".btn.btn-secondary", function(event)
   $('div.my-button').html(response.code);
  }
  });
+
+});
+
+$(document).on('click', '.notify' ,function(event){
+var notificationid = $(this).attr("data");
+var ur= "/home/seennotification/".concat(notificationid);
+var out = $(this)
+
+$.ajax(
+{
+url:ur,
+method:'get',
+async: false,
+});
 
 });
 

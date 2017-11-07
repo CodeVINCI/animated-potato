@@ -6,7 +6,7 @@ import tempfile
 import ssl
 from django.core import files
 from django.utils import timezone
-
+import time
 
 
 
@@ -46,7 +46,7 @@ def get_news(URL):
                 if not(article['urlToImage']==None):
                     image_url=article["urlToImage"].encode('utf-8')
                     request = requests.get(image_url, stream=True)
-
+                    time.sleep(1)
                     # Was the request OK?
                     if request.status_code != requests.codes.ok:
                     # Nope, error handling, skip file etc etc etc

@@ -128,7 +128,13 @@ return false;
         revertToOriginalURL();
     });
 
-
+$('#wrap').delegate('.comment_box','keypress',function(e){
+    if(e.which === 13){
+    //alert($(this).siblings('#comment_button').html());
+        $(this).siblings("#comment_button").click();
+        return false;
+    }
+});
 /*handling comment form submission*/
 $('#wrap').on('click','#comment_button', function(event){
     event.preventDefault();
@@ -187,7 +193,7 @@ $('#wrap').on('click','.comment_like',function(event)
 var id= $(this).attr('data-pk');
 var ur= "/home/like_comment/".concat(id);
 var out = $(this);
-alert(ur);
+alert("Now you can only delete comment we are coming up with other features");
 return false;
 });
 
@@ -197,7 +203,7 @@ $('#wrap').on('click','.comment_reply',function(event)
 var id= $(this).attr('data-pk');
 var ur= "/home/reply_comment/".concat(id);
 var out = $(this);
-alert(ur);
+alert("Now you can only delete comment we are coming up with other features");
 return false;
 });
 
@@ -295,6 +301,20 @@ alert('Max 3 can be added to any compare');
 
 });
 
+
+$(document).on('click', '.notify' ,function(event){
+var notificationid = $(this).attr("data");
+var ur= "/home/seennotification/".concat(notificationid);
+var out = $(this)
+
+$.ajax(
+{
+url:ur,
+method:'get',
+async: false,
+});
+
+});
 //final paranthesis
 });
 

@@ -122,3 +122,8 @@
  {
   margin-left:175px;
  }
+
+.notify:hover
+{
+background-color:grey;
+}

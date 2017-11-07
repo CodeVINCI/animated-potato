@@ -206,3 +206,8 @@ padding:0px !important;
 {
  margin-top:16px;
 }
+
+.notify:hover
+{
+background-color:grey;
+}

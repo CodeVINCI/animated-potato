@@ -23,6 +23,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import os
 # view for login /account/login
 def login(request):
+    if request.user.is_authenticated():
+        print("hey there i am already authenticated")
+        return redirect('/home/most_liked')
     return redirect('/account/login')
 
 

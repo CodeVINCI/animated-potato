@@ -1,45 +1,18 @@
 $(document).ready(function()
 {
 
-/*var ready=true;
-function yHandler()
-{
-var str="";
-$('.thumbnail').each(function()
-{
- str +=($(this).attr("id").concat(" "));
+$(document).on('click', 'a[href="#formModal"]' ,function(event){
+var mod = $(this).attr('href');
+$(mod).modal('show');
 });
-if ($(window).scrollTop() == ($(document).height() - $(window).height()))
-{
-ready=false;
-$.ajax(
-{
-url:'/home/scroll/loadcontent/home',
-method:'get',
-data:{posts:str},
-dataType:'json',
-success:function(response)
-{
 
-  $("#col1").children('#tilescol1').append(response.col1);
-  $("#col1").children('#tilescol1').append(response.col4);
-  $("#col2").children('#tilescol2').append(response.col2);
-  $("#col2").children('#tilescol2').append(response.col5);
-  $("#col3").children('#tilescol3').append(response.col3);
-  $("#col3").children('#tilescol3').append(response.col6);
-}
-}).always(function(){
-                ready = true; //Reset the flag here
-            });
-}
-}
-window.onscroll=yHandler;*/
-/*$(".testing").on('click','#data',function(event)
-{
- var wrap = document.getElementById('tiles')
- var h= wrap.offsetHeight;
- alert(h);
-});*/
+
+$('#socrates-search').keypress(function(e){
+    if(e.which === 13){
+        $("#searchsubmit").click();
+        return false;
+    }
+});
 
 $(".navbar-form").on('click','#searchsubmit',function(event)
 {
@@ -47,10 +20,12 @@ var search_term=$(this).siblings('div').find('#socrates-search').val();
 var ur= ("/account/searchsocrates/").concat(search_term);
  if (search_term.trim() ==="")
     {alert('Empty search');
-    return 0;
+    return false;
     }
  window.location.href= ur;
+ return false;
 });
+
 
 $('#results').on('click', "#readlater", function(event)
 {
@@ -128,7 +103,7 @@ return false;
 
 /*showing url on opening the modal*/
   //$(window.location.hash).modal('show');
-   $('#results').on('click', 'a[data-toggle="modal"]' ,function(event){
+   $(document).on('click', 'a[data-toggle="modal"]' ,function(event){
         window.location.hash = $(this).attr('data');
       var m = $(this).parent('p').nextAll('.modal').first().attr('id');
       m = ('#').concat(m);
@@ -147,6 +122,14 @@ return false;
     $('#results').on('hidden.bs.modal','.modal', function () {
         revertToOriginalURL();
     });
+
+$('#results').delegate('.comment_box','keypress',function(e){
+    if(e.which === 13){
+    //alert($(this).siblings('#comment_button').html());
+        $(this).siblings("#comment_button").click();
+        return false;
+    }
+});
 
 /*handling comment form submission*/
 $('#results').on('click','#comment_button', function(event){
@@ -205,7 +188,7 @@ $('#results').on('click','.comment_like',function(event)
 var id= $(this).attr('data-pk');
 var ur= "/home/like_comment/".concat(id);
 var out = $(this);
-alert(ur);
+alert("Now you can only delete comment we are coming up with other features");
 return false;
 });
 
@@ -215,69 +198,83 @@ $('#results').on('click','.comment_reply',function(event)
 var id= $(this).attr('data-pk');
 var ur= "/home/reply_comment/".concat(id);
 var out = $(this);
-alert(ur);
+alert("Now you can only delete comment we are coming up with other features");
 return false;
 });
 
 
-//final paranthesis
+$(document).on('click', '.notify' ,function(event){
+var notificationid = $(this).attr("data");
+var ur= "/home/seennotification/".concat(notificationid);
+var out = $(this)
+
+$.ajax(
+{
+url:ur,
+method:'get',
+async: false,
 });
 
-//this is csrf_token in javascript don't remove it.
-$(function() {
+});
+
+$(document).on('click','#newcomparesave',function(event)
+{
+var title= $('#id_title').val();
+var description = $('#id_description').val();
+var id = $('#selectedpost').attr('data-pk')
+var replace = '<a id="addpost" style="cursor:pointer;text-decoration:none;" data=""><p><span class="glyphicon glyphicon-grain"></span>&nbsp;'.concat(title,'<span style="float:right;">1</span></p></a>');
+$.ajax(
+{
+url:'/account/newcompare',
+method:'get',
+data:{title:title,description:description,post:id},
+dataType:'json',
+success:function(response)
+{
+$('#oldcompare').prepend(replace);
+$('#oldcompare').children('a[data=""]').attr('data',response.data);
+}
+});
+
+});
+
+$(document).on('click','#addtocompare',function(event)
+{
+var id = $(this).closest('.thumbnail').attr('id');
+$('#selectedpost').attr('data-pk',id);
+
+});
+
+$(document).on('click','#addpost',function(event)
+{
+alert('about to add');
+var id = $('#selectedpost').attr('data-pk');
+var comp = $(this).attr('data');
+var out = $(this)
+var count = $(this).find('span[style="float:right;"]').html();
+
+if (count < 3)
+{
+$.ajax(
+{
+url:'/account/addposttocompare',
+method:'get',
+data:{compare:comp,post:id},
+dataType:'json',
+success:function(response)
+{
+out.find('span[style="float:right;"]').html(response.count);
+}
+});
+}
+else
+{
+alert('Max 3 can be added to any compare');
+}
+
+});
 
 
-    // This function gets cookie with a given name
-    function getCookie(name) {
-        var cookieValue = null;
-        if (document.cookie && document.cookie != '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = jQuery.trim(cookies[i]);
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-    var csrftoken = getCookie('csrftoken');
-
-    /*
-    The functions below will create a header with csrftoken
-    */
-
-    function csrfSafeMethod(method) {
-        // these HTTP methods do not require CSRF protection
-        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-    }
-    function sameOrigin(url) {
-        // test that a given url is a same-origin URL
-        // url could be relative or scheme relative or absolute
-        var host = document.location.host; // host + port
-        var protocol = document.location.protocol;
-        var sr_origin = '//' + host;
-        var origin = protocol + sr_origin;
-        // Allow absolute or scheme relative URLs to same origin
-        return (url == origin || url.slice(0, origin.length + 1) == origin + '/') ||
-            (url == sr_origin || url.slice(0, sr_origin.length + 1) == sr_origin + '/') ||
-            // or any other URL that isn't scheme relative or absolute i.e relative.
-            !(/^(\/\/|http:|https:).*/.test(url));
-    }
-
-    $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-            if (!csrfSafeMethod(settings.type) && sameOrigin(settings.url)) {
-                // Send the token to same-origin, relative URLs only.
-                // Send the token only if the method warrants CSRF protection
-                // Using the CSRFToken value acquired earlier
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            }
-        }
-    });
-
-
+//final paranthesis
 });
 
