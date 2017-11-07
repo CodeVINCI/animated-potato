@@ -203,3 +203,8 @@ float:right;
 {
  margin-top:16px;
 }
+
+.notify:hover
+{
+background-color:grey;
+}

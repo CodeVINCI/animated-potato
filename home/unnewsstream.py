@@ -69,7 +69,7 @@ def ScrapeUN():
                 if not(article['urlToImage']==None):
                     image_url=article["urlToImage"].encode('utf-8')
                     request = requests.get(image_url, stream=True)
-
+                    time.sleep(5)
                     # Was the request OK?
                     if request.status_code != requests.codes.ok:
                     # Nope, error handling, skip file etc etc etc

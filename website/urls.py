@@ -21,6 +21,7 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.login_redirect ,name='login_redirect'),
+    url(r'^accounts/login/$', views.login_redirect ,name = 'share_login_redirect'),
     url(r'^admin/', admin.site.urls),
     url(r'^account/',include('account.urls')),
     url(r'^home/',include('home.urls',namespace='home')),

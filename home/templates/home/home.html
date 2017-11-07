@@ -17,13 +17,6 @@
     <link rel="stylesheet" href="{% static "home.css"%}" type="text/css"/>
     <link rel="shortcut icon" type="image/png" href="{% static "images/favicon.ico" %}"/>
          <script src="{% static 'js/home.js' %}"></script>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({
-    google_ad_client: "ca-pub-4497560118148641",
-    enable_page_level_ads: true
-  });
-</script>
     <title>Socrates-General</title>
     <meta property="og:url"           content="http://www.your-domain.com/your-page.html" />
   <meta property="og:type"          content="website" />
@@ -138,7 +131,7 @@
         {% for post in col1 %}
 
    <li><div class="thumbnail" id="{{post.0.pk}}">
-      <img src={{ post.0.image.url }} alt="...">
+      <img src={{ post.0.link }} alt="...">
       <div class="caption">
           <p style="font-size:10px;">{{ post.0.date }}</p>
           <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.0.headline }}</h3>
@@ -194,7 +187,7 @@
       </div>
       <div class="modal-body">
           <div class="conatiner">
-              <img src={{ post.0.image.url }} alt="..." style="width:568px;height:400px;">
+              <img src={{ post.0.link }} alt="..." style="width:568px;height:400px;">
               <p style="font-size:10px;">{{ post.0.author }}</p>
               <p style="font-size:20px;">{{ post.0.story }}</p>
           <p style="font-size:10px;">{{ post.0.source }}</p>
@@ -278,7 +271,7 @@
         {% for post in col2 %}
 
    <li><div class="thumbnail" id="{{post.0.pk}}">
-      <img src={{ post.0.image.url }} alt="...">
+      <img src={{ post.0.link }} alt="...">
       <div class="caption">
           <p style="font-size:10px;">{{ post.0.date }}</p>
           <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.0.headline }}</h3>
@@ -331,7 +324,7 @@
       </div>
       <div class="modal-body">
           <div class="conatiner">
-              <img src={{ post.0.image.url }} alt="..." style="width:568px;height:400px;">
+              <img src={{ post.0.link }} alt="..." style="width:568px;height:400px;">
               <p style="font-size:10px;">{{ post.0.author }}</p>
               <p style="font-size:20px;">{{ post.0.story }}</p>
           <p style="font-size:10px;">{{ post.0.source }}</p>
@@ -415,7 +408,7 @@
         {% for post in col3 %}
 
    <li><div class="thumbnail" id="{{post.0.pk}}">
-      <img src={{ post.0.image.url }} alt="...">
+      <img src={{ post.0.link }} alt="...">
       <div class="caption">
           <p style="font-size:10px;">{{ post.0.date }}</p>
           <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.0.headline }}</h3>
@@ -469,7 +462,7 @@
       </div>
       <div class="modal-body">
           <div class="conatiner">
-              <img src={{ post.0.image.url }} alt="..." style="width:568px;height:400px;">
+              <img src={{ post.0.link }} alt="..." style="width:568px;height:400px;">
               <p style="font-size:10px;">{{ post.0.author }}</p>
               <p style="font-size:20px;">{{ post.0.story }}</p>
           <p style="font-size:10px;">{{ post.0.source }}</p>

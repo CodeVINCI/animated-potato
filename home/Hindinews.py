@@ -11,25 +11,28 @@ import tempfile
 from django.core import files
 from django.utils import timezone
 
-#function for dainikbhaskar news scraping
-def Scrap_dainik_bhaskar():
-    url = "http://www.bhaskar.com/today-top-news/"
+#function for gaoconnection news scraping
+def Scrape_gaoconnection_home():
+    url = "https://www.gaonconnection.com/"
     context = ssl._create_unverified_context()
     html_base=urllib.urlopen(url,context=context)
     soup_base=BeautifulSoup(html_base,"html.parser")
-    soup_base=soup_base.find("div",{"class":"content_lhs"})
-    newslinks=soup_base.findAll("div",{"class":"br-news-row-image"})
+    soup_base=soup_base.find("div",{"class":"list-article"})
+    newslinks=soup_base.findAll("article",{"class":"list-article"})
     articles=[]
     for link in newslinks:
         try:
-            articleurl=link.find("div",{"class":"br_img"}).find('a')['href']
-            urlToImage=link.find("div",{"class":"br_img"}).find('a').img['src']
-            title=link.find("p").find('a').text
-            articleurl=articleurl.strip()
-            urlToImage=urlToImage.strip()
-            title=title.strip()
-            description="  "
-            article={"author":"bhaskar.com","title":title,"description":description,"url":articleurl,"urlToImage":urlToImage,"publishedAt":None}
+            articleurl=url+str(link.a['href'])
+            #print articleurl
+            title=link.find("div",{"class":"list-article__content"}).find("a").find("h3").text
+            #print title
+            urlToimage=str(link.find("a").find("div",{"class":"list-article__image-container"}).find("figure").img["src"])
+            #print urlToimage
+            description = link.find("div",{"class":"list-article__content"}).find("a").find("p").text
+            #print description
+            author=link.find("div",{"class":"list-article__content"}).find("div",{"class":"list-article__byline"}).find("span").find("a").text
+            #print author
+            article={"author":author,"title":title,"description":description,"url":articleurl,"urlToImage":urlToimage,"publishedAt":None}
             articles.append(article)
         except:
             pass
@@ -88,37 +91,39 @@ def articlesave(response):
                     date=date[:10]
                 if not(article['urlToImage']==None):
                     image_url=article["urlToImage"].encode('utf-8')
-                    request = requests.get(image_url, stream=True)
-
+                    a=Post(source=articlesource,author=author,headline=headline,story=story,link=image_url,date=date,pageurl=url,category=category)
+                    a.save()
+                    #request = requests.get(image_url, stream=True)
+                    #time.sleep(2)
                     # Was the request OK?
-                    if request.status_code != requests.codes.ok:
+                    #if request.status_code != requests.codes.ok:
                     # Nope, error handling, skip file etc etc etc
-                        continue
+                    #    continue
 
                     # Get the filename from the url, used for saving later
-                    file_name = image_url.split('/')[-1]+".jpg"
-                    if len(file_name)>50:
-                        file_name=file_name[:50]+".jpg"
+                    #file_name = image_url.split('/')[-1]+".jpg"
+                    #if len(file_name)>50:
+                    #    file_name=file_name[:50]+".jpg"
 
                     # Create a temporary file
-                    lf = tempfile.NamedTemporaryFile()
+                    #lf = tempfile.NamedTemporaryFile()
 
                     # Read the streamed image in sections
-                    for block in request.iter_content(1024 * 8):
+                    #for block in request.iter_content(1024 * 8):
 
                         # If no more file then stop
-                        if not block:
-                            break
+                    #    if not block:
+                    #        break
 
                         # Write image block to temporary file
-                        lf.write(block)
+                    #    lf.write(block)
 
                     # Create the model you want to save the image to
-                    a=Post(source=articlesource,author=author,headline=headline,story=story,link=image_url,date=date,pageurl=url,category=category)
+               
 
                     # Save the temporary image to the model#
                     # This saves the model so be sure that is it valid
-                    a.image.save(file_name, files.File(lf))
+                    #a.image.save(file_name, files.File(lf))
 
 
 

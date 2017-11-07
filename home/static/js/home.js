@@ -1,5 +1,12 @@
 $(document).ready(function()
 {
+var wid = $( window ).width();
+
+if(wid <= 767){
+ $('#bs-example-navbar-collapse-1').css('background-color','white');
+ $('#bs-example-navbar-collapse-1').css('margin-top','5px');
+}
+
 var valnow=$('#my-data').data().filter;
 $(function() {
     $("#filters").val(valnow);
