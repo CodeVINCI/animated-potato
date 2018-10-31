@@ -1,6 +1,13 @@
 $(document).ready(function()
 {
 
+var wid = $( window ).width();
+
+if(wid <= 767){
+ $('#bs-example-navbar-collapse-1').css('background-color','white');
+ $('#bs-example-navbar-collapse-1').css('margin-top','5px');
+}
+
 $('#socrates-search').keypress(function(e){
     if(e.which === 13){
         $("#searchsubmit").click();

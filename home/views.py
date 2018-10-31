@@ -28,7 +28,7 @@ class home(TemplateView):
         details=userprofile[0]
         pic=details.image
         commentbox=comment_form()
-        all_notifications=Notification.objects.filter(user=request.user)
+        all_notifications=Notification.objects.filter(user=request.user).order_by("-pk")
         new_notifications=all_notifications.filter(seen=0)
         ping= new_notifications.count()
         col1=[]
@@ -158,7 +158,7 @@ def loadcontent(request,theme):
     if theme=="home":
         post=Post.objects.filter(category="general").exclude(pk__in=ex).order_by('-pk')
     elif theme=="sports":
-        post=Post.objects.filter(category="sports").exclude(pk__in=ex).order_by('pk')
+        post=Post.objects.filter(category="sports").exclude(pk__in=ex).order_by('-pk')
     elif theme=="market":
         post=Post.objects.filter(category="business").exclude(pk__in=ex).order_by('-pk')
     elif theme=="unitednations":
@@ -173,7 +173,7 @@ def loadcontent(request,theme):
     thumbnails=[]
     for i in range(6):
         whole=""
-        a='<li><div class="thumbnail" id="'+str(post[i].pk)+'"><img src="'+str(post[i].image.url)+'" alt="..."><div class="caption"><p style="font-size:10px;">'+str((post[i].date).strftime("%b %d,%Y"))+'</p><h3 style="font-family:"Times New Roman", Times, serif;">'+(post[i].headline).encode("utf8")+'</h3><p style="font-size:10px;">'+(post[i].author).encode("utf8")+'</p><p style="font-size:20px;">'+(post[i].story).encode("utf8")+'</p><p style="font-size:10px;">'+(post[i].source).encode("utf8")+'</p><hr><div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 170px);width: -webkit-calc(100% -170px);width: calc(100% - 170px);"><button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">'
+        a='<li><div class="thumbnail" id="'+str(post[i].pk)+'"><img src="'+str(post[i].link)+'" alt="..."><div class="caption"><p style="font-size:10px;">'+str((post[i].date).strftime("%b %d,%Y"))+'</p><h3 style="font-family:"Times New Roman", Times, serif;">'+(post[i].headline).encode("utf8")+'</h3><p style="font-size:10px;">'+(post[i].author).encode("utf8")+'</p><p style="font-size:20px;">'+(post[i].story).encode("utf8")+'</p><p style="font-size:10px;">'+(post[i].source).encode("utf8")+'</p><hr><div class="social_buttons" style="float:left;display:inline-block;width:-moz-calc(100% - 170px);width: -webkit-calc(100% -170px);width: calc(100% - 170px);"><button id="like" class="social-like" style="border:none;background-color:transparent;margin-top:10px;">'
         if len(Likes.objects.filter(post=post[i])) and request.user in Likes.objects.get(post=post[i]).users.all():
             b='<meta id="button_data" data-nextaction="social-unlike" data-pk="'+str(post[i].pk)+'"><span class="like"><i style="color:maroon;"class="glyphicon glyphicon-thumbs-up custom"></i></span>'
         else:
@@ -186,7 +186,7 @@ def loadcontent(request,theme):
         else:
             d='<meta id="button_data" data-nextaction="social-dislike" data-pk="'+str(post[i].pk)+'"><span class="like"><i style="color:#7f8c8d;opacity:0.7;" class="glyphicon glyphicon-thumbs-down custom"></i></span></button></div>'
 
-        e='<p id="'+str(post[i].pk)+'"><a href="'+str(post[i].pageurl)+'" class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><!-- Button trigger modal --><p><a data="#exampleModalLong'+str(post[i].pk)+'" class="popup" data-toggle="modal"><input id="post-comment" value="" required=True  placeholder="Write a comment..."/></a><a style="float:right;" href="http://www.facebook.com/sharer/sharer.php?u='+str(post[i].pageurl)+'&app_id=1885028298402855&image='+str(post[i].link)+'" target="_blank" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button><button id="addtocompare" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus-sign"></span></button></p><!-- Modal --><div class="modal fade" id="exampleModalLong'+str(post[i].pk)+'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><p style="font-size:10px;">'+str((post[i].created_on).strftime("%b %d,%Y"))+'</p><h3 style="font-family:"Times New Roman", Times, serif;">'+(post[i].headline).encode("utf8")+'</h3></div><div class="modal-body"><div class="conatiner"><img src="'+str(post[i].image.url)+'" alt="..." style="width:568px;height:400px;"><p style="font-size:10px;">'+(post[i].author).encode("utf8")+'</p><p style="font-size:20px;">'+(post[i].story).encode("utf8")+'</p><p style="font-size:10px;">'+(post[i].source).encode("utf8")+'</p><div class="media"><div class="media-left">'
+        e='<p id="'+str(post[i].pk)+'"><a href="'+str(post[i].pageurl)+'" class="btn btn-primary" id="visitbutton" role="button" target="_blank">Visit Site</a> <a id="suggestbutton" class="btn btn-default" role="button">Suggest</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p><!-- Button trigger modal --><p><a data="#exampleModalLong'+str(post[i].pk)+'" class="popup" data-toggle="modal"><input id="post-comment" value="" required=True  placeholder="Write a comment..."/></a><a style="float:right;" href="http://www.facebook.com/sharer/sharer.php?u='+str(post[i].pageurl)+'&app_id=1885028298402855&image='+str(post[i].link)+'" target="_blank" class="fa fa-facebook"></a><button id="readlater" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;"><span style="color:#0077b3;" class="glyphicon glyphicon-pushpin"></span></button><button id="addtocompare" class="pin" style="border:none;background-color:transparent;margin-top:10px;float:right;" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus-sign"></span></button></p><!-- Modal --><div class="modal fade" id="exampleModalLong'+str(post[i].pk)+'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button><p style="font-size:10px;">'+str((post[i].created_on).strftime("%b %d,%Y"))+'</p><h3 style="font-family:"Times New Roman", Times, serif;">'+(post[i].headline).encode("utf8")+'</h3></div><div class="modal-body"><div class="conatiner"><img src="'+str(post[i].link)+'" alt="..." style="width:568px;height:400px;"><p style="font-size:10px;">'+(post[i].author).encode("utf8")+'</p><p style="font-size:20px;">'+(post[i].story).encode("utf8")+'</p><p style="font-size:10px;">'+(post[i].source).encode("utf8")+'</p><div class="media"><div class="media-left">'
         pic=Userprofile.objects.get(user=request.user).image
         csrf=django.middleware.csrf.get_token(request)
 
@@ -223,7 +223,7 @@ class homeSports(TemplateView):
         details=userprofile[0]
         pic=details.image
         commentbox=comment_form()
-        all_notifications=Notification.objects.filter(user=request.user)
+        all_notifications=Notification.objects.filter(user=request.user).order_by("-pk")
         new_notifications=all_notifications.filter(seen=0)
         ping= new_notifications.count()
         col1=[]
@@ -356,7 +356,7 @@ class homeMarket(TemplateView):
         details=userprofile[0]
         pic=details.image
         commentbox=comment_form()
-        all_notifications=Notification.objects.filter(user=request.user)
+        all_notifications=Notification.objects.filter(user=request.user).order_by("-pk")
         new_notifications=all_notifications.filter(seen=0)
         ping= new_notifications.count()
         col1=[]
@@ -490,7 +490,7 @@ class unitednations(TemplateView):
         details=userprofile[0]
         pic=details.image
         commentbox=comment_form()
-        all_notifications=Notification.objects.filter(user=request.user)
+        all_notifications=Notification.objects.filter(user=request.user).order_by("-pk")
         new_notifications=all_notifications.filter(seen=0)
         ping= new_notifications.count()
         col1=[]
@@ -617,7 +617,7 @@ class hindi(TemplateView):
         details=Userprofile.objects.get(user=name)
         pic=details.image
         commentbox=comment_form()
-        all_notifications=Notification.objects.filter(user=request.user)
+        all_notifications=Notification.objects.filter(user=request.user).order_by("-pk")
         new_notifications=all_notifications.filter(seen=0)
         ping= new_notifications.count()
         col1=[]
@@ -876,7 +876,7 @@ def notificationpost(request,type,pk):
             details=Userprofile.objects.get(user=request.user)
 
             all_notifications=Notification.objects.filter(user=request.user)
-            new_notifications=all_notifications.filter(seen=0)
+            new_notifications=all_notifications.filter(seen=0).order_by("-pk")
             ping= new_notifications.count()
             compares=Compare.objects.filter(user=request.user)
             p=Likes.objects.filter(post=post).filter(users__in=[request.user])
@@ -900,7 +900,7 @@ def notificationpost(request,type,pk):
 
 
 def allnotifications(request):
-    all_notifications=Notification.objects.filter(user=request.user)
+    all_notifications=Notification.objects.filter(user=request.user).order_by("-pk")
     paginator = Paginator(all_notifications, 10)
     page = request.GET.get('page')
     try:

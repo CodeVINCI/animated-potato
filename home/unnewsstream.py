@@ -14,10 +14,8 @@ from django.utils import timezone
 
 def ScrapeUN():
     url= "http://unnewsstream.org/"
-    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
     context = ssl._create_unverified_context()
-    response = requests.get(url, headers=headers,context=context)
-    html_base=response.content
+    html_base=urllib.urlopen(url,context=context)
     soup_base=BeautifulSoup(html_base,"html.parser")
     newslinks=soup_base.findAll("div",{"class":"news"})
     articles=[]
@@ -70,36 +68,36 @@ def ScrapeUN():
                     date=date[:10]
                 if not(article['urlToImage']==None):
                     image_url=article["urlToImage"].encode('utf-8')
-                    request = requests.get(image_url, stream=True)
-                    time.sleep(5)
+                    #request = requests.get(image_url, stream=True)
+		    #time.sleep(5)
                     # Was the request OK?
-                    if request.status_code != requests.codes.ok:
+                    #if request.status_code != requests.codes.ok:
                     # Nope, error handling, skip file etc etc etc
-                        continue
+                    #    continue
 
                     # Get the filename from the url, used for saving later
-                    file_name = image_url.split('/')[-1]+".jpg"
-                    if len(file_name)>50:
-                        file_name=file_name[:50]+".jpg"
+                    #file_name = image_url.split('/')[-1]+".jpg"
+                    #if len(file_name)>50:
+                    #    file_name=file_name[:50]+".jpg"
 
                     # Create a temporary file
-                    lf = tempfile.NamedTemporaryFile()
+                    #lf = tempfile.NamedTemporaryFile()
 
                     # Read the streamed image in sections
-                    for block in request.iter_content(1024 * 8):
+                    #for block in request.iter_content(1024 * 8):
 
                         # If no more file then stop
-                        if not block:
-                            break
+                    #    if not block:
+                    #        break
 
                         # Write image block to temporary file
-                        lf.write(block)
+                    #    lf.write(block)
 
                     # Create the model you want to save the image to
                     a=Post(source=articlesource,author=author,headline=headline,story=story,link=image_url,date=date,pageurl=url,category=category)
 
                     # Save the temporary image to the model#
                     # This saves the model so be sure that is it valid
-                    a.image.save(file_name, files.File(lf))
+                    a.save()
 
 

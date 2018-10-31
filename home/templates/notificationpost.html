@@ -17,13 +17,6 @@
     <link rel="stylesheet" href="{% static "notificationpost.css"%}" type="text/css"/>
     <link rel="shortcut icon" type="image/png" href="{% static "images/favicon.ico" %}"/>
          <script src="{% static 'js/notificationpost.js' %}"></script>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({
-    google_ad_client: "ca-pub-4497560118148641",
-    enable_page_level_ads: true
-  });
-</script>
     <title>Socrates-{{post.headline}}</title>
     <meta property="og:url"           content="http://www.your-domain.com/your-page.html" />
   <meta property="og:type"          content="website" />
@@ -114,7 +107,7 @@
 <meta id="my-data" data-filter="{{ filter }}">
 <div class="span12" id="wrap">
 <div class="container">
-    <div class="thumb" id="imgsection"><img src={{ post.image.url }} alt="..."></div>
+    <div class="thumb" id="imgsection"><img src={{ post.link }} alt="..."></div>
     <div class="thumb" id="contentsection">
         <h3 id="headline">{{post.headline}}<span style="font-size:10px;">&nbsp;&nbsp;&nbsp;{{ post.date }}</span></h3>
         <p style="font-size:11px;">{{ post.author }}</p>

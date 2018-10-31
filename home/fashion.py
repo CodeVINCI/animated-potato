@@ -10,13 +10,17 @@ import requests
 import tempfile
 from django.core import files
 from django.utils import timezone
+from account.models import Following,Compare
+from home.models import Post
+from datetime import datetime,timedelta
+import os
 
 
 def Scrape_bussiness_of_fashion():
     url="https://www.businessoffashion.com/articles/"
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/39.0.2171.95 Safari/537.36'}
     context = ssl._create_unverified_context()
-    response = requests.get(url, headers=headers,context=context)
+    response = requests.get(url, headers=headers)
     html_base=response.content
     soup_base=BeautifulSoup(html_base,"html.parser")
     soup_base=soup_base.find("div",{"class":"col-md-17"})
@@ -102,3 +106,24 @@ def Scrape_bussiness_of_fashion():
                     # This saves the model so be sure that is it valid
                     a.image.save(file_name, files.File(lf))
 
+
+def delete_Post():
+    all_exclusions = []
+    all_compares=Compare.objects.all()
+    for c in all_compares:
+        all_exclusions= all_exclusions+list(c.posts.all())
+    all_followings= Following.objects.all()
+    for following in all_followings:
+        all_exclusions= all_exclusions+list(following.post.all())
+    all_pks = []
+    for exclusion in all_exclusions:
+        all_pks.append(exclusion.pk)
+    date_today = datetime.today()
+    d = str(datetime.today()-timedelta(days=14))
+    d = d[:10]
+    all_deletes = Post.objects.exclude(pk__in = all_pks).exclude(date__range=[d,date_today])
+    for post in all_deletes:
+        url = post.image.url
+        pa = os.getcwd()+'/website'+url
+       # os.remove(pa)
+        post.delete()

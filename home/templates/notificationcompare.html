@@ -17,13 +17,6 @@
     <link rel="stylesheet" href="{% static "notificationpost.css"%}" type="text/css"/>
     <link rel="shortcut icon" type="image/png" href="{% static "images/favicon.ico" %}"/>
          <script src="{% static 'js/notificationcompare.js' %}"></script>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({
-    google_ad_client: "ca-pub-4497560118148641",
-    enable_page_level_ads: true
-  });
-</script>
     <title>Socrates-{{post.title}}</title>
     <meta property="og:url"           content="http://www.your-domain.com/your-page.html" />
   <meta property="og:type"          content="website" />
@@ -125,7 +118,7 @@
           <div class="carousel-inner">
 
           <div class="item active">
-              <a href={{post.posts.all.0.pageurl}} target="_blank"><img src={{post.posts.all.0.image.url}} alt="Los Angeles" style="width:400px;height:550px;"></a>
+              <a href={{post.posts.all.0.pageurl}} target="_blank"><img src={{post.posts.all.0.link}} alt="Los Angeles" style="width:400px;height:550px;"></a>
         <div class="carousel-caption">
             <a style="color:white;" href={{post.posts.all.0.pageurl}} target="_blank"><h1>{{post.posts.all.0.source}}</h1></a>
           <h3>{{post.posts.all.0.headline}}</h3>
@@ -133,7 +126,7 @@
       </div>
     {% if post.posts.all.1 %}
       <div class="item">
-          <a href={{post.posts.all.1.pageurl}} target="_blank"><img src={{post.posts.all.1.image.url}} alt="Chicago" style="width:400px;height:550px;"></a>
+          <a href={{post.posts.all.1.pageurl}} target="_blank"><img src={{post.posts.all.1.link}} alt="Chicago" style="width:400px;height:550px;"></a>
         <div class="carousel-caption">
             <a style="color:white;" href={{post.posts.all.1.pageurl}} target="_blank"><h1>{{post.posts.all.1.source}}</h1></a>
           <h3>{{post.posts.all.1.headline}}</h3>
@@ -143,7 +136,7 @@
 
       {% if post.posts.all.2 %}
       <div class="item">
-          <a href={{post.posts.all.2.pageurl}} target="_blank"><img src={{post.posts.all.2.image.url}} alt="New York" style="width:400px;height:550px;"></a>
+          <a href={{post.posts.all.2.pageurl}} target="_blank"><img src={{post.posts.all.2.link}} alt="New York" style="width:400px;height:550px;"></a>
         <div class="carousel-caption">
             <a style="color:white;" href={{post.posts.all.2.pageurl}} target="_blank"><h1>{{post.posts.all.2.source}}</h1></a>
           <h3>{{post.posts.all.2.headline}}</h3>

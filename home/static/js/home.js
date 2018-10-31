@@ -1,5 +1,6 @@
 $(document).ready(function()
 {
+
 var wid = $( window ).width();
 
 if(wid <= 767){
