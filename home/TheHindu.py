@@ -35,7 +35,10 @@ def get_news(URL):
                 else:
                     author=article["author"].encode('utf-8')
                 headline=article["title"].encode('utf-8')
-                story=article["description"].encode('utf-8')
+                if article["description"]:
+                    story=article["description"].encode('utf-8')
+                else:
+                    story = ""
                 url=article["url"].encode('utf-8')
                 if article["publishedAt"]==None:
                     date= str(timezone.now())
