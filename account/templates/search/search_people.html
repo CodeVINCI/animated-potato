@@ -110,19 +110,5 @@
     <li><div class="imgAbt"><a href="/account/viewprofile/{{ names.0.pk }}" class="image"><img src={{ names.0.image.url }} alt="" style="width:40px;height:40px;border:1px solid #E6E6E6;border-radius:50%;">{{ names.1.first_name}}&nbsp;{{names.1.last_name}}&nbsp;&nbsp;&nbsp;Username:&nbsp;{{names.1.username}}</a></div><hr></li>
 
   {% endfor %}
-        <div class="pagination" style="width:100%;padding:20px;">
-        <span class="step-links">
-            {% if peoplelist.has_previous %}
-            <a href="?page={{ peoplelist.previous_page_number }}">previous</a>
-            {% endif %}
-            <span class="current">
-                Page {{ peoplelist.number }} of {{ peoplelist.paginator.num_pages }}
-            </span>
-            {% if peoplelist.has_next %}
-            <a href="?page={{ peoplelist.next_page_number }}">next</a>
-        {% endif %}
-            </span>
-    </div>
-
 </body>
 </html>

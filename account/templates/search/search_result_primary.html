@@ -113,7 +113,7 @@
         {% for post in col1 %}
 
    <li><div class="thumbnail" id="{{post.0.pk}}">
-      <img src={{ post.0.image.url }} alt="...">
+      <img src={{ post.0.link }} alt="...">
       <div class="caption">
           <p style="font-size:10px;">{{ post.0.date }}</p>
           <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.0.headline }}</h3>
@@ -258,7 +258,7 @@
         {% for post in col2 %}
 
    <li><div class="thumbnail" id="{{post.0.pk}}">
-      <img src={{ post.0.image.url }} alt="...">
+      <img src={{ post.0.link }} alt="...">
       <div class="caption">
           <p style="font-size:10px;">{{ post.0.date }}</p>
           <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.0.headline }}</h3>
@@ -395,7 +395,7 @@
         {% for post in col3 %}
 
    <li><div class="thumbnail" id="{{post.0.pk}}">
-      <img src={{ post.0.image.url }} alt="...">
+      <img src={{ post.0.link }} alt="...">
       <div class="caption">
           <p style="font-size:10px;">{{ post.0.date }}</p>
           <h3 style="font-family:"Times New Roman", Times, serif;">{{ post.0.headline }}</h3>

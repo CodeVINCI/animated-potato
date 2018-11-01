@@ -8,7 +8,7 @@ urlpatterns=[url(r'^$', views.login),
              url(r'^login/$', login,{'template_name':'login/login.html'} ),
              url(r'^logout/$', logout,{'template_name':'logout/logout.html'}),
              url(r'^deactivate/$', views.deactivate, name='deactivate'),
-
+             
              url(r'^dictionary/$', ajax.dictionary, name='dictionary'),
 
              url(r'^signup/$', signup.as_view(), name='signup'),

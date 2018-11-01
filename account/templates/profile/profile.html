@@ -29,10 +29,9 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-
-           <form class="navbar-form navbar-left">
+         <form class="navbar-form navbar-left">
         <div class="form-group">
-          <input id="socrates-search" type="text" value="{{search_terms}}" class="form-control" placeholder="Search-Socrates" autocomplete="off">
+          <input id="socrates-search" type="text" class="form-control" placeholder="Search-Socrates" autocomplete="off">
         </div>
         <button id="searchsubmit" type="button" class="btn btn-default">&#x1f50d;</button>
       </form>
@@ -144,7 +143,7 @@
           <div class="carousel-inner">
 
           <div class="item active">
-              <a href={{compare.posts.all.0.pageurl}} target="_blank"><img src={{compare.posts.all.0.image.url}} alt="Los Angeles" style="width:100%;height:300px;"></a>
+              <a href={{compare.posts.all.0.pageurl}} target="_blank"><img src={{compare.posts.all.0.link}} alt="Los Angeles" style="width:100%;height:300px;"></a>
         <div class="carousel-caption">
             <a style="color:white;" href={{compare.posts.all.0.pageurl}} target="_blank"><h1>{{compare.posts.all.0.source}}</h1></a>
           <h3>{{compare.posts.all.0.headline}}</h3>
@@ -152,7 +151,7 @@
       </div>
     {% if compare.posts.all.1 %}
       <div class="item">
-          <a href={{compare.posts.all.1.pageurl}} target="_blank"><img src={{compare.posts.all.1.image.url}} alt="Chicago" style="width:100%;height:300px;"></a>
+          <a href={{compare.posts.all.1.pageurl}} target="_blank"><img src={{compare.posts.all.1.link}} alt="Chicago" style="width:100%;height:300px;"></a>
         <div class="carousel-caption">
             <a style="color:white;" href={{compare.posts.all.1.pageurl}} target="_blank"><h1>{{compare.posts.all.1.source}}</h1></a>
           <h3>{{compare.posts.all.1.headline}}</h3>
@@ -162,7 +161,7 @@
 
       {% if compare.posts.all.2 %}
       <div class="item">
-          <a href={{compare.posts.all.2.pageurl}} target="_blank"><img src={{compare.posts.all.2.image.url}} alt="New York" style="width:100%;height:300px;"></a>
+          <a href={{compare.posts.all.2.pageurl}} target="_blank"><img src={{compare.posts.all.2.link}} alt="New York" style="width:100%;height:300px;"></a>
         <div class="carousel-caption">
             <a style="color:white;" href={{compare.posts.all.2.pageurl}} target="_blank"><h1>{{compare.posts.all.2.source}}</h1></a>
           <h3>{{compare.posts.all.2.headline}}</h3>
@@ -230,7 +229,7 @@
 </div>
 
 <footer class="container-fluid text-center">
-  <p>Footer Text</p>
+  <p>Powered by:Newsapi.org</p>
 </footer>
 {% else %}
 <p><a href="/account/login">You need to login first</a></p>

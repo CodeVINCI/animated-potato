@@ -19,13 +19,9 @@ from django.utils import timezone
 from datetime import datetime, timedelta
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 import os
 # view for login /account/login
 def login(request):
-    if request.user.is_authenticated():
-        print("hey there i am already authenticated")
-        return redirect('/home/most_liked')
     return redirect('/account/login')
 
 
@@ -67,7 +63,7 @@ class Profile(TemplateView):
          time_stamp=date_today.strftime("%b %d,%Y")
          name=request.user
 
-         all_notifications=Notification.objects.filter(user=request.user)
+         all_notifications=Notification.objects.filter(user=request.user).order_by("-pk")
          new_notifications=all_notifications.filter(seen=0)
          ping= new_notifications.count()
          compares=Compare.objects.filter(user=request.user).filter(published=1)
@@ -140,7 +136,7 @@ def myarticles(request,user):
     details=userprofile[0]
     pic=details.image
     commentbox=comment_form()
-    all_notifications=Notification.objects.filter(user=request.user)
+    all_notifications=Notification.objects.filter(user=request.user).order_by("-pk")
     new_notifications=all_notifications.filter(seen=0)
     ping= new_notifications.count()
     col1=[]
@@ -223,7 +219,7 @@ def settings(request):
     userprofile=Userprofile.objects.filter(user=name)
     details=userprofile[0]
     pic=details.image
-    all_notifications=Notification.objects.filter(user=request.user)
+    all_notifications=Notification.objects.filter(user=request.user).order_by("-pk")
     new_notifications=all_notifications.filter(seen=0)
     ping= new_notifications.count()
     args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic}
@@ -257,7 +253,7 @@ def psettings(request):
     userprofile=Userprofile.objects.filter(user=name)
     details=userprofile[0]
     pic=details.image
-    all_notifications=Notification.objects.filter(user=request.user)
+    all_notifications=Notification.objects.filter(user=request.user).order_by("-pk")
     new_notifications=all_notifications.filter(seen=0)
     ping= new_notifications.count()
     args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic}
@@ -270,7 +266,7 @@ def ensettings(request):
     userprofile=Userprofile.objects.filter(user=name)
     details=userprofile[0]
     pic=details.image
-    all_notifications=Notification.objects.filter(user=request.user)
+    all_notifications=Notification.objects.filter(user=request.user).order_by("-pk")
     new_notifications=all_notifications.filter(seen=0)
     ping= new_notifications.count()
     args={'all_notifications':all_notifications,'new_notifications':new_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic}
@@ -295,7 +291,7 @@ class newspapers(TemplateView):
         # today and a day before
 
         #navbar content
-        all_notifications=Notification.objects.filter(user=request.user)
+        all_notifications=Notification.objects.filter(user=request.user).order_by("-pk")
         new_notifications=all_notifications.filter(seen=0)
         ping= new_notifications.count()
 
@@ -435,8 +431,9 @@ class Profileupload(TemplateView):
             userprofile.pk=profile.pk
             userprofile.image= request.FILES['image']
             userprofile.save()
-            pa = os.getcwd()+"/website"+picture.url
-            os.remove(pa)
+            if not(str(picture.url) == "/media/profile_pictures/Dp.png"):
+                pa = os.getcwd()+"/website"+picture.url
+            	os.remove(pa)
             return redirect('/account/profile')
 
         args={'user':request.user,'form':form,'pic':picture}
@@ -460,7 +457,7 @@ class Search_results(TemplateView):
         details=userprofile[0]
         pic=details.image
 
-        all_notifications=Notification.objects.filter(user=request.user)
+        all_notifications=Notification.objects.filter(user=request.user).order_by("-pk")
         new_notifications=all_notifications.filter(seen=0)
         ping= new_notifications.count()
 
@@ -530,7 +527,7 @@ class People_search(TemplateView):
 
     def get(self,request,search_terms):
 
-        all_notifications=Notification.objects.filter(user=request.user)
+        all_notifications=Notification.objects.filter(user=request.user).order_by("-pk")
         new_notifications=all_notifications.filter(seen=0)
         ping= new_notifications.count()
 
@@ -552,18 +549,8 @@ class People_search(TemplateView):
             b=a.get_list(name_split[0],emptylastname,request.user)
             pic_list=a.get_pics(name_split[0],emptylastname,request.user)
             final=zip(pic_list,b)
-        paginator = Paginator(final, 2)
-        page = request.GET.get('page')
-        try:
-            finalList = paginator.page(page)
-        except PageNotAnInteger:
-        # If page is not an integer, deliver first page.
-            finalList = paginator.page(1)
-        except EmptyPage:
-           # If page is out of range (e.g. 9999), deliver last page of results.
-            finalList = paginator.page(paginator.num_pages)
 
-        return render(request,self.template_name,{'form':form,'peoplelist':finalList,'search_terms':search_terms,'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic})
+        return render(request,self.template_name,{'form':form,'peoplelist':final,'search_terms':search_terms,'all_notifications':all_notifications,'ping':ping,'user':request.user,'details':details,'pic':pic})
 
 
 
@@ -580,7 +567,7 @@ class ComparePublish(TemplateView):
         followingobj=Following.objects.get(current_user=name)
         compareobj = Compare.objects.filter(user=name).filter(published=0)
 
-        all_notifications=Notification.objects.filter(user=request.user)
+        all_notifications=Notification.objects.filter(user=request.user).order_by("-pk")
         new_notifications=all_notifications.filter(seen=0)
         ping= new_notifications.count()
         firstpaper=followingobj.newspaper.all()[0]
@@ -603,7 +590,7 @@ class ComparePublished(TemplateView):
         followingobj=Following.objects.get(current_user=name)
         compareobj = Compare.objects.filter(user=name).filter(published=1)
 
-        all_notifications=Notification.objects.filter(user=request.user)
+        all_notifications=Notification.objects.filter(user=request.user).order_by("-pk")
         new_notifications=all_notifications.filter(seen=0)
         ping= new_notifications.count()
         firstpaper=followingobj.newspaper.all()[0]

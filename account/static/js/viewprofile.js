@@ -22,7 +22,9 @@ var ur= ("/account/searchsocrates/").concat(search_term);
 
 $('div.my-button').on('click', ".btn.btn-secondary", function(event)
 {
+
  event.preventDefault();
+ //$('div.my-button').html("processing request");
  var href = $('#my-data').data();
  var possib = href.possibleaction;
  var pk = href.pk;
